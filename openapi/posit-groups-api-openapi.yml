@@ -1,0 +1,1286 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Groups API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Groups
+paths:
+  /v1/experimental/groups/{guid}/content:
+    get:
+      description: 'This endpoint takes a group GUID and returns a list of content items with access control lists
+
+        that the given group is listed on. This includes content accessible only by specific users
+
+        or groups that include the given group, as well as content accessible by anyone or only
+
+        logged-in users that includes the given group as a collaborator.'
+      operationId: getGroupOwnershipExperimental
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GroupOwnershipContent'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List content for which a group with given GUID has access to
+      tags:
+      - Groups
+  /v1/groups:
+    get:
+      description: 'This endpoint lists or searches for local groups.
+
+
+        - For a `prefix` search without an explicit `sort_by`,
+
+        results are sorted based on similarity to the `prefix`.
+
+        - When `sort_by` is specified, results are always sorted
+
+        by that field regardless of whether `prefix` is present.
+
+        - The `prefix` can also be an exact match for the
+
+        group''s DN (for LDAP) or the auth provider''s unique ID
+
+        for the group, if any.
+
+        - The default sort order is by group name ascending.
+
+
+        This endpoint is available only when groups are enabled
+
+        in Posit Connect and it will return an error otherwise.
+
+
+        This endpoint uses offset pagination. Requests can include
+
+        query-string parameters for `page_number` and `page_size` to
+
+        fetch different pages of results.
+
+
+        #### Service tokens
+
+
+        This endpoint can be accessed using a service token with
+
+        the `groups:read` scope. Service tokens receive unfiltered
+
+        results equivalent to administrator access.'
+      operationId: getGroups
+      parameters:
+      - in: query
+        name: prefix
+        schema:
+          type: string
+      - description: The page number to return.
+        in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int32
+          type: integer
+      - description: The number of items per page.
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - description: Whether results are in ascending order.
+        in: query
+        name: asc_order
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Groups'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List or search for group details
+      tags:
+      - Groups
+    post:
+      description: 'This endpoint creates the given group.
+
+
+        - This endpoint is available only when groups are enabled
+
+        in Posit Connect and only for Password, PAM, OAuth2,
+
+        SAML and Proxied authentication.
+
+        - Publisher or administrator access is required to create
+
+        groups.'
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create a group from caller-supplied details (Password, PAM, OAuth2, SAML, Proxied)
+      tags:
+      - Groups
+    put:
+      description: "This endpoint creates the given group on the Posit Connect server.\n\n- This endpoint is used only for LDAP authentication. Password,\n  PAM, SAML, OAuth2 and Proxied authentication providers should\n  use the [POST /v1/groups](#createGroup) endpoint.\n- Publisher or administrator access is required to access this\n  endpoint.\n- Group members will be automatically populated from the LDAP server.\n\n### Group Creation Workflow on LDAP\n\nThe API lets you identify an existing group in the LDAP system\nand create a corresponding group on Posit Connect. This is a\ntwo-step process:\n\n- Use the [GET /v1/groups/remote](#searchRemoteGroups) endpoint. This endpoint will return a list of potential\n  matching groups in LDAP. A group that does not exist in\n  Posit Connect will lack a `guid`. Note the `temp_ticket`\n  for the desired group.\n- Use this PUT endpoint with the `temp_ticket` to create a\n  corresponding group on Posit Connect.\n\nThe Cookbook contains a recipe on [Creating a Group Using a\nRemote Authentication Provider\n(LDAP)](../cookbook/groups/creating-a-group-using-a-remote-authentication-provider-ldap/)\nwhich demonstrates this workflow using the Posit SDKs."
+      operationId: createRemoteGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateRemoteInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create a group using details from a remote authentication provider (LDAP)
+      tags:
+      - Groups
+  /v1/groups/remote:
+    get:
+      description: 'This endpoint is used to support operations against groups not
+
+        managed by Connect, such as creating LDAP groups.
+
+        See [GET /v1/groups](#getGroups) for listing groups on Posit Connect.
+
+
+        This endpoint searches for groups on Posit Connect and on
+
+        your LDAP system.
+
+
+        Results are sorted based on similarity to the `prefix`.
+
+
+        - This endpoint can be used only by LDAP authentication and
+
+        will return an error otherwise.
+
+        - Publisher or administrator access is required to access this
+
+        endpoint.'
+      operationId: searchRemoteGroups
+      parameters:
+      - in: query
+        name: prefix
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupRemoteSearch'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Search for group details from a remote provider
+      tags:
+      - Groups
+  /v1/groups/{group_guid}/members:
+    get:
+      description: 'This endpoint gets the group member details. Group member
+
+        enumeration is currently not supported for LDAP.
+
+
+        - This endpoint is available only when groups are enabled
+
+        in Posit Connect and only for Password, PAM, OAuth2,
+
+        SAML and Proxied authentication.
+
+        - The `email` field is not populated for non-admins when
+
+        [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.
+
+        - This endpoint uses offset pagination. Requests can include
+
+        query-string parameters for `page_number`, `page_size`,
+
+        `sort`, and `asc_order` to control pagination and sorting.
+
+        Valid sort fields: `first_name`, `user_role`, `active_time`.
+
+        Defaults to `first_name` ascending if `sort` is not specified.
+
+        `asc_order` accepts `true` (ascending) or `false` (descending).
+
+
+        #### Service tokens
+
+
+        This endpoint can be accessed using a service token with
+
+        the `groups:read` scope. When accessed with a service token,
+
+        all group members are returned.'
+      operationId: getGroupMembers
+      parameters:
+      - in: path
+        name: group_guid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int32
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - in: query
+        name: sort
+        schema:
+          type: string
+      - in: query
+        name: asc_order
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMembers'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get group member details
+      tags:
+      - Groups
+    post:
+      description: 'This endpoint adds a user to a group.
+
+
+        - This endpoint is available only when groups are enabled
+
+        in Posit Connect and only for Password, PAM, OAuth2,
+
+        SAML and Proxied authentication. If the auth provider
+
+        is configured to provide group membership information,
+
+        then it is not possible to add/remove members via this API.
+
+        - Administrator access is required to modify a group you do
+
+        not own.'
+      operationId: addGroupMember
+      parameters:
+      - in: path
+        name: group_guid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMemberAddInput'
+        required: true
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Add a group member
+      tags:
+      - Groups
+  /v1/groups/{group_guid}/members/{user_guid}:
+    delete:
+      description: 'This endpoint removes a user from a group.
+
+
+        - This endpoint is available only when groups are enabled
+
+        in Posit Connect and only for Password, PAM, OAuth2,
+
+        SAML and Proxied authentication. If the auth provider
+
+        is configured to provide group membership information,
+
+        then it is not possible to add/remove members via this API.
+
+        - Administrator access is required to remove a user from a
+
+        group you do not own, but no special access is needed to
+
+        remove yourself from a group.'
+      operationId: removeGroupMember
+      parameters:
+      - in: path
+        name: group_guid
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: user_guid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Remove a group member
+      tags:
+      - Groups
+  /v1/groups/{guid}:
+    delete:
+      description: 'Delete the given group.
+
+
+        - This endpoint can be used only when groups are enabled in
+
+        Posit Connect and will return an error otherwise.
+
+        - Administrator access is required to delete a group you do
+
+        not own.'
+      operationId: deleteGroup
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Delete a group
+      tags:
+      - Groups
+    get:
+      description: 'Get detailed information on a specific group.
+
+
+        This endpoint is available only when groups are enabled in Posit Connect.'
+      operationId: getGroup
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get group details
+      tags:
+      - Groups
+    patch:
+      description: 'This endpoint updates the specified fields of a group. Only fields
+
+        included in the request body will be modified; omitted fields remain
+
+        unchanged.
+
+
+        This endpoint requires groups to be enabled via the
+
+        [`Authorization.UserGroups`](../admin/appendix/configuration/index.md#Authorization.UserGroups)
+
+        setting. Returns a 400 error if groups are disabled.
+
+
+        ### Field availability by authentication provider
+
+
+        Not all fields can be modified with all authentication providers:
+
+
+        | Field | Password | PAM | LDAP | SAML | OAuth2 | Proxied |
+
+        |-------|----------|-----|------|------|--------|---------|
+
+        | `name` | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ |
+
+        | `owner_guid` | ✓¹ | ✓¹ | ✗ | Configurable² | Configurable² | Configurable² |
+
+        | `gid` | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ |
+
+
+        ¹ Password and PAM groups are managed locally in Connect and require
+
+        an owner to manage group membership. Ownership can be transferred to
+
+        another user but cannot be cleared.
+
+
+        ² Behavior depends on the `GroupsAutoProvision` setting. When enabled,
+
+        owners cannot be assigned or transferred, but existing owners can be
+
+        cleared. When disabled, owners can be assigned or transferred but not
+
+        cleared (same as Password and PAM).
+
+
+        ### Authorization requirements
+
+
+        | Field | Required role |
+
+        |-------|---------------|
+
+        | `name` | Group owner or administrator |
+
+        | `owner_guid` | Group owner or administrator |
+
+        | `gid` | Administrator only |
+
+
+        **Caution**: When using SAML or OAuth2 with `GroupsAutoProvision`
+
+        enabled but `GroupsByUniqueId` disabled, renaming a group in the
+
+        identity provider creates a new group in Connect. The original group
+
+        becomes orphaned but retains its `gid`. To transfer the `gid` to the
+
+        new group, either delete the old group or set its `gid` to `null`,
+
+        then set the `gid` on the new group.'
+      operationId: patchGroup
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPatchInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update a group (partial update)
+      tags:
+      - Groups
+    post:
+      description: 'This endpoint modifies the given group.
+
+
+        - This endpoint is available only when groups are enabled
+
+        in Posit Connect and only for Password, PAM, OAuth2,
+
+        SAML and Proxied authentication.
+
+        - Publisher or administrator access is required to modify
+
+        groups.'
+      operationId: updateGroup
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Modify a group name or owner (Password, PAM, OAuth2, SAML, Proxied)
+      tags:
+      - Groups
+components:
+  schemas:
+    User:
+      description: A user object.
+      properties:
+        email:
+          description: The user's email.
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role.
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: administrator
+          type: string
+        created_time:
+          description: 'The timestamp (RFC3339) indicating when the user was created in
+
+            the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        updated_time:
+          description: 'The timestamp (RFC3339) indicating when information about this
+
+            user was last updated in the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        active_time:
+          description: 'The timestamp (RFC3339) indicating approximately when the user
+
+            was last active. Highly active users only receive periodic updates.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        confirmed:
+          description: 'When `false`, the created user must confirm their account through
+
+            an email. This feature is unique to password authentication.'
+          example: true
+          type: boolean
+        locked:
+          description: Whether or not the user is locked.
+          example: false
+          type: boolean
+        external_id:
+          description: 'The unique identifier for this user from the authentication
+
+            provider, when available.'
+          example: okta-12345-abcde
+          type: string
+        guid:
+          description: 'The user''s GUID, or unique identifier, in UUID
+
+            [RFC4122](https://www.rfc-editor.org/rfc/rfc4122)
+
+            format'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    Groups:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The groups list
+            items:
+              $ref: '#/components/schemas/Group'
+            type: array
+        type: object
+      description: The groups list with paging information.
+    TrustedPublisher:
+      description: 'A binding that allows a service principal (a machine identity such as a
+
+        GitHub Actions workflow) to publish to a single content item. A workload
+
+        that authenticates as the service principal can upload bundles and deploy
+
+        this content, but cannot act on any other content.'
+      properties:
+        service_principal_guid:
+          description: The GUID of the service principal bound to this content item.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        name:
+          description: The descriptive name of the service principal.
+          example: GitHub Actions (acme/web)
+          type: string
+        role:
+          description: 'The auth role workloads authenticating as the service principal carry.
+
+            Trusted publishers carry only the viewer role; their ability to publish
+
+            comes from the per-content grant, not this role.'
+          example: viewer
+          type: string
+        app_role:
+          description: The content access level granted to the service principal on this item.
+          example: editor
+          type: string
+      type: object
+    GroupCreateInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating a group.
+      properties:
+        name:
+          description: The group's desired name
+          example: marketing
+          type: string
+        unique_id:
+          description: 'Applies to SAML, OAuth2 and Proxied authentication when
+
+            the setting `GroupsByUniqueId` is enabled. This field
+
+            must not be present otherwise.'
+          type: string
+        gid:
+          description: 'The POSIX Group ID (GID) for
+
+            [current user execution](../admin/process-management/index.md#runas-current).
+
+            Only administrators can set this field, and only when using
+
+            SAML or OAuth2 authentication. Must be a positive integer
+
+            and unique across all groups.'
+          example: 1001
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    GroupUpdateInput:
+      additionalProperties: false
+      description: The fields that can be specified when updating a group.
+      type: object
+    GroupPatchInput:
+      additionalProperties: false
+      description: The fields that can be specified when partially updating a group.
+      properties:
+        name:
+          description: 'The group''s new name. Cannot be empty or `null`, and must be
+
+            at most 4096 characters. Names must be unique, except for
+
+            SAML, OAuth2, and Proxied authentication when `GroupsByUniqueId`
+
+            is enabled.'
+          example: engineering
+          nullable: true
+          type: string
+        owner_guid:
+          description: 'The new owner''s unique identifier. Must reference an existing
+
+            user who is not a viewer. Can be set to `null` to remove the
+
+            owner for SAML, OAuth2, and Proxied authentication when
+
+            `GroupsAutoProvision` is enabled.'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          nullable: true
+          type: string
+        gid:
+          description: 'The POSIX Group ID (GID) for
+
+            [current user execution](../admin/process-management/index.md#runas-current).
+
+            Must be a positive integer and unique across all groups. Set
+
+            to `null` to remove the GID.'
+          example: 1001
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    GroupMember:
+      allOf:
+      - $ref: '#/components/schemas/User'
+      description: A group member (user).
+    GroupOwnershipContent:
+      additionalProperties: false
+      description: Content item with access control details for a group.
+      properties:
+        content_guid:
+          description: The unique identifier of the content item.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+        content_name:
+          description: The name of the content item.
+          type: string
+        content_title:
+          description: The title of the content item.
+          type: string
+        access_type:
+          description: The access type of the content item.
+          example: acl
+          type: string
+        permissions:
+          description: 'List of principals (users and groups) with access to the content.
+
+            The owner is listed as `author` and is always present.'
+          items:
+            $ref: '#/components/schemas/GroupOwnershipPermission'
+          type: array
+      type: object
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/TrustedPublisher'
+      - properties:
+          guid:
+            description: The unique identifier
+            example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+            format: uuid
+            type: string
+          member_count:
+            description: The number of members in the group.
+            example: 3
+            format: int64
+            type: integer
+        type: object
+      description: A group object.
+    GroupOwnershipPermission:
+      additionalProperties: false
+      description: A principal with access to a content item.
+      properties:
+        principal_guid:
+          description: The identifier of the principal (user or group) with access to the content.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+        principal_name:
+          description: The name of the principal (user or group) with access to the content.
+          type: string
+        principal_role:
+          description: The role of the principal (user or group) with access to the content.
+          example: author
+          type: string
+        principal_type:
+          description: The type of the principal (user or group) with access to the content.
+          example: user
+          type: string
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    GroupWithTicket:
+      additionalProperties: false
+      description: A group object with a temporary ticket for remote group creation.
+      properties:
+        name:
+          description: The group name
+          example: accounting
+          type: string
+        guid:
+          description: 'The group''s unique identifier in
+
+            [RFC4122](https://tools.ietf.org/html/rfc4122) format. When
+
+            a group does not exist in the Posit Connect server, this
+
+            property will be `null`.'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          nullable: true
+          type: string
+        temp_ticket:
+          description: 'This value is for actions that require a `temp_ticket`, such
+
+            as adding an LDAP group to the Connect server.'
+          type: string
+      type: object
+    GroupRemoteSearch:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The groups list
+            items:
+              $ref: '#/components/schemas/GroupWithTicket'
+            type: array
+        type: object
+      description: The remote group search results with paging information.
+    GroupMembers:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The group members list
+            items:
+              $ref: '#/components/schemas/GroupMember'
+            type: array
+        type: object
+      description: The group members list with paging information.
+    GroupCreateRemoteInput:
+      additionalProperties: false
+      description: The fields that must be specified when creating a remote group.
+      properties:
+        temp_ticket:
+          description: 'The temporary ticket used for creating a group on the
+
+            Posit Connect server. It is obtained from the
+
+            [GET /v1/groups/remote](#searchRemoteGroups) endpoint.'
+          type: string
+      type: object
+    GroupMemberAddInput:
+      additionalProperties: false
+      description: The fields that must be specified when adding a member to a group.
+      properties:
+        user_guid:
+          description: The user's unique identifier
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

@@ -1,0 +1,619 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Instrumentation API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Instrumentation
+paths:
+  /v1/instrumentation/content/hits:
+    get:
+      description: 'This endpoint returns content usage information for all content types, also known as hits, where hits
+
+        are individual activity events such as content visits or requests to APIs hosted on Posit Connect.
+
+
+        This endpoint requires administrator or publisher access. Publishers can
+
+        query visits data for content they own or are a collaborator on.
+
+
+        #### Filtering of results:
+
+
+        There are several ways the result set can be filtered by the server before
+
+        being sent back within the API response. If multiple filters are in effect,
+
+        they will be logically ANDed together.
+
+
+        ##### Implicit filtering
+
+
+        If the user calling the endpoint is a publisher, the data returned will be
+
+        limited to the content owned by the user.
+
+
+        ##### Time windows
+
+
+        This API accepts optional `from` and `to` timestamps to define a window of
+
+        interest.  If `from` is not specified, it is assumed to be before the earliest
+
+        recorded information.  If `to` is not specified, it is assumed to be "now".
+
+
+        Any content hit activity that falls inclusively within the time window will be
+
+        part of the result set.
+
+
+        #### Responses
+
+
+        The response of a call will contain zero or more data records representing a hit
+
+        by a user to a piece of content. As opposed to other instrumentation API endpoints,
+
+        this API is better suited to consume large amounts of unfiltered content activity records,
+
+        to later be analysed and processed by the consumer.'
+      operationId: getContentHits
+      parameters:
+      - in: query
+        name: content_guid
+        schema:
+          type: string
+      - in: query
+        name: from
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: to
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ContentHitEntry'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get all content hits
+      tags:
+      - Instrumentation
+  /v1/instrumentation/content/visits:
+    get:
+      description: 'This endpoint returns a portion of the visit (or "hits") information for all
+
+        content types _other than Shiny applications_. The results returned include
+
+        paging details that can be used to navigate the information this endpoint
+
+        returns.
+
+
+        The information returned is based on data collected by Posit Connect as
+
+        users visit content in the dashboard or make requests to applications or APIs
+
+        hosted on Connect.
+
+
+        #### Important notes
+
+
+        In the past there were issues with how visits were recorded that caused extra
+
+        entries to be stored under certain circumstances. These will affect analyses
+
+        that interpret visit counts. Entries that were recorded before issues were
+
+        addressed are not returned by default.  If you desire these records, specify
+
+        the `min_data_version` filter with a value of `0` (the default value is `3`).
+
+
+        This endpoint requires administrator or publisher access. Publishers can
+
+        query visits data for content they own or are a collaborator on.
+
+
+        #### Service tokens
+
+
+        This endpoint can be accessed using a service token with the
+
+        `instrumentation:read` scope. When accessed with a service token,
+
+        visits for all content items are returned regardless of ownership.
+
+
+        #### Filtering of results:
+
+
+        There are several ways the result set can be filtered by the server before
+
+        being sent back within the API response. If multiple filters are in effect,
+
+        they will be logically ANDed together.
+
+
+        ##### Implicit filtering
+
+
+        If the user calling the endpoint is a publisher, the data returned will be
+
+        limited to the content owned by the user.
+
+
+        ##### Time windows
+
+
+        This API accepts optional `from` and `to` timestamps to define a window of
+
+        interest.  If `from` is not specified, it is assumed to be before the earliest
+
+        recorded information.  If `to` is not specified, it is assumed to be "now".
+
+
+        Any visit to content that falls inclusively within the time window will be
+
+        part of the result set.
+
+
+        #### Responses
+
+
+        The response of a call will contain zero or more data records representing a visit
+
+        by a user to a piece of content.  No more than `limit` records will be returned.
+
+        Multiple requests of this endpoint are typically required to retrieve the complete
+
+        result set from the server.  To facilitate this, each response includes a paging
+
+        object containing full URL links which can be requested to iteratively move forward
+
+        or backward through multiple response pages.'
+      operationId: getContentVisits
+      parameters:
+      - in: query
+        name: content_guid
+        schema:
+          type: string
+      - in: query
+        name: min_data_version
+        schema:
+          default: 3
+          format: int32
+          type: integer
+      - in: query
+        name: user_agent
+        schema:
+          type: string
+      - in: query
+        name: from
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: to
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: limit
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - in: query
+        name: previous
+        schema:
+          type: string
+      - in: query
+        name: next
+        schema:
+          type: string
+      - in: query
+        name: asc_order
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentVisitLogs'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get content visits
+      tags:
+      - Instrumentation
+  /v1/instrumentation/shiny/usage:
+    get:
+      description: "This endpoint returns a portion of the Shiny application usage information,\nas well as paging details that can be used to navigate that information.\n\nThe information returned is based on data collected by Posit Connect as\nusers visit Shiny applications.  Because of how visits are detected, end\ntimes will be slightly inflated by a reconnect timeout, generally around\n15 seconds.\n\n#### Important notes\n\nPrior to the release of this API, there was an issue with how visits were\nrecorded that caused extra entries to be stored.  These will affect analyses\nthat interpret visit counts or durations.  Entries that were recorded before\nthe issue was addressed are not returned by default.  If you desire these\nrecords, specify the `min_data_version` filter with a value of 0.\n\n- Because of how visits are detected, end times will be slightly inflated by the\n  currently configured client reconnect timeout, which defaults to 15 seconds.\n  The ending time may also be affected by connect and read timeout\n  settings.\n\n  The [Shiny Application\n  Events](../admin/operational-metrics/index.md#shiny-application-events)\n  section of the Posit Connect Admin Guide has more details about\n  how these events are collected.\n- This endpoint requires administrator or publisher access. Publishers can\n  query Shiny usage data for content they own or are a collaborator on.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`instrumentation:read` scope. When accessed with a service token,\nusage data for all Shiny applications is returned regardless of\nownership.\n\n#### Filtering of results:\n\nThere are several ways the result set can be filtered by the server before\nbeing sent back within the API response. If multiple filters are in effect,\nthey will be logically ANDed together.\n\n##### Implicit filtering\n\nIf the user calling the endpoint is a publisher, the data returned will be\nlimited to those applications owned by the user.\n\n##### Time windows\n\nThis API accepts optional `from` and `to` timestamps to define a window of\ninterest.  If `from` is not specified, it is assumed to be before the earliest\nrecorded information.  If `to` is not specified, it is assumed to be \"now\".\n\nAny visit to content that falls inclusively within the time window will be\npart of the result set.\n\n#### Responses\n\nThe response of a call will contain zero or more data records representing a session\nby a user of a Shiny application.  No more than `limit` records will be returned.\nMultiple requests of this endpoint are typically required to retrieve the complete\nresult set from the server.  To facilitate this, each response includes a paging\nobject containing full URL links which can be requested to iteratively move forward\nor backward through multiple response pages."
+      operationId: getShinyAppUsage
+      parameters:
+      - in: query
+        name: content_guid
+        schema:
+          type: string
+      - in: query
+        name: min_data_version
+        schema:
+          default: 1
+          format: int32
+          type: integer
+      - in: query
+        name: from
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: to
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: limit
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - in: query
+        name: previous
+        schema:
+          type: string
+      - in: query
+        name: next
+        schema:
+          type: string
+      - in: query
+        name: asc_order
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShinyAppUsageLogs'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get Shiny app usage
+      tags:
+      - Instrumentation
+components:
+  schemas:
+    ShinyAppUsageLogs:
+      additionalProperties: false
+      description: Shiny application usage results with keyset pagination.
+      properties:
+        results:
+          description: The Shiny application usage logs.
+          items:
+            $ref: '#/components/schemas/ShinyAppUsageEntry'
+          type: array
+        paging:
+          allOf:
+          - $ref: '#/components/schemas/KeysetPaging'
+          description: Paging information for navigating result sets.
+      type: object
+    PagingCursors:
+      additionalProperties: false
+      description: Cursor values for keyset pagination.
+      properties:
+        previous:
+          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
+          example: '23948901087'
+          nullable: true
+          type: string
+        next:
+          description: A cursor ID that can be used with the next query parameter to get the next page of results.
+          example: '23948901087'
+          nullable: true
+          type: string
+      type: object
+    ContentVisitEntry:
+      additionalProperties: false
+      description: A content visit record.
+      properties:
+        content_guid:
+          description: The GUID of the content this visit pertains to.
+          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
+          format: uuid
+          type: string
+        user_guid:
+          description: The GUID of the user that visited the content. May be null when the content does not require a user session.
+          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
+          format: uuid
+          nullable: true
+          type: string
+        variant_key:
+          description: The key of the variant the user visited. Null for static content.
+          example: HidI2Kwq
+          nullable: true
+          type: string
+        time:
+          description: The timestamp (RFC3339) when the user visited the content.
+          example: '2018-09-15T18:00:00-05:00'
+          format: date-time
+          type: string
+        rendering_id:
+          description: The ID of the rendering the user visited. Null for static content.
+          example: '7'
+          nullable: true
+          type: string
+        bundle_id:
+          description: The ID of the particular bundle used.
+          example: '33'
+          nullable: true
+          type: string
+        path:
+          description: The path requested by the user.
+          example: /logs
+          nullable: true
+          type: string
+        data_version:
+          description: The data version the record was recorded with.
+          example: 1
+          format: int32
+          type: integer
+        user_agent:
+          description: The user agent that made the request.
+          example: Mozilla/5.0
+          nullable: true
+          type: string
+      type: object
+    ContentHitEntry:
+      additionalProperties: false
+      description: A content hit activity record.
+      properties:
+        id:
+          description: The ID of the activity record.
+          example: '33'
+          type: string
+        user_guid:
+          description: The GUID of the user that visited the content. May be null when the content does not require a user session.
+          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
+          format: uuid
+          nullable: true
+          type: string
+        content_guid:
+          description: The GUID of the content this activity pertains to.
+          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
+          format: uuid
+          type: string
+        timestamp:
+          description: The timestamp (RFC3339) when the user visited the content.
+          example: '2018-09-15T18:00:00-05:00'
+          format: date-time
+          type: string
+        data:
+          allOf:
+          - $ref: '#/components/schemas/ContentHitData'
+          description: Additional data about the content hit.
+      type: object
+    ShinyAppUsageEntry:
+      additionalProperties: false
+      description: A Shiny application usage record.
+      properties:
+        content_guid:
+          description: The GUID of the Shiny application this usage record pertains to.
+          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
+          format: uuid
+          type: string
+        user_guid:
+          description: The GUID of the user that visited the application. May be null if the user cannot be determined.
+          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
+          format: uuid
+          nullable: true
+          type: string
+        started:
+          description: The timestamp (RFC3339) when the user opened the application.
+          example: '2018-09-15T18:00:00-05:00'
+          format: date-time
+          type: string
+        ended:
+          description: The timestamp (RFC3339) when the user left the application.
+          example: '2018-09-15T18:01:00-05:00'
+          format: date-time
+          nullable: true
+          type: string
+        data_version:
+          description: The data version the record was recorded with.
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    ContentHitData:
+      additionalProperties: false
+      description: Additional data about a content hit.
+      properties:
+        path:
+          description: The path consumed for this hit event.
+          example: /summary
+          nullable: true
+          type: string
+        query:
+          description: The query string for this hit event.
+          example: view_hit_source=email
+          nullable: true
+          type: string
+        user_agent:
+          description: The user agent registered for this hit event.
+          example: Mozilla/5.0
+          nullable: true
+          type: string
+        sec_fetch_dest:
+          description: 'The value of the Sec-Fetch-Dest HTTP header. Common values: document, iframe, empty.'
+          nullable: true
+          type: string
+        sec_fetch_site:
+          description: 'The value of the Sec-Fetch-Site HTTP header. Common values: same-origin, same-site, cross-site, none.'
+          nullable: true
+          type: string
+      type: object
+    KeysetPaging:
+      allOf:
+      - $ref: '#/components/schemas/PagingLinks'
+      - properties:
+          cursors:
+            allOf:
+            - $ref: '#/components/schemas/PagingCursors'
+            description: Cursor values for navigating between pages.
+        type: object
+      description: Keyset-based pagination metadata with cursors and navigation links.
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    PagingLinks:
+      description: Navigation links for keyset pagination.
+      properties:
+        first:
+          description: A full URL of the first page of results. Null if the current response is the first page.
+          nullable: true
+          type: string
+        previous:
+          description: A full URL of the previous page of results. Null if the current response is the first page.
+          nullable: true
+          type: string
+        next:
+          description: A full URL of the next page of results. Null if the current response is the last page.
+          nullable: true
+          type: string
+        last:
+          description: A full URL of the last page of results. Null if the current response is the last page.
+          nullable: true
+          type: string
+      type: object
+    ContentVisitLogs:
+      additionalProperties: false
+      description: Content visit results with keyset pagination.
+      properties:
+        results:
+          description: The content visit logs.
+          items:
+            $ref: '#/components/schemas/ContentVisitEntry'
+          type: array
+        paging:
+          allOf:
+          - $ref: '#/components/schemas/KeysetPaging'
+          description: Paging information for navigating result sets.
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

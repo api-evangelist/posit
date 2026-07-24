@@ -1,0 +1,3760 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Content API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Content
+paths:
+  /v1/content:
+    get:
+      description: 'List all content items visible to the requesting user.
+
+
+        Authenticated access from a user is required. If an "administrator"
+
+        role is used, then all content items will be returned regardless of
+
+        the visibility to the requesting user.
+
+
+        Information about the target environment is populated for users with
+
+        "publisher" and "administrator" role; it is suppressed for viewers.'
+      operationId: getContents
+      parameters:
+      - description: 'The content name specified when the content was created.
+
+          Content names are unique within the owning user''s account, so a
+
+          request that specifies a non-empty name and owner_guid will return
+
+          at most one content item.'
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: The unique identifier of the user who owns the content.
+        in: query
+        name: owner_guid
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated set of values indicating additional details to include in the response.
+
+
+          * `tags`: Populates a `tags` field for each returned content item
+
+          containing the tags associated with this content item.
+
+          * `owner`: Populates an `owner` field for each returned content
+
+          item with basic details about the content owner.
+
+          * `vanity_url`: Populates the `vanity_url` field for each returned
+
+          content item if the content has an associated custom vanity URL.
+
+          * `bookmarked`: Populates a `bookmarked` field for each returned
+
+          content item indicating whether the requesting user has bookmarked
+
+          the content.
+
+          * `schedule`: Populates a `schedules` field for each returned
+
+          content item with the list of schedules associated with the
+
+          content, including variant details and last run information.
+
+          '
+        in: query
+        name: include
+        schema:
+          enum:
+          - tags
+          - owner
+          - vanity_url
+          - bookmarked
+          - schedule
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Content'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List content items
+      tags:
+      - Content
+    post:
+      description: Create a new content item.
+      operationId: createContent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContentInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create content item
+      tags:
+      - Content
+  /v1/content/{guid}:
+    delete:
+      description: Delete a specific content item. On-disk data and database records are removed.
+      operationId: deleteContent
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Delete content
+      tags:
+      - Content
+    get:
+      description: 'Get detailed information about a specific content item.
+
+
+        Unauthenticated clients are rejected regardless of the content access
+
+        type.
+
+
+        Authorized, non-administrator clients without viewership rights to
+
+        this content are rejected.
+
+
+        Authorized, administrator clients without viewership rights are
+
+        permitted to obtain information about this content. The computed
+
+        `app_role` for these users will be `none`, representing that these
+
+        users cannot view the content itself.
+
+
+        Authorized clients with viewership (or collaborator) rights are
+
+        permitted to obtain information about this content. The computed
+
+        `app_role` for these users will reflect the level of access.
+
+
+        Information about the target environment is populated for users with
+
+        "publisher" and "administrator" role; it is suppressed for viewers.'
+      operationId: getContent
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated set of values indicating additional details to include in the response.
+
+
+          * `tags`: Populates a `tags` field for each returned content item
+
+          containing the tags associated with this content item.
+
+          * `owner`: Populates an `owner` field for each returned content
+
+          item with basic details about the content owner.
+
+          * `vanity_url`: Populates the `vanity_url` field for each returned
+
+          content item if the content has an associated custom vanity URL.
+
+          * `bookmarked`: Populates a `bookmarked` field for each returned
+
+          content item indicating whether the requesting user has bookmarked
+
+          the content.
+
+          * `schedule`: Populates a `schedules` field for each returned
+
+          content item with the list of schedules associated with the
+
+          content, including variant details and last run information.
+
+          '
+        in: query
+        name: include
+        schema:
+          enum:
+          - tags
+          - owner
+          - vanity_url
+          - bookmarked
+          - schedule
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get content details
+      tags:
+      - Content
+    patch:
+      description: 'Update fields for a specific content item.
+
+
+        Authenticated access from a user having either "publisher" or
+
+        "administrator" role is allowed. All other clients are rejected.
+
+
+        Authorized clients with collaborator or administrator rights are
+
+        permitted to modify content item fields.
+
+
+        Administrators can reassign content ownership by updating
+
+        the `owner_guid` field. The new owner must have publisher or
+
+        administrator rights.'
+      operationId: updateContent
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContentInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update content
+      tags:
+      - Content
+  /v1/content/{guid}/access-test:
+    post:
+      description: 'Trigger a Public Access Content Verification test for this content item.
+
+
+        Checks if a content item is available and reachable on the public
+
+        internet. If not, the result includes a message to help with
+
+        troubleshooting. The verification process is identical to the test
+
+        Connect performs automatically for all Public Access Content, but the
+
+        API can provide more details about verification failures or
+
+        immediately retest an item instead of waiting for the automatic
+
+        verification to run.
+
+
+        See the [Admin Guide](../admin/public-access)
+
+        and [User Guide](../user/content-settings/index.md#public-access-content-verification)
+
+        for more information about Public Access Content Verification.
+
+
+        To use this API, you must have a license with the Public Access
+
+        entitlement, the content item must be interactive (e.g. Shiny
+
+        applications, FastAPI APIs), and the content item must be configured
+
+        with the "Anyone - no login required"/`all` access type.'
+      operationId: testPublicAccess
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTestResult'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Triggers a Public Access Content Verification test
+      tags:
+      - Content
+  /v1/content/{guid}/build:
+    post:
+      description: 'Build (restore) a deployment bundle.
+
+
+        Build requests spawn an asynchronous task to make your previously
+
+        uploaded data ready for rendering or running. Content will have its
+
+        environment reconstructed, e.g. by using the packrat R package to
+
+        install R package dependencies, but documents will not be re-rendered.
+
+
+        Building is intended to facilitate server changes or migrations that
+
+        may require re-installing R packages or other dependencies.
+
+
+        By default, the built bundle becomes the active bundle for the content.
+
+        You can prevent this by setting `activate: false` in the request body.
+
+        This allows you to build a bundle without making it the active version.
+
+
+        The response from this endpoint includes a task identifier. Poll the
+
+        [GET /v1/tasks/{id}](#getTask) endpoint to track the progress of this task.'
+      operationId: buildContentBundle
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentBuildInstructions'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentBuildTask'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Build deployment bundle
+      tags:
+      - Content
+  /v1/content/{guid}/deploy:
+    post:
+      description: 'Deploy (activate) a deployment bundle.
+
+
+        Deployment requests spawn an asynchronous task to make your previously
+
+        uploaded data available for serving. The workflow applied to the
+
+        bundled files varies depending on the type of content.
+
+
+        Executable content has its environment reconstructed. This includes
+
+        using the packrat R package to install R package dependencies.
+
+
+        Documents (R Markdown reports, Jupyter Notebooks, static Quarto content)
+
+        are rendered and the result made available.
+
+
+        Interactive content (applications and APIs) are available to be
+
+        launched on the next client visit.
+
+
+        The deployment workflow for static content (HTML, plots) is
+
+        lighter-weight than for executable content. File time-stamps are
+
+        updated to ensure that browsers do not cache previous results and
+
+        instead see the newly promoted files.
+
+
+        By default, the deployed bundle becomes the active bundle for the content.
+
+        You can prevent this by setting `activate: false` in the request body.
+
+        This allows you to deploy a bundle without making it the active version.
+
+
+        The response from this endpoint includes a task identifier. Poll the
+
+        [GET /v1/tasks/{id}](#getTask) endpoint to track the progress of this task.'
+      operationId: deployContentBundle
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentDeploymentInstructions'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentDeploymentTask'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Deploy deployment bundle
+      tags:
+      - Content
+  /v1/content/{guid}/environment:
+    get:
+      description: Get the names of the environment variables defined for this content.
+      operationId: getContentEnvironment
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentVariableNames'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get environment variables
+      tags:
+      - Content
+    patch:
+      description: Add, change, or delete environment variables for this content.
+      operationId: updateContentEnvironment
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentVariables'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentVariableNames'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update environment variables
+      tags:
+      - Content
+    put:
+      description: Set the environment for this content item. Any existing environment variables will be removed.
+      operationId: setContentEnvironment
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvironmentVariables'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentVariableNames'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Set all environment variables
+      tags:
+      - Content
+  /v1/content/{guid}/lockfile:
+    get:
+      description: 'Get the Python lockfile (`requirements.txt.lock`) for a content item''s
+
+        active bundle.
+
+
+        This endpoint returns the lockfile that describes the exact Python
+
+        packages installed in Connect''s managed Python environment for this
+
+        content. The file can be used to recreate the same Python environment
+
+        elsewhere.
+
+
+        The content must have a managed Python environment
+
+        (`py_environment_management` enabled). Returns an error if the content
+
+        does not use Python or does not have environment management enabled.'
+      operationId: getContentLockfile
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get Python lockfile
+      tags:
+      - Content
+  /v1/content/{guid}/oauth/integrations/associations:
+    get:
+      description: List all OAuth integration associations for this content item.
+      operationId: listContentOAuthIntegrationAssociations
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthIntegrationAssociationOutput'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List all OAuth integration associations for this content item
+      tags:
+      - Content
+    put:
+      description: Replaces any existing associations for a piece of content with the given list.
+      operationId: setOAuthIntegrationAssociations
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthIntegrationAssociationInput'
+        required: true
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Set all OAuth integration associations
+      tags:
+      - Content
+  /v1/content/{guid}/packages:
+    get:
+      description: 'Get the names and versions of all packages
+
+        installed for this content. Returned packages are sorted
+
+        by language and then by package name.
+
+
+        If the content is not yet deployed, an HTTP 204 No Content
+
+        response is returned. If the content environment is being
+
+        rebuilt, package information from before the rebuild
+
+        will be returned.
+
+
+        Note that a content item may include packages that are not explicitly requested
+
+        in the `manifest.json` or `requirements.txt` file used during deployment. These include
+
+        packages that are:
+
+        - Installed as dependencies of the explicitly requested packages,
+
+        - Installed by Connect in order to render or serve the content item,
+
+        - Installed in the base Python installation and inherited by the content item, or
+
+        - Listed under [`R.External`](../admin/appendix/configuration/index.md#R.External) in the Connect configuration file.'
+      operationId: getContentPackages
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentPackages'
+          description: Successful response.
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get package dependencies
+      tags:
+      - Content
+  /v1/content/{guid}/render:
+    post:
+      description: 'Render a specific content item.
+
+
+        Render requests spawn an asynchronous task to re-render static reports
+
+        (R Markdown documents, Jupyter Notebooks, or Quarto documents). The
+
+        rendered output becomes the active rendering for the variant.
+
+
+        By default, the default variant is rendered. You can render a specific
+
+        variant by providing its key in the request body.
+
+
+        Users with "editor" or higher role on the content can render any public
+
+        variant, and private variants they own. Users with "viewer" role can
+
+        only render ad-hoc variants when the
+
+        [`Applications.ViewerOnDemandReports`](../admin/appendix/configuration/index.md#Applications.ViewerOnDemandReports) server setting is enabled.
+
+
+        The response from this endpoint includes a task identifier. Poll the
+
+        [GET /v1/tasks/{id}](#getTask) endpoint to track the progress of this task.'
+      operationId: renderContent
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentRenderInstructions'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentRenderTask'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Render content
+      tags:
+      - Content
+  /v1/content/{guid}/repository:
+    delete:
+      description: Remove the Git repository location associated with this content.
+      operationId: deleteContentRepository
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Remove Git repository location
+      tags:
+      - Content
+    get:
+      description: Get the Git repository location associated with this content.
+      operationId: getContentRepository
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitLocationOutput'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get Git repository
+      tags:
+      - Content
+    patch:
+      description: Update the Git repository location associated with this content.
+      operationId: updateContentRepository
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitLocationInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitLocationOutput'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update Git repository
+      tags:
+      - Content
+    put:
+      description: Associate a Git repository location with this content.
+      operationId: setContentRepository
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitLocationInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitLocationOutput'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Set Git repository
+      tags:
+      - Content
+  /v1/content/{guid}/thumbnail:
+    delete:
+      description: Delete the thumbnail associated with a content item.
+      operationId: deleteContentThumbnail
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Delete a content thumbnail
+      tags:
+      - Content
+    put:
+      description: 'Set a content thumbnail.
+
+
+        Associate a content item with an image that is used as its thumbnail
+
+        in the Connect dashboard content listing and settings view.
+
+
+        #### Requesting a thumbnail
+
+
+        The thumbnail is requested by appending a `__thumbnail__` path segment
+
+        to the default content URL or a content vanity URL.
+
+
+        For example, the thumbnail for a content item having the GUID
+
+        `25438b83-ea6d-4839-ae8e-53c52ac5f9ce` and the vanity URL
+
+        `/daily-summary/` is served at the URLs:
+
+
+        * `https://connect.company.com/content/25438b83-ea6d-4839-ae8e-53c52ac5f9ce/__thumbnail__`
+
+        * `https://connect.company.com/daily-summary/__thumbnail__`
+
+
+        Thumbnail requests are subject to content access restrictions. An HTTP
+
+        204 No Content is served when there is no thumbnail. Thumbnails are
+
+        not served for incomplete content.'
+      operationId: setContentThumbnail
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+              type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Set a content thumbnail
+      tags:
+      - Content
+  /v1/search/content:
+    get:
+      description: "This endpoint searches for content items, using a search query format\nthat allows for both search terms and filters. The search terms are used\nto find content items that have matching terms in the title,\ndescription, etc, while the filters are used to filter the search\nresults by specific fields (such as `owner` or content `type`).\n\nAuthenticated access is required, and only content items visible to the\nrequesting user are returned. If an Administrator role is used,\nthen all content items are returned regardless of the visibility to\nthe requesting user.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`content:search` scope. When accessed with a service token, all\ncontent items are returned without user-based access filtering.\nThe `owner` and `bookmarked` query filters and the `bookmarked`\nand `schedule` include options are not available with service tokens.\n\n#### Search query\n\nThe search query is a string that includes both search terms and\nfilters. Any text in the search query that is not a supported filter\nis treated as a search term, and those search terms are matched\nagainst any of: `name`, `title`, or `description`. Note that the search\nterms are case-insensitive, and all terms must be present in a content\nitem for it to be included in the search results.\n\nWithin a single search term, any run of non-alphanumeric separator\ncharacters — whitespace, dashes, underscores, dots, slashes, colons,\npipes, and plus signs (including Unicode variants such as the en dash,\nem dash, no-break space, etc.) — are treated as\ninterchangeable. For example, a query for `sales-report` will match\ncontent named `sales-report`, `sales_report`, `sales.report`, or\n`sales report`. Letters and digits are matched literally.\n\n##### Filters\n\nFilters are specified as colon-delimited key-value pairs, containing one\nor more values separated by commas. If any of the values within a filter\ncontain a space or comma, you should use quotes around the value. Example:\n\n```\nmyterm tag:tagwithoutspace,\"tag with space\"\n```\n\nValues may contain other punctuation literally, including `\"`, `\\`, and\n`/`. The escape sequences `\\\"` and `\\\\` always produce a literal `\"` and\n`\\` respectively; any other backslash is preserved as-is, so tag names\nlike `back\\slash` work without escaping. To match a tag whose name begins\nwith `\"`, escape the leading quote: `tag:\\\"my-tag`. If a value contains a\nspace it must be wrapped in quotes, and any interior quotes are escaped;\nfor example, the tag named `\"quoted tag\"` is matched with\n`tag:\"\\\"quoted tag\\\"\"`.\n\nFor filters that expect a boolean value (like `published:`, `locked:`,\nand `bookmarked:`), you can use the shorthand `is:<field>` as an\nequivalent to `<field>:true`. Similarly, you can use `not:<field>` as an\nequivalent to `<field>:false`. Examples:\n\n```\nis:published\n```\n\n```\nnot:locked\n```\n\n```\nis:bookmarked\n```\n\nAdditionally, you can negate a filter or search term by prefixing it\nwith a `-`. For example, `-owner:@me` will exclude content items\nowned by the requesting user.\n\nThe following filters are supported:\n\n`owner:<username>[,<additional-usernames>,...]`: Only return content\nitems that have the specified owner by username. If more than one\nusername is provided, content items owned by ANY of the specified owners\nwill be included. Note that usernames are not case sensitive.\n\n`type:<content-type>[,<additional-content-types>,...]`: Only return\ncontent items that have the specified content type. If more than one\ntype is provided, content items with ANY of the specified types will be\nincluded. See `app_mode` for a list of supported types and their\ndescription.\n\n`tag:<tag-name>[,<additional-tag-names>,...]`: Only return content\nitems that have been tagged with the specified tag name. If more than\none tag name is provided, content items with *any* of the specified tag\nnames are included. Additionally, since tags are hierarchical, they\ndo not necessarily have unique names. For example, you may have one\n`docs` tag that is nested under a `finance` tag, and a separate `docs`\ntag that is nested under an `engineering` tag. If you specify\n`tag:docs`, it will match content items with either of those `docs`\ntags. If you want a specific tag, you can specify the path to the tag,\ndelimited by `/`. In this case, `tag:finance/docs` would only match the\n`docs` tag that is nested directly under the `finance` tag.\n\n`published:<true|false>` - Only return content items that have been\npublished, which means that a bundle has been uploaded for the content\nitem.\n\n`locked:<true|false>` - Only return content items that have been locked.\n\n`bookmarked:<true|false>` - Only return content items that have been\nbookmarked by the requesting user.\n\n`scheduled:<true|false>` - Only return content items that have been\nscheduled to run on a recurring basis.\n\n`python:<version>` - Only return content items that use a specific Python\nversion in their runtime environment. The version can be specified as\n`3`, `3.11`, or `3.11.5`. You can find content items that use\nany version of Python by specifying `is:python`.\n\n`r:<version>` - Only return content items that use a specific R\nversion in their runtime environment. The version can be specified as\n`4`, `4.3`, or `4.3.1`. You can find content items that use\nany version of R by specifying `is:r`.\n\n`package:<name>[version]` - Only return content items that have a\nspecific package in their runtime environment. If a version specification\nis provided, only return content items that have a matching\nversion for the package. Examples:\n\n- `flask`: Return items that include the `flask` package.\n- `flask==2.3.4`: Return items that include `flask` version `2.3.4`. Versions\n  ending in `.0` are equivalent to versions without the `.0`.\n- `flask==2.3.*`: Return items that include any `flask` version starting with `2.3`.\n- `flask>=2.3`: Return items that include `flask` version `2.3` or newer.\n- Similarly, you can use `<=`, `<`, `>`, and `!=`. You can combine criteria\n  with commas, such as `\"flask>=2.3,<3\"`; those must be enclosed in double-quotes.\n  Alternatively, you can use the `package` filter multiple times:\n  `package:flask>=2.3 package:flask<3`.\n- `flask~=2.3.4`: Return items that include a  `flask` version compatible with `2.3.4`;\n  that is, a `2.3.x` version that is `>=2.3.4`.\n- `flask===2.3`: Return items that include a  `flask` version that exactly matches `2.3`.\n  Version `2.3.0` would not match this filter.\n\nNote that a content item may include packages that are not explicitly requested\nin the `manifest.json` or `requirements.txt` file used during deployment. These include\npackages that are:\n\n- Installed as dependencies of the explicitly requested packages,\n- Installed by Connect in order to render or serve the content item,\n- Installed in the base Python installation and inherited by the content item, or\n- Listed under [`R.External`](../admin/appendix/configuration/index.md#R.External) in the Connect configuration file.\n\n`image:<image_name>` - Only return content items that use a specific image in\ntheir execution environment. This filter performs partial string matching on the\nimage name in either the `image_name` or `default_image_name` content fields.\n\n#### Validation warnings\n\nWhen a filter value is invalid (for example, `published:bogus`\ninstead of `published:true`), the invalid filter is ignored and\nthe response includes a `warnings` array with messages explaining\nwhich filters were not applied and why. Results are returned as\nif the invalid filter was not specified.\n\n#### Pagination\n\nThis endpoint uses offset pagination. Requests can include\nquery-string parameters for `page_number` and `page_size` to\nfetch different pages of results."
+      operationId: searchContent
+      parameters:
+      - in: query
+        name: q
+        schema:
+          type: string
+      - description: 'Comma-separated set of values indicating additional details to include in the response.
+
+
+          * `tags`: Populates a `tags` field for each returned content item
+
+          containing the tags associated with this content item.
+
+          * `owner`: Populates an `owner` field for each returned content
+
+          item with basic details about the content owner.
+
+          * `vanity_url`: Populates the `vanity_url` field for each returned
+
+          content item if the content has an associated custom vanity URL.
+
+          * `bookmarked`: Populates a `bookmarked` field for each returned
+
+          content item indicating whether the requesting user has bookmarked
+
+          the content.
+
+          * `schedule`: Populates a `schedules` field for each returned
+
+          content item with the list of schedules associated with the
+
+          content, including variant details and last run information.
+
+          '
+        in: query
+        name: include
+        schema:
+          enum:
+          - tags
+          - owner
+          - vanity_url
+          - bookmarked
+          - schedule
+          type: string
+      - description: The page number to return.
+        in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int64
+          type: integer
+      - description: The number of items per page.
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          format: int64
+          type: integer
+      - description: The field to sort by.
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: 'The sort order: asc or desc.'
+        in: query
+        name: order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentResults'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Search for content items
+      tags:
+      - Content
+  /v1/search/variants:
+    get:
+      description: "This endpoint searches for variants (report outputs).\nVariants are created when reports are rendered. A parameterized report\nmay have multiple variants when it is rendered with different parameter\nvalues.\n\nAuthenticated access is required. Administrators can see public\nvariants, and their own private variants, for all content, while other\nusers can only see variants for content they own or have permissions to\naccess.\n\n#### Variant visibility\n\nIn addition to content-level permissions, variants have their own\nvisibility settings:\n\n- **Public variants**: Visible to all users who can access the parent content\n- **Private variants**: Only visible to the variant owner, regardless of\n  content permissions\n\nADHOC variants (temporary renders) are never returned in search results.\n\n#### Pagination\n\nThis endpoint uses offset pagination. Requests can include\nquery-string parameters for `page_number` and `page_size` to\nfetch different pages of results."
+      operationId: searchVariants
+      parameters:
+      - in: query
+        name: q
+        schema:
+          type: string
+      - description: The page number to return.
+        in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int64
+          type: integer
+      - description: The number of items per page.
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          format: int64
+          type: integer
+      - description: The field to sort by.
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: 'The sort order: asc or desc.'
+        in: query
+        name: order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: 'A comma-separated list of additional information to include in the response.
+
+
+          * `schedule`: Include schedule information for each variant, including
+
+          the schedule configuration and last run details.'
+        in: query
+        name: include
+        schema:
+          enum:
+          - schedule
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariantResults'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Search for variants
+      tags:
+      - Content
+components:
+  schemas:
+    ContentDeploymentTask:
+      additionalProperties: false
+      description: Identifies the task that can be used to track the progress of a deployment operation.
+      properties:
+        task_id:
+          description: Identifier for the created deployment task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
+    CreateContentInput:
+      additionalProperties: false
+      description: The content fields that can be specified when creating a content item.
+      properties:
+        name:
+          description: 'A simple identifier. Allows alpha-numeric
+
+            characters, periods (`"."`), hyphens (`"-"`), and underscores (`"_"`).'
+          example: quarterly-analysis
+          type: string
+        title:
+          description: The title of this content.
+          example: Quarterly Analysis of Team Velocity
+          nullable: true
+          type: string
+        description:
+          description: A rich description of this content.
+          example: This report calculates per-team statistics ...
+          type: string
+        access_type:
+          description: 'Access type describes how this content manages its viewers. The
+
+            value `all` is the most permissive; any visitor to Posit Connect
+
+            will be able to view this content. The value `logged_in` indicates
+
+            that all Posit Connect accounts may view the content. The `acl`
+
+            value lets specifically enumerated users and groups view the
+
+            content. Users configured as collaborators may always view content.
+
+
+            Access types may be restricted by the Connect configuration or the
+
+            product license.'
+          enum:
+          - all
+          - logged_in
+          - acl
+          example: acl
+          type: string
+        connection_timeout:
+          description: 'Maximum number of seconds allowed without data sent or received
+
+            across a client connection. A value of `0` means connections will
+
+            never time-out (not recommended). When `null`, the default
+
+            [`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types
+
+            that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        read_timeout:
+          description: 'Maximum number of seconds allowed without data received from a
+
+            client connection. A value of `0` means a lack of client (browser)
+
+            interaction never causes the connection to close. When `null`, the
+
+            default [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        init_timeout:
+          description: 'The maximum number of seconds allowed for an interactive application
+
+            to start. Posit Connect must be able to connect to a newly
+
+            launched application before this threshold has
+
+            elapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.
+
+            Applies only to content types that are executed on demand.'
+          example: 60
+          format: int32
+          nullable: true
+          type: integer
+        idle_timeout:
+          description: 'The maximum number of seconds a worker process for an interactive
+
+            application to remain alive after it goes idle (no active
+
+            connections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is
+
+            used. Applies only to content types that are executed on demand.'
+          example: 5
+          format: int32
+          nullable: true
+          type: integer
+        max_processes:
+          description: 'Specifies the total number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 3
+          format: int32
+          nullable: true
+          type: integer
+        min_processes:
+          description: 'Specifies the minimum number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default `Scheduler.MinProcesses` is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 0
+          format: int32
+          nullable: true
+          type: integer
+        max_conns_per_process:
+          description: 'Specifies the maximum number of client connections allowed to an
+
+            individual process. Incoming connections which will exceed this
+
+            limit are routed to a new process or rejected. When `null`, the
+
+            default [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 20
+          format: int32
+          nullable: true
+          type: integer
+        load_factor:
+          description: 'Controls how aggressively new processes are spawned. When `null`,
+
+            the default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 0.5
+          format: double
+          nullable: true
+          type: number
+        default_r_environment_management:
+          description: 'Indicates whether or not Connect should create and manage an R
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
+          example: true
+          nullable: true
+          type: boolean
+        default_py_environment_management:
+          description: 'Indicates whether or not Connect should create and manage a Python
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
+          example: true
+          nullable: true
+          type: boolean
+        run_as:
+          description: 'The UNIX user that executes this content. When `null`, the default
+
+            [`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content
+
+            types - not `static`.'
+          example: rstudio-connect
+          nullable: true
+          type: string
+        run_as_current_user:
+          description: 'Indicates that Connect should run processes for this content item
+
+            under the Unix account of the user who visits it. Content accessed
+
+            anonymously will continue to run as the specified `run_as` user.'
+          example: false
+          nullable: true
+          type: boolean
+        memory_request:
+          description: 'The minimum amount of RAM this content needs when executing or
+
+            rendering, expressed in bytes. When `null`, the default
+
+            [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is used.'
+          example: 1073741824
+          format: int64
+          nullable: true
+          type: integer
+        memory_limit:
+          description: 'The maximum amount of RAM this content will be allowed to consume
+
+            when executing or rendering, expressed in bytes. When `null`, the
+
+            default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
+          example: 2147483648
+          format: int64
+          nullable: true
+          type: integer
+        cpu_request:
+          description: 'The minimum amount of compute power this content needs when executing
+
+            or rendering, expressed in CPU Units, where 1.0 unit is equivalent to
+
+            1 physical or virtual core. Fractional values are allowed. When `null`,
+
+            the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is used.'
+          example: 1
+          format: double
+          nullable: true
+          type: number
+        cpu_limit:
+          description: 'The maximum amount of compute power this content will be allowed to
+
+            consume when executing or rendering, expressed in CPU Units. When
+
+            `null`, the default [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
+          example: 1.5
+          format: double
+          nullable: true
+          type: number
+        amd_gpu_limit:
+          description: 'The number of AMD GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used.'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        nvidia_gpu_limit:
+          description: 'The number of NVIDIA GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used.'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        service_account_name:
+          description: The name of the Kubernetes service account used to run this content.
+          example: rstudio-connect-content
+          nullable: true
+          type: string
+        default_image_name:
+          description: 'The default container image used when none is defined by the bundle''s
+
+            manifest.'
+          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
+          nullable: true
+          type: string
+        default_environment_guid:
+          description: 'The default execution environment used when none is defined by the
+
+            bundle''s manifest.'
+          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
+          format: uuid
+          nullable: true
+          type: string
+        metrics_collection_enabled:
+          description: 'Controls whether per-job resource metrics are collected for this
+
+            content item. When `null`, inherits the server-wide default.'
+          example: true
+          nullable: true
+          type: boolean
+        notify_on_share:
+          description: 'Controls whether email notifications are sent by default when
+
+            users or groups are added as collaborators or viewers.
+
+            When `null`, inherits the server-wide default from
+
+            [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare).'
+          example: true
+          nullable: true
+          type: boolean
+        otel_enabled:
+          description: Controls whether content telemetry is collected for this content item.
+          example: false
+          nullable: true
+          type: boolean
+      type: object
+    OAuthIntegrationAssociationOutput:
+      additionalProperties: false
+      description: Represents an association between a content item and an OAuth integration.
+      properties:
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_guid:
+          description: The unique identifier of the content item.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_guid:
+          description: The unique identifier of an existing OAuth integration.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_name:
+          description: A descriptive name that identifies the OAuth integration.
+          example: Databricks Integration
+          nullable: true
+          type: string
+        oauth_integration_description:
+          description: A brief text that describes the OAuth integration.
+          example: Integration with external system
+          nullable: true
+          type: string
+        oauth_integration_template:
+          description: The template used to configure this OAuth integration.
+          example: custom
+          nullable: true
+          type: string
+        oauth_integration_auth_type:
+          description: 'Indicates which OAuth flow is used by this integration. The
+
+            "Viewer" authentication type corresponds to the Authorization Code
+
+            flow. The "Service Account" authentication type corresponds to the
+
+            Client Credentials flow.'
+          example: Viewer
+          nullable: true
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) indicating when this association was created.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    VariantSearchResult:
+      additionalProperties: false
+      description: A single variant in search results.
+      properties:
+        content_guid:
+          description: The GUID of the parent content item
+          example: abc123de-f456-7890-abcd-ef1234567890
+          format: uuid
+          type: string
+        content_name:
+          description: The URL-friendly name of the parent content item
+          example: monthly-sales-report
+          type: string
+        content_title:
+          description: The human-readable title of the parent content item
+          example: Monthly Sales Report
+          nullable: true
+          type: string
+        variant_key:
+          description: The unique key identifying this variant
+          example: xyz789
+          type: string
+        variant_name:
+          description: The human-readable name of the variant
+          example: West Region
+          type: string
+        is_default:
+          description: Whether this is the default variant for the content
+          example: false
+          type: boolean
+        created_time:
+          description: The time this variant was created
+          example: '2025-06-15T09:00:00Z'
+          format: date-time
+          type: string
+        render_time:
+          description: The time this variant was last rendered
+          example: '2026-01-26T08:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        failures:
+          description: 'The number of failed jobs (non-zero exit code) for this variant.
+
+            When a `failed:>=` filter is used, this count is scoped to failures
+
+            on or after the given timestamp.'
+          example: 0
+          type: integer
+        last_failed:
+          description: 'The time the most recent failed job completed for this variant.
+
+            Null if no failures have occurred. When a `failed:>=` filter is
+
+            used, this reflects only failures within the given time window.'
+          example: '2026-02-01T12:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        skips:
+          description: 'The number of skipped scheduled jobs for this variant. When a
+
+            `skipped:>=` filter is used, this count is scoped to skips on or
+
+            after the given timestamp.'
+          example: 0
+          type: integer
+        last_skipped:
+          description: 'The scheduled time of the most recent skipped job for this
+
+            variant. Null if no skips have occurred. When a `skipped:>=`
+
+            filter is used, this reflects only skips within the given time
+
+            window.'
+          example: '2026-02-01T12:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        schedule:
+          allOf:
+          - $ref: '#/components/schemas/Schedule'
+          description: Schedule information for this variant. Omitted if no schedule exists.
+          nullable: true
+      type: object
+    ContentPackages:
+      description: Lists the packages installed for a content item.
+      items:
+        $ref: '#/components/schemas/Package'
+      type: array
+    ContentSchedule:
+      allOf:
+      - $ref: '#/components/schemas/Schedule'
+      - properties:
+          variant:
+            allOf:
+            - $ref: '#/components/schemas/ScheduleVariant'
+            nullable: true
+        type: object
+      description: Schedule information with variant details for a content item.
+    ContentRenderInstructions:
+      additionalProperties: false
+      description: Instructions for rendering a content item.
+      properties:
+        variant_key:
+          description: 'The key of the variant to render. If not specified, the default
+
+            variant is rendered.'
+          example: HidI2Kwq
+          nullable: true
+          type: string
+      type: object
+    GitLocationOutput:
+      additionalProperties: false
+      description: Git location associated with a content item.
+      properties:
+        repository:
+          description: URL for the repository.
+          example: https://github.com/rstudio/connect-examples
+          type: string
+        branch:
+          description: The tracked Git branch.
+          example: main
+          type: string
+        directory:
+          description: Directory containing the content.
+          example: stock-report
+          type: string
+        polling:
+          description: Indicates that the Git repository is regularly polled.
+          example: false
+          type: boolean
+        last_error:
+          description: The last error encountered when polling the Git repository, if one occurred.
+          example: The requested operation requires authentication.
+          type: string
+        last_known_commit:
+          description: The last known commit in the Git repository.
+          example: a8906feae5c7675b934b7d22eb5fbd12ce51f1ba
+          type: string
+        last_fetched_time:
+          description: The last time the Git repository was fetched.
+          example: '2026-04-14T12:00:00Z'
+          format: date-time
+          type: string
+      type: object
+    EnvironmentVariables:
+      description: List of environment variables with their values.
+      items:
+        $ref: '#/components/schemas/EnvironmentVariable'
+      type: array
+    ContentRenderTask:
+      additionalProperties: false
+      description: The result of requesting a content render, containing a task identifier.
+      properties:
+        task_id:
+          description: Identifier for the created render task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
+    ContentBuildTask:
+      additionalProperties: false
+      description: Identifies the task that can be used to track the progress of a build operation.
+      properties:
+        task_id:
+          description: Identifier for the created build task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
+    OAuthIntegrationAssociationInput:
+      additionalProperties: false
+      description: An OAuth integration GUID to associate with a content item.
+      properties:
+        oauth_integration_guid:
+          description: The unique identifier of an existing OAuth integration.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+      type: object
+    Package:
+      additionalProperties: false
+      description: A package dependency record.
+      properties:
+        language:
+          description: Language ecosystem the package belongs to
+          type: string
+        language_version:
+          description: Version of R or Python used by the content
+          example: 3.12.4
+          type: string
+        name:
+          description: Package name
+          example: shiny
+          type: string
+        version:
+          description: Package version
+          example: 1.0.3
+          type: string
+        hash:
+          description: Package description hash for R packages
+          example: e4ac73dd20b2f6420742aac66e5d3e78
+          nullable: true
+          type: string
+        bundle_id:
+          description: Identifier for the bundle that depends on this package
+          example: '449'
+          type: string
+        app_id:
+          description: This field is deprecated and has been renamed to `content_id`.
+          example: '145'
+          type: string
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_id:
+          description: Numeric identifier for the content that depends on this package
+          example: '145'
+          type: string
+        content_guid:
+          description: The unique identifier of the content item that depends on this package
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+      type: object
+    Content:
+      additionalProperties: false
+      description: The content object models all the "things" you may deploy to Posit Connect. This includes Shiny applications, R Markdown documents, Jupyter notebooks, Plumber APIs, FastAPI and Flask APIs, Python apps, plots, and pins.
+      properties:
+        guid:
+          description: The unique identifier of this content item.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        name:
+          description: 'A simple identifier. Allows alpha-numeric
+
+            characters, periods (`"."`), hyphens (`"-"`), and underscores (`"_"`).'
+          example: quarterly-analysis
+          type: string
+        title:
+          description: The title of this content.
+          example: Quarterly Analysis of Team Velocity
+          nullable: true
+          type: string
+        description:
+          description: A rich description of this content.
+          example: This report calculates per-team statistics ...
+          type: string
+        access_type:
+          description: 'Access type describes how this content manages its viewers. The
+
+            value `all` is the most permissive; any visitor to Posit Connect
+
+            will be able to view this content. The value `logged_in` indicates
+
+            that all Posit Connect accounts may view the content. The `acl`
+
+            value lets specifically enumerated users and groups view the
+
+            content. Users configured as collaborators may always view content.
+
+
+            Access types may be restricted by the Connect configuration or the
+
+            product license.'
+          example: acl
+          type: string
+        locked:
+          description: Whether or not the content is locked.
+          example: false
+          type: boolean
+        locked_message:
+          description: 'A custom message that is displayed by the content item when locked.
+
+            It is possible to format this message using Markdown.'
+          example: '# This piece of content is locked'
+          type: string
+        connection_timeout:
+          description: 'Maximum number of seconds allowed without data sent or received
+
+            across a client connection. A value of `0` means connections will
+
+            never time-out (not recommended). When `null`, the default
+
+            [`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types
+
+            that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        read_timeout:
+          description: 'Maximum number of seconds allowed without data received from a
+
+            client connection. A value of `0` means a lack of client (browser)
+
+            interaction never causes the connection to close. When `null`, the
+
+            default [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        init_timeout:
+          description: 'The maximum number of seconds allowed for an interactive application
+
+            to start. Posit Connect must be able to connect to a newly
+
+            launched application before this threshold has
+
+            elapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.
+
+            Applies only to content types that are executed on demand.'
+          example: 60
+          format: int32
+          nullable: true
+          type: integer
+        idle_timeout:
+          description: 'The maximum number of seconds a worker process for an interactive
+
+            application to remain alive after it goes idle (no active
+
+            connections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is
+
+            used. Applies only to content types that are executed on demand.'
+          example: 5
+          format: int32
+          nullable: true
+          type: integer
+        max_processes:
+          description: 'Specifies the total number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 3
+          format: int32
+          nullable: true
+          type: integer
+        min_processes:
+          description: 'Specifies the minimum number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default `Scheduler.MinProcesses` is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 0
+          format: int32
+          nullable: true
+          type: integer
+        max_conns_per_process:
+          description: 'Specifies the maximum number of client connections allowed to an
+
+            individual process. Incoming connections which will exceed this
+
+            limit are routed to a new process or rejected. When `null`, the
+
+            default [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 20
+          format: int32
+          nullable: true
+          type: integer
+        load_factor:
+          description: 'Controls how aggressively new processes are spawned. When `null`,
+
+            the default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 0.5
+          format: double
+          nullable: true
+          type: number
+        memory_request:
+          description: 'The minimum amount of RAM this content needs when executing or
+
+            rendering, expressed in bytes. This is used when running in an
+
+            off-host execution configuration to determine where the content
+
+            should be run. When `null`, the default [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is
+
+            used.'
+          example: 1073741824
+          format: int64
+          nullable: true
+          type: integer
+        memory_limit:
+          description: 'The maximum amount of RAM this content will be allowed to consume
+
+            when executing or rendering, expressed in bytes. If the process tries
+
+            to use more memory than allowed, it will be terminated. When `null`,
+
+            the default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
+          example: 2147483648
+          format: int64
+          nullable: true
+          type: integer
+        cpu_request:
+          description: 'The minimum amount of compute power this content needs when executing
+
+            or rendering, expressed in ["CPU
+
+            Units"](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu),
+
+            where 1.0 unit is equivalent to 1 physical or virtual core.
+
+            Fractional values are allowed. This is used when running in an
+
+            off-host execution configuration to determine where the content
+
+            should be run. When `null`, the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is
+
+            used.'
+          example: 1
+          format: double
+          nullable: true
+          type: number
+        cpu_limit:
+          description: 'The maximum amount of compute power this content will be allowed to
+
+            consume when executing or rendering, expressed in ["CPU
+
+            Units"](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu),
+
+            where 1.0 unit is equivalent to 1 physical or virtual core.
+
+            Fractional values are allowed. This is used when running in an
+
+            off-host execution configuration. If the process tries to use more
+
+            CPU than allowed, it will be throttled. When `null`, the default
+
+            [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
+          example: 1.5
+          format: double
+          nullable: true
+          type: number
+        amd_gpu_limit:
+          description: 'The number of AMD GPUs that will be
+
+            [allocated by
+
+            Kubernetes](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)
+
+            to run this content. This is used when running in an
+
+            off-host execution configuration. When `null`, the default
+
+            [`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used. This setting can not exceed
+
+            [`Scheduler.MaxAMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxAMDGPULimit).'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        nvidia_gpu_limit:
+          description: 'The number of NVIDIA GPUs that will be
+
+            [allocated by
+
+            Kubernetes](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)
+
+            to run this content. This is used when running in an
+
+            off-host execution configuration. When `null`, the default
+
+            [`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used. This setting can not exceed
+
+            [`Scheduler.MaxNvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxNvidiaGPULimit).'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        service_account_name:
+          description: 'The name of the Kubernetes service account that is used to run a particular
+
+            piece of content.
+
+            It must adhere to valid Kubernetes service account naming rules.
+
+
+            Connect must be configured to run with [`Launcher.Enabled = true`](../admin/appendix/configuration/index.md#Launcher.Enabled),
+
+            [`Launcher.Kubernetes = true`](../admin/appendix/configuration/index.md#Launcher.Kubernetes) and
+
+            [`Launcher.KubernetesContentServiceAccountSelection = true`](../admin/appendix/configuration/index.md#Launcher.KubernetesContentServiceAccountSelection)
+
+            for this value to be applied. It will have precedence over the
+
+            [`Launcher.KubernetesDefaultServiceAccount`](../admin/appendix/configuration/index.md#Launcher.KubernetesDefaultServiceAccount) that may be set in the
+
+            configuration for Connect.
+
+
+            If this value is defined and Connect is configured with
+
+            [`Launcher.KubernetesContentServiceAccountSelection = false`](../admin/appendix/configuration/index.md#Launcher.KubernetesContentServiceAccountSelection) an error will be
+
+            returned.
+
+
+            Only administrators and publishers can view this value.
+
+            Only administrators can set or change this value.'
+          example: rstudio-connect-content
+          nullable: true
+          type: string
+        default_image_name:
+          description: 'The default image that will be used when none is defined by the
+
+            bundle''s manifest. A specific image may be selected by setting the
+
+            `environment.image` field in the manifest. If no image is selected
+
+            by the manifest file, then the `default_image_name` is used.
+
+            If a target image is not defined by the manifest, and no
+
+            `default_image_name` is configured, then Connect will select an
+
+            image from the list of configured execution environments.
+
+
+            If either `environment.identifier` or `environment.image` is specified in
+
+            the bundle''s
+
+            manifest.json then the settings in the manifest are used and the
+
+            content-level default
+
+            settings will be ignored. This allows historical bundle activation to behave
+
+            consistently
+
+            even when the content-level default values may have changed.
+
+
+            A `null` value is returned when the client does not have sufficient
+
+            rights to see this information.
+
+
+            Use the `/v1/environments` API endpoints to determine which environments
+
+            are available for content execution.'
+          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
+          nullable: true
+          type: string
+        default_environment_guid:
+          description: 'The default execution environment that will be used when none is defined by
+
+            the
+
+            bundle''s manifest. A specific execution environment may be selected by
+
+            setting the
+
+            `environment.identifier` field in the manifest. If no execution environment
+
+            is selected
+
+            by the manifest file, then `default_environment_guid` is used to select the
+
+            execution environment. If a target execution environment is not defined by
+
+            the manifest,
+
+            and no `default_environment_guid` is configured, then Connect will select an
+
+            execution environment from the list of configured execution environments.
+
+
+            If either `environment.identifier` or `environment.image` is specified in
+
+            the bundle''s
+
+            manifest.json then the settings in the manifest are used and the
+
+            content-level default
+
+            settings will be ignored. This allows historical bundle activation to behave
+
+            consistently
+
+            even when the content-level default values may have changed.
+
+
+            A `null` value is returned when the client does not have sufficient
+
+            rights to see this information.
+
+
+            Use the `/v1/environments` API endpoints to determine which environments
+
+            are available for content execution.'
+          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
+          format: uuid
+          nullable: true
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) indicating when this content was created.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        last_deployed_time:
+          description: 'The timestamp (RFC3339) indicating when this content last had a
+
+            successful bundle deployment performed.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        bundle_id:
+          description: 'The identifier for the active deployment bundle. Automatically
+
+            assigned upon the successful deployment of that bundle.'
+          example: '101'
+          nullable: true
+          type: string
+        app_mode:
+          description: 'The runtime model for this content. Has a value of `unknown` before
+
+            data is deployed to this item. Automatically assigned upon the first
+
+            successful bundle deployment.
+
+
+            Valid values are:
+
+
+            * `api` - R code defining a [Plumber API](https://www.rplumber.io/).
+
+            * `jupyter-static` - A [Jupyter
+
+            Notebook](https://jupyter-notebook.readthedocs.io/en/stable/).
+
+            * `jupyter-voila` A [Voila](https://voila.readthedocs.io/en/stable/)
+
+            interactive dashboard.
+
+            * `python-api` - Python code defining a WSGI API (such as
+
+            [Flask](https://palletsprojects.com/p/flask/))
+
+            * `python-bokeh` - Python code defining a [Bokeh
+
+            application](https://bokeh.org/).
+
+            * `python-panel` - Python code defining a [Panel
+
+            application](https://panel.holoviz.org/).
+
+            * `python-dash` - Python code defining a [Dash
+
+            application](https://dash.plotly.com/).
+
+            * `python-fastapi` - Python code defining an ASGI API (such as
+
+            [FastAPI](https://fastapi.tiangolo.com/))
+
+            * `python-gradio` - Python code defining a [Gradio](https://www.gradio.app/)
+
+            application.
+
+            * `python-shiny` - Python code defining a [Shiny
+
+            application](https://shiny.posit.co/py/).
+
+            * `python-streamlit` - Python code defining a [Streamlit
+
+            application](https://streamlit.io/).
+
+            * `quarto-shiny` - A [Quarto](https://quarto.org/) document with a Shiny
+
+            runtime.
+
+            * `quarto-static` - A [Quarto](https://quarto.org/) document or site.
+
+            * `rmd-shiny` - An [R Markdown](https://rmarkdown.rstudio.com/) document
+
+            with a Shiny runtime.
+
+            * `rmd-static` - An [R Markdown](https://rmarkdown.rstudio.com/) document or
+
+            site.
+
+            * `shiny` - R code defining a [Shiny application](https://shiny.posit.co/).
+
+            * `static` - Content deployed without source; often HTML and plots.
+
+            * `tensorflow-saved-model` - A TensorFlow Model API.
+
+            * `unknown` - No known runtime model.'
+          example: shiny
+          type: string
+        content_category:
+          description: 'Describes the specialization of the content runtime model.
+
+            Automatically assigned upon the first successful bundle deployment.
+
+
+            The `content_category` field refines the type of content specified by
+
+            `app_mode`. It is empty by default. The rsconnect R package may assign
+
+            a value when analyzing your content and building its manifest and
+
+            bundle. Plots (images created in the RStudio IDE and presented in the
+
+            "Plots" pane) have an `app_mode` of `static` and receive a
+
+            `content_category` of `plot` to distinguish them from other HTML
+
+            documents. Pinned static data sets have an `app_mode` of `static` and a
+
+            `content_category` of `pin`. Multi-document R Markdown sites have an
+
+            `app_mode` of `rmd-static` and a `content_category` of `site`.
+
+            API content types (such as FastAPI, Flask, or Plumber) that serve as
+
+            MCP servers have a `content_category` of `mcp`. The `mcp` category is
+
+            auto-detected on first deploy but can also be set or cleared via
+
+            [PATCH /v1/content/{guid}](#updateContent).'
+          example: site
+          type: string
+        parameterized:
+          description: 'True when R Markdown rendered content allows parameter
+
+            configuration. Automatically assigned upon the first successful
+
+            bundle deployment. Applies only to content with an `app_mode` of
+
+            `rmd-static`.'
+          example: false
+          type: boolean
+        environment_guid:
+          description: 'The guid of the execution environment used to run this content. Content
+
+            running locally
+
+            on the same server as Connect will have either a `null` value.
+
+
+            A `null` value is returned when the client does not have sufficient rights
+
+            to see this
+
+            information.'
+          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
+          format: uuid
+          nullable: true
+          type: string
+        cluster_name:
+          description: 'The location where this content runs. Content running on the same
+
+            server as Connect will have either a `null` value or the string
+
+            "Local". Gives the name of the cluster when run external to the
+
+            Connect host.
+
+
+            A `null` value is returned when the client does not have sufficient
+
+            rights to see this information.'
+          example: Local
+          nullable: true
+          type: string
+        image_name:
+          description: 'The name of the container image used to run this content in containerized
+
+            environments such as Kubernetes. Content running locally
+
+            on the same server as Connect will have either a `null` value or the string
+
+            "Local".
+
+
+            A `null` value is returned when the client does not have sufficient
+
+            rights to see this information.'
+          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
+          nullable: true
+          type: string
+        r_version:
+          description: 'The of R interpreter associated with this content. A `null` value
+
+            represents that R is not used by this content, that the content has
+
+            not been prepared for execution, or that the client does not have
+
+            sufficient rights to see this information. Automatically assigned
+
+            upon the successful deployment of a bundle.'
+          example: 3.5.1
+          nullable: true
+          type: string
+        py_version:
+          description: 'The version of Python associated with this content. A `null` value
+
+            represents that Python is not used by this content, that the content
+
+            has not been prepared for execution, or that the client does not
+
+            have sufficient rights to see this information. Automatically
+
+            assigned upon the successful deployment of a bundle.'
+          example: 3.8.2
+          nullable: true
+          type: string
+        quarto_version:
+          description: 'The version of Quarto associated with this content. A `null`
+
+            represents that Quarto is not used by this content, that the content
+
+            has not been prepared for execution, or that the client does not
+
+            have sufficient rights to see this information. Automatically
+
+            assigned upon the successful deployment of a bundle.'
+          example: 0.2.22
+          nullable: true
+          type: string
+        node_version:
+          description: 'The version of Node.js associated with this content. A `null`
+
+            represents that Node.js is not used by this content, that the content
+
+            has not been prepared for execution, or that the client does not
+
+            have sufficient rights to see this information. Automatically
+
+            assigned upon the successful deployment of a bundle.'
+          example: 22.11.0
+          nullable: true
+          type: string
+        r_environment_management:
+          description: 'Indicates whether or not Connect is managing an R environment and
+
+            has installed the required packages for this content. A `null` value
+
+            represents that R is not used by this content, that the content has
+
+            not been prepared for execution, or that the client does not have
+
+            sufficient rights to see this information. Automatically assigned
+
+            upon the successful deployment of a bundle.'
+          example: true
+          nullable: true
+          type: boolean
+        default_r_environment_management:
+          description: 'Indicates whether or not Connect should create and manage an R
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.
+
+
+            A `null` value is also returned when the client does not have
+
+            sufficient rights to see this information.
+
+
+            This value is ignored if the server setting
+
+            [`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.'
+          example: true
+          nullable: true
+          type: boolean
+        py_environment_management:
+          description: 'Indicates whether or not Connect is managing a Python environment
+
+            and has installed the required packages for this content. A `null`
+
+            value represents that Python is not used by this content, that the
+
+            content has not been prepared for execution, or that the client does
+
+            not have sufficient rights to see this information. Automatically
+
+            assigned upon the successful deployment of a bundle.'
+          example: true
+          nullable: true
+          type: boolean
+        default_py_environment_management:
+          description: 'Indicates whether or not Connect should create and manage a Python
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.
+
+
+            A `null` value is also returned when the client does not have
+
+            sufficient rights to see this information.
+
+
+            This value is ignored if the server setting
+
+            [`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.'
+          example: true
+          nullable: true
+          type: boolean
+        run_as:
+          description: 'The UNIX user that executes this content. When `null`, the default
+
+            [`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content
+
+            types - not `static`.
+
+
+            Only administrators can change this value.
+
+
+            If [`Applications.RunAsEnabled = false`](../admin/appendix/configuration/index.md#Applications.RunAsEnabled), this value will be ignored when
+
+            executing content.'
+          example: rstudio-connect
+          nullable: true
+          type: string
+        run_as_current_user:
+          description: 'Indicates that Connect should run processes for this content item
+
+            under the Unix account of the user who visits it. Content accessed
+
+            anonymously will continue to run as the specified `run_as` user.
+
+
+            Connect must be configured with the server setting
+
+            [`Applications.RunAsCurrentUser = true`](../admin/appendix/configuration/index.md#Applications.RunAsCurrentUser). Current user execution is
+
+            supported with the PAM, OAuth2, SAML, and LDAP authentication
+
+            providers; PAM additionally requires [`PAM.ForwardPassword = true`](../admin/appendix/configuration/index.md#PAM.ForwardPassword).
+
+
+            This setting applies to application content types (Shiny, Dash,
+
+            Streamlit, Bokeh, and Panel) and API content types (Plumber, Flask,
+
+            FastAPI, and Node.js).
+
+
+            Only administrators can change this value.'
+          example: false
+          type: boolean
+        metrics_collection_enabled:
+          description: 'Controls whether per-job resource metrics (CPU, memory, connections)
+
+            are collected for this content item.
+
+
+            When `null`, the content item inherits the server-wide default from
+
+            [`Applications.MetricsCollectionEnabled`](../admin/appendix/configuration/index.md#Applications.MetricsCollectionEnabled). Explicit `true` or `false`
+
+            values override the server default.
+
+
+            Metrics can be retrieved via the
+
+            [GET /v1/content/{guid}/jobs/{key}/metrics](#getJobMetrics) endpoint.'
+          example: true
+          nullable: true
+          type: boolean
+        notify_on_share:
+          description: 'Controls whether email notifications are sent by default
+
+            when users or groups are added as collaborators or viewers.
+
+
+            When `null`, the content item inherits the server-wide default
+
+            from [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare). Explicit `true` or `false`
+
+            values override the server default.'
+          example: true
+          nullable: true
+          type: boolean
+        otel_enabled:
+          description: 'Controls whether content telemetry (metrics, logs, traces) is collected
+
+            for this content item. Both this field and the server setting
+
+            `OpenTelemetry.AllowContentInstrumentation` must be true for signals to flow.
+
+            Only visible to collaborators and owners.'
+          example: false
+          type: boolean
+        owner_guid:
+          description: 'The unique identifier of the user who created this content item.
+
+            Automatically assigned when the content is created.'
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        content_url:
+          description: 'The URL associated with this content. Computed from the associated
+
+            GUID for this content.'
+          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+          type: string
+        dashboard_url:
+          description: 'The URL within the Connect dashboard where this content can be configured.
+
+            Computed from the GUID for this content.'
+          example: https://posit-connect.company.com/connect/#/apps/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+          type: string
+        vanity_url:
+          description: 'The vanity URL associated with this content item. Included in responses
+
+            when the vanity URL is set and `include=vanity_url` is provided.'
+          example: https://posit-connect.company.com/my-content/
+          type: string
+        app_role:
+          description: 'The relationship of the accessing user to this content. A value of
+
+            `owner` is returned for the content owner. `editor` indicates a
+
+            collaborator. The `viewer` value is given to users who are permitted
+
+            to view the content. A `none` role is returned for administrators
+
+            who cannot view the content but are permitted to view its
+
+            configuration. Computed at the time of the request.'
+          example: owner
+          type: string
+        bookmarked:
+          description: 'Indicates whether the requesting user has bookmarked this content
+
+            item. Included in responses when `include=bookmarked` is provided.'
+          example: true
+          nullable: true
+          type: boolean
+        schedules:
+          description: 'Schedules associated with this content item. Included in responses when
+
+            `include=schedule` is provided.'
+          items:
+            $ref: '#/components/schemas/ContentSchedule'
+          nullable: true
+          type: array
+        id:
+          description: The internal numeric identifier of this content item.
+          example: '314'
+          type: string
+        tags:
+          description: 'Tags associated with this content item. Included in responses when
+
+            `include=tags` is provided. Returns an empty array when content has
+
+            no tags.'
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/ContentOwner'
+          description: 'Basic details about the owner of this content item. Included in
+
+            responses when `include=owner` is provided.'
+          nullable: true
+        public_content_status:
+          description: 'Validation status of public interactive content. When validation is
+
+            required by licensing, this will be one of "ok", "warning", or
+
+            "restricted". If licensing does not require validation, it will be
+
+            "unrestricted"; if licensing does not allow public interactive
+
+            content, it will be "unlicensed". If the app has not been made public,
+
+            but public content is permitted, it will be "none".'
+          example: unrestricted
+          nullable: true
+          type: string
+      type: object
+    Tag:
+      additionalProperties: false
+      description: A tag used to organize content within Connect.
+      properties:
+        id:
+          description: The identifier for the tag.
+          example: '101'
+          type: string
+        name:
+          description: The name of the tag.
+          example: financial-statements
+          type: string
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag is a top-level tag.'
+          example: '102'
+          nullable: true
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) indicating when the tag was created.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+        updated_time:
+          description: The timestamp (RFC3339) indicating when the tag was updated.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+      type: object
+    VariantResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of variants, paginated
+            items:
+              $ref: '#/components/schemas/VariantSearchResult'
+            type: array
+        type: object
+      description: Search results containing variants and pagination metadata.
+    AccessTestResult:
+      additionalProperties: false
+      description: The results of the public access content verification test.
+      properties:
+        guid:
+          description: The unique identifier of this content item.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        url:
+          description: 'The URL that was used to test access to this content. Computed from
+
+            the associated GUID for this content or the optional vanity URL.'
+          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+          type: string
+        checked_at:
+          description: The timestamp (RFC3339) indicating when the access test was performed.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        accessible:
+          description: 'Indicates whether or not the test was able to access the content item
+
+            on the public internet.'
+          example: false
+          type: boolean
+        message:
+          description: 'An optional informational message with extra details about the test
+
+            result. See the
+
+            [Admin Guide](../admin/licensing/index.md#public-access)
+
+            for additional guidance about specific messages.'
+          example: content is not publicly accessible
+          type: string
+      type: object
+    ContentDeploymentInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target deployment bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to deploy. If not provided, the most recently uploaded bundle is deployed.
+          nullable: true
+          type: string
+        activate:
+          description: Whether the deployed bundle should be activated after deployment. Defaults to true.
+          nullable: true
+          type: boolean
+      type: object
+    ScheduleLastRun:
+      additionalProperties: false
+      description: Information about the last scheduled run.
+      properties:
+        job_key:
+          description: The unique key of the job.
+          example: abc123xyz
+          type: string
+        status:
+          description: The status of the last run.
+          example: success
+          type: string
+        scheduled_time:
+          description: The scheduled time of the run.
+          format: date-time
+          nullable: true
+          type: string
+        queued_time:
+          description: The time the run was queued.
+          format: date-time
+          nullable: true
+          type: string
+        start_time:
+          description: The time the run started.
+          format: date-time
+          type: string
+        end_time:
+          description: The time the run ended. Null if still running.
+          format: date-time
+          nullable: true
+          type: string
+        run_duration_ms:
+          description: The duration of the run in milliseconds. Null if still running.
+          example: 5000
+          format: int64
+          nullable: true
+          type: integer
+        exit_code:
+          description: The exit code of the job. Null if still running.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    RRuleSet:
+      additionalProperties: false
+      description: RFC 5545 recurrence rule components for a schedule.
+      properties:
+        dtstart:
+          description: 'The DTSTART component specifying when the schedule begins,
+
+            including timezone information.'
+          example: DTSTART;TZID=America/New_York:20240115T090000
+          type: string
+        rrules:
+          description: An array of RRULE components defining the recurrence pattern.
+          example:
+          - RRULE:FREQ=DAILY;INTERVAL=2
+          items:
+            type: string
+          type: array
+        until:
+          description: The UNTIL component specifying when the schedule ends, if applicable.
+          example: UNTIL=20240215T090000Z
+          type: string
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    GitLocationInput:
+      additionalProperties: false
+      description: Git location associated with a content item.
+      properties:
+        repository:
+          description: URL for the repository.
+          example: https://github.com/rstudio/connect-examples
+          type: string
+        branch:
+          description: The tracked Git branch.
+          example: main
+          type: string
+        directory:
+          description: Directory containing the content.
+          example: stock-report
+          type: string
+        polling:
+          description: Indicates that the Git repository should be regularly polled.
+          example: false
+          type: boolean
+      type: object
+    ScheduleVariant:
+      additionalProperties: false
+      description: Variant information embedded in a schedule.
+      properties:
+        key:
+          description: The variant key.
+          example: default
+          type: string
+        name:
+          description: The variant name.
+          example: Default Variant
+          type: string
+        is_default:
+          description: Whether this is the default variant.
+          example: true
+          type: boolean
+      type: object
+    EnvironmentVariableNames:
+      description: List of environment variable names, without values.
+      items:
+        type: string
+      type: array
+    Schedule:
+      description: Base schedule information for a content item.
+      properties:
+        type:
+          description: The schedule type.
+          example: rrule
+          type: string
+        schedule:
+          allOf:
+          - $ref: '#/components/schemas/RRuleSet'
+          description: The recurrence rule in RFC5545 format.
+        next_run:
+          description: The next scheduled run time. Null if no future runs are scheduled.
+          format: date-time
+          nullable: true
+          type: string
+        email:
+          description: Whether email notifications are enabled for this schedule.
+          example: false
+          type: boolean
+        timezone:
+          description: The timezone for this schedule.
+          example: America/New_York
+          type: string
+        start_time:
+          description: The start time of the schedule window.
+          format: date-time
+          nullable: true
+          type: string
+        end_time:
+          description: The end time of the schedule window. Null if the schedule runs indefinitely.
+          format: date-time
+          nullable: true
+          type: string
+        last_run:
+          allOf:
+          - $ref: '#/components/schemas/ScheduleLastRun'
+          description: Information about the last scheduled run.
+          nullable: true
+      type: object
+    ContentBuildInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target build bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to build. If not provided, the most recently uploaded bundle is built.
+          nullable: true
+          type: string
+        activate:
+          description: Whether the built bundle should be activated after building. Defaults to true.
+          nullable: true
+          type: boolean
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    UpdateContentInput:
+      additionalProperties: false
+      description: The content fields that can be specified when updating a content item.
+      properties:
+        name:
+          description: 'A simple identifier. Allows alpha-numeric
+
+            characters, periods (`"."`), hyphens (`"-"`), and underscores (`"_"`).'
+          example: quarterly-analysis
+          type: string
+        title:
+          description: The title of this content.
+          example: Quarterly Analysis of Team Velocity
+          nullable: true
+          type: string
+        description:
+          description: A rich description of this content.
+          example: This report calculates per-team statistics ...
+          type: string
+        owner_guid:
+          description: 'The unique identifier of the user who owns this content item.
+
+            Can only be changed by an administrator.'
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          nullable: true
+          type: string
+        access_type:
+          description: 'Access type describes how this content manages its viewers. The
+
+            value `all` is the most permissive; any visitor to Posit Connect
+
+            will be able to view this content. The value `logged_in` indicates
+
+            that all Posit Connect accounts may view the content. The `acl`
+
+            value lets specifically enumerated users and groups view the
+
+            content. Users configured as collaborators may always view content.
+
+
+            Access types may be restricted by the Connect configuration or the
+
+            product license.'
+          enum:
+          - all
+          - logged_in
+          - acl
+          example: acl
+          type: string
+        locked:
+          description: Whether or not the content is locked.
+          example: false
+          nullable: true
+          type: boolean
+        locked_message:
+          description: 'A custom message that is displayed by the content item when locked.
+
+            It is possible to format this message using Markdown.'
+          example: '# This piece of content is locked'
+          nullable: true
+          type: string
+        connection_timeout:
+          description: 'Maximum number of seconds allowed without data sent or received
+
+            across a client connection. A value of `0` means connections will
+
+            never time-out (not recommended). When `null`, the default
+
+            [`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types
+
+            that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        read_timeout:
+          description: 'Maximum number of seconds allowed without data received from a
+
+            client connection. A value of `0` means a lack of client (browser)
+
+            interaction never causes the connection to close. When `null`, the
+
+            default [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 3600
+          format: int32
+          nullable: true
+          type: integer
+        init_timeout:
+          description: 'The maximum number of seconds allowed for an interactive application
+
+            to start. Posit Connect must be able to connect to a newly
+
+            launched application before this threshold has
+
+            elapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.
+
+            Applies only to content types that are executed on demand.'
+          example: 60
+          format: int32
+          nullable: true
+          type: integer
+        idle_timeout:
+          description: 'The maximum number of seconds a worker process for an interactive
+
+            application to remain alive after it goes idle (no active
+
+            connections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is
+
+            used. Applies only to content types that are executed on demand.'
+          example: 5
+          format: int32
+          nullable: true
+          type: integer
+        max_processes:
+          description: 'Specifies the total number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 3
+          format: int32
+          nullable: true
+          type: integer
+        min_processes:
+          description: 'Specifies the minimum number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default `Scheduler.MinProcesses` is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 0
+          format: int32
+          nullable: true
+          type: integer
+        max_conns_per_process:
+          description: 'Specifies the maximum number of client connections allowed to an
+
+            individual process. Incoming connections which will exceed this
+
+            limit are routed to a new process or rejected. When `null`, the
+
+            default [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 20
+          format: int32
+          nullable: true
+          type: integer
+        load_factor:
+          description: 'Controls how aggressively new processes are spawned. When `null`,
+
+            the default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 0.5
+          format: double
+          nullable: true
+          type: number
+        default_r_environment_management:
+          description: 'Indicates whether or not Connect should create and manage an R
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
+          example: true
+          nullable: true
+          type: boolean
+        default_py_environment_management:
+          description: 'Indicates whether or not Connect should create and manage a Python
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
+          example: true
+          nullable: true
+          type: boolean
+        run_as:
+          description: 'The UNIX user that executes this content. When `null`, the default
+
+            [`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content
+
+            types - not `static`.'
+          example: rstudio-connect
+          nullable: true
+          type: string
+        run_as_current_user:
+          description: 'Indicates that Connect should run processes for this content item
+
+            under the Unix account of the user who visits it. Content accessed
+
+            anonymously will continue to run as the specified `run_as` user.'
+          example: false
+          nullable: true
+          type: boolean
+        memory_request:
+          description: 'The minimum amount of RAM this content needs when executing or
+
+            rendering, expressed in bytes. When `null`, the default
+
+            [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is used.'
+          example: 1073741824
+          format: int64
+          nullable: true
+          type: integer
+        memory_limit:
+          description: 'The maximum amount of RAM this content will be allowed to consume
+
+            when executing or rendering, expressed in bytes. When `null`, the
+
+            default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
+          example: 2147483648
+          format: int64
+          nullable: true
+          type: integer
+        cpu_request:
+          description: 'The minimum amount of compute power this content needs when executing
+
+            or rendering, expressed in CPU Units, where 1.0 unit is equivalent to
+
+            1 physical or virtual core. Fractional values are allowed. When `null`,
+
+            the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is used.'
+          example: 1
+          format: double
+          nullable: true
+          type: number
+        cpu_limit:
+          description: 'The maximum amount of compute power this content will be allowed to
+
+            consume when executing or rendering, expressed in CPU Units. When
+
+            `null`, the default [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
+          example: 1.5
+          format: double
+          nullable: true
+          type: number
+        amd_gpu_limit:
+          description: 'The number of AMD GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used.'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        nvidia_gpu_limit:
+          description: 'The number of NVIDIA GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used.'
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        service_account_name:
+          description: The name of the Kubernetes service account used to run this content.
+          example: rstudio-connect-content
+          nullable: true
+          type: string
+        default_image_name:
+          description: 'The default container image used when none is defined by the bundle''s
+
+            manifest.'
+          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
+          nullable: true
+          type: string
+        default_environment_guid:
+          description: 'The default execution environment used when none is defined by the
+
+            bundle''s manifest.'
+          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
+          format: uuid
+          nullable: true
+          type: string
+        metrics_collection_enabled:
+          description: 'Controls whether per-job resource metrics are collected for this
+
+            content item. When `null`, inherits the server-wide default.'
+          example: true
+          nullable: true
+          type: boolean
+        notify_on_share:
+          description: 'Controls whether email notifications are sent by default when
+
+            users or groups are added as collaborators or viewers.
+
+            When `null`, inherits the server-wide default from
+
+            [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare).'
+          example: true
+          nullable: true
+          type: boolean
+        otel_enabled:
+          description: Controls whether content telemetry is collected for this content item.
+          example: false
+          nullable: true
+          type: boolean
+        content_category:
+          description: 'The `content_category` field refines the type of content specified by
+
+            `app_mode`. For example, the MCP content category indicates content that
+
+            serves as an MCP server. Allowed values are `""` (empty string to clear)
+
+            or `"mcp"`.'
+          example: mcp
+          nullable: true
+          type: string
+      type: object
+    ContentOwner:
+      additionalProperties: false
+      description: Basic details about the owner of a content item.
+      properties:
+        guid:
+          description: The owner's unique identifier.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        username:
+          description: The owner's username.
+          example: jondoe
+          nullable: true
+          type: string
+        first_name:
+          description: The owner's first name.
+          example: Jon
+          nullable: true
+          type: string
+        last_name:
+          description: The owner's last name.
+          example: Doe
+          nullable: true
+          type: string
+      type: object
+    ContentResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of content items, paginated
+            items:
+              $ref: '#/components/schemas/Content'
+            type: array
+          warnings:
+            description: 'An optional list of warning messages generated during query
+
+              processing. Warnings indicate issues with the search query that
+
+              did not prevent the search from completing, such as invalid
+
+              filter values. When a filter value is invalid, the filter is
+
+              ignored and results are returned unfiltered for that field.
+
+              This field is omitted when there are no warnings.'
+            example:
+            - 'Invalid value for ''published'' filter: ''bogus''. Expected true or false'
+            items:
+              type: string
+            type: array
+        type: object
+      description: Search results containing content items and pagination metadata.
+    EnvironmentVariable:
+      additionalProperties: false
+      description: Defines an environment variable and its value.
+      properties:
+        name:
+          description: Name of the environment variable.
+          example: DEBUG
+          type: string
+        value:
+          description: 'New value of the environment variable.
+
+            A value of `null` will delete the environment variable.'
+          example: '1'
+          nullable: true
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

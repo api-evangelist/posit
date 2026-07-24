@@ -1,0 +1,1040 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Jobs API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Jobs
+paths:
+  /v1/content/{guid}/jobs:
+    get:
+      description: 'Get the list of jobs for a given piece of content.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: getJobs
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Job'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get jobs
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}:
+    delete:
+      description: 'Request to register an order to kill a specific job.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: killJob
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KillJobOrder'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Register job kill order
+      tags:
+      - Jobs
+    get:
+      description: 'Get a job for a given piece of content by key.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: getJob
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get job
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}/download:
+    get:
+      description: 'Download a content job log file.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: jobDownloadLog
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      - description: false "The name of the file to retrieve"
+        in: query
+        name: filename
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Download job log file
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}/error:
+    get:
+      description: 'Get the primary error for a job (if one exists).
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: jobError
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggedError'
+          description: Successful response.
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get job error
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}/log:
+    get:
+      description: 'Get the log output for a given job.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: jobLogs
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      - description: false "The maximum number of log lines to return"
+        in: query
+        name: maxLogLines
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogEntries'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get job log
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}/metrics:
+    get:
+      description: 'Get resource usage metrics collected for a specific job.
+
+
+        Returns JSON data containing CPU, memory, and connection metrics sampled
+
+        during job execution. The metrics are only available when per-content
+
+        metrics collection is enabled for the content item.
+
+
+        This action is permitted for content owners, users with collaborator rights,
+
+        and administrators.'
+      operationId: getJobMetrics
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        schema:
+          type: string
+      - in: query
+        name: to
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobMetrics'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get job metrics
+      tags:
+      - Jobs
+  /v1/content/{guid}/jobs/{key}/tail:
+    get:
+      description: 'Actively tail the log output for a given job.
+
+        This action is permitted for content owners, users with collaborator rights, and administrators.'
+      operationId: jobTailLog
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogEntry'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Tail job log
+      tags:
+      - Jobs
+  /v1/experimental/jobs/summary:
+    get:
+      description: 'Get aggregated job statistics for scheduled content.
+
+
+        Returns total counts of running, waiting, succeeded, and failed scheduled jobs, plus a
+
+        time-series histogram of job outcomes bucketed by time.
+
+
+        This endpoint includes **only scheduled jobs**. On-demand executions
+
+        (ad-hoc deployments, manual runs) are excluded. This provides statistics
+
+        specifically for scheduled content execution.
+
+
+        **Authorization:**
+
+
+        - **Administrators** see statistics for all content system-wide
+
+        - **Publishers** see statistics only for content they own or collaborate on (editor role or higher)
+
+        - **Viewers** are denied access (403 Forbidden)
+
+
+        The time bucketing strategy automatically adjusts based on the time range:
+
+
+        - Range < 2 hours → 5-minute buckets
+
+        - Range < 12 hours → 30-minute buckets
+
+        - Range < 2 days → 1-hour buckets
+
+        - Range < 10 days → 6-hour buckets
+
+        - Range < 60 days → 1-day buckets
+
+        - Range < 180 days → 7-day buckets
+
+        - Range >= 180 days → 30-day buckets
+
+
+        If no time range is specified, statistics cover all jobs in the database.'
+      operationId: getJobsSummary
+      parameters:
+      - description: false "Include only jobs with start_time at or after this timestamp (RFC3339)"
+        in: query
+        name: from
+        schema:
+          type: string
+      - description: false "Include only jobs with start_time at or before this timestamp (RFC3339)"
+        in: query
+        name: to
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSummary'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get aggregated job statistics for scheduled content
+      tags:
+      - Jobs
+components:
+  schemas:
+    LogEntry:
+      additionalProperties: false
+      description: A single log entry.
+      properties:
+        source:
+          description: The source of the log entry. `stdout` or `stderr`.
+          example: stdout
+          type: string
+        timestamp:
+          description: The timestamp (RFC3339) indicating when this log entry was recorded.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        data:
+          description: The log entry content.
+          example: 'Running on host: connect'
+          type: string
+      type: object
+    LoggedError:
+      additionalProperties: false
+      description: The primary error of a job.
+      properties:
+        code:
+          description: The error code.
+          type: string
+        summary:
+          description: Summary of the error.
+          type: string
+        help_url:
+          description: A help URL with further information about the error.
+          type: string
+      type: object
+    MetricSample:
+      additionalProperties: false
+      description: A single resource usage sample for a job process.
+      properties:
+        timestamp:
+          description: The timestamp (RFC3339) when this sample was recorded.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        cpu_fraction:
+          description: CPU usage as a fraction (0.0 to 1.0 per core).
+          example: 0.25
+          format: double
+          type: number
+        memory_bytes:
+          description: Memory usage in bytes.
+          example: 104857600
+          format: int64
+          type: integer
+        connections:
+          description: 'Number of active connections to the process.
+
+            May be null if connection counting is not available.'
+          example: 5
+          format: int64
+          nullable: true
+          type: integer
+        process_id:
+          description: The process ID being monitored.
+          example: 12345
+          type: integer
+      type: object
+    KillJobOrder:
+      additionalProperties: false
+      description: The result of registering an order to kill a job.
+      properties:
+        guid:
+          description: The unique identifier for the registered kill order.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        app_id:
+          description: This field is deprecated and has been renamed to `content_id`.
+          example: 54
+          format: int64
+          type: integer
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        content_id:
+          description: The identifier for this job's parent content.
+          example: '54'
+          type: string
+        content_guid:
+          description: The unique identifier for this job's content.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        job_id:
+          description: The job's id
+          example: 54
+          format: int64
+          type: integer
+        job_key:
+          description: The job's unique key identifier.
+          example: tHawGvHZTosJA2Dx
+          type: string
+        result:
+          description: A short message describing the end result.
+          example: Order to kill job registered
+          type: string
+      type: object
+    AuditLog:
+      additionalProperties: false
+      description: An audit log entry.
+      properties:
+        id:
+          description: The identifier of the audit action.
+          type: string
+        time:
+          description: Timestamp in RFC3339 format when the action was taken.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        user_id:
+          description: The user identifier of the actor who performed the audit action.
+          type: string
+        user_guid:
+          description: The user GUID of the actor who performed the audit action.
+          format: uuid
+          nullable: true
+          type: string
+        user_description:
+          description: A description of the actor.
+          example: Full name (username)
+          type: string
+        action:
+          description: The audit action taken.
+          example: add_user
+          type: string
+        event_description:
+          description: A human-readable description of the action.
+          example: Added user Full Name (username)
+          type: string
+      type: object
+    JobMetrics:
+      additionalProperties: false
+      description: Resource usage metrics collected for a job.
+      properties:
+        content_guid:
+          description: The unique identifier for the content item.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        job_key:
+          description: The job's unique key identifier.
+          example: tHawGvHZTosJA2Dx
+          type: string
+        samples:
+          description: 'Array of metric samples collected during job execution.
+
+            May be empty if no metrics were collected.'
+          items:
+            $ref: '#/components/schemas/MetricSample'
+          type: array
+      type: object
+    Job:
+      additionalProperties: false
+      description: A job record representing a content execution.
+      properties:
+        id:
+          description: The job identifier.
+          example: '54'
+          type: string
+        ppid:
+          description: The job's parent process identifier.
+          example: '20253'
+          nullable: true
+          type: string
+        pid:
+          description: The job's process identifier.
+          example: '20253'
+          type: string
+        key:
+          description: The job's unique key identifier.
+          example: tHawGvHZTosJA2Dx
+          type: string
+        remote_id:
+          description: The job's identifier for off-host execution configurations.
+          example: S3ViZXJuZXRlczpyZW5kZXItci1tYXJrZG93bi1zaXRlLWtnODJo
+          nullable: true
+          type: string
+        app_id:
+          description: This field is deprecated and has been renamed to `content_id`.
+          example: '54'
+          type: string
+        content_id:
+          description: The identifier for this job's parent content.
+          example: '54'
+          type: string
+        content_guid:
+          description: The unique identifier for this job's content.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        variant_id:
+          description: The identifier of the variant owning this job.
+          example: '54'
+          type: string
+        variant_key:
+          description: 'The key of the variant owning this job. May be empty
+
+            if the variant is no longer available.'
+          example: HidI2Kwq
+          type: string
+        bundle_id:
+          description: The identifier of a content bundle linked to this job.
+          example: '54'
+          type: string
+        start_time:
+          description: The timestamp (RFC3339) indicating when this job started.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        end_time:
+          description: The timestamp (RFC3339) indicating when this job finished.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        last_heartbeat_time:
+          description: 'The timestamp (RFC3339) indicating the last time
+
+            this job was observed to be running.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        queued_time:
+          description: 'The timestamp (RFC3339) indicating when this job was added to the queue
+
+            to be processed. Only scheduled reports will present a value for this field.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        queue_name:
+          description: 'The name of the queue which processes the job. Only scheduled reports
+
+            will present a value for this field.'
+          example: default
+          nullable: true
+          type: string
+        tag:
+          description: 'A tag to identify the nature of the job. It can be one of `unknown`,
+
+            `build_report`, `build_site`, `build_jupyter`, `packrat_restore`,
+
+            `python_restore`, `configure_report`, `run_app`, `run_api`,
+
+            `run_tensorflow`, `run_python_api`, `run_dash_app`,
+
+            `run_streamlit`, `run_bokeh_app`, `run_panel_app`, `run_fastapi_app`,
+
+            `run_gradio_app`,
+
+            `run_pyshiny_app`, `render_shiny`, `run_voila_app`, `testing`,
+
+            `git`, `val_py_ext_pkg`, `val_r_ext_pkg`, `val_r_install`.'
+          example: build_report
+          type: string
+        exit_code:
+          description: The job's exit code. Present only when job is finished.
+          example: 0
+          format: int64
+          nullable: true
+          type: integer
+        error:
+          description: The error message if the job failed due to an unexpected server error.
+          nullable: true
+          type: string
+        status:
+          description: 'The current status of the job. It can be one of Active: `0`, Finished: `1`,
+
+            Finalized: `2`, Skipped: `3`.'
+          example: 0
+          type: integer
+        hostname:
+          description: The name of the node which processes the job.
+          example: connect
+          nullable: true
+          type: string
+        cluster:
+          description: 'The location where this content runs. Content running on the same
+
+            server as Connect will have either a `null` value or the string
+
+            `Local`. Gives the name of the cluster when run external to the
+
+            Connect host.'
+          example: Kubernetes
+          nullable: true
+          type: string
+        image:
+          description: 'The location where this content runs. Content running on the
+
+            same server as Connect will have either a `null` value or the string
+
+            `Local`. References the name of the target image when content runs
+
+            in a clustered environment such as Kubernetes.'
+          example: someorg/image:jammy
+          nullable: true
+          type: string
+        run_as:
+          description: The UNIX user that executed this job.
+          example: rstudio-connect
+          nullable: true
+          type: string
+        skip_reason:
+          description: 'The reason why this job was skipped. Only present for jobs with a
+
+            skipped status (e.g., when a duplicate job was already queued).'
+          example: duplicate job already queued
+          nullable: true
+          type: string
+      type: object
+    JobSummary:
+      additionalProperties: false
+      description: Aggregated job statistics with totals and time-bucketed histogram for scheduled jobs only.
+      properties:
+        totals:
+          allOf:
+          - $ref: '#/components/schemas/JobSummaryTotals'
+          description: Aggregated total counts of scheduled jobs by status.
+        buckets:
+          description: 'Time-series histogram of scheduled job outcomes. Each bucket represents a
+
+            time interval
+
+            with counts of succeeded and failed scheduled jobs. The bucket interval is
+
+            automatically
+
+            determined based on the query time range (5 minutes to 30 days).'
+          items:
+            $ref: '#/components/schemas/JobSummaryBucket'
+          type: array
+      type: object
+    JobSummaryBucket:
+      additionalProperties: false
+      description: A single time bucket in the scheduled job history histogram.
+      properties:
+        timestamp:
+          description: 'The start time of this bucket (RFC3339). Scheduled jobs with start_time in
+
+            the interval
+
+            [timestamp, timestamp+interval) are counted in this bucket.'
+          example: '2026-01-26T00:00:00Z'
+          format: date-time
+          type: string
+        failed:
+          description: Number of scheduled jobs in this bucket that failed.
+          example: 4
+          type: integer
+        succeeded:
+          description: Number of scheduled jobs in this bucket that succeeded.
+          example: 100
+          type: integer
+        skipped:
+          description: 'Number of scheduled jobs in this bucket that were skipped. Note: skipped
+
+            jobs are tracked from Connect version 2026.03.0 onward.'
+          example: 1
+          type: integer
+      type: object
+    JobSummaryTotals:
+      additionalProperties: false
+      description: Total counts of scheduled jobs by status.
+      properties:
+        waiting:
+          description: 'Number of scheduled jobs queued but not yet started. For time ranges in the
+
+            past, this will be 0.'
+          example: 3
+          type: integer
+        running:
+          description: 'Number of currently executing scheduled jobs. For time ranges in the past,
+
+            this will be 0.'
+          example: 1
+          type: integer
+        succeeded:
+          description: Number of scheduled jobs that completed successfully (exit code 0).
+          example: 287
+          type: integer
+        failed:
+          description: Number of scheduled jobs that failed (non-zero exit code).
+          example: 5
+          type: integer
+        skipped:
+          description: 'Number of scheduled jobs that were skipped. Note: skipped jobs are tracked
+
+            from Connect version 2026.03.0 onward.'
+          example: 2
+          type: integer
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    LogEntries:
+      additionalProperties: false
+      description: Log entries for a job.
+      properties:
+        entries:
+          description: The list of log entries.
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          type: array
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

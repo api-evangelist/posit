@@ -1,0 +1,1083 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys OAuth Integrations API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: OAuth Integrations
+paths:
+  /v1/oauth/integrations:
+    get:
+      description: 'List all OAuth integrations available to Posit Connect.
+
+        You must have administrator or publisher privileges to perform this action.'
+      operationId: listOAuthIntegrations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAuthIntegration'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List OAuth integrations
+      tags:
+      - OAuth Integrations
+    post:
+      description: 'Create a new OAuth integration.
+
+        You must have administrator privileges to perform this action.'
+      operationId: createOAuthIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthIntegrationInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthIntegration'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires payment.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create an OAuth integration
+      tags:
+      - OAuth Integrations
+  /v1/oauth/integrations/credentials:
+    post:
+      description: 'This endpoint facilitates an [OAuth Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693) by
+
+        exchanging a Connect-provided credential for OAuth credentials.
+
+
+        There are several types of OAuth token exchanges supported by this endpoint. It allows content
+
+        owners to exchange the viewer''s Connect credentials for the viewer''s OAuth credentials, and it allows executing content
+
+        to exchange its own Connect credentials for the OAuth credentials associated with a service account.
+
+
+        This endpoint can only be called _from content that is running on Posit Connect_ because the Connect-provided
+
+        credentials required by the endpoint are only available in that context. See the `subject_token` property for details.
+
+
+        In the case of a *Viewer credential exchange*, this endpoint requires that the content viewer first perform an OAuth
+
+        login by visiting the login endpoint of the OAuth integration in their browser.
+
+        The login endpoint is located at `__oauth__/integrations/:guid/login`.
+
+
+        Once the viewer has successfully initialized an OAuth session for the OAuth integration by visiting the login endpoint,
+
+        the content can then exchange the viewer''s `user-session-token` for the viewer''s OAuth credentials.
+
+
+        OAuth credential refresh is handled automatically by Connect. Repeated requests to this endpoint will return
+
+        the same OAuth credentials until they expire. When the OAuth credentials expire, the next request to this endpoint
+
+        will return a refreshed set of OAuth credentials.
+
+
+        You must have administrator or publisher privileges to perform this action.
+
+        Additionally, the requester _must_ be owner of the content where the credential exchange request originated.
+
+        Finally, the user whose OAuth credentials are being requested must have viewer permissions on the content.
+
+
+        In the case of a *Service Account credential exchange*, this endpoint will return a fresh OAuth access token to the
+
+        requesting content item on every request. There is no login redirect or refresh token management. You must have administrator
+
+        or publisher privileges to perform this action. The requester _must_ be owner of the content where the credential exchange
+
+        request originated.'
+      operationId: exchangeCredentials
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              additionalProperties: false
+              properties:
+                audience:
+                  description: Identifies the integration for which the OAuth credentials are being requested.
+                  type: string
+                grant_type:
+                  description: Indicates that an OAuth Token Exchange is being requested. The value is always "urn:ietf:params:oauth:grant-type:token-exchange".
+                  type: string
+                requested_token_type:
+                  description: Identifies the type of token being requested.
+                  type: string
+                subject_token:
+                  description: An opaque string that is used to identify the consumer of the OAuth access token.
+                  type: string
+                subject_token_type:
+                  description: Identifies the type of subject_token in use.
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthCredentials'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires payment.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Exchange Connect credentials for OAuth credentials
+      tags:
+      - OAuth Integrations
+  /v1/oauth/integrations/{guid}:
+    delete:
+      description: 'Delete the OAuth integration associated with the provided guid.
+
+        You must have administrator privileges to perform this action.'
+      operationId: deleteOAuthIntegration
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Delete an OAuth integration
+      tags:
+      - OAuth Integrations
+    get:
+      description: 'Get detailed information about a specific OAuth integration.
+
+        You must have administrator or publisher privileges to perform this action.'
+      operationId: getOAuthIntegration
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthIntegration'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get OAuth integration details
+      tags:
+      - OAuth Integrations
+    patch:
+      description: 'Update a specific OAuth integration.
+
+        You must have administrator privileges to perform this action.'
+      operationId: updateOAuthIntegration
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthIntegrationUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthIntegration'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires payment.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update an OAuth integration
+      tags:
+      - OAuth Integrations
+  /v1/oauth/integrations/{guid}/associations:
+    get:
+      description: 'List all associations for this OAuth integration.
+
+        You must have administrator privileges to perform this action.'
+      operationId: listOAuthIntegrationAssociations
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAuthIntegrationAssociationOutput'
+                type: array
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List all associations for this OAuth integration.
+      tags:
+      - OAuth Integrations
+  /v1/oauth/integrations/{guid}/verify:
+    post:
+      description: 'This endpoint simulates a content session token exchange with the OAuth integration to
+
+        verify that the integration is configured correctly. No access token is returned.
+
+        Verification is only available for OAuth integrations with the "Service Account" authentication type.
+
+        If the integration is not a service account integration, a 400 status code will be returned.
+
+        You must have administrator privileges to perform this action.'
+      operationId: verifyServiceAccountIntegration
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires payment.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Verify that an OAuth service account integration is configured correctly.
+      tags:
+      - OAuth Integrations
+components:
+  schemas:
+    OAuthCredentials:
+      additionalProperties: false
+      properties:
+        access_token:
+          description: 'The user''s token which is accepted by the external resource. If
+
+            `issued_token_type` is `urn:ietf:params:aws:token-type:credentials`, then
+
+            this field will contain base64-encoded JSON containing temporary AWS
+
+            credentials.
+
+
+            https://datatracker.ietf.org/doc/html/rfc8693#section-2.2.1-2.2'
+          nullable: true
+          type: string
+        issued_token_type:
+          description: 'The type of token stored in the access_token field.
+
+
+            https://datatracker.ietf.org/doc/html/rfc8693#section-2.2.1-2.4'
+          example: urn:ietf:params:oauth:token-type:access_token
+          nullable: true
+          type: string
+        token_type:
+          description: 'The method by which the access_token should be provided to the external
+
+            resource.
+
+
+            https://datatracker.ietf.org/doc/html/rfc8693#section-2.2.1-2.6'
+          example: Bearer
+          nullable: true
+          type: string
+        expires_in:
+          description: 'The remaining time before the returned token expires, expressed in seconds.
+
+
+            This value is only returned if expiry information is available for the
+
+            token. For example, if an external OAuth service does not provide expiry
+
+            information to Connect, this value can''t be returned in the response.
+
+
+            Token expiration is calulated relative to the current UTC time, *not* local
+
+            time.
+
+
+            https://datatracker.ietf.org/doc/html/rfc8693#section-2.2.1-2.8'
+          example: 3600
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    OAuthIntegration:
+      additionalProperties: false
+      description: OAuthIntegration represents a custom OAuth integration available in Posit Connect.
+      properties:
+        id:
+          description: The internal numeric identifier of this OAuth integration.
+          example: '123'
+          type: string
+        guid:
+          description: 'The unique identifier of this OAuth integration which is used in REST API
+
+            requests.'
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) indicating when this OAuth integration was created.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        updated_time:
+          description: 'The timestamp (RFC3339) indicating when this OAuth integration was last
+
+            updated.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        name:
+          description: A descriptive name to identify each OAuth integration.
+          nullable: true
+          type: string
+        description:
+          description: A brief text to describe each OAuth integration.
+          example: Integration with external system
+          nullable: true
+          type: string
+        template:
+          description: 'The template to use to configure this OAuth integration. See List OAuth
+
+            templates for more information.'
+          example: custom
+          nullable: true
+          type: string
+        auth_type:
+          description: 'The authentication type indicates which OAuth flow is used by this
+
+            integration. The "Viewer" authentication type corresponds to the
+
+            Authorization Code flow. The "Service Account" authentication type
+
+            corresponds to the Client Credentials flow.'
+          example: Viewer
+          nullable: true
+          type: string
+        config:
+          additionalProperties: true
+          description: 'The OAuth integration configuration based on the template. See List OAuth
+
+            templates for more
+
+            information on available fields for each template. The configuration
+
+            combines elements from both
+
+            options and fields from a given template.
+
+
+            For example, given the following template section:
+
+
+            ```
+
+            ...
+
+            "options": [{
+
+            ...
+
+            "name": "auth_mode",
+
+            "type": "select",
+
+            "values": ["Confidential", "Public"]
+
+            },
+
+            ...
+
+            }],
+
+            "fields": [{
+
+            ...
+
+            "name": "client_id",
+
+            "label": "Client ID"
+
+            },
+
+            ...
+
+            }]
+
+            ...
+
+            ```
+
+
+            A valid OAuthIntegration `config` would be:
+
+
+            ```
+
+            {
+
+            ...
+
+            "config": {
+
+            "auth_mode": "Public",
+
+            "client_id": "1b9b9733-43f5-4848-a894-f753f2fbaf41",
+
+            ...
+
+            }
+
+            }
+
+            ```'
+          type: object
+        permissions:
+          description: 'A list of permission records that define which users or groups have access
+
+            to this OAuth integration.'
+          items:
+            $ref: '#/components/schemas/OAuthIntegrationPermission'
+          type: array
+        environment_variables:
+          description: The names of the environment variables provisioned by this OAuth integration.
+          items:
+            type: string
+          type: array
+        content_count:
+          description: 'The number of content items currently using this OAuth integration.
+
+            This field is only included for administrators.'
+          example: 5
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    OAuthIntegrationPermissionInput:
+      additionalProperties: false
+      description: 'The fields that can be specified when adding permissions to an OAuth integration.
+
+        Note that only one of user_guid or group_guid can be specified in a single request.'
+      properties:
+        user_guid:
+          description: 'The identifier of the user. Do not specify this field if you
+
+            are adding a group.'
+          example: 89a3c946-d73c-4781-8463-dd3cccff3fef
+          format: uuid
+          nullable: true
+          type: string
+        group_guid:
+          description: 'The identifier of the group. Do not specify this field if you
+
+            are adding a user.'
+          example: 998f3356-96f0-48a2-9655-94334615fa5b
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+    OAuthIntegrationInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating an OAuth integration.
+      properties:
+        name:
+          description: A descriptive name to identify each OAuth integration.
+          example: Databricks Integration
+          nullable: true
+          type: string
+        description:
+          description: A brief text to describe each OAuth integration.
+          example: Integration with external system
+          nullable: true
+          type: string
+        template:
+          description: 'The template to use to configure this OAuth integration. See List OAuth
+
+            templates for more information.'
+          example: custom
+          type: string
+        config:
+          additionalProperties: true
+          description: 'The OAuth integration configuration based on the template.
+
+            See List OAuth templates for more information on available fields for each
+
+            template.
+
+            The configuration combines elements from both options and fields from a
+
+            given template.
+
+
+            For example, given the following OAuthTemplateOptions:
+
+
+            ```
+
+            ...
+
+            "options": [{
+
+            ...
+
+            "name": "auth_mode",
+
+            "type": "select",
+
+            "values": ["Confidential", "Public"]
+
+            },
+
+            ...
+
+            }],
+
+            "fields": [{
+
+            ...
+
+            "name": "client_id",
+
+            "label": "Client ID"
+
+            },
+
+            ...
+
+            }]
+
+            ...
+
+            ```
+
+
+            A valid OAuthIntegration `config` would be:
+
+
+            ```
+
+            {
+
+            ...
+
+            "config": {
+
+            "auth_mode": "Public",
+
+            "client_id": "1b9b9733-43f5-4848-a894-f753f2fbaf41",
+
+            ...
+
+            }
+
+            }
+
+            ```'
+          type: object
+        permissions:
+          description: 'An optional list of permissions to grant access to this OAuth integration.
+
+            Each permission record specifies a user or group that can access the
+
+            integration.'
+          items:
+            $ref: '#/components/schemas/OAuthIntegrationPermissionInput'
+          nullable: true
+          type: array
+      type: object
+    OAuthIntegrationPermission:
+      additionalProperties: false
+      description: 'Represents a permission record associated with an OAuth integration that
+
+        defines which users or groups can access the integration.'
+      properties:
+        id:
+          description: The internal identifier for this permission entry.
+          example: '101'
+          type: string
+        guid:
+          description: The identifier for this permission entry.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        integration_guid:
+          description: The identifier of the OAuth integration.
+          example: 62543474-5716-4423-92d1-b3a22163eb49
+          format: uuid
+          type: string
+        user_guid:
+          description: 'The identifier of the user listed in the permission entry.
+
+            This field will be null if a group is listed.'
+          example: d73f7343-02e8-4c52-9208-598e28f8002e
+          format: uuid
+          nullable: true
+          type: string
+        group_guid:
+          description: 'The identifier of the group listed in the permission entry.
+
+            This field will be null if a user is listed.'
+          example: a46be0c8-ef75-4dce-b902-d8e56a6b8509
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+    OAuthIntegrationAssociationOutput:
+      additionalProperties: false
+      description: Represents an association between a content item and an OAuth integration.
+      properties:
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_guid:
+          description: The unique identifier of the content item.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_guid:
+          description: The unique identifier of an existing OAuth integration.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_name:
+          description: A descriptive name that identifies the OAuth integration.
+          example: Databricks Integration
+          nullable: true
+          type: string
+        oauth_integration_description:
+          description: A brief text that describes the OAuth integration.
+          example: Integration with external system
+          nullable: true
+          type: string
+        oauth_integration_template:
+          description: The template used to configure this OAuth integration.
+          example: custom
+          nullable: true
+          type: string
+        oauth_integration_auth_type:
+          description: 'Indicates which OAuth flow is used by this integration. The
+
+            "Viewer" authentication type corresponds to the Authorization Code
+
+            flow. The "Service Account" authentication type corresponds to the
+
+            Client Credentials flow.'
+          example: Viewer
+          nullable: true
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) indicating when this association was created.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    OAuthIntegrationUpdate:
+      additionalProperties: false
+      description: The fields that can be specified when updating an OAuth integration.
+      properties:
+        name:
+          description: A descriptive name to identify each OAuth integration.
+          example: databricks
+          nullable: true
+          type: string
+        description:
+          description: A brief text to describe each OAuth integration.
+          example: Integration with external system
+          nullable: true
+          type: string
+        config:
+          additionalProperties: true
+          description: 'The OAuth integration configuration based on the template.
+
+            See List OAuth templates for more information on available fields for each
+
+            template.
+
+            The configuration combines elements from both options and fields from a
+
+            given template.
+
+
+            For example, given the following OAuthTemplateOptions:
+
+
+            ```
+
+            ...
+
+            "options": [{
+
+            ...
+
+            "name": "auth_mode",
+
+            "type": "select",
+
+            "values": ["Confidential", "Public"]
+
+            },
+
+            ...
+
+            }],
+
+            "fields": [{
+
+            ...
+
+            "name": "client_id",
+
+            "label": "Client ID"
+
+            },
+
+            ...
+
+            }]
+
+            ...
+
+            ```
+
+
+            A valid OAuthIntegration `config` would be:
+
+
+            ```
+
+            {
+
+            ...
+
+            "config": {
+
+            "auth_mode": "Public",
+
+            "client_id": "1b9b9733-43f5-4848-a894-f753f2fbaf41",
+
+            ...
+
+            }
+
+            }
+
+            ```'
+          type: object
+        permissions:
+          description: 'An optional list of permissions to grant access to this OAuth integration.
+
+            Each permission record specifies a user or group that can access the
+
+            integration.
+
+            When provided, this replaces the existing permissions for the integration.'
+          items:
+            $ref: '#/components/schemas/OAuthIntegrationPermissionInput'
+          nullable: true
+          type: array
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

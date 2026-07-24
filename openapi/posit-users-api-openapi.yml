@@ -1,0 +1,862 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Users API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Users
+paths:
+  /v1/user:
+    get:
+      description: Get detailed information on the requesting user.
+      operationId: getCurrentUser
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get current user details
+      tags:
+      - Users
+  /v1/users:
+    get:
+      description: "This endpoint lists local users. When called with a prefix\nparameter, it searches for local users matching the prefix.\n\nBy default, results are sorted by first name, then last name, then\nusername, then email. Use the `sort` parameter to sort by a\ndifferent field. When `prefix` is specified and `sort` is not,\nresults are ordered by relevance to the prefix. When both `prefix`\nand `sort` are specified, the `sort` field takes precedence. The\n`prefix` can also be an exact match for the user's DN (for LDAP)\nor the auth provider's unique ID for the user, if any.\n\n- The `email` field is not populated for non-admins when\n  [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.\n- The `external_id` field is only visible to administrators and to users\n  viewing their own record.\n- When the user making the request is a viewer and\n  [`Authorization.ViewersCanOnlySeeThemselves`](../admin/appendix/configuration/index.md#Authorization.ViewersCanOnlySeeThemselves) is being used,\n  the results contain only the given user.\n\nThis endpoint uses offset pagination. Requests can include\nquery-string parameters for `page_number` and `page_size` to\nfetch different pages of results.\n\nNote that searching by `prefix` will only return the first page of\nresults; subsequent pages will be empty. Set `page_size` to its\nmaximum (`500`) to retrieve the most results.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`users:read` scope. When accessed with a service token, all\nusers are returned unscrubbed. CSV export is not available.\n\n#### CSV export\n\nAdministrators can request the response as CSV by setting the `Accept`\nheader to `text/csv`. The CSV export ignores pagination parameters and\nreturns all matching users.\n\n```bash\ncurl -H \"Authorization: Key ${API_KEY}\" \\\n     -H \"Accept: text/csv\" \\\n     \"https://connect.example.com/__api__/v1/users\"\n```"
+      operationId: getUsers
+      parameters:
+      - description: Filter by a prefix string matched against username, first name, last name, provider key, and DN.
+        in: query
+        name: prefix
+        schema:
+          type: string
+      - description: The page number to return.
+        in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int32
+          type: integer
+      - description: The number of items per page.
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - description: Whether results are in ascending order.
+        in: query
+        name: asc_order
+        schema:
+          default: true
+          type: boolean
+      - description: Sort results by field. Defaults to `first_name`. When `prefix` is specified and `sort` is not, results are ordered by search relevance score instead.
+        in: query
+        name: sort
+        schema:
+          enum:
+          - first_name
+          - last_name
+          - username
+          - active_time
+          - created_time
+          - user_role
+          type: string
+      - description: Filter by user role. `|` represents logical OR.
+        in: query
+        name: user_role
+        schema:
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          type: string
+      - description: Filter by account status. `|` represents logical OR.
+        in: query
+        name: account_status
+        schema:
+          enum:
+          - locked
+          - licensed
+          - inactive
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: List or search for user details
+      tags:
+      - Users
+    post:
+      description: "This endpoint creates the given user.\n\n- This endpoint is used only for SAML, OAuth2 (non-Google), password, PAM, and proxied\n  authentication. All other authentication providers should\n  use the [PUT /v1/users](#createPullUser) endpoint.\n- Administrator access is required to create *other* users.\n\n#### Initial User Creation Workflow\n\nThis endpoint requires authentication to create *other* users,\nwhich means that you need an API key for access. How do you\nget an API key if there are no users in Posit Connect?\n\n- For password authentication, you can use this endpoint\n  without an API key to create the first user. The first user\n  will be an administrator.\n- For SAML, OAuth2 (non-Google), PAM or proxied authentication, the first user can be\n  created by logging into Posit Connect. The API cannot be used.\n\nOnce the first user is created, an API key can be used to access this\nendpoint and create subsequent users. The [API\nKeys](../user/api-keys/) chapter of the Posit Connect User Guide\nexplains how to create an API key.\n\n#### All Authentication Providers\n\n- When `user_role` is not specified, it will default to the\n  role specified by the config setting\n  [`Authorization.DefaultUserRole`](../admin/appendix/configuration/index.md#Authorization.DefaultUserRole).\n\n#### SAML, OAuth2 (non-Google), PAM and Proxied Authentication\n\n- An API key must always be used. Users cannot use this\n  endpoint to create their own account.\n- Administrator access is always required to create accounts.\n- `external_id` is required for SAML and OAuth2 (non-Google)\n  authentication, and also for proxied authentication if the\n  [`ProxyAuth.UniqueIdHeader`](../admin/appendix/configuration/index.md#ProxyAuth.UniqueIdHeader) config setting is used.\n  It is not required for PAM, nor for proxied\n  authentication without the [`ProxyAuth.UniqueIdHeader`](../admin/appendix/configuration/index.md#ProxyAuth.UniqueIdHeader) setting.\n\n#### Password Authentication\n\n- Users must confirm their account through an email. This\n  feature is unique to password authentication.\n- Administrator access is always required except for the first\n  created user."
+      operationId: createPushUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreatePushInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create a user from caller-supplied details (SAML, password, PAM, proxied, OAuth2 except with Google)
+      tags:
+      - Users
+    put:
+      description: "This endpoint creates the given user on the Posit Connect server.\n\n- This endpoint is used only for LDAP and OAuth2 with Google\n  authentication. All other authentication providers should\n  use the [POST /v1/users](#createPushUser) endpoint.\n- Unlike the [POST /v1/users](#createPushUser) endpoint, publisher or administrator\n  access is required to access this endpoint.\n\n#### User Creation Workflow on LDAP and OAuth2 with Google\n\nThis endpoint requires authentication, which means that you need an\nAPI key for access. How do you get an API key if there are no users in\nPosit Connect? The first user can be created by simply logging into\nPosit Connect. The Posit Connect Server API cannot be used to\ncreate the first user. Once logged in, you can create an API key.\n\nFor LDAP and OAuth2 with Google, the API lets you identify an existing\nuser in the LDAP or OAuth2 with Google system and create a corresponding\naccount on Posit Connect. This is a two-step process:\n\n- Use the [GET /v1/users/remote](#searchRemoteUsers) endpoint. This\n  endpoint will return a list of potential matching accounts\n  in LDAP or OAuth2 with Google. A user with no account on Posit Connect will\n  lack a `guid`. Note the `temp_ticket` for the desired user\n  account.\n- Use this PUT endpoint with the `temp_ticket` to create a\n  corresponding account on Posit Connect.\n\nThe Cookbook contains a recipe on [Creating a User Using a\nRemote Authentication Provider\n(LDAP)](../cookbook/users/creating-a-user-using-a-remote-authentication-provider-ldap/)\nwhich demonstrates this workflow using the Posit SDKs.\n\n#### LDAP and OAuth2 with Google Authentication\n\n- The created user role will default to the role specified by\n  the config setting [`Authorization.DefaultUserRole`](../admin/appendix/configuration/index.md#Authorization.DefaultUserRole)."
+      operationId: createPullUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreatePullInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Create a user using details from a remote authentication provider (LDAP, OAuth2 with Google)
+      tags:
+      - Users
+  /v1/users/remote:
+    get:
+      description: "This endpoint is used to support operations against users who\ndo not have a Posit Connect account, such as\n[creating LDAP and OAuth2 with Google users](#createPullUser).\nSee [GET /v1/users](#getUsers) for listing users.\n\nThis endpoint searches for users on Posit Connect and on\nyour LDAP or OAuth2 with Google system.\n\nResults are first sorted based on similarity to the `prefix`\nand then by first name, last name, username, and email.\n\n- This endpoint can be used only by LDAP or OAuth2 with Google\n  authentication and will return an error otherwise.\n- Publisher or administrator access is required to access this\n  endpoint.\n- The `email` field is not populated for non-admins when\n  [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.\n- The `external_id` field is only visible to administrators and to users\n  viewing their own record.\n- When the user making the request is a viewer and\n  [`Authorization.ViewersCanOnlySeeThemselves`](../admin/appendix/configuration/index.md#Authorization.ViewersCanOnlySeeThemselves) is being used,\n  the results contain only the given user."
+      operationId: searchRemoteUsers
+      parameters:
+      - in: query
+        name: prefix
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoteSearchResults'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Search for user details from a remote provider
+      tags:
+      - Users
+  /v1/users/{guid}:
+    get:
+      description: 'Get detailed information on a specific user.
+
+
+        The `email` field is not populated for non-admins when
+
+        [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled. The `external_id` field is only
+
+        visible to administrators and to users viewing their own record.'
+      operationId: getUser
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get user details
+      tags:
+      - Users
+    put:
+      description: "This endpoint updates a given user and returns the updated\nuser properties. Note that it returns only the properties that\ncan be modified by this endpoint.\n\nIf the authentication provider allows it:\n\n- a user can change their own user properties.\n- another user's properties can be changed with administrator\n  access.\n- The configuration setting [`Authorization.UserInfoEditableBy`](../admin/appendix/configuration/index.md#Authorization.UserInfoEditableBy)\n  controls whether or not non-admins can edit their own properties.\n\n### Password Authentication\n\n- Emails are required.\n- Changing an unconfirmed user's email will cause the\n  confirmation email to be resent to the new email."
+      operationId: updateUser
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateInput'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditableUser'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The request could not be completed due to a conflict.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Update a user
+      tags:
+      - Users
+  /v1/users/{guid}/lock:
+    post:
+      description: 'This endpoint locks or unlocks a given user account.
+
+
+        - Unlocking a user is prohibited if that additional user would
+
+        violate the user account limit specified by the Posit Connect product
+
+        license.
+
+        - Administrator access is required to access this endpoint.
+
+        - Users are able to lock themselves.'
+      operationId: lockUser
+      parameters:
+      - in: path
+        name: guid
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LockUserInput'
+        required: true
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Lock a user
+      tags:
+      - Users
+components:
+  schemas:
+    User:
+      description: A user object.
+      properties:
+        email:
+          description: The user's email.
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role.
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: administrator
+          type: string
+        created_time:
+          description: 'The timestamp (RFC3339) indicating when the user was created in
+
+            the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        updated_time:
+          description: 'The timestamp (RFC3339) indicating when information about this
+
+            user was last updated in the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        active_time:
+          description: 'The timestamp (RFC3339) indicating approximately when the user
+
+            was last active. Highly active users only receive periodic updates.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        confirmed:
+          description: 'When `false`, the created user must confirm their account through
+
+            an email. This feature is unique to password authentication.'
+          example: true
+          type: boolean
+        locked:
+          description: Whether or not the user is locked.
+          example: false
+          type: boolean
+        external_id:
+          description: 'The unique identifier for this user from the authentication
+
+            provider, when available.'
+          example: okta-12345-abcde
+          type: string
+        guid:
+          description: 'The user''s GUID, or unique identifier, in UUID
+
+            [RFC4122](https://www.rfc-editor.org/rfc/rfc4122)
+
+            format'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    UserWithTicket:
+      additionalProperties: false
+      description: A user object with a temporary ticket for remote user creation.
+      properties:
+        email:
+          description: The user's email.
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role.
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: administrator
+          type: string
+        created_time:
+          description: 'The timestamp (RFC3339) indicating when the user was created in
+
+            the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        updated_time:
+          description: 'The timestamp (RFC3339) indicating when information about this
+
+            user was last updated in the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        active_time:
+          description: 'The timestamp (RFC3339) indicating approximately when the user
+
+            was last active. Highly active users only receive periodic updates.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          nullable: true
+          type: string
+        confirmed:
+          description: 'When `false`, the created user must confirm their account through
+
+            an email. This feature is unique to password authentication.'
+          example: true
+          type: boolean
+        locked:
+          description: Whether or not the user is locked.
+          example: false
+          type: boolean
+        external_id:
+          description: 'The unique identifier for this user from the authentication
+
+            provider, when available.'
+          example: okta-12345-abcde
+          type: string
+        guid:
+          description: 'The user''s GUID, or unique identifier in
+
+            [RFC4122](https://www.rfc-editor.org/rfc/rfc4122)
+
+            format. When a user does not exist in the Posit Connect server, this
+
+            property
+
+            will be `null`.'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          nullable: true
+          type: string
+        temp_ticket:
+          description: 'This value is for actions that require a `temp_ticket`, such
+
+            as adding an LDAP or OAuth2 with Google user to the Connect server.'
+          type: string
+      type: object
+    UserUpdateInput:
+      additionalProperties: false
+      description: The fields that can be specified when updating a user.
+      properties:
+        email:
+          description: The user's email.
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role.
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: administrator
+          type: string
+      type: object
+    LockUserInput:
+      additionalProperties: false
+      description: The fields that must be specified when locking or unlocking a user.
+      properties:
+        locked:
+          description: Whether or not the user should be locked.
+          example: true
+          nullable: true
+          type: boolean
+      type: object
+    Users:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The users list
+            items:
+              $ref: '#/components/schemas/User'
+            type: array
+        type: object
+      description: The users list with paging information.
+    EditableUser:
+      additionalProperties: false
+      description: The editable user properties.
+      properties:
+        email:
+          description: The user's email
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role
+          example: administrator
+          type: string
+        updated_time:
+          description: 'The timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format)
+
+            when the
+
+            user was last updated in the Posit Connect server'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    RemoteSearchResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The users list
+            items:
+              $ref: '#/components/schemas/UserWithTicket'
+            type: array
+        type: object
+      description: The remote user search results with paging information.
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    UserCreatePullInput:
+      additionalProperties: false
+      description: The fields that must be specified when creating a user from a remote authentication provider.
+      properties:
+        temp_ticket:
+          description: 'This value is for actions that require a `temp_ticket`, such
+
+            as adding an LDAP or OAuth2 with Google user to the Connect server.'
+          type: string
+      type: object
+    UserCreatePushInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating a user from caller-supplied details.
+      properties:
+        username:
+          description: The user's desired username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        email:
+          description: The user's email address.
+          example: jon.doe@example.com
+          type: string
+        user_role:
+          description: 'The user''s role. When `null`, the role is determined by the server
+
+            default.'
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: publisher
+          nullable: true
+          type: string
+        user_must_set_password:
+          description: 'When `true`, the created user will be asked to set the password
+
+            on first login.'
+          example: false
+          type: boolean
+        password:
+          description: 'The user''s initial password. Must meet minimum password
+
+            requirements.'
+          type: string
+        external_id:
+          description: 'The unique identifier for this user from the authentication
+
+            provider.'
+          example: okta-12345-abcde
+          type: string
+        unique_id:
+          description: 'Deprecated: use `external_id` instead.'
+          example: okta-12345-abcde
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey

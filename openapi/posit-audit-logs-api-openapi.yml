@@ -1,0 +1,514 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@posit.co
+    name: Posit Connect Support
+    url: https://support.posit.co/hc/en-us
+  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  license:
+    name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
+    url: https://posit.co/about/eula/
+  termsOfService: https://posit.co/about/eula/
+  title: Posit Connect API Reference API Keys Audit Logs API
+  version: 1.0.1
+servers:
+- url: /__api__
+security:
+- apiKey: []
+tags:
+- name: Audit Logs
+paths:
+  /v1/audit/actions:
+    get:
+      description: 'Retrieve the list of audit actions available on your Posit Connect server.
+
+        You can also see a list of these actions in the [Admin Guide](../admin/auditing/events/).
+
+        Action names can be used to filter audit logs in the [Audit Log Search API](#searchAuditLogs).'
+      operationId: getAuditActions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuditActionResult'
+                type: array
+          description: Successful response.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get audit actions
+      tags:
+      - Audit Logs
+  /v1/audit_logs:
+    get:
+      description: 'This endpoint returns a portion of the audit logs, as well as
+
+        paging information that can be used to navigate the audit log
+
+        results.
+
+
+        This endpoint requires administrator access.
+
+
+        This endpoint uses keyset pagination. The URLs in the `paging` field''s
+
+        subfields can be used to fetch the `next`, `previous`, `first`, and
+
+        `last` pages of results.'
+      operationId: getAuditLogs
+      parameters:
+      - description: 'Number of logs to return. The minimum supported value is 1 and
+
+          maximum supported value is 500. Note that `limit` is a "best
+
+          effort" request since there may not be enough logs to satisfy the limit.'
+        in: query
+        name: limit
+        schema:
+          default: 20
+          format: int64
+          type: integer
+      - description: Gets the previous page of audit logs relative to the given id.
+        in: query
+        name: previous
+        schema:
+          type: string
+      - description: Gets the next page of audit logs relative to the given id.
+        in: query
+        name: next
+        schema:
+          type: string
+      - description: Whether the audit logs should be listed in ascending order.
+        in: query
+        name: ascOrder
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogs'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested object does not exist.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Get audit logs
+      tags:
+      - Audit Logs
+  /v1/search/auditlogs:
+    get:
+      description: 'This endpoint searches for audit logs, using a search query format
+
+        that allows for both search terms and filters. The search terms are used
+
+        to find audit logs that have matching terms in the audit action, audit
+
+        description, etc, while the filters are used to filter the search
+
+        results by specific fields (such as `user_guid` or the audit `time`).
+
+
+        Authenticated access with an Administrator role is required.
+
+
+        #### Search query
+
+
+        The search query is a string that includes both search terms and
+
+        filters. Any text in the search query that is not a supported filter
+
+        is treated as a search term, and those search terms are matched
+
+        against any of: `user_description`, `action`, or `event_description`. Note that the search
+
+        terms are case-insensitive, and all terms must be present in an audit log entry
+
+        for it to be included in the search results.
+
+
+        #### Filters
+
+
+        Filters are specified as colon-delimited key-value pairs, containing one
+
+        or more values separated by commas. If any of the values within a filter
+
+        contain a space or comma, you should use quotes around the value. Example:
+
+
+        ```
+
+        myterm tag:tagwithoutspace,"tag with space"
+
+        ```
+
+
+        You can negate a filter or search term by prefixing it
+
+        with a `-`. For example, `-user_id:0` will exclude audit logs produced by system actors which
+
+        have a default user_id of `0`.
+
+
+        The following filters are supported:
+
+
+        `action:<action>[,<additional-actions>,...]` - Only return audit logs
+
+        that have the specified action. If more than one action is provided,
+
+        audit logs with ANY of the specified actions will be included. Note that
+
+        actions are not case sensitive. Audit actions are enumerated in the
+
+        [Admin Guide](../admin/auditing/events/), and are also exposed in the
+
+        [GET /v1/audit/actions](#getAuditActions).
+
+
+        `user_guid:<user_guid>[,<additional-user_guids>,...]` - Only return
+
+        audit logs that have the specified user GUID. If more than one user
+
+        GUID is provided, audit logs with ANY of the specified user GUIDs will
+
+        be included.
+
+
+        `user_id:<user_id>[,<additional-user_ids>,...]` - Only return audit logs
+
+        that have the specified user ID. If more than one user ID is provided,
+
+        audit logs with ANY of the specified user IDs will be included. The user ID `0`
+
+        is reserved for system actors.
+
+
+        `from:<timestamp>` - Only return audit logs that have a timestamp
+
+        greater than or equal to the specified timestamp. The timestamp must
+
+        be provided in RFC3339 format, such as `2023-01-01T12:34:56Z`. Up to nanosecond
+
+        precision is supported (e.g. `2023-01-01T12:34:56.123456789Z`). The timestamp
+
+        is inclusive, so audit logs with the specified timestamp will be
+
+        included in the results.
+
+
+        `to:<timestamp>` - Only return audit logs that have a timestamp
+
+        less than or equal to the specified timestamp. The timestamp must
+
+        be provided in RFC3339 format, such as `2023-01-01T12:34:56Z`. Up to nanosecond
+
+        precision is supported (e.g. `2023-01-01T12:34:56.123456789Z`). The timestamp
+
+        is inclusive, so audit logs with the specified timestamp will be
+
+        included in the results.
+
+
+        #### Pagination
+
+
+        This endpoint uses offset pagination. Requests can include
+
+        query-string parameters for `page_number` and `page_size` to
+
+        fetch different pages of results.'
+      operationId: searchAuditLogs
+      parameters:
+      - description: Search audit log entries.
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: The page number to return.
+        in: query
+        name: page_number
+        schema:
+          default: 1
+          format: int64
+          type: integer
+      - description: The number of items per page.
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          format: int64
+          type: integer
+      - description: 'The sort order: asc or desc.'
+        in: query
+        name: order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogSearchResults'
+          description: Successful response.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation is invalid.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: The requested operation requires authentication.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: You do not have permission to perform this operation.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+          description: A server error occurred.
+      summary: Search audit logs
+      tags:
+      - Audit Logs
+components:
+  schemas:
+    AuditActionResult:
+      additionalProperties: false
+      description: An audit action available on your Posit Connect server.
+      properties:
+        action:
+          description: The name of the action.
+          example: create_user
+          type: string
+        description:
+          description: A human-readable description of the action.
+          example: Create a new user.
+          type: string
+      type: object
+    AuditLogSearchResults:
+      additionalProperties: false
+      description: Audit log search results with total count.
+      properties:
+        total:
+          description: The total number of matching audit log entries.
+          example: 100
+          type: integer
+        results:
+          description: The matching audit log entries for this page.
+          items:
+            $ref: '#/components/schemas/AuditLogEntry'
+          type: array
+      type: object
+    AuditLogs:
+      additionalProperties: false
+      description: Audit log results with keyset pagination.
+      properties:
+        results:
+          description: The audit logs
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          type: array
+        paging:
+          allOf:
+          - $ref: '#/components/schemas/KeysetPaging'
+          description: Paging object that can be used for navigation.
+      type: object
+    PagingCursors:
+      additionalProperties: false
+      description: Cursor values for keyset pagination.
+      properties:
+        previous:
+          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
+          example: '23948901087'
+          nullable: true
+          type: string
+        next:
+          description: A cursor ID that can be used with the next query parameter to get the next page of results.
+          example: '23948901087'
+          nullable: true
+          type: string
+      type: object
+    AuditLogEntry:
+      additionalProperties: false
+      description: An audit log entry.
+      properties:
+        id:
+          description: The unique identifier of the audit log entry.
+          example: '123'
+          type: string
+        time:
+          description: The timestamp (RFC3339) of the audit action.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        user_id:
+          description: The unique identifier of the user who performed the action.
+          example: '456'
+          type: string
+        user_guid:
+          description: The GUID of the user who performed the action.
+          example: d4aaf24e-b7d5-404f-843e-a78e4c1eab38
+          format: uuid
+          nullable: true
+          type: string
+        user_description:
+          description: A description of the user who performed the action.
+          example: John Doe
+          type: string
+        action:
+          description: The name of the audit action.
+          example: create_user
+          type: string
+        event_description:
+          description: A human-readable description of the event.
+          example: Created a new user account.
+          type: string
+      type: object
+    KeysetPaging:
+      allOf:
+      - $ref: '#/components/schemas/PagingLinks'
+      - properties:
+          cursors:
+            allOf:
+            - $ref: '#/components/schemas/PagingCursors'
+            description: Cursor values for navigating between pages.
+        type: object
+      description: Keyset-based pagination metadata with cursors and navigation links.
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          nullable: true
+          type: object
+      required:
+      - code
+      - error
+      type: object
+    PagingLinks:
+      description: Navigation links for keyset pagination.
+      properties:
+        first:
+          description: A full URL of the first page of results. Null if the current response is the first page.
+          nullable: true
+          type: string
+        previous:
+          description: A full URL of the previous page of results. Null if the current response is the first page.
+          nullable: true
+          type: string
+        next:
+          description: A full URL of the next page of results. Null if the current response is the last page.
+          nullable: true
+          type: string
+        last:
+          description: A full URL of the last page of results. Null if the current response is the last page.
+          nullable: true
+          type: string
+      type: object
+    AuditLog:
+      additionalProperties: false
+      description: An audit log entry.
+      properties:
+        id:
+          description: The identifier of the audit action.
+          type: string
+        time:
+          description: Timestamp in RFC3339 format when the action was taken.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        user_id:
+          description: The user identifier of the actor who performed the audit action.
+          type: string
+        user_guid:
+          description: The user GUID of the actor who performed the audit action.
+          format: uuid
+          nullable: true
+          type: string
+        user_description:
+          description: A description of the actor.
+          example: Full name (username)
+          type: string
+        action:
+          description: The audit action taken.
+          example: add_user
+          type: string
+        event_description:
+          description: A human-readable description of the action.
+          example: Added user Full Name (username)
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
+
+        '
+      in: header
+      name: Authorization
+      type: apiKey
