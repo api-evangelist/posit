@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/posit-connect-openapi-original.json + docs.posit.co/connect
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.3 document published at docs.posit.co/connect/api/openapi.json
+- id: oauth2
+  conforms: false
+  evidence: >-
+    The Connect Server API itself authenticates with per-user API keys
+    (securityScheme type apiKey). Connect can act as an OAuth 2.1 authorization
+    server for integrations (2026.06.0+) but the documented API auth is apiKey.
+- id: scim-2.0
+  conforms: true
+  evidence: >-
+    Posit Connect supports SCIM v2.0 provisioning for SAML/OAuth2 user and
+    group management (release 2026.05.0).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use a custom envelope {code, error, payload} with numeric error
+    codes rather than application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: page-based pagination via page_number / page_size / limit parameters
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header or idempotency contract documented in the spec

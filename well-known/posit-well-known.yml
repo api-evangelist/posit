@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/* on Posit hosts
+note: >-
+  No /.well-known/ discovery documents were served on the probed Posit hosts.
+  Absence is a valid, recorded result. Posit Connect is self-hosted software;
+  OIDC/OAuth discovery documents live on each customer's own Connect server,
+  not on posit.co.
+hosts:
+- host: https://posit.co
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+- host: https://docs.posit.co
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://packagemanager.posit.co
+  documents:
+  - {path: /.well-known/security.txt, status: 404}

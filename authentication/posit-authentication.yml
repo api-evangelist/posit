@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/posit-connect-openapi-original.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Prefix your API key with `Key `, e.g. `Key ABC123`.
+  sources:
+  - openapi/posit-connect-openapi-original.json

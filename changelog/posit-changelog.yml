@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.posit.co/connect/news/
+product: Posit Connect
+scheme: calendar (YYYY.MM.PATCH)
+current: '2026.06.1'
+url: https://docs.posit.co/connect/news/
+entries:
+- version: '2026.06.1'
+  date: '2026-07-01'
+  highlights:
+  - Patch release following 2026.06.0.
+- version: '2026.06.0'
+  date: '2026-07-01'
+  breaking: false
+  highlights:
+  - Introduces an OAuth 2.1 authorization server with RFC 8628 device code flow support.
+  - Adds sticky session routing for FastAPI/ASGI content.
+  - Configurable API key expiration.
+- version: '2026.05.1'
+  date: '2026-06-01'
+  highlights:
+  - Kubernetes off-host execution fallback improvements for WebSocket compatibility.
+- version: '2026.05.0'
+  date: '2026-05-28'
+  highlights:
+  - SCIM v2.0 provisioning support for SAML and OAuth2 authentication.
+  - Node.js content off-host execution capability.
+- version: '2026.04.1'
+  date: '2026-05-13'
+  highlights:
+  - Databricks OAuth integration token-refresh fixes.
+  - Streamlit 1.57.0+ compatibility improvements.
+- version: '2026.04.0'
+  date: '2026-04-29'
+  highlights:
+  - MCP servers auto-detection on deployment with a dedicated content list tab.
+  - New off-host execution implementation with simplified Kubernetes configuration.

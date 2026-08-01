@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Posit Connect Server API
+  version: 1.0.0
+extends: openapi/posit-connect-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: posit
+    x-apievangelist-product: Posit Connect
+    x-apievangelist-auth: API key (Authorization:&#32;Key <token>)
+    x-apievangelist-base-path: /__api__
+    x-apievangelist-self-hosted: true
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/posit-authentication.yml
+      conventions: conventions/posit-conventions.yml
+      errors: errors/posit-problem-types.yml
+      lifecycle: lifecycle/posit-lifecycle.yml
+      data-model: data-model/posit-data-model.yml

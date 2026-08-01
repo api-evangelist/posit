@@ -1,0 +1,13 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/posit-connect-openapi-original.json
+api: openapi/posit-connect-openapi-original.json
+skills:
+- file: posit-deploy-content.md
+  name: Publish and deploy content to Posit Connect
+  api: openapi/posit-connect-openapi-original.json
+  operations: [createContent, uploadContentBundle, deployContentBundle, getJob]
+- file: posit-manage-access.md
+  name: Manage content access and permissions
+  api: openapi/posit-connect-openapi-original.json
+  operations: [getContents, listContentPermissions, addContentPermission, getGroups]

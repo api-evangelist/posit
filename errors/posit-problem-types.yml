@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/posit-connect-openapi-original.json (4xx/5xx responses)
+format: custom
+envelope:
+  media_type: application/json
+  shape: '{ "code": <int>, "error": "<message>", "payload": <any> }'
+  note: >-
+    Posit Connect returns a custom error object (schema APIError) with a
+    numeric `code` keyed to the Connect API error-codes reference, a human
+    `error` message, and an optional `payload`. Not RFC 9457.
+docs: https://docs.posit.co/connect/api/#api-error-codes
+problems:
+- status: 400
+  title: Bad request
+  meaning: Malformed request, invalid parameters, or invalid body.
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid API key (Authorization&#58; Key <token>).
+- status: 402
+  title: Payment required / licensing
+  meaning: The operation requires a license entitlement not present on the server.
+- status: 403
+  title: Forbidden
+  meaning: Authenticated but not permitted for the requested resource or action.
+- status: 404
+  title: Not found
+  meaning: The requested resource (content, user, group, bundle, job) does not exist.
+- status: 409
+  title: Conflict
+  meaning: The request conflicts with current state (e.g. duplicate or locked resource).
+- status: 500
+  title: Internal server error
+  meaning: Unexpected server-side error.

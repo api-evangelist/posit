@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/posit-connect-openapi-original.json + docs.posit.co/connect/api/
+authentication:
+  style: api-key
+  header: Authorization
+  format: 'Key <token>'
+  docs: https://docs.posit.co/connect/api/
+  cross_ref: authentication/posit-authentication.yml
+pagination:
+  style: page
+  params: [page_number, page_size, limit]
+  note: >-
+    List endpoints paginate with page_number and page_size (some accept a limit).
+    Responses return the requested slice of results.
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or idempotency contract is documented.
+versioning:
+  style: uri-path
+  stable_prefix: /v1/
+  experimental_prefix: /experimental/
+  cross_ref: lifecycle/posit-lifecycle.yml
+identifiers:
+  scheme: guid
+  note: Content, users, groups, and most resources are addressed by a GUID.
+error_envelope:
+  media_type: application/json
+  shape: '{ code, error, payload }'
+  cross_ref: errors/posit-problem-types.yml
+base_path: /__api__

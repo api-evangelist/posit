@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.posit.co/connect/news/ + https://status.posit.co/
+versioning:
+  scheme: calendar
+  pattern: YYYY.MM.PATCH
+  current: '2026.06.1'
+  api_version: v1
+  api_path_style: uri-path (/v1/, experimental endpoints under /experimental/)
+  docs: https://docs.posit.co/connect/api/
+deprecation:
+  policy: >-
+    Connect API endpoints are versioned under /v1/; experimental endpoints are
+    exposed under /experimental/ and may change. Release notes call out
+    behavior changes and removals per calendar release.
+  docs: https://docs.posit.co/connect/news/
+  experimental_path: /experimental/
+status_page: https://status.posit.co/
+changelog: https://docs.posit.co/connect/news/
+deprecated_operations: []

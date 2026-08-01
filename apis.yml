@@ -1,7 +1,16 @@
 aid: posit
 name: Posit
-description: Posit is a company surfaced as a portfolio company of dcvc and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Posit, PBC (formerly RStudio) builds open-source and enterprise software for
+  data science teams working in R and Python. Its professional products —
+  Posit Workbench, Posit Connect, and Posit Package Manager (bundled as Posit
+  Team), plus Posit Cloud and the Positron IDE — help organizations develop,
+  publish, and govern data science work. Posit Connect exposes a full REST
+  Server API (the Connect API) for automating content publishing, deployment
+  bundles, users and groups, permissions, jobs, environments, tags, audit logs,
+  and API keys, authenticated with per-user API keys. Posit also stewards
+  widely used open-source projects including the Tidyverse, Shiny, Quarto, and
+  tidymodels.
 url: https://raw.githubusercontent.com/api-evangelist/posit/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,14 +18,431 @@ x-backed-by:
 - dcvc
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://posit.co/wp-content/uploads/2022/10/Posit-Logo-Black-TransparentBackground.png
 tags:
 - Company
-apis: []
+- Data Science
+- Analytics
+- Developer Tools
+- R
+- Python
+- Publishing
+- Machine Learning
+- Enterprise
+- Reproducibility
+apis:
+- aid: posit:posit-api-keys-api
+  name: Posit API Keys API
+  description: The API Keys API from Posit — 2 operation(s) for api keys.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-api-keys-api-openapi.yml
+- aid: posit:posit-audit-logs-api
+  name: Posit Audit Logs API
+  description: The Audit Logs API from Posit — 3 operation(s) for audit logs.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-audit-logs-api-openapi.yml
+- aid: posit:posit-bookmarks-api
+  name: Posit Bookmarks API
+  description: The Bookmarks API from Posit — 1 operation(s) for bookmarks.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Bookmarks
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-bookmarks-api-openapi.yml
+- aid: posit:posit-bootstrap-api
+  name: Posit Bootstrap API
+  description: The Bootstrap API from Posit — 2 operation(s) for bootstrap.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Bootstrap
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-bootstrap-api-openapi.yml
+- aid: posit:posit-bundles-api
+  name: Posit Bundles API
+  description: The Bundles API from Posit — 5 operation(s) for bundles.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Bundles
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-bundles-api-openapi.yml
+- aid: posit:posit-content-api
+  name: Posit Content API
+  description: The Content API from Posit — 14 operation(s) for content.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-content-api-openapi.yml
+- aid: posit:posit-content-permissions-api
+  name: Posit Content Permissions API
+  description: The Content Permissions API from Posit — 2 operation(s) for content permissions.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Content Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-content-permissions-api-openapi.yml
+- aid: posit:posit-custom-documentation-api
+  name: Posit Custom Documentation API
+  description: The Custom Documentation API from Posit — 1 operation(s) for custom documentation.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Custom Documentation
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-custom-documentation-api-openapi.yml
+- aid: posit:posit-environment-permissions-api
+  name: Posit Environment Permissions API
+  description: The Environment Permissions API from Posit — 2 operation(s) for environment permissions.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Environment Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-environment-permissions-api-openapi.yml
+- aid: posit:posit-environments-api
+  name: Posit Environments API
+  description: The Environments API from Posit — 2 operation(s) for environments.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-environments-api-openapi.yml
+- aid: posit:posit-examples-api
+  name: Posit Examples API
+  description: The Examples API from Posit — 3 operation(s) for examples.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Examples
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-examples-api-openapi.yml
+- aid: posit:posit-feature-usage-api
+  name: Posit Feature Usage API
+  description: The Feature Usage API from Posit — 1 operation(s) for feature usage.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Feature Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-feature-usage-api-openapi.yml
+- aid: posit:posit-groups-api
+  name: Posit Groups API
+  description: The Groups API from Posit — 6 operation(s) for groups.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-groups-api-openapi.yml
+- aid: posit:posit-instrumentation-api
+  name: Posit Instrumentation API
+  description: The Instrumentation API from Posit — 3 operation(s) for instrumentation.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Instrumentation
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-instrumentation-api-openapi.yml
+- aid: posit:posit-jobs-api
+  name: Posit Jobs API
+  description: The Jobs API from Posit — 8 operation(s) for jobs.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-jobs-api-openapi.yml
+- aid: posit:posit-metrics-api
+  name: Posit Metrics API
+  description: The Metrics API from Posit — 1 operation(s) for metrics.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-metrics-api-openapi.yml
+- aid: posit:posit-oauth-clients-api
+  name: Posit OAuth Clients API
+  description: The OAuth Clients API from Posit — 2 operation(s) for oauth clients.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - OAuth Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-oauth-clients-api-openapi.yml
+- aid: posit:posit-oauth-integration-templates-api
+  name: Posit OAuth Integration Templates API
+  description: >-
+    The OAuth Integration Templates API from Posit — 2 operation(s) for oauth integration templates.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - OAuth Integration Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-oauth-integration-templates-api-openapi.yml
+- aid: posit:posit-oauth-integrations-api
+  name: Posit OAuth Integrations API
+  description: The OAuth Integrations API from Posit — 5 operation(s) for oauth integrations.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - OAuth Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-oauth-integrations-api-openapi.yml
+- aid: posit:posit-oauth-sessions-api
+  name: Posit OAuth Sessions API
+  description: The OAuth Sessions API from Posit — 2 operation(s) for oauth sessions.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - OAuth Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-oauth-sessions-api-openapi.yml
+- aid: posit:posit-packages-api
+  name: Posit Packages API
+  description: The Packages API from Posit — 1 operation(s) for packages.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-packages-api-openapi.yml
+- aid: posit:posit-queue-api
+  name: Posit Queue API
+  description: The Queue API from Posit — 2 operation(s) for queue.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Queue
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-queue-api-openapi.yml
+- aid: posit:posit-schedules-api
+  name: Posit Schedules API
+  description: The Schedules API from Posit — 1 operation(s) for schedules.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-schedules-api-openapi.yml
+- aid: posit:posit-server-information-api
+  name: Posit Server Information API
+  description: The Server Information API from Posit — 7 operation(s) for server information.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Server Information
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-server-information-api-openapi.yml
+- aid: posit:posit-service-tokens-api
+  name: Posit Service Tokens API
+  description: The Service Tokens API from Posit — 3 operation(s) for service tokens.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Service Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-service-tokens-api-openapi.yml
+- aid: posit:posit-storage-api
+  name: Posit Storage API
+  description: The Storage API from Posit — 2 operation(s) for storage.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-storage-api-openapi.yml
+- aid: posit:posit-system-api
+  name: Posit System API
+  description: The System API from Posit — 1 operation(s) for system.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-system-api-openapi.yml
+- aid: posit:posit-system-checks-api
+  name: Posit System Checks API
+  description: The System Checks API from Posit — 3 operation(s) for system checks.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - System Checks
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-system-checks-api-openapi.yml
+- aid: posit:posit-system-information-api
+  name: Posit System Information API
+  description: The System Information API from Posit — 3 operation(s) for system information.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - System Information
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-system-information-api-openapi.yml
+- aid: posit:posit-tags-api
+  name: Posit Tags API
+  description: The Tags API from Posit — 5 operation(s) for tags.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-tags-api-openapi.yml
+- aid: posit:posit-tasks-api
+  name: Posit Tasks API
+  description: The Tasks API from Posit — 1 operation(s) for tasks.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-tasks-api-openapi.yml
+- aid: posit:posit-users-api
+  name: Posit Users API
+  description: The Users API from Posit — 5 operation(s) for users.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-users-api-openapi.yml
+- aid: posit:posit-vanity-urls-api
+  name: Posit Vanity URLs API
+  description: The Vanity URLs API from Posit — 2 operation(s) for vanity urls.
+  humanURL: https://docs.posit.co/connect/api/
+  baseURL: https://connect.example.com/__api__
+  tags:
+  - Vanity URLs
+  properties:
+  - type: OpenAPI
+    url: openapi/posit-vanity-urls-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: DomainSecurity
+  url: security/posit-domain-security.yml
+- type: Website
+  url: https://posit.co
+- type: DeveloperPortal
+  url: https://docs.posit.co/
+- type: Documentation
+  url: https://docs.posit.co/connect/
+- type: APIReference
+  url: https://docs.posit.co/connect/api/
+- type: GettingStarted
+  url: https://docs.posit.co/connect/user/
+- type: Blog
+  url: https://posit.co/blog/
+- type: GitHubOrganization
+  url: https://github.com/posit-dev
+- type: Pricing
+  url: https://posit.co/pricing/
+- type: TermsOfService
+  url: https://posit.co/about/website-term-of-use/
+- type: Support
+  url: https://support.posit.co/
+- type: StatusPage
+  url: https://status.posit.co/
+- type: ChangeLog
+  url: https://docs.posit.co/connect/news/
+- type: SDKs
+  url: packages/posit-packages.yml
+- type: CLI
+  url: cli/posit-cli.yml
+- type: AgenticAccess
+  url: agentic-access/posit-agentic-access.yml
+- type: Authentication
+  url: authentication/posit-authentication.yml
+- type: Packages
+  url: packages/posit-packages.yml
+- type: Conventions
+  url: conventions/posit-conventions.yml
+- type: ErrorCatalog
+  url: errors/posit-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/posit-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/posit-lifecycle.yml
+- type: Conformance
+  url: conformance/posit-conformance.yml
+- type: DataModel
+  url: data-model/posit-data-model.yml
+- type: WellKnown
+  url: well-known/posit-well-known.yml
+- type: MCPServer
+  url: mcp/posit-mcp.yml
+- type: LLMsTxt
+  url: llms/posit-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ChangeLog
+  url: changelog/posit-changelog.yml

@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: PyPI + CRAN registry lookups for first-party Posit Connect clients
+packages:
+- language: python
+  registry: pypi
+  name: posit-sdk
+  url: https://pypi.org/project/posit-sdk/
+  install: pip install posit-sdk
+  summary: Official Posit SDK for Python (Connect client + more)
+  official: true
+- language: python
+  registry: pypi
+  name: rsconnect-python
+  url: https://pypi.org/project/rsconnect-python/
+  install: pip install rsconnect-python
+  summary: Posit Connect command-line interface and deployment client (rsconnect)
+  official: true
+- language: r
+  registry: cran
+  name: connectapi
+  url: https://cran.r-project.org/package=connectapi
+  install: install.packages("connectapi")
+  summary: R client for the Posit Connect Server API
+  official: true
+- language: r
+  registry: cran
+  name: rsconnect
+  url: https://cran.r-project.org/package=rsconnect
+  install: install.packages("rsconnect")
+  summary: Deployment interface for Posit Connect and shinyapps.io from R
+  official: true

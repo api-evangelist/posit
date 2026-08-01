@@ -1,0 +1,69 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/posit-connect-openapi-original.json (paths, schemas, id-fields)
+id_scheme: guid
+entities:
+- name: Content
+  description: A deployed application, document, API, or static asset.
+  key: guid
+- name: Bundle
+  description: A versioned deployment archive attached to a content item.
+  key: id
+- name: ContentPermission
+  description: A grant of access to a content item for a user or group.
+  key: id
+- name: User
+  description: A Connect user account.
+  key: guid
+- name: Group
+  description: A collection of users.
+  key: guid
+- name: Job
+  description: An execution/render job for a content item.
+  key: key
+- name: Environment
+  description: A named execution environment (image) for off-host execution.
+  key: guid
+- name: Tag
+  description: A label organizing content into a tag tree.
+  key: id
+- name: APIKey
+  description: A per-user API key used to authenticate to the Server API.
+  key: id
+relationships:
+- from: Content
+  type: belongs_to
+  to: User
+  via: owner_guid
+- from: Content
+  type: has_many
+  to: Bundle
+  via: content_guid
+- from: Content
+  type: has_many
+  to: ContentPermission
+  via: content_guid
+- from: Content
+  type: has_many
+  to: Job
+  via: content_guid
+- from: Content
+  type: has_many
+  to: Tag
+  via: tag_id
+- from: Bundle
+  type: belongs_to
+  to: Content
+  via: content_guid
+- from: Group
+  type: has_many
+  to: User
+  via: member
+- from: APIKey
+  type: belongs_to
+  to: User
+  via: user_guid
+- from: ContentPermission
+  type: belongs_to
+  to: Content
+  via: content_guid

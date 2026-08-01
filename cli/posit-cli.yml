@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/project/rsconnect-python/
+cli:
+  name: rsconnect
+  package: rsconnect-python
+  install:
+  - pip install rsconnect-python
+  docs: https://docs.posit.co/rsconnect-python/
+  description: >-
+    First-party command-line interface for deploying and managing content on
+    Posit Connect. Wraps the Connect Server API for publishing Shiny apps,
+    Quarto/RMarkdown documents, Jupyter notebooks, Plumber/FastAPI APIs, and
+    static content, plus managing servers and API keys.
+  command_groups:
+  - group: add / remove / list / details
+    purpose: Register, inspect, and remove Posit Connect server targets and API keys.
+  - group: deploy
+    purpose: >-
+      Deploy content by type — deploy shiny, deploy api, deploy fastapi,
+      deploy dash, deploy streamlit, deploy bokeh, deploy notebook,
+      deploy quarto, deploy manifest, deploy html.
+  - group: write-manifest
+    purpose: Generate a manifest.json describing content and its dependencies.
+  - group: content
+    purpose: Search, build, and manage deployed content items.
+  - group: system
+    purpose: Inspect caches and runtime information on the Connect server.
