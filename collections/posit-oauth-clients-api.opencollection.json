@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys OAuth Clients API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registered OAuth clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/clients",
+            "params": [
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query",
+                "description": "Whether results are in ascending order."
+              }
+            ]
+          },
+          "docs": "List all registered OAuth clients. You must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an OAuth client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/clients/:client_id",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the OAuth client associated with the provided client_id. You must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Delete an OAuth client",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/oauth/clients/:client_id",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the OAuth client associated with the provided client_id.\nYou must have administrator privileges to perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

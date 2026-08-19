@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Tags API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tags for content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/tags",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List of all tags for the specified content item.\n\nAuthenticated access required from an admin or from a user with at least viewer\npermissions on the content item."
+        },
+        {
+          "info": {
+            "name": "Add tag to content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/tags",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add the specified tag to an individual content item. When adding a tag,\nall tags above the specified tag in the tag tree are also added to the\ncontent item.\n\nAuthenticated access required from an admin or from a user with\ncollaborator/editor permissions on the content item."
+        },
+        {
+          "info": {
+            "name": "Remove tag from content",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/tags/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove the specified tag from an individual content item. When removing\na tag, all children and descendant tags are also removed from the content\nitem.\n\nAuthenticated access required from an admin or from a user with\ncollaborator/editor permissions on the content item."
+        },
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/tags",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List of all tags.\n\nAuthenticated access from a user is required."
+        },
+        {
+          "info": {
+            "name": "Create tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new tag. Tags without a parent are considered tag \"categories\"\nand are used to organize other tags. Note that tag categories cannot be\nadded to content items.\n\nAuthenticated access from a user having an \"administrator\" role is required."
+        },
+        {
+          "info": {
+            "name": "Get tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an individual tag by its identifier or by a comma-delimited \"path\"\nto the tag. The path to the tag is the series of tag names to traverse\nthe tag hierarchy, starting with a tag category.\n\nAuthenticated access from a user is required."
+        },
+        {
+          "info": {
+            "name": "Update tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing tag.\n\nAuthenticated access from a user having an \"administrator\" role is required."
+        },
+        {
+          "info": {
+            "name": "Delete tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a tag, including all descendants in its own tag hierarchy.\n\nAuthenticated access from a user having an \"administrator\" role is required."
+        },
+        {
+          "info": {
+            "name": "List content for tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/tags/:id/content",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all of the content for the specified tag.\n\nAuthenticated access from a user is required. If an \"administrator\"\nrole is used, then all content items will be returned regardless of\nthe visibility to the requesting user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

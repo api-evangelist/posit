@@ -1,0 +1,3498 @@
+{
+  "item": [
+    {
+      "id": "6d6ef8cf-6408-491e-a3b2-c85021530aae",
+      "name": "OAuth Integrations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c04aaa0-06a6-421e-8e3e-3a45ca42f631",
+          "name": "List OAuth integrations",
+          "request": {
+            "name": "List OAuth integrations",
+            "description": {
+              "content": "List all OAuth integrations available to Posit Connect.\nYou must have administrator or publisher privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91720297-5fc2-4bb0-a7bd-9d6b69a0077d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"123\",\n    \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\",\n    \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n    \"name\": \"string\",\n    \"description\": \"Integration with external system\",\n    \"template\": \"custom\",\n    \"auth_type\": \"Viewer\",\n    \"config\": {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": false\n    },\n    \"permissions\": [\n      {\n        \"id\": \"101\",\n        \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n        \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n        \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n        \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n      },\n      {\n        \"id\": \"101\",\n        \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n        \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n        \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n        \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n      }\n    ],\n    \"environment_variables\": [\n      \"string\",\n      \"string\"\n    ],\n    \"content_count\": 5\n  },\n  {\n    \"id\": \"123\",\n    \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\",\n    \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n    \"name\": \"string\",\n    \"description\": \"Integration with external system\",\n    \"template\": \"custom\",\n    \"auth_type\": \"Viewer\",\n    \"config\": {\n      \"key_0\": 3740,\n      \"key_1\": 3093,\n      \"key_2\": 3455\n    },\n    \"permissions\": [\n      {\n        \"id\": \"101\",\n        \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n        \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n        \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n        \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n      },\n      {\n        \"id\": \"101\",\n        \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n        \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n        \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n        \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n      }\n    ],\n    \"environment_variables\": [\n      \"string\",\n      \"string\"\n    ],\n    \"content_count\": 5\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "625816a8-d22d-4ea7-bc18-378dddffd9f8",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28d2265d-5030-431e-b185-42d195391005",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13778d1d-42f9-444a-909c-9581edbbaf8c",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f63fae-9b30-41a0-95d7-b6e8d29cee41",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74f094bb-d48c-47cc-9744-ad3e46e61685",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddfab2dd-bc81-40b6-9682-8bcca95b88f6",
+          "name": "Create an OAuth integration",
+          "request": {
+            "name": "Create an OAuth integration",
+            "description": {
+              "content": "Create a new OAuth integration.\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"template\": \"<string>\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"<uuid>\",\n      \"group_guid\": \"<uuid>\"\n    },\n    {\n      \"user_guid\": \"<uuid>\",\n      \"group_guid\": \"<uuid>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a6c8ea2-780a-44f4-a520-5a76f84d0051",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"123\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"name\": \"string\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"auth_type\": \"Viewer\",\n  \"config\": {\n    \"key_0\": 4398.9464765916555,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    },\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    }\n  ],\n  \"environment_variables\": [\n    \"string\",\n    \"string\"\n  ],\n  \"content_count\": 5\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a891a2bd-7dce-4db8-90bd-c8a9427577b1",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c722b9a0-32e1-4408-a3f2-62c95f798f7a",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da17232f-9eaf-47fb-8ef2-a8676f112a58",
+              "name": "The requested operation requires payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78373fdb-7f49-4dd4-be34-c1f05bbc715b",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b08904b7-5e9d-4bdd-874e-8396432cc8be",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0369b85d-a72d-4dd7-bc9b-d1a26aebd0e8",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Databricks Integration\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee093830-5254-440b-8bb8-5d96aa352b1e",
+          "name": "Exchange Connect credentials for OAuth credentials",
+          "request": {
+            "name": "Exchange Connect credentials for OAuth credentials",
+            "description": {
+              "content": "This endpoint facilitates an [OAuth Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693) by\nexchanging a Connect-provided credential for OAuth credentials.\n\nThere are several types of OAuth token exchanges supported by this endpoint. It allows content\nowners to exchange the viewer's Connect credentials for the viewer's OAuth credentials, and it allows executing content\nto exchange its own Connect credentials for the OAuth credentials associated with a service account.\n\nThis endpoint can only be called _from content that is running on Posit Connect_ because the Connect-provided\ncredentials required by the endpoint are only available in that context. See the `subject_token` property for details.\n\nIn the case of a *Viewer credential exchange*, this endpoint requires that the content viewer first perform an OAuth\nlogin by visiting the login endpoint of the OAuth integration in their browser.\nThe login endpoint is located at `__oauth__/integrations/:guid/login`.\n\nOnce the viewer has successfully initialized an OAuth session for the OAuth integration by visiting the login endpoint,\nthe content can then exchange the viewer's `user-session-token` for the viewer's OAuth credentials.\n\nOAuth credential refresh is handled automatically by Connect. Repeated requests to this endpoint will return\nthe same OAuth credentials until they expire. When the OAuth credentials expire, the next request to this endpoint\nwill return a refreshed set of OAuth credentials.\n\nYou must have administrator or publisher privileges to perform this action.\nAdditionally, the requester _must_ be owner of the content where the credential exchange request originated.\nFinally, the user whose OAuth credentials are being requested must have viewer permissions on the content.\n\nIn the case of a *Service Account credential exchange*, this endpoint will return a fresh OAuth access token to the\nrequesting content item on every request. There is no login redirect or refresh token management. You must have administrator\nor publisher privileges to perform this action. The requester _must_ be owner of the content where the credential exchange\nrequest originated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "audience",
+                  "value": "<string>",
+                  "description": "Identifies the integration for which the OAuth credentials are being requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "requested_token_type",
+                  "value": "<string>",
+                  "description": "Identifies the type of token being requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_token",
+                  "value": "<string>",
+                  "description": "An opaque string that is used to identify the consumer of the OAuth access token."
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_token_type",
+                  "value": "<string>",
+                  "description": "Identifies the type of subject_token in use."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f4a25297-5816-47a2-82cf-48db9edb6238",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"issued_token_type\": \"urn:ietf:params:oauth:token-type:access_token\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47cd241f-d16d-4843-ab74-c913bcf03c2f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d79b80f-f60d-49b4-8d83-ce482e9d4775",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1716f868-3ea6-47be-8a78-e3d6576a9f7b",
+              "name": "The requested operation requires payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aae5d4fa-ed20-4513-8bc9-138696decbdb",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "066a4e3d-c520-4eff-a1ad-7336fec0fe39",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aecbf82-a634-4104-be64-5a43afd42a69",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the integration for which the OAuth credentials are being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "audience",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates that an OAuth Token Exchange is being requested. The value is always \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of token being requested.",
+                        "type": "text/plain"
+                      },
+                      "key": "requested_token_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An opaque string that is used to identify the consumer of the OAuth access token.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identifies the type of subject_token in use.",
+                        "type": "text/plain"
+                      },
+                      "key": "subject_token_type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8668634a-5189-4b51-a7ab-2204441c83c4",
+          "name": "Delete an OAuth integration",
+          "request": {
+            "name": "Delete an OAuth integration",
+            "description": {
+              "content": "Delete the OAuth integration associated with the provided guid.\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ef10e4b-2906-4ff6-a232-890c1f1f2f84",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1309658b-637e-4d22-8440-a0fd4ccce434",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f309e4e-c7f6-4559-bdf2-f265ef2015e8",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e930ccaf-852d-4089-8a2d-2d878a756271",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ddb44c3-c0b6-4c44-9c43-5574511d2293",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5918844-f77c-49f0-b4ac-0535673f6563",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f1355f2-ca22-44a3-b9a8-e40410b0da94",
+          "name": "Get OAuth integration details",
+          "request": {
+            "name": "Get OAuth integration details",
+            "description": {
+              "content": "Get detailed information about a specific OAuth integration.\nYou must have administrator or publisher privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be80c6ed-3d6f-449f-bf44-6d4ce6bf257e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"123\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"name\": \"string\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"auth_type\": \"Viewer\",\n  \"config\": {\n    \"key_0\": 4398.9464765916555,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    },\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    }\n  ],\n  \"environment_variables\": [\n    \"string\",\n    \"string\"\n  ],\n  \"content_count\": 5\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcce44bd-64c4-4db9-b91a-8a6e9b0a94cb",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df34367-6def-4b01-84c2-9e19b5aba94a",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6e6e6c3-defa-45df-9700-b0e99eaea89c",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfa70324-63dd-430a-b766-fe8a7cb9d550",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bcc16ba-364a-4a2a-942f-df2aa7b8e6de",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "906cbf56-5e67-4973-a831-eb51363a65ce",
+          "name": "Update an OAuth integration",
+          "request": {
+            "name": "Update an OAuth integration",
+            "description": {
+              "content": "Update a specific OAuth integration.\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"config\": {\n    \"key_0\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"<uuid>\",\n      \"group_guid\": \"<uuid>\"\n    },\n    {\n      \"user_guid\": \"<uuid>\",\n      \"group_guid\": \"<uuid>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56ee819d-376b-4b28-a478-06c9e8d0280f",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"123\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"name\": \"string\",\n  \"description\": \"Integration with external system\",\n  \"template\": \"custom\",\n  \"auth_type\": \"Viewer\",\n  \"config\": {\n    \"key_0\": 4398.9464765916555,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    },\n    {\n      \"id\": \"101\",\n      \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n      \"integration_guid\": \"62543474-5716-4423-92d1-b3a22163eb49\",\n      \"user_guid\": \"d73f7343-02e8-4c52-9208-598e28f8002e\",\n      \"group_guid\": \"a46be0c8-ef75-4dce-b902-d8e56a6b8509\"\n    }\n  ],\n  \"environment_variables\": [\n    \"string\",\n    \"string\"\n  ],\n  \"content_count\": 5\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e8ebbf0-5e3f-4320-933c-6f13434ca24f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ab7d615-b1a4-4195-ba0b-a6b79bf26eff",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de9b80ab-bb66-4a49-a01e-cf792c2a63fa",
+              "name": "The requested operation requires payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "818d7558-90c3-4ce5-bee2-4345ee8a6613",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75cfc2c5-f192-4b35-83a3-25bdd6a654de",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b8ed29-82f7-41fe-ba04-9ceb3163a84b",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"databricks\",\n  \"description\": \"Integration with external system\",\n  \"config\": {\n    \"key_0\": 149.5748221585269,\n    \"key_1\": \"string\"\n  },\n  \"permissions\": [\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    },\n    {\n      \"user_guid\": \"89a3c946-d73c-4781-8463-dd3cccff3fef\",\n      \"group_guid\": \"998f3356-96f0-48a2-9655-94334615fa5b\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "606899cd-1eb4-4818-9203-0f6363cdd938",
+          "name": "List all associations for this OAuth integration.",
+          "request": {
+            "name": "List all associations for this OAuth integration.",
+            "description": {
+              "content": "List all associations for this OAuth integration.\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                ":guid",
+                "associations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8839e828-c5f9-45f0-905b-43bdc89df38e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "associations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"app_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"content_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"oauth_integration_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"oauth_integration_name\": \"Databricks Integration\",\n    \"oauth_integration_description\": \"Integration with external system\",\n    \"oauth_integration_template\": \"custom\",\n    \"oauth_integration_auth_type\": \"Viewer\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\"\n  },\n  {\n    \"app_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"content_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"oauth_integration_guid\": \"f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f\",\n    \"oauth_integration_name\": \"Databricks Integration\",\n    \"oauth_integration_description\": \"Integration with external system\",\n    \"oauth_integration_template\": \"custom\",\n    \"oauth_integration_auth_type\": \"Viewer\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3012e68-3ee4-4259-8bff-61da7a1ba1ff",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "associations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5835cfb-01b7-4e86-ade8-38cbd9d416ca",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "associations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9913b93c-e6cf-4a95-b2e3-824b6a7a1b4f",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "associations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "161416f8-9a8f-42b3-ae64-19cdba73b845",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "associations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3fed88a-61b5-4dba-8f97-0da05983fdc0",
+          "name": "Verify that an OAuth service account integration is configured correctly.",
+          "request": {
+            "name": "Verify that an OAuth service account integration is configured correctly.",
+            "description": {
+              "content": "This endpoint simulates a content session token exchange with the OAuth integration to\nverify that the integration is configured correctly. No access token is returned.\nVerification is only available for OAuth integrations with the \"Service Account\" authentication type.\nIf the integration is not a service account integration, a 400 status code will be returned.\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "oauth",
+                "integrations",
+                ":guid",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29b6f489-88ac-4905-aa39-cc2f66af3ddd",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26433930-fd11-4591-a0d9-825b7ccfba2a",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2359ec2-c245-4e64-b156-f4d70b6f31f8",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53c73476-9edb-4c60-8691-891e4ee1c7cd",
+              "name": "The requested operation requires payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fc9f63c-49f6-445b-84f1-571201ddbac3",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "480dcff9-8a68-4177-a60f-1b4a32a3a3ff",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379c3895-662c-4021-a9c0-b51ee2502786",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "oauth",
+                    "integrations",
+                    ":guid",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1944,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/__api__",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f487d32-f65d-4bf5-a47c-b3c5c1b98c2a",
+    "name": "Posit Connect API Reference API Keys OAuth Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n\n\nContact Support:\n Name: Posit Connect Support\n Email: support@posit.co",
+      "type": "text/plain"
+    }
+  }
+}

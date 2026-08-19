@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Queue API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queue",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List items in queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/queue",
+            "params": [
+              {
+                "name": "queue_names",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query",
+                "description": "Whether results are in ascending order."
+              }
+            ]
+          },
+          "docs": "List all items currently in the job queue.\nThis endpoint requires administrator access."
+        },
+        {
+          "info": {
+            "name": "Delete a queue item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/queue/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an item from the job queue. Only inactive items\n(not currently being processed) can be deleted.\n\nAuthenticated access from a user having an \"administrator\" role is required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,296 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Groups API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content for which a group with given GUID has access to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/experimental/groups/:guid/content",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint takes a group GUID and returns a list of content items with access control lists\nthat the given group is listed on. This includes content accessible only by specific users\nor groups that include the given group, as well as content accessible by anyone or only\nlogged-in users that includes the given group as a collaborator."
+        },
+        {
+          "info": {
+            "name": "List or search for group details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/groups",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query",
+                "description": "Whether results are in ascending order."
+              }
+            ]
+          },
+          "docs": "This endpoint lists or searches for local groups.\n\n- For a `prefix` search without an explicit `sort_by`,\nresults are sorted based on similarity to the `prefix`.\n- When `sort_by` is specified, results are always sorted\nby that field regardless of whether `prefix` is present.\n- The `prefix` can also be an exact match for the\ngroup's DN (for LDAP) or the auth provider's unique ID\nfor the group, if any.\n- The default sort order is by group name ascending.\n\nThis endpoint is available only when group"
+        },
+        {
+          "info": {
+            "name": "Create a group from caller-supplied details (Password, PAM, OAuth2, SAML, Proxied)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates the given group.\n\n- This endpoint is available only when groups are enabled\nin Posit Connect and only for Password, PAM, OAuth2,\nSAML and Proxied authentication.\n- Publisher or administrator access is required to create\ngroups."
+        },
+        {
+          "info": {
+            "name": "Create a group using details from a remote authentication provider (LDAP)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates the given group on the Posit Connect server.\n\n- This endpoint is used only for LDAP authentication. Password,\n  PAM, SAML, OAuth2 and Proxied authentication providers should\n  use the [POST /v1/groups](#createGroup) endpoint.\n- Publisher or administrator access is required to access this\n  endpoint.\n- Group members will be automatically populated from the LDAP server.\n\n### Group Creation Workflow on LDAP\n\nThe API lets you identify an existing group in the LDAP system\nand cr"
+        },
+        {
+          "info": {
+            "name": "Search for group details from a remote provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/groups/remote",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to support operations against groups not\nmanaged by Connect, such as creating LDAP groups.\nSee [GET /v1/groups](#getGroups) for listing groups on Posit Connect.\n\nThis endpoint searches for groups on Posit Connect and on\nyour LDAP system.\n\nResults are sorted based on similarity to the `prefix`.\n\n- This endpoint can be used only by LDAP authentication and\nwill return an error otherwise.\n- Publisher or administrator access is required to access this\nendpoint."
+        },
+        {
+          "info": {
+            "name": "Get group member details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/groups/:group_guid/members",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint gets the group member details. Group member\nenumeration is currently not supported for LDAP.\n\n- This endpoint is available only when groups are enabled\nin Posit Connect and only for Password, PAM, OAuth2,\nSAML and Proxied authentication.\n- The `email` field is not populated for non-admins when\n[`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.\n- This endpoint uses offset pagination. Requests can include\nquery-string paramet"
+        },
+        {
+          "info": {
+            "name": "Add a group member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/groups/:group_guid/members",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint adds a user to a group.\n\n- This endpoint is available only when groups are enabled\nin Posit Connect and only for Password, PAM, OAuth2,\nSAML and Proxied authentication. If the auth provider\nis configured to provide group membership information,\nthen it is not possible to add/remove members via this API.\n- Administrator access is required to modify a group you do\nnot own."
+        },
+        {
+          "info": {
+            "name": "Remove a group member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/groups/:group_guid/members/:user_guid",
+            "params": [
+              {
+                "name": "group_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint removes a user from a group.\n\n- This endpoint is available only when groups are enabled\nin Posit Connect and only for Password, PAM, OAuth2,\nSAML and Proxied authentication. If the auth provider\nis configured to provide group membership information,\nthen it is not possible to add/remove members via this API.\n- Administrator access is required to remove a user from a\ngroup you do not own, but no special access is needed to\nremove yourself from a group."
+        },
+        {
+          "info": {
+            "name": "Get group details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/groups/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information on a specific group.\n\nThis endpoint is available only when groups are enabled in Posit Connect."
+        },
+        {
+          "info": {
+            "name": "Modify a group name or owner (Password, PAM, OAuth2, SAML, Proxied)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/groups/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint modifies the given group.\n\n- This endpoint is available only when groups are enabled\nin Posit Connect and only for Password, PAM, OAuth2,\nSAML and Proxied authentication.\n- Publisher or administrator access is required to modify\ngroups."
+        },
+        {
+          "info": {
+            "name": "Update a group (partial update)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/groups/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates the specified fields of a group. Only fields\nincluded in the request body will be modified; omitted fields remain\nunchanged.\n\nThis endpoint requires groups to be enabled via the\n[`Authorization.UserGroups`](../admin/appendix/configuration/index.md#Authorization.UserGroups)\nsetting. Returns a 400 error if groups are disabled.\n\n### Field availability by authentication provider\n\nNot all fields can be modified with all authentication providers:\n\n| Field | Password | PAM | LDAP "
+        },
+        {
+          "info": {
+            "name": "Delete a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/groups/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the given group.\n\n- This endpoint can be used only when groups are enabled in\nPosit Connect and will return an error otherwise.\n- Administrator access is required to delete a group you do\nnot own."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

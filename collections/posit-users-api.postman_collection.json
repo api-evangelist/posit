@@ -1,0 +1,3242 @@
+{
+  "item": [
+    {
+      "id": "3d8b4d8d-d6ad-408d-8415-14082f01dcc6",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02115367-807a-42f4-b7ae-10bca1567e6b",
+          "name": "Get current user details",
+          "request": {
+            "name": "Get current user details",
+            "description": {
+              "content": "Get detailed information on the requesting user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d572e8c1-9747-4a58-be73-3c5b0f8eee00",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"active_time\": \"2006-01-02T15:04:05-07:00\",\n  \"confirmed\": true,\n  \"locked\": false,\n  \"external_id\": \"okta-12345-abcde\",\n  \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "907b2b91-29ac-4328-af2c-da434465664f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a97d38c8-5492-4846-a690-049404a7ee68",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df46c14c-fd14-4c35-aa25-72981eedf948",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79bc16c2-16e9-41c2-8c88-eb8b539fcdc9",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30c7578d-6811-44f9-a4aa-5a35e555fc24",
+          "name": "List or search for user details",
+          "request": {
+            "name": "List or search for user details",
+            "description": {
+              "content": "This endpoint lists local users. When called with a prefix\nparameter, it searches for local users matching the prefix.\n\nBy default, results are sorted by first name, then last name, then\nusername, then email. Use the `sort` parameter to sort by a\ndifferent field. When `prefix` is specified and `sort` is not,\nresults are ordered by relevance to the prefix. When both `prefix`\nand `sort` are specified, the `sort` field takes precedence. The\n`prefix` can also be an exact match for the user's DN (for LDAP)\nor the auth provider's unique ID for the user, if any.\n\n- The `email` field is not populated for non-admins when\n  [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.\n- The `external_id` field is only visible to administrators and to users\n  viewing their own record.\n- When the user making the request is a viewer and\n  [`Authorization.ViewersCanOnlySeeThemselves`](../admin/appendix/configuration/index.md#Authorization.ViewersCanOnlySeeThemselves) is being used,\n  the results contain only the given user.\n\nThis endpoint uses offset pagination. Requests can include\nquery-string parameters for `page_number` and `page_size` to\nfetch different pages of results.\n\nNote that searching by `prefix` will only return the first page of\nresults; subsequent pages will be empty. Set `page_size` to its\nmaximum (`500`) to retrieve the most results.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`users:read` scope. When accessed with a service token, all\nusers are returned unscrubbed. CSV export is not available.\n\n#### CSV export\n\nAdministrators can request the response as CSV by setting the `Accept`\nheader to `text/csv`. The CSV export ignores pagination parameters and\nreturns all matching users.\n\n```bash\ncurl -H \"Authorization: Key ${API_KEY}\" \\\n     -H \"Accept: text/csv\" \\\n     \"https://connect.example.com/__api__/v1/users\"\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>",
+                  "description": "Filter by a prefix string matched against username, first name, last name, provider key, and DN."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "The number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc_order",
+                  "value": "true",
+                  "description": "Whether results are in ascending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results by field. Defaults to `first_name`. When `prefix` is specified and `sort` is not, results are ordered by search relevance score instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_role",
+                  "value": "<string>",
+                  "description": "Filter by user role. `|` represents logical OR."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_status",
+                  "value": "<string>",
+                  "description": "Filter by account status. `|` represents logical OR."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fde956db-65ec-430c-ad87-ed5886f6cb87",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"email\": \"jon.doe@example.com\",\n      \"username\": \"jondoe\",\n      \"first_name\": \"Jon\",\n      \"last_name\": \"Doe\",\n      \"user_role\": \"administrator\",\n      \"created_time\": \"2006-01-02T15:04:05-07:00\",\n      \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n      \"active_time\": \"2006-01-02T15:04:05-07:00\",\n      \"confirmed\": true,\n      \"locked\": false,\n      \"external_id\": \"okta-12345-abcde\",\n      \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n    },\n    {\n      \"email\": \"jon.doe@example.com\",\n      \"username\": \"jondoe\",\n      \"first_name\": \"Jon\",\n      \"last_name\": \"Doe\",\n      \"user_role\": \"administrator\",\n      \"created_time\": \"2006-01-02T15:04:05-07:00\",\n      \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n      \"active_time\": \"2006-01-02T15:04:05-07:00\",\n      \"confirmed\": true,\n      \"locked\": false,\n      \"external_id\": \"okta-12345-abcde\",\n      \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dbb85a8-ae38-4df6-8ad3-e704cb1b2b1f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad31aa48-53c6-4f89-82c3-83d6cfc047d6",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25317c4b-fcd3-49a3-bad6-a5a513eec43d",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b7fa030-61c3-40ca-99af-f8fc804e5de8",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70bf3fd5-ac05-4dc8-9baf-a4857edd75bb",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "asc_order",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7f3221e-bb47-4953-a225-29827a211002",
+          "name": "Create a user from caller-supplied details (SAML, password, PAM, proxied, OAuth2 except with Google)",
+          "request": {
+            "name": "Create a user from caller-supplied details (SAML, password, PAM, proxied, OAuth2 except with Google)",
+            "description": {
+              "content": "This endpoint creates the given user.\n\n- This endpoint is used only for SAML, OAuth2 (non-Google), password, PAM, and proxied\n  authentication. All other authentication providers should\n  use the [PUT /v1/users](#createPullUser) endpoint.\n- Administrator access is required to create *other* users.\n\n#### Initial User Creation Workflow\n\nThis endpoint requires authentication to create *other* users,\nwhich means that you need an API key for access. How do you\nget an API key if there are no users in Posit Connect?\n\n- For password authentication, you can use this endpoint\n  without an API key to create the first user. The first user\n  will be an administrator.\n- For SAML, OAuth2 (non-Google), PAM or proxied authentication, the first user can be\n  created by logging into Posit Connect. The API cannot be used.\n\nOnce the first user is created, an API key can be used to access this\nendpoint and create subsequent users. The [API\nKeys](../user/api-keys/) chapter of the Posit Connect User Guide\nexplains how to create an API key.\n\n#### All Authentication Providers\n\n- When `user_role` is not specified, it will default to the\n  role specified by the config setting\n  [`Authorization.DefaultUserRole`](../admin/appendix/configuration/index.md#Authorization.DefaultUserRole).\n\n#### SAML, OAuth2 (non-Google), PAM and Proxied Authentication\n\n- An API key must always be used. Users cannot use this\n  endpoint to create their own account.\n- Administrator access is always required to create accounts.\n- `external_id` is required for SAML and OAuth2 (non-Google)\n  authentication, and also for proxied authentication if the\n  [`ProxyAuth.UniqueIdHeader`](../admin/appendix/configuration/index.md#ProxyAuth.UniqueIdHeader) config setting is used.\n  It is not required for PAM, nor for proxied\n  authentication without the [`ProxyAuth.UniqueIdHeader`](../admin/appendix/configuration/index.md#ProxyAuth.UniqueIdHeader) setting.\n\n#### Password Authentication\n\n- Users must confirm their account through an email. This\n  feature is unique to password authentication.\n- Administrator access is always required except for the first\n  created user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"user_role\": \"<string>\",\n  \"user_must_set_password\": \"<boolean>\",\n  \"password\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"unique_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9f88432-289f-457a-9f4c-6482352b0e51",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"active_time\": \"2006-01-02T15:04:05-07:00\",\n  \"confirmed\": true,\n  \"locked\": false,\n  \"external_id\": \"okta-12345-abcde\",\n  \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aecd8670-672c-4d56-93fd-f09d9dbdab29",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f70ed1b-fb60-45d6-8058-999cbcda63f0",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7771232f-af56-4525-ad91-d47c8722e5f2",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f92a789-201e-4ec7-bd70-6c61a8b2a7c1",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b626d410-4963-46ef-b2e2-dd5d3cd5bd6d",
+              "name": "The request could not be completed due to a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a611fe0b-2a0e-4a98-ad84-fd35ee98cbad",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jon.doe@example.com\",\n  \"user_role\": \"publisher\",\n  \"user_must_set_password\": false,\n  \"password\": \"<string>\",\n  \"external_id\": \"okta-12345-abcde\",\n  \"unique_id\": \"okta-12345-abcde\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef9a9ab5-56de-41b2-9d08-72ac14b50f91",
+          "name": "Create a user using details from a remote authentication provider (LDAP, OAuth2 with Google)",
+          "request": {
+            "name": "Create a user using details from a remote authentication provider (LDAP, OAuth2 with Google)",
+            "description": {
+              "content": "This endpoint creates the given user on the Posit Connect server.\n\n- This endpoint is used only for LDAP and OAuth2 with Google\n  authentication. All other authentication providers should\n  use the [POST /v1/users](#createPushUser) endpoint.\n- Unlike the [POST /v1/users](#createPushUser) endpoint, publisher or administrator\n  access is required to access this endpoint.\n\n#### User Creation Workflow on LDAP and OAuth2 with Google\n\nThis endpoint requires authentication, which means that you need an\nAPI key for access. How do you get an API key if there are no users in\nPosit Connect? The first user can be created by simply logging into\nPosit Connect. The Posit Connect Server API cannot be used to\ncreate the first user. Once logged in, you can create an API key.\n\nFor LDAP and OAuth2 with Google, the API lets you identify an existing\nuser in the LDAP or OAuth2 with Google system and create a corresponding\naccount on Posit Connect. This is a two-step process:\n\n- Use the [GET /v1/users/remote](#searchRemoteUsers) endpoint. This\n  endpoint will return a list of potential matching accounts\n  in LDAP or OAuth2 with Google. A user with no account on Posit Connect will\n  lack a `guid`. Note the `temp_ticket` for the desired user\n  account.\n- Use this PUT endpoint with the `temp_ticket` to create a\n  corresponding account on Posit Connect.\n\nThe Cookbook contains a recipe on [Creating a User Using a\nRemote Authentication Provider\n(LDAP)](../cookbook/users/creating-a-user-using-a-remote-authentication-provider-ldap/)\nwhich demonstrates this workflow using the Posit SDKs.\n\n#### LDAP and OAuth2 with Google Authentication\n\n- The created user role will default to the role specified by\n  the config setting [`Authorization.DefaultUserRole`](../admin/appendix/configuration/index.md#Authorization.DefaultUserRole).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4726050-6261-424e-960f-1055034da102",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"active_time\": \"2006-01-02T15:04:05-07:00\",\n  \"confirmed\": true,\n  \"locked\": false,\n  \"external_id\": \"okta-12345-abcde\",\n  \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "578524b5-21f0-4605-b18e-f5d5061c6a9f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dec66af-62dc-4c88-a7f3-c6a1c4888217",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bfda58c-c154-4b03-9543-56e7aa1678bb",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5fa56a2-9ea4-4751-9f9d-d7469594533b",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09d6ab47-508f-4368-aea3-f22cb7c386c4",
+              "name": "The request could not be completed due to a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "629d50b0-01e7-41e9-b020-8c82aa9ed40f",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temp_ticket\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec2ffee1-d6e5-45ff-86dc-6741084b7c7e",
+          "name": "Search for user details from a remote provider",
+          "request": {
+            "name": "Search for user details from a remote provider",
+            "description": {
+              "content": "This endpoint is used to support operations against users who\ndo not have a Posit Connect account, such as\n[creating LDAP and OAuth2 with Google users](#createPullUser).\nSee [GET /v1/users](#getUsers) for listing users.\n\nThis endpoint searches for users on Posit Connect and on\nyour LDAP or OAuth2 with Google system.\n\nResults are first sorted based on similarity to the `prefix`\nand then by first name, last name, username, and email.\n\n- This endpoint can be used only by LDAP or OAuth2 with Google\n  authentication and will return an error otherwise.\n- Publisher or administrator access is required to access this\n  endpoint.\n- The `email` field is not populated for non-admins when\n  [`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled.\n- The `external_id` field is only visible to administrators and to users\n  viewing their own record.\n- When the user making the request is a viewer and\n  [`Authorization.ViewersCanOnlySeeThemselves`](../admin/appendix/configuration/index.md#Authorization.ViewersCanOnlySeeThemselves) is being used,\n  the results contain only the given user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                "remote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65c00c75-e6a6-4934-9916-a67fb390d351",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"email\": \"jon.doe@example.com\",\n      \"username\": \"jondoe\",\n      \"first_name\": \"Jon\",\n      \"last_name\": \"Doe\",\n      \"user_role\": \"administrator\",\n      \"created_time\": \"2006-01-02T15:04:05-07:00\",\n      \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n      \"active_time\": \"2006-01-02T15:04:05-07:00\",\n      \"confirmed\": true,\n      \"locked\": false,\n      \"external_id\": \"okta-12345-abcde\",\n      \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\",\n      \"temp_ticket\": \"string\"\n    },\n    {\n      \"email\": \"jon.doe@example.com\",\n      \"username\": \"jondoe\",\n      \"first_name\": \"Jon\",\n      \"last_name\": \"Doe\",\n      \"user_role\": \"administrator\",\n      \"created_time\": \"2006-01-02T15:04:05-07:00\",\n      \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n      \"active_time\": \"2006-01-02T15:04:05-07:00\",\n      \"confirmed\": true,\n      \"locked\": false,\n      \"external_id\": \"okta-12345-abcde\",\n      \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\",\n      \"temp_ticket\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8affbafe-4ac7-4a05-bd32-864f7d42937d",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2c018ba-862e-4a1e-8d55-27ba120a4b25",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "653dd25e-4952-4b50-9d60-a0e1215a1ec3",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ce22484-8ede-4740-877f-f7b81c7caa60",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc4c4604-e954-499a-a12f-647beec64796",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "remote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8833adfe-7965-4160-ad67-f7c0a29107e2",
+          "name": "Get user details",
+          "request": {
+            "name": "Get user details",
+            "description": {
+              "content": "Get detailed information on a specific user.\n\nThe `email` field is not populated for non-admins when\n[`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled. The `external_id` field is only\nvisible to administrators and to users viewing their own record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6993c4ee-e4e2-4d96-b72c-376213116361",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"active_time\": \"2006-01-02T15:04:05-07:00\",\n  \"confirmed\": true,\n  \"locked\": false,\n  \"external_id\": \"okta-12345-abcde\",\n  \"guid\": \"6f300623-1e0c-48e6-a473-ddf630c0c0c3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4afcc23-e99b-41eb-adc6-594bfe16fc3c",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14ce51c3-8824-4071-89b5-5f8a497393eb",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "130cacc1-0091-4879-a5b7-45205ea03bf0",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8661bca9-e448-4767-852e-027bf5dc809a",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56f1acd3-ee91-4f85-b1df-d14adda77a0a",
+          "name": "Update a user",
+          "request": {
+            "name": "Update a user",
+            "description": {
+              "content": "This endpoint updates a given user and returns the updated\nuser properties. Note that it returns only the properties that\ncan be modified by this endpoint.\n\nIf the authentication provider allows it:\n\n- a user can change their own user properties.\n- another user's properties can be changed with administrator\n  access.\n- The configuration setting [`Authorization.UserInfoEditableBy`](../admin/appendix/configuration/index.md#Authorization.UserInfoEditableBy)\n  controls whether or not non-admins can edit their own properties.\n\n### Password Authentication\n\n- Emails are required.\n- Changing an unconfirmed user's email will cause the\n  confirmation email to be resent to the new email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"username\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"user_role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21bbc53b-3ee7-4c9b-9497-a8ee52c3cbcb",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "163102a4-5e27-4ffe-8941-aae9a624bc8f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db7da6c5-98fb-481a-a9ab-fc412de04a3d",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b91319cd-59c3-48ab-9f4e-64a160161e7d",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "469253a6-fe94-4fde-83f7-2c565a38ddb6",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b94148d0-7010-4001-9ec8-24c686fff0b5",
+              "name": "The request could not be completed due to a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "683c5e24-c180-44dd-89a9-d46ba46772db",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"jon.doe@example.com\",\n  \"username\": \"jondoe\",\n  \"first_name\": \"Jon\",\n  \"last_name\": \"Doe\",\n  \"user_role\": \"administrator\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6a36869-d34d-49fe-9e15-ad3abecd14b7",
+          "name": "Lock a user",
+          "request": {
+            "name": "Lock a user",
+            "description": {
+              "content": "This endpoint locks or unlocks a given user account.\n\n- Unlocking a user is prohibited if that additional user would\nviolate the user account limit specified by the Posit Connect product\nlicense.\n- Administrator access is required to access this endpoint.\n- Users are able to lock themselves.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":guid",
+                "lock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locked\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "429fd29a-c4b6-4f73-b229-0f6c697707e1",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2bdf46b6-1efd-4f61-99e9-fdf403e4ec49",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb6e7e4e-67b3-4833-b538-7b17c1f067ea",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af1afaa8-a4dc-4659-bd5c-fff6428e3e13",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3766a0c-c851-4cc1-af3c-477db13bc12d",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48986c4a-b5c4-468e-93a4-82468c282718",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":guid",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locked\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2248,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/__api__",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a30cc20-5947-4a15-9e52-d1ca1e068886",
+    "name": "Posit Connect API Reference API Keys Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n\n\nContact Support:\n Name: Posit Connect Support\n Email: support@posit.co",
+      "type": "text/plain"
+    }
+  }
+}

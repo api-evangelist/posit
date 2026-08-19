@@ -1,0 +1,1065 @@
+{
+  "item": [
+    {
+      "id": "3b4b7969-e6d8-43b2-8af6-f203ef18a106",
+      "name": "Audit Logs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8e08ae72-331e-4ac8-8413-a966caea6700",
+          "name": "Get audit actions",
+          "request": {
+            "name": "Get audit actions",
+            "description": {
+              "content": "Retrieve the list of audit actions available on your Posit Connect server.\nYou can also see a list of these actions in the [Admin Guide](../admin/auditing/events/).\nAction names can be used to filter audit logs in the [Audit Log Search API](#searchAuditLogs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "audit",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "518df0b9-4656-41ab-ad29-310288ac0173",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"action\": \"create_user\",\n    \"description\": \"Create a new user.\"\n  },\n  {\n    \"action\": \"create_user\",\n    \"description\": \"Create a new user.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1a04071-0d2a-4f4d-92d8-7c7fe99a4a92",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16e61731-9a80-45da-897f-7d8fe79fc564",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "936a6daf-e731-4455-90d3-fcd7e5a28f85",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53b35860-4dac-4e0b-a47d-7935df4ef1b4",
+          "name": "Get audit logs",
+          "request": {
+            "name": "Get audit logs",
+            "description": {
+              "content": "This endpoint returns a portion of the audit logs, as well as\npaging information that can be used to navigate the audit log\nresults.\n\nThis endpoint requires administrator access.\n\nThis endpoint uses keyset pagination. The URLs in the `paging` field's\nsubfields can be used to fetch the `next`, `previous`, `first`, and\n`last` pages of results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "audit_logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of logs to return. The minimum supported value is 1 and\nmaximum supported value is 500. Note that `limit` is a \"best\neffort\" request since there may not be enough logs to satisfy the limit."
+                },
+                {
+                  "disabled": false,
+                  "key": "previous",
+                  "value": "<string>",
+                  "description": "Gets the previous page of audit logs relative to the given id."
+                },
+                {
+                  "disabled": false,
+                  "key": "next",
+                  "value": "<string>",
+                  "description": "Gets the next page of audit logs relative to the given id."
+                },
+                {
+                  "disabled": false,
+                  "key": "ascOrder",
+                  "value": "true",
+                  "description": "Whether the audit logs should be listed in ascending order."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f949460-3b74-415c-bb84-472dff69f480",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"time\": \"2006-01-02T15:04:05-07:00\",\n      \"user_id\": \"string\",\n      \"user_guid\": \"e61171dc-957e-8226-34db-18478c606247\",\n      \"user_description\": \"Full name (username)\",\n      \"action\": \"add_user\",\n      \"event_description\": \"Added user Full Name (username)\"\n    },\n    {\n      \"id\": \"string\",\n      \"time\": \"2006-01-02T15:04:05-07:00\",\n      \"user_id\": \"string\",\n      \"user_guid\": \"aadf43f3-fefc-1c21-c50d-c9519cb2a9d1\",\n      \"user_description\": \"Full name (username)\",\n      \"action\": \"add_user\",\n      \"event_description\": \"Added user Full Name (username)\"\n    }\n  ],\n  \"paging\": {\n    \"first\": \"string\",\n    \"previous\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\",\n    \"cursors\": {\n      \"previous\": \"23948901087\",\n      \"next\": \"23948901087\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b6b0a99-26e5-4387-870f-3ef7ed2e9609",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e0f764a-6c65-4962-a400-2d895ff9fc05",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10700680-eefd-4acf-853f-32631426a336",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c872d751-57e0-4243-a209-5102e63a0418",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8065a5ae-2b2e-447b-9f28-4b8b19983af2",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "previous",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ascOrder",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7364795-bec2-4c0c-b7bf-bc5524414fe7",
+          "name": "Search audit logs",
+          "request": {
+            "name": "Search audit logs",
+            "description": {
+              "content": "This endpoint searches for audit logs, using a search query format\nthat allows for both search terms and filters. The search terms are used\nto find audit logs that have matching terms in the audit action, audit\ndescription, etc, while the filters are used to filter the search\nresults by specific fields (such as `user_guid` or the audit `time`).\n\nAuthenticated access with an Administrator role is required.\n\n#### Search query\n\nThe search query is a string that includes both search terms and\nfilters. Any text in the search query that is not a supported filter\nis treated as a search term, and those search terms are matched\nagainst any of: `user_description`, `action`, or `event_description`. Note that the search\nterms are case-insensitive, and all terms must be present in an audit log entry\nfor it to be included in the search results.\n\n#### Filters\n\nFilters are specified as colon-delimited key-value pairs, containing one\nor more values separated by commas. If any of the values within a filter\ncontain a space or comma, you should use quotes around the value. Example:\n\n```\nmyterm tag:tagwithoutspace,\"tag with space\"\n```\n\nYou can negate a filter or search term by prefixing it\nwith a `-`. For example, `-user_id:0` will exclude audit logs produced by system actors which\nhave a default user_id of `0`.\n\nThe following filters are supported:\n\n`action:<action>[,<additional-actions>,...]` - Only return audit logs\nthat have the specified action. If more than one action is provided,\naudit logs with ANY of the specified actions will be included. Note that\nactions are not case sensitive. Audit actions are enumerated in the\n[Admin Guide](../admin/auditing/events/), and are also exposed in the\n[GET /v1/audit/actions](#getAuditActions).\n\n`user_guid:<user_guid>[,<additional-user_guids>,...]` - Only return\naudit logs that have the specified user GUID. If more than one user\nGUID is provided, audit logs with ANY of the specified user GUIDs will\nbe included.\n\n`user_id:<user_id>[,<additional-user_ids>,...]` - Only return audit logs\nthat have the specified user ID. If more than one user ID is provided,\naudit logs with ANY of the specified user IDs will be included. The user ID `0`\nis reserved for system actors.\n\n`from:<timestamp>` - Only return audit logs that have a timestamp\ngreater than or equal to the specified timestamp. The timestamp must\nbe provided in RFC3339 format, such as `2023-01-01T12:34:56Z`. Up to nanosecond\nprecision is supported (e.g. `2023-01-01T12:34:56.123456789Z`). The timestamp\nis inclusive, so audit logs with the specified timestamp will be\nincluded in the results.\n\n`to:<timestamp>` - Only return audit logs that have a timestamp\nless than or equal to the specified timestamp. The timestamp must\nbe provided in RFC3339 format, such as `2023-01-01T12:34:56Z`. Up to nanosecond\nprecision is supported (e.g. `2023-01-01T12:34:56.123456789Z`). The timestamp\nis inclusive, so audit logs with the specified timestamp will be\nincluded in the results.\n\n#### Pagination\n\nThis endpoint uses offset pagination. Requests can include\nquery-string parameters for `page_number` and `page_size` to\nfetch different pages of results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "search",
+                "auditlogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search audit log entries."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "The number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "The sort order: asc or desc."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c947cca7-290d-403d-88e0-33116ef75bc3",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search",
+                    "auditlogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 100,\n  \"results\": [\n    {\n      \"id\": \"123\",\n      \"time\": \"2006-01-02T15:04:05-07:00\",\n      \"user_id\": \"456\",\n      \"user_guid\": \"d4aaf24e-b7d5-404f-843e-a78e4c1eab38\",\n      \"user_description\": \"John Doe\",\n      \"action\": \"create_user\",\n      \"event_description\": \"Created a new user account.\"\n    },\n    {\n      \"id\": \"123\",\n      \"time\": \"2006-01-02T15:04:05-07:00\",\n      \"user_id\": \"456\",\n      \"user_guid\": \"d4aaf24e-b7d5-404f-843e-a78e4c1eab38\",\n      \"user_description\": \"John Doe\",\n      \"action\": \"create_user\",\n      \"event_description\": \"Created a new user account.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28999add-04a1-495b-893f-756b7ff0d476",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search",
+                    "auditlogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0c4f984-b132-4e67-8de8-cece48af7099",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search",
+                    "auditlogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6facd3bb-5989-404e-8a45-c00b96f806e4",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search",
+                    "auditlogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "614ac4ff-60a0-4c3c-a694-e4bf6e35d340",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search",
+                    "auditlogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8542,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/__api__",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40272a3d-68ed-4c2f-a8a1-59544398e1c9",
+    "name": "Posit Connect API Reference API Keys Audit Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n\n\nContact Support:\n Name: Posit Connect Support\n Email: support@posit.co",
+      "type": "text/plain"
+    }
+  }
+}

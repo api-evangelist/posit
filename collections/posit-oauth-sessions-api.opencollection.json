@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys OAuth Sessions API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List OAuth sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/sessions",
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "false \"When making a request with administrator privileges, include OAuth sessions for all users when set to true\""
+              }
+            ]
+          },
+          "docs": "List OAuth sessions available to Posit Connect associated with the current user.\nIf you have administrator privileges you can request all available sessions."
+        },
+        {
+          "info": {
+            "name": "Get OAuth session details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/sessions/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get information about a specific OAuth session.\nIf you have administrator privileges you can request details for any available session."
+        },
+        {
+          "info": {
+            "name": "Delete an OAuth session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/oauth/sessions/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the OAuth session associated with the provided guid.\nA user can delete their own sessions. Deleting sessions for other users requires administrator privileges."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Audit Logs API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get audit actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/audit/actions"
+          },
+          "docs": "Retrieve the list of audit actions available on your Posit Connect server.\nYou can also see a list of these actions in the [Admin Guide](../admin/auditing/events/).\nAction names can be used to filter audit logs in the [Audit Log Search API](#searchAuditLogs)."
+        },
+        {
+          "info": {
+            "name": "Get audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/audit_logs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of logs to return. The minimum supported value is 1 and\nmaximum supported value is 500. Note that `limit` is a \"best\neffort\" request since there may not be enough logs to satisfy the limit."
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query",
+                "description": "Gets the previous page of audit logs relative to the given id."
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Gets the next page of audit logs relative to the given id."
+              },
+              {
+                "name": "ascOrder",
+                "value": "",
+                "type": "query",
+                "description": "Whether the audit logs should be listed in ascending order."
+              }
+            ]
+          },
+          "docs": "This endpoint returns a portion of the audit logs, as well as\npaging information that can be used to navigate the audit log\nresults.\n\nThis endpoint requires administrator access.\n\nThis endpoint uses keyset pagination. The URLs in the `paging` field's\nsubfields can be used to fetch the `next`, `previous`, `first`, and\n`last` pages of results."
+        },
+        {
+          "info": {
+            "name": "Search audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/search/auditlogs",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search audit log entries."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order: asc or desc."
+              }
+            ]
+          },
+          "docs": "This endpoint searches for audit logs, using a search query format\nthat allows for both search terms and filters. The search terms are used\nto find audit logs that have matching terms in the audit action, audit\ndescription, etc, while the filters are used to filter the search\nresults by specific fields (such as `user_guid` or the audit `time`).\n\nAuthenticated access with an Administrator role is required.\n\n#### Search query\n\nThe search query is a string that includes both search terms and\nfilter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

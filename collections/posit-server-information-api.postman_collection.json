@@ -1,0 +1,1473 @@
+{
+  "item": [
+    {
+      "id": "6707f107-e4d7-4a43-9084-2cc9b04ba7e2",
+      "name": "Server Information",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c186b9b5-4219-41cb-b63a-8cdfe535e3e2",
+          "name": "Get Node.js Information",
+          "request": {
+            "name": "Get Node.js Information",
+            "description": {
+              "content": "This endpoint returns a list of metadata objects for each version\nof Node.js that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "nodejs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79aad3c5-76e4-4c84-8e43-7744653a2981",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "nodejs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"installations\": [\n    {\n      \"version\": \"22.11.0\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"Local\"\n    },\n    {\n      \"version\": \"22.11.0\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"Local\"\n    }\n  ],\n  \"enabled\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a548d2ae-9076-4e01-b32a-fea4f0475e66",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "nodejs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25efa0ae-899e-4e2d-a6b0-80b256848993",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "nodejs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9ba76d7-7539-49f6-8263-1f1a53e36cae",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "nodejs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "983796dc-3962-43f3-b39f-42270bd451f0",
+          "name": "Get public settings",
+          "request": {
+            "name": "Get public settings",
+            "description": {
+              "content": "This endpoint returns the minimal server settings needed to render\nunauthenticated views in the Connect dashboard.\n\nThe returned settings include:\n- Authentication provider information (name, notice, timing)\n- Self-registration availability\n- System display name for branding\n- Username validation rules for registration\n\n**Security Note**: This endpoint is public (no authentication required)\nand deliberately exposes minimal server settings to unauthenticated\nusers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "public"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6b502d1-8457-4195-8981-d50b7928fb5b",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authentication\": {},\n  \"self_registration\": false,\n  \"system_display_name\": \"Posit Connect\",\n  \"public_warning\": \"\",\n  \"customized_landing\": false,\n  \"mail_configured\": true,\n  \"prohibited_usernames\": [\n    \"connect\",\n    \"apps\",\n    \"users\",\n    \"groups\"\n  ],\n  \"username_validator\": \"default\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "220837c7-62bb-488f-9236-5f45d97962e5",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8542104-de11-4e7e-aa71-1e801f875565",
+          "name": "Get Python Information",
+          "request": {
+            "name": "Get Python Information",
+            "description": {
+              "content": "This endpoint returns a list of metadata objects for each version\nof Python that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "python"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a77fb53-4937-4918-8d37-69abb3549c2c",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "python"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"installations\": [\n    {\n      \"version\": \"3.10.6\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    },\n    {\n      \"version\": \"3.10.6\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    }\n  ],\n  \"api_enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1b2c224-0e96-4989-a298-c5a44b847cbd",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "python"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aee8c7c2-f511-4bde-a449-d9e2e3f31bac",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "python"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "073aae5d-1639-4046-b54a-ec4af2e45d53",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "python"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f73346c-d071-432a-b116-e9c5f9412c4d",
+          "name": "Get Quarto Information",
+          "request": {
+            "name": "Get Quarto Information",
+            "description": {
+              "content": "This endpoint returns a list of metadata objects for each version\nof Quarto that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "quarto"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "486f168a-cc99-41d7-a2cb-a717e470928d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "quarto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"installations\": [\n    {\n      \"version\": \"1.0.27\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    },\n    {\n      \"version\": \"1.0.27\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc92a2c-03d3-457b-b833-ea33624827d1",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "quarto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0504e2f-b680-497b-8ccb-90d743a7edf1",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "quarto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35dc92d8-8fab-496c-b37f-1927f5d5fb8f",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "quarto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3650b6a8-9745-4150-a5a3-dcfd40b68ccc",
+          "name": "Get R Information",
+          "request": {
+            "name": "Get R Information",
+            "description": {
+              "content": "This endpoint returns a list of metadata objects for each version\nof R that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "r"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f198bfdc-fd67-4990-a252-152565aeb812",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "r"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"installations\": [\n    {\n      \"version\": \"3.4.4\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    },\n    {\n      \"version\": \"3.4.4\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "234bcbf0-b56b-4a75-aafa-5215a2db9765",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "r"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5aaacfe-fc6f-45c9-af69-0654504320e1",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "r"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23c3210a-8506-4b12-89a7-f570bec0fb4f",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "r"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34bd63d3-115e-4a66-8cad-057b487c55ea",
+          "name": "Get TensorFlow Information",
+          "request": {
+            "name": "Get TensorFlow Information",
+            "description": {
+              "content": "This endpoint returns a list of metadata objects for each version\nof TensorFlow that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "server_settings",
+                "tensorflow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2166c13d-5335-4116-92b5-4df8b8f4b60c",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "tensorflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"installations\": [\n    {\n      \"version\": \"1.0.27\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    },\n    {\n      \"version\": \"1.0.27\",\n      \"cluster_name\": \"Kubernetes\",\n      \"image_name\": \"rstudio/content-base:r4.1.3-py3.10.11-jammy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67265c8f-54d3-47ff-a442-3fcbf6762fb0",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "tensorflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0132695a-0ac0-4dfd-bf0c-2996feec9cd7",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "tensorflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba64996f-ec42-4e50-b01b-7835cd5d125b",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "server_settings",
+                    "tensorflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7d1ad2f-db20-4f2c-99d6-965f29e39777",
+          "name": "List Time Zones",
+          "request": {
+            "name": "List Time Zones",
+            "description": {
+              "content": "Returns the set of names and offsets for all time zones known by the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "timezones"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82271082-9c5b-4d53-a37e-a94443429697",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timezones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"timezone\": \"America/New_York\",\n    \"offset\": \"-04:00\"\n  },\n  {\n    \"timezone\": \"America/New_York\",\n    \"offset\": \"-04:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0e6fe95-2824-4dfd-a19f-a9fc4e4b82a3",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timezones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb3b466d-7103-406e-b2c6-326a3f8ca582",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timezones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d4399f0-5acd-49e5-a652-9551f055edf7",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timezones"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8431,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/__api__",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6a7432e1-9bb3-4e59-bb5c-688608331484",
+    "name": "Posit Connect API Reference API Keys Server Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n\n\nContact Support:\n Name: Posit Connect Support\n Email: support@posit.co",
+      "type": "text/plain"
+    }
+  }
+}

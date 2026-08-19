@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Vanity URLs API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vanity URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get vanity URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/vanity",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the vanity URL, if any, defined for this content.\nIf the content item has a vanity URL, it is returned.\nIf there is no vanity URL for this content, a 404 status is returned.\n\nAdministrators can get the vanity URL for any content item.\nAny authenticated user who is authorized to view the content can\nget the vanity URL."
+        },
+        {
+          "info": {
+            "name": "Set vanity URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/vanity",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the vanity URL for this content item.\n\nA vanity URL path must meet certain requirements:\n\n*   It must consist of alphanumeric characters, hyphens, underscores,\n    and slashes.\n\n*   It cannot be a reserved path such as the root path `/`, or a path\n    beginning with `/__`.\n\n*   The following path prefixes are prohibited:\n\n    * `/__`\n    * `/favicon.ico`\n    * `/connect`\n    * `/apps`\n    * `/users`\n    * `/groups`\n    * `/setpassword`\n    * `/user-completion`\n    * `/confirm`\n    * `/recent"
+        },
+        {
+          "info": {
+            "name": "Delete vanity URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/vanity",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the vanity URL for this content.\n\nIf [`Authorization.PublishersCanManageVanities`](../admin/appendix/configuration/index.md#Authorization.PublishersCanManageVanities) is `true` (default), publishers\ncan delete the vanity URL for content items that they have permission to change.\nOtherwise, administrator permissions are required."
+        },
+        {
+          "info": {
+            "name": "List vanity URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/vanities"
+          },
+          "docs": "List all defined vanity URLs.\n\nYou must have administrator privileges to perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

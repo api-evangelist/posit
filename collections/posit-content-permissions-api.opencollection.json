@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Content Permissions API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/permissions",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the permissions for this content item.\nThere will be one permission item for each user or group\nlisted in the ACL for this content item."
+        },
+        {
+          "info": {
+            "name": "Add or update permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/permissions",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upsert a user or group to the permissions for this content item."
+        },
+        {
+          "info": {
+            "name": "Get permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/permissions/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single permission entry for the content item, given its ID."
+        },
+        {
+          "info": {
+            "name": "Update permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/permissions/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a permission entry for this content item."
+        },
+        {
+          "info": {
+            "name": "Delete permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/permissions/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a single permission entry for the content item, given its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

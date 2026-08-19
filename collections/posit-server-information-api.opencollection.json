@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Server Information API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Node.js Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/nodejs"
+          },
+          "docs": "This endpoint returns a list of metadata objects for each version\nof Node.js that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles."
+        },
+        {
+          "info": {
+            "name": "Get public settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/public"
+          },
+          "docs": "This endpoint returns the minimal server settings needed to render\nunauthenticated views in the Connect dashboard.\n\nThe returned settings include:\n- Authentication provider information (name, notice, timing)\n- Self-registration availability\n- System display name for branding\n- Username validation rules for registration\n\n**Security Note**: This endpoint is public (no authentication required)\nand deliberately exposes minimal server settings to unauthenticated\nusers."
+        },
+        {
+          "info": {
+            "name": "Get Python Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/python"
+          },
+          "docs": "This endpoint returns a list of metadata objects for each version\nof Python that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope."
+        },
+        {
+          "info": {
+            "name": "Get Quarto Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/quarto"
+          },
+          "docs": "This endpoint returns a list of metadata objects for each version\nof Quarto that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope."
+        },
+        {
+          "info": {
+            "name": "Get R Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/r"
+          },
+          "docs": "This endpoint returns a list of metadata objects for each version\nof R that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope."
+        },
+        {
+          "info": {
+            "name": "Get TensorFlow Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/server_settings/tensorflow"
+          },
+          "docs": "This endpoint returns a list of metadata objects for each version\nof TensorFlow that is available for executing content.\nThis endpoint requires authentication and is only available to\n`publisher` and `administrator` roles.\n\n#### Service tokens\n\nThis endpoint can be accessed using a service token with the\n`server-settings:read` scope."
+        },
+        {
+          "info": {
+            "name": "List Time Zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/timezones"
+          },
+          "docs": "Returns the set of names and offsets for all time zones known by the server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

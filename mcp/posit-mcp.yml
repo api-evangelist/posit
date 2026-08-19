@@ -2,12 +2,10 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/posit-connect-openapi-original.json
-note: >-
-  No official hosted MCP server for the Posit Connect Server API was found.
-  (Posit Connect can HOST and auto-detect user-published MCP servers as content,
-  but Posit does not publish a first-party MCP server that fronts the Connect
-  API itself.) The tools below are a candidate surface derived from Connect API
-  operations for building one.
+note: No official hosted MCP server for the Posit Connect Server API was found. (Posit Connect can HOST
+  and auto-detect user-published MCP servers as content, but Posit does not publish a first-party MCP
+  server that fronts the Connect API itself.) The tools below are a candidate surface derived from Connect
+  API operations for building one.
 server:
   name: posit-connect
   transport: http
@@ -36,3 +34,9 @@ tools:
 - name: get_job
   description: Get a content job
   source_operation: openapi/posit-connect-openapi-original.json#getJob
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

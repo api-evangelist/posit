@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Feature Usage API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feature Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Provides details about all tracked features.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/feature-usage"
+          },
+          "docs": "This endpoint returns details about all tracked features.\nThis endpoint requires publisher access.\nThe response is not paginated. All flags are returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

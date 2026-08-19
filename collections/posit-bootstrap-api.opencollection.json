@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Bootstrap API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bootstrap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create first administrator and API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/bootstrap"
+          },
+          "docs": "This endpoint creates an initial administrator user, provisions an API key for the initial administrator,\nand returns the API key. This endpoint only functions for installations with no pre-existing users.\n\n#### Code samples\n\n::: {.panel-tabset}\n\n##### curl\n\n```bash\n#!/bin/bash\n\nBOOTSTRAP_JWT=\"your.jwt.here\"\n\ncurl --silent --show-error -L --max-redirs 0 --fail \\\n    -X POST \\\n    -H \"Authorization: Connect-Bootstrap ${BOOTSTRAP_JWT}\" \\\n    \"https://connect.example.com/__api__/v1/bootstrap\"\n```\n\n"
+        },
+        {
+          "info": {
+            "name": "Create first administrator and API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/experimental/bootstrap"
+          },
+          "docs": "This endpoint creates an initial administrator user, provisions an\nAPI key for the initial administrator, and returns the API key. This\nendpoint only functions for installations with no pre-existing users.\n\nThis endpoint is deprecated. Use [POST /v1/bootstrap](#bootstrap) instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

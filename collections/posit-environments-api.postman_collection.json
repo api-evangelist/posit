@@ -1,0 +1,1970 @@
+{
+  "item": [
+    {
+      "id": "d8df7be5-d05c-4935-8d59-08d2333449b9",
+      "name": "Environments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f872882-4834-475c-a7e8-cdfa26db2f70",
+          "name": "List execution environments",
+          "request": {
+            "name": "List execution environments",
+            "description": {
+              "content": "List all execution environments available to Posit Connect.\n\nYou must have administrator or publisher privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a04c2b0-4db6-47a9-8be9-85bd034a084a",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"314\",\n    \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\",\n    \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n    \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n    \"description\": \"This is my description of the environment\",\n    \"cluster_name\": \"Kubernetes\",\n    \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n    \"environment_type\": \"Kubernetes\",\n    \"matching\": \"any\",\n    \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n    \"managed_by\": \"string\",\n    \"python\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"nodejs\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"quarto\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"r\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"tensorflow\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"volume_mounts\": [\n      {\n        \"source\": {\n          \"volume_type\": \"nfs\",\n          \"nfs_host\": \"string\",\n          \"nfs_export_path\": \"string\",\n          \"pvc_name\": \"string\"\n        },\n        \"target\": {\n          \"path\": \"/mnt/data\",\n          \"read_only\": false\n        }\n      },\n      {\n        \"source\": {\n          \"volume_type\": \"nfs\",\n          \"nfs_host\": \"string\",\n          \"nfs_export_path\": \"string\",\n          \"pvc_name\": \"string\"\n        },\n        \"target\": {\n          \"path\": \"/mnt/data\",\n          \"read_only\": false\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"314\",\n    \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n    \"created_time\": \"2006-01-02T15:04:05-07:00\",\n    \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n    \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n    \"description\": \"This is my description of the environment\",\n    \"cluster_name\": \"Kubernetes\",\n    \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n    \"environment_type\": \"Kubernetes\",\n    \"matching\": \"any\",\n    \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n    \"managed_by\": \"string\",\n    \"python\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"nodejs\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"quarto\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"r\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"tensorflow\": {\n      \"installations\": [\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        },\n        {\n          \"version\": \"3.6.3\",\n          \"path\": \"/opt/R/3.6.3/bin/R\"\n        }\n      ]\n    },\n    \"volume_mounts\": [\n      {\n        \"source\": {\n          \"volume_type\": \"nfs\",\n          \"nfs_host\": \"string\",\n          \"nfs_export_path\": \"string\",\n          \"pvc_name\": \"string\"\n        },\n        \"target\": {\n          \"path\": \"/mnt/data\",\n          \"read_only\": false\n        }\n      },\n      {\n        \"source\": {\n          \"volume_type\": \"nfs\",\n          \"nfs_host\": \"string\",\n          \"nfs_export_path\": \"string\",\n          \"pvc_name\": \"string\"\n        },\n        \"target\": {\n          \"path\": \"/mnt/data\",\n          \"read_only\": false\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9e9706d-2e4f-47dd-8bc4-f0f9b4f96f13",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7227e688-b9e5-4dbd-b066-fb853c9576bd",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1d57a4b-47c2-44fb-a697-4d57f09f1bd5",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e27c9578-8eac-41b5-a08a-939a3e41401b",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0a3a811-6365-41f4-8391-75e6ad131f95",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa36855b-7677-4a3f-9ae6-2ba34ef7a1a6",
+          "name": "Create execution environment",
+          "request": {
+            "name": "Create execution environment",
+            "description": {
+              "content": "Create a new execution environment.\n\nYou must have administrator privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"cluster_name\": \"<string>\",\n  \"name\": \"<string>\",\n  \"matching\": \"<string>\",\n  \"supervisor\": \"<string>\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"<string>\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"<string>\",\n        \"read_only\": \"<boolean>\"\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"<string>\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"<string>\",\n        \"read_only\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e84bf64-a757-4f7d-813f-dd255e583bd4",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"314\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"environment_type\": \"Kubernetes\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"managed_by\": \"string\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7fcf825-39d4-4090-be07-9824ba005395",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d8277b-712a-460c-a07d-aa0a85bdb2e1",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90287f56-f1a3-4745-bfdb-43a6e9725242",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68071652-8fab-45c4-88fd-579858c6addf",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dd2b94f-aa02-486a-8916-511531cbdceb",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b33b278-3fca-4a56-a0b4-b424ed32322e",
+          "name": "Delete an execution environment",
+          "request": {
+            "name": "Delete an execution environment",
+            "description": {
+              "content": "Delete a specific execution environment.\n\nYou must have administrator privileges to perform this action.\n\nEnvironments managed by a configuration file cannot be deleted via the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "environments",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c61c1e70-d9ec-46b7-aae4-30789e04901e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f9d1d1d5-8697-4199-b472-b58b4b7382ae",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67ec9a20-3251-4487-afad-b69775183c8b",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b4aab7e-566e-4995-ace1-362e3c57234e",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d27c8499-f99e-47ee-8571-05cadc545d48",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0cb6340-fdd0-4c94-b6d7-d6904d263bc9",
+              "name": "The request could not be completed due to a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fff1419c-6a5d-4e7c-b18a-e9aaa29e82d0",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f65e23e0-a936-48a3-b8b7-ab95d26ec581",
+          "name": "Get execution environment details",
+          "request": {
+            "name": "Get execution environment details",
+            "description": {
+              "content": "Get detailed information about a specific execution environment.\n\nYou must have administrator or publisher privileges to perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "environments",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10743472-a415-415d-9a19-2dc06cb4227e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"314\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"environment_type\": \"Kubernetes\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"managed_by\": \"string\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f09d50-5566-4592-9fb7-5df82f98d3b0",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78b23421-1317-4854-9797-f186ee7c7754",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c3b1f0d-778f-4d89-86a4-3e42b7328c53",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c5c8b33-3a1a-43d4-aaba-4b7ce43133c2",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61b37207-accd-4e87-8d68-3f680a76a5b9",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f956baac-4eb5-48ac-b11e-43b7ffc15b99",
+          "name": "Update an execution environment",
+          "request": {
+            "name": "Update an execution environment",
+            "description": {
+              "content": "Update a specific execution environment.\n\nYou must have administrator privileges to perform this action.\n\nEnvironments managed by a configuration file cannot be updated via the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "environments",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"matching\": \"<string>\",\n  \"supervisor\": \"<string>\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"version\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"<string>\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"<string>\",\n        \"read_only\": \"<boolean>\"\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"<string>\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"<string>\",\n        \"read_only\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "895d4dd0-48a2-4e10-822c-ae051d5efed6",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"314\",\n  \"guid\": \"25438b83-ea6d-4839-ae8e-53c52ac5f9ce\",\n  \"created_time\": \"2006-01-02T15:04:05-07:00\",\n  \"updated_time\": \"2006-01-02T15:04:05-07:00\",\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"cluster_name\": \"Kubernetes\",\n  \"name\": \"ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804\",\n  \"environment_type\": \"Kubernetes\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"managed_by\": \"string\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "587f157b-3c27-47d5-bb15-2d2fcb3fe27f",
+              "name": "The requested operation is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12878c3a-cda7-4c0a-9f9c-1c1a97e97670",
+              "name": "The requested operation requires authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73a7ab2e-cbec-4857-9da7-128e032dc3a6",
+              "name": "You do not have permission to perform this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17fe6b2f-4f05-443b-ba76-01e85a7504da",
+              "name": "The requested object does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efe8936f-c11a-405d-a9a6-6696f26becb2",
+              "name": "The request could not be completed due to a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0c40f68-c3b0-4aba-9bd4-f6d183f8bea2",
+              "name": "A server error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "environments",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Project Alpha (R 4.1.1, Python 3.10)\",\n  \"description\": \"This is my description of the environment\",\n  \"matching\": \"any\",\n  \"supervisor\": \"/usr/local/bin/supervisor.sh\",\n  \"python\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"nodejs\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"quarto\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"r\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"tensorflow\": {\n    \"installations\": [\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      },\n      {\n        \"version\": \"3.6.3\",\n        \"path\": \"/opt/R/3.6.3/bin/R\"\n      }\n    ]\n  },\n  \"volume_mounts\": [\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    },\n    {\n      \"source\": {\n        \"volume_type\": \"nfs\",\n        \"nfs_host\": \"<string>\",\n        \"nfs_export_path\": \"<string>\",\n        \"pvc_name\": \"<string>\"\n      },\n      \"target\": {\n        \"path\": \"/mnt/data\",\n        \"read_only\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5556,\n  \"error\": \"string\",\n  \"payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/__api__",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15accfa9-82de-4ba1-b3c2-4a7dc530d676",
+    "name": "Posit Connect API Reference API Keys Environments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n\n\nContact Support:\n Name: Posit Connect Support\n Email: support@posit.co",
+      "type": "text/plain"
+    }
+  }
+}

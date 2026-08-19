@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Service Tokens API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List service tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/service-tokens"
+          },
+          "docs": "List all service tokens.\nThis endpoint is available only to administrators."
+        },
+        {
+          "info": {
+            "name": "Create a service token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/system/service-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new service token with the specified scopes.\nThis response includes the full token key. **Subsequent requests\ndo not include the key value.**\nThis endpoint is available only to administrators."
+        },
+        {
+          "info": {
+            "name": "List available scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/service-tokens/scopes"
+          },
+          "docs": "List all available scopes you can assign to service tokens.\nThis endpoint is available only to administrators."
+        },
+        {
+          "info": {
+            "name": "Delete a service token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/system/service-tokens/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a service token. The token will immediately stop working for\nauthentication.\nThis endpoint is available only to administrators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

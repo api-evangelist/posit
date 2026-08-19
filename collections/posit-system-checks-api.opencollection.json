@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys System Checks API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Checks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List system check runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/checks"
+          },
+          "docs": "List all system check runs that have been requested.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Start a system check run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/system/checks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start a system check run. The tests run in the background, and you can\npoll for status using the returned run ID.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Get the status of a system check run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/checks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the status of a system check run."
+        },
+        {
+          "info": {
+            "name": "Delete a system check run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/system/checks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a system check run and the associated results."
+        },
+        {
+          "info": {
+            "name": "Get the results of a system check run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/checks/:id/results",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the results of a system check run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

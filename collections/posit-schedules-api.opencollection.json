@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Schedules API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get schedule history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/schedule/history",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the schedule change history for a piece of content.\n\nReturns the current schedule (if any) and a list of historical changes\nincluding when schedules were created, updated, or deleted.\n\nSchedule data is returned in RFC 5545 (iCalendar) format.\n\nA maximum of 100 history entries are returned, ordered by change time\n(most recent first).\n\nThis action is permitted for content owners, users with collaborator\nor editor rights, and administrators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

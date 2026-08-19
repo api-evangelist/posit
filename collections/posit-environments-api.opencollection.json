@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Environments API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List execution environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/environments"
+          },
+          "docs": "List all execution environments available to Posit Connect.\n\nYou must have administrator or publisher privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Create execution environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/environments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new execution environment.\n\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Get execution environment details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/environments/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a specific execution environment.\n\nYou must have administrator or publisher privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Update an execution environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/environments/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a specific execution environment.\n\nYou must have administrator privileges to perform this action.\n\nEnvironments managed by a configuration file cannot be updated via the API."
+        },
+        {
+          "info": {
+            "name": "Delete an execution environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/environments/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific execution environment.\n\nYou must have administrator privileges to perform this action.\n\nEnvironments managed by a configuration file cannot be deleted via the API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

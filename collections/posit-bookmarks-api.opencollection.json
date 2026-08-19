@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Bookmarks API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bookmarks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get bookmark",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bookmark",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the bookmark for this content item for the requesting user.\nReturns a bookmark record if the user has bookmarked this content, and a 404 status otherwise.\nAuthenticated access is required. The user must have permission to view the content item."
+        },
+        {
+          "info": {
+            "name": "Create bookmark",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/bookmark",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a bookmark for this content item for the requesting user.\nA bookmark allows the user to save content for quick access later.\nEach user can only have one bookmark per content item.\nAuthenticated access is required. The user must have permission to view the content item."
+        },
+        {
+          "info": {
+            "name": "Delete bookmark",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/bookmark",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the bookmark for this content item for the requesting user.\nAuthenticated access is required. The user must have permission to view the content item."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

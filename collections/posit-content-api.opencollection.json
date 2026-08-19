@@ -1,0 +1,570 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Content API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The content name specified when the content was created.\nContent names are unique within the owning user's account, so a\nrequest that specifies a non-empty name and owner_guid will return\nat most one content item."
+              },
+              {
+                "name": "owner_guid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the user who owns the content."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated set of values indicating additional details to include in the response.\n\n* `tags`: Populates a `tags` field for each returned content item\ncontaining the tags associated with this content item.\n* `owner`: Populates an `owner` field for each returned content\nitem with basic details about the content owner.\n* `vanity_url`: Populates the `vanity_url` field for each returned\ncontent item if the content has an associated custom vanity URL.\n* `bookmarked`: Populates a `bookmarked` field for each returned\ncontent item indicating whether the requesting user has bookmarked\nthe content.\n* `schedule`: Populates a `schedules` field for each returned\ncontent item with the list of schedules associated with the\ncontent, including variant details and last run information.\n"
+              }
+            ]
+          },
+          "docs": "List all content items visible to the requesting user.\n\nAuthenticated access from a user is required. If an \"administrator\"\nrole is used, then all content items will be returned regardless of\nthe visibility to the requesting user.\n\nInformation about the target environment is populated for users with\n\"publisher\" and \"administrator\" role; it is suppressed for viewers."
+        },
+        {
+          "info": {
+            "name": "Create content item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new content item."
+        },
+        {
+          "info": {
+            "name": "Get content details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated set of values indicating additional details to include in the response.\n\n* `tags`: Populates a `tags` field for each returned content item\ncontaining the tags associated with this content item.\n* `owner`: Populates an `owner` field for each returned content\nitem with basic details about the content owner.\n* `vanity_url`: Populates the `vanity_url` field for each returned\ncontent item if the content has an associated custom vanity URL.\n* `bookmarked`: Populates a `bookmarked` field for each returned\ncontent item indicating whether the requesting user has bookmarked\nthe content.\n* `schedule`: Populates a `schedules` field for each returned\ncontent item with the list of schedules associated with the\ncontent, including variant details and last run information.\n"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a specific content item.\n\nUnauthenticated clients are rejected regardless of the content access\ntype.\n\nAuthorized, non-administrator clients without viewership rights to\nthis content are rejected.\n\nAuthorized, administrator clients without viewership rights are\npermitted to obtain information about this content. The computed\n`app_role` for these users will be `none`, representing that these\nusers cannot view the content itself.\n\nAuthorized clients with viewership ("
+        },
+        {
+          "info": {
+            "name": "Update content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/content/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields for a specific content item.\n\nAuthenticated access from a user having either \"publisher\" or\n\"administrator\" role is allowed. All other clients are rejected.\n\nAuthorized clients with collaborator or administrator rights are\npermitted to modify content item fields.\n\nAdministrators can reassign content ownership by updating\nthe `owner_guid` field. The new owner must have publisher or\nadministrator rights."
+        },
+        {
+          "info": {
+            "name": "Delete content",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific content item. On-disk data and database records are removed."
+        },
+        {
+          "info": {
+            "name": "Triggers a Public Access Content Verification test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/access-test",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Trigger a Public Access Content Verification test for this content item.\n\nChecks if a content item is available and reachable on the public\ninternet. If not, the result includes a message to help with\ntroubleshooting. The verification process is identical to the test\nConnect performs automatically for all Public Access Content, but the\nAPI can provide more details about verification failures or\nimmediately retest an item instead of waiting for the automatic\nverification to run.\n\nSee the [Admin G"
+        },
+        {
+          "info": {
+            "name": "Build deployment bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/build",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Build (restore) a deployment bundle.\n\nBuild requests spawn an asynchronous task to make your previously\nuploaded data ready for rendering or running. Content will have its\nenvironment reconstructed, e.g. by using the packrat R package to\ninstall R package dependencies, but documents will not be re-rendered.\n\nBuilding is intended to facilitate server changes or migrations that\nmay require re-installing R packages or other dependencies.\n\nBy default, the built bundle becomes the active bundle for t"
+        },
+        {
+          "info": {
+            "name": "Deploy deployment bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/deploy",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy (activate) a deployment bundle.\n\nDeployment requests spawn an asynchronous task to make your previously\nuploaded data available for serving. The workflow applied to the\nbundled files varies depending on the type of content.\n\nExecutable content has its environment reconstructed. This includes\nusing the packrat R package to install R package dependencies.\n\nDocuments (R Markdown reports, Jupyter Notebooks, static Quarto content)\nare rendered and the result made available.\n\nInteractive conten"
+        },
+        {
+          "info": {
+            "name": "Get environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/environment",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the names of the environment variables defined for this content."
+        },
+        {
+          "info": {
+            "name": "Set all environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/environment",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the environment for this content item. Any existing environment variables will be removed."
+        },
+        {
+          "info": {
+            "name": "Update environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/content/:guid/environment",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add, change, or delete environment variables for this content."
+        },
+        {
+          "info": {
+            "name": "Get Python lockfile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/lockfile",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Python lockfile (`requirements.txt.lock`) for a content item's\nactive bundle.\n\nThis endpoint returns the lockfile that describes the exact Python\npackages installed in Connect's managed Python environment for this\ncontent. The file can be used to recreate the same Python environment\nelsewhere.\n\nThe content must have a managed Python environment\n(`py_environment_management` enabled). Returns an error if the content\ndoes not use Python or does not have environment management enabled."
+        },
+        {
+          "info": {
+            "name": "List all OAuth integration associations for this content item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/oauth/integrations/associations",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all OAuth integration associations for this content item."
+        },
+        {
+          "info": {
+            "name": "Set all OAuth integration associations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/oauth/integrations/associations",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces any existing associations for a piece of content with the given list."
+        },
+        {
+          "info": {
+            "name": "Get package dependencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/packages",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the names and versions of all packages\ninstalled for this content. Returned packages are sorted\nby language and then by package name.\n\nIf the content is not yet deployed, an HTTP 204 No Content\nresponse is returned. If the content environment is being\nrebuilt, package information from before the rebuild\nwill be returned.\n\nNote that a content item may include packages that are not explicitly requested\nin the `manifest.json` or `requirements.txt` file used during deployment. These include\npack"
+        },
+        {
+          "info": {
+            "name": "Render content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/render",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Render a specific content item.\n\nRender requests spawn an asynchronous task to re-render static reports\n(R Markdown documents, Jupyter Notebooks, or Quarto documents). The\nrendered output becomes the active rendering for the variant.\n\nBy default, the default variant is rendered. You can render a specific\nvariant by providing its key in the request body.\n\nUsers with \"editor\" or higher role on the content can render any public\nvariant, and private variants they own. Users with \"viewer\" role can\non"
+        },
+        {
+          "info": {
+            "name": "Get Git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/repository",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Git repository location associated with this content."
+        },
+        {
+          "info": {
+            "name": "Set Git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/repository",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate a Git repository location with this content."
+        },
+        {
+          "info": {
+            "name": "Update Git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/content/:guid/repository",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the Git repository location associated with this content."
+        },
+        {
+          "info": {
+            "name": "Remove Git repository location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/repository",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove the Git repository location associated with this content."
+        },
+        {
+          "info": {
+            "name": "Set a content thumbnail",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/content/:guid/thumbnail",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Set a content thumbnail.\n\nAssociate a content item with an image that is used as its thumbnail\nin the Connect dashboard content listing and settings view.\n\n#### Requesting a thumbnail\n\nThe thumbnail is requested by appending a `__thumbnail__` path segment\nto the default content URL or a content vanity URL.\n\nFor example, the thumbnail for a content item having the GUID\n`25438b83-ea6d-4839-ae8e-53c52ac5f9ce` and the vanity URL\n`/daily-summary/` is served at the URLs:\n\n* `https://connect.company.co"
+        },
+        {
+          "info": {
+            "name": "Delete a content thumbnail",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/thumbnail",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the thumbnail associated with a content item."
+        },
+        {
+          "info": {
+            "name": "Search for content items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/search/content",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated set of values indicating additional details to include in the response.\n\n* `tags`: Populates a `tags` field for each returned content item\ncontaining the tags associated with this content item.\n* `owner`: Populates an `owner` field for each returned content\nitem with basic details about the content owner.\n* `vanity_url`: Populates the `vanity_url` field for each returned\ncontent item if the content has an associated custom vanity URL.\n* `bookmarked`: Populates a `bookmarked` field for each returned\ncontent item indicating whether the requesting user has bookmarked\nthe content.\n* `schedule`: Populates a `schedules` field for each returned\ncontent item with the list of schedules associated with the\ncontent, including variant details and last run information.\n"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort by."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order: asc or desc."
+              }
+            ]
+          },
+          "docs": "This endpoint searches for content items, using a search query format\nthat allows for both search terms and filters. The search terms are used\nto find content items that have matching terms in the title,\ndescription, etc, while the filters are used to filter the search\nresults by specific fields (such as `owner` or content `type`).\n\nAuthenticated access is required, and only content items visible to the\nrequesting user are returned. If an Administrator role is used,\nthen all content items are re"
+        },
+        {
+          "info": {
+            "name": "Search for variants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/search/variants",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort by."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order: asc or desc."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of additional information to include in the response.\n\n* `schedule`: Include schedule information for each variant, including\nthe schedule configuration and last run details."
+              }
+            ]
+          },
+          "docs": "This endpoint searches for variants (report outputs).\nVariants are created when reports are rendered. A parameterized report\nmay have multiple variants when it is rendered with different parameter\nvalues.\n\nAuthenticated access is required. Administrators can see public\nvariants, and their own private variants, for all content, while other\nusers can only see variants for content they own or have permissions to\naccess.\n\n#### Variant visibility\n\nIn addition to content-level permissions, variants ha"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

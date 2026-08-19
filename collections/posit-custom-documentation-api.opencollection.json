@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Custom Documentation API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Documentation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get custom documentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/documentation"
+          },
+          "docs": "Retrieve the custom documentation for your Posit Connect server, formatted using Markdown.\nReturns a 404 Not Found error if no custom documentation is configured."
+        },
+        {
+          "info": {
+            "name": "Set custom documentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/system/documentation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the custom documentation for your Posit Connect server, formatted using Markdown.\nThe maximum length for the provided documentation is 500000 characters.\nThis action is only available to administrators.\nReturns a 204 No Content response if the documentation was successfully set."
+        },
+        {
+          "info": {
+            "name": "Delete custom documentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/system/documentation"
+          },
+          "docs": "Delete the custom documentation for your Posit Connect server.\nThis action is only available to administrators.\nReturns a 204 No Content response if the documentation was successfully deleted.\nReturns a 404 Not Found error if no custom documentation is configured."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

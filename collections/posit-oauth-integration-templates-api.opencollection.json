@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys OAuth Integration Templates API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth Integration Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List OAuth templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/templates"
+          },
+          "docs": "List OAuth templates available to Posit Connect.\nYou must have administrator or publisher privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Get OAuth template details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/templates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get information about a specific OAuth template.\nYou must have administrator or publisher privileges to perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

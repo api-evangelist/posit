@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys OAuth Integrations API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List OAuth integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/integrations"
+          },
+          "docs": "List all OAuth integrations available to Posit Connect.\nYou must have administrator or publisher privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Create an OAuth integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/oauth/integrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new OAuth integration.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Exchange Connect credentials for OAuth credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/oauth/integrations/credentials",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "audience",
+                  "value": ""
+                },
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "requested_token_type",
+                  "value": ""
+                },
+                {
+                  "name": "subject_token",
+                  "value": ""
+                },
+                {
+                  "name": "subject_token_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This endpoint facilitates an [OAuth Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693) by\nexchanging a Connect-provided credential for OAuth credentials.\n\nThere are several types of OAuth token exchanges supported by this endpoint. It allows content\nowners to exchange the viewer's Connect credentials for the viewer's OAuth credentials, and it allows executing content\nto exchange its own Connect credentials for the OAuth credentials associated with a service account.\n\nThis endpoint ca"
+        },
+        {
+          "info": {
+            "name": "Get OAuth integration details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/integrations/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a specific OAuth integration.\nYou must have administrator or publisher privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Update an OAuth integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/__api__/v1/oauth/integrations/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a specific OAuth integration.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Delete an OAuth integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/oauth/integrations/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the OAuth integration associated with the provided guid.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "List all associations for this OAuth integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/oauth/integrations/:guid/associations",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all associations for this OAuth integration.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "Verify that an OAuth service account integration is configured correctly.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/oauth/integrations/:guid/verify",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint simulates a content session token exchange with the OAuth integration to\nverify that the integration is configured correctly. No access token is returned.\nVerification is only available for OAuth integrations with the \"Service Account\" authentication type.\nIf the integration is not a service account integration, a 400 status code will be returned.\nYou must have administrator privileges to perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

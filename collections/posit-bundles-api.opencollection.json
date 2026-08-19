@@ -1,0 +1,227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Bundles API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bundles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bundles",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query",
+                "description": "Whether results are in ascending order."
+              }
+            ]
+          },
+          "docs": "List bundles associated with a specific content item.\n\nBundle enumeration is permitted by all users with viewership rights to\nthe content item and administrators. Information about the target\nenvironment is populated for users with \"publisher\" and \"administrator\" role.\n\nResults are sorted by ID in descending order (newest first).\n\nThis endpoint supports `page_number` and `page_size` query\nparameters to limit the number of results returned."
+        },
+        {
+          "info": {
+            "name": "Create a bundle by uploading an archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/content/:guid/bundles",
+            "headers": [
+              {
+                "name": "X-Content-Checksum",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "URL of a gzip compressed tar archive."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "archive",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new deployment bundle by uploading an archive.\n\nUpload a compressed `tar` archive containing code/data that represent\none deployment of this content. Bundles must be `gzip` compressed\n`tar` archives.\n\n* All deployment bundles include a `manifest.json` describing the\ncontained files and their runtime dependencies.\n* A bundle for a Shiny application includes an `app.R` or `ui.R`\nand `server.R`, and any images or data files required by the\napplication.\n* Python API and application bundles "
+        },
+        {
+          "info": {
+            "name": "Get bundle details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bundles/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a specific bundle.\n\nBundle reads are permitted by all users with viewership rights to the\ncontent item and administrators. Information about the target environment\nis populated for users with \"publisher\" and \"administrator\" role."
+        },
+        {
+          "info": {
+            "name": "Delete bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/bundles/:id",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific bundle.\n\nBundle deletion is permitted by authorized clients with collaborator\nrights and administrators.\n\nOn-disk data and database records are removed as a consequence of this\ncall. Deletion is not allowed while the bundle is still active."
+        },
+        {
+          "info": {
+            "name": "Download the bundle archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bundles/:id/download",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download a deployment bundle.\n\nBundle download is permitted by authorized clients with collaborator\nrights.\n\nDownload a `gzip` compressed `tar` archive (`.tar.gz`) containing the\ncode/data from one deployment of the associated content.\n\nSee the [POST /v1/content/{guid}/bundles](#uploadContentBundle) endpoint for details about\nthe construction of bundle archives."
+        },
+        {
+          "info": {
+            "name": "List files in a bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bundles/:id/files",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a JSON object containing every file inside the\nbundle's gzipped tar archive. Symlinks, directories, and\nother special tar entries are not listed. Listing bundle\nfiles is permitted by authorized clients with\ncollaborator rights and administrators."
+        },
+        {
+          "info": {
+            "name": "Get the contents of a file in a bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/bundles/:id/files/*path",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the UTF-8 contents of one file inside a deployed\nbundle's gzipped tar archive. Binary files and files\nlarger than the inline-preview cap are reported with\nflags and a null content body. Reading bundle file\ncontent is permitted by authorized clients with\ncollaborator rights and administrators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

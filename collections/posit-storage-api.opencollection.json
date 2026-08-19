@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Storage API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content storage usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/storage",
+            "params": [
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The field to sort by."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order: asc or desc."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of content items with their bundle storage\naggregates. Useful for identifying which content items consume the\nmost storage.\n\nResults can be sorted by total bundle bytes, active bundle bytes,\ninactive bundle bytes, or bundle count.\n\nThis endpoint requires authentication and is only available to users\nwith the `administrator` role."
+        },
+        {
+          "info": {
+            "name": "Get content storage details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/storage",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed storage information for a specific content item,\nincluding per-bundle size data.\n\nThis endpoint requires authentication and is only available to users\nwith the `administrator` role."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

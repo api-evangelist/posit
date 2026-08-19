@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Instrumentation API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instrumentation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all content hits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/instrumentation/content/hits",
+            "params": [
+              {
+                "name": "content_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint returns content usage information for all content types, also known as hits, where hits\nare individual activity events such as content visits or requests to APIs hosted on Posit Connect.\n\nThis endpoint requires administrator or publisher access. Publishers can\nquery visits data for content they own or are a collaborator on.\n\n#### Filtering of results:\n\nThere are several ways the result set can be filtered by the server before\nbeing sent back within the API response. If multiple fil"
+        },
+        {
+          "info": {
+            "name": "Get content visits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/instrumentation/content/visits",
+            "params": [
+              {
+                "name": "content_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_data_version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_agent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint returns a portion of the visit (or \"hits\") information for all\ncontent types _other than Shiny applications_. The results returned include\npaging details that can be used to navigate the information this endpoint\nreturns.\n\nThe information returned is based on data collected by Posit Connect as\nusers visit content in the dashboard or make requests to applications or APIs\nhosted on Connect.\n\n#### Important notes\n\nIn the past there were issues with how visits were recorded that caused"
+        },
+        {
+          "info": {
+            "name": "Get Shiny app usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/instrumentation/shiny/usage",
+            "params": [
+              {
+                "name": "content_guid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_data_version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint returns a portion of the Shiny application usage information,\nas well as paging details that can be used to navigate that information.\n\nThe information returned is based on data collected by Posit Connect as\nusers visit Shiny applications.  Because of how visits are detected, end\ntimes will be slightly inflated by a reconnect timeout, generally around\n15 seconds.\n\n#### Important notes\n\nPrior to the release of this API, there was an issue with how visits were\nrecorded that caused ex"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

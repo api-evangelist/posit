@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Tasks API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get task details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current state of a task and any output lines past the\nrequested initial position (`first`).\n\nWhen `wait` is non-zero, will wait up to that number of seconds for\nthe task to complete before responding. The current state of the task\nis returned once the task completes or `wait` seconds elapse.\n\nIncrementally receive task output by using the `last` response field\nvalue as the `first` value in a subsequent query.\n\nUse `wait` and `first` together to incrementally fetch generated\noutput.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

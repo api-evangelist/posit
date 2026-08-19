@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys System Information API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List runtime caches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/caches/runtime"
+          },
+          "docs": "List all content runtime caches. These include packrat and Python\nenvironment caches.\nThis information is available only to administrators."
+        },
+        {
+          "info": {
+            "name": "Delete a runtime cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/system/caches/runtime",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a content runtime package cache by specifying language, version,\nand execution environment.\nThis action is only available to administrators."
+        },
+        {
+          "info": {
+            "name": "List Connect hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/hosts",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "false \"Return only active hosts\""
+              }
+            ]
+          },
+          "docs": "List registered hosts.\nThe default response includes hosts that are no longer active. Use the\n`active` parameter to return only active hosts. A host is considered\nactive if it has checked in in the last 60 seconds.\nYou must have administrator privileges to perform this action."
+        },
+        {
+          "info": {
+            "name": "List Kubernetes service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/offhost/service-accounts"
+          },
+          "docs": "Applicable to Connect instances configured for off-host execution.\nList the Kubernetes service accounts discovered when Connect started.\nThis action is available to publishers and administrators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Jobs API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the list of jobs for a given piece of content.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Get job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a job for a given piece of content by key.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Register job kill order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/__api__/v1/content/:guid/jobs/:key",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Request to register an order to kill a specific job.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Download job log file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key/download",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "query",
+                "description": "false \"The name of the file to retrieve\""
+              }
+            ]
+          },
+          "docs": "Download a content job log file.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Get job error",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key/error",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the primary error for a job (if one exists).\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Get job log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key/log",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "maxLogLines",
+                "value": "",
+                "type": "query",
+                "description": "false \"The maximum number of log lines to return\""
+              }
+            ]
+          },
+          "docs": "Get the log output for a given job.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Get job metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key/metrics",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get resource usage metrics collected for a specific job.\n\nReturns JSON data containing CPU, memory, and connection metrics sampled\nduring job execution. The metrics are only available when per-content\nmetrics collection is enabled for the content item.\n\nThis action is permitted for content owners, users with collaborator rights,\nand administrators."
+        },
+        {
+          "info": {
+            "name": "Tail job log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/content/:guid/jobs/:key/tail",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Actively tail the log output for a given job.\nThis action is permitted for content owners, users with collaborator rights, and administrators."
+        },
+        {
+          "info": {
+            "name": "Get aggregated job statistics for scheduled content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/experimental/jobs/summary",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "false \"Include only jobs with start_time at or after this timestamp (RFC3339)\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "false \"Include only jobs with start_time at or before this timestamp (RFC3339)\""
+              }
+            ]
+          },
+          "docs": "Get aggregated job statistics for scheduled content.\n\nReturns total counts of running, waiting, succeeded, and failed scheduled jobs, plus a\ntime-series histogram of job outcomes bucketed by time.\n\nThis endpoint includes **only scheduled jobs**. On-demand executions\n(ad-hoc deployments, manual runs) are excluded. This provides statistics\nspecifically for scheduled content execution.\n\n**Authorization:**\n\n- **Administrators** see statistics for all content system-wide\n- **Publishers** see statisti"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys System API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get server storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/system/storage"
+          },
+          "docs": "Returns aggregate bundle storage metrics for the Connect server.\n\nThis endpoint provides total, active, and inactive bundle byte counts\nalong with overall bundle and content item counts. It is useful for\ncapacity planning and understanding server-wide storage usage.\n\nThis endpoint requires authentication and is only available to users\nwith the `administrator` role."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

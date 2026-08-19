@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Users API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current user details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/user"
+          },
+          "docs": "Get detailed information on the requesting user."
+        },
+        {
+          "info": {
+            "name": "List or search for user details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/users",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a prefix string matched against username, first name, last name, provider key, and DN."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page."
+              },
+              {
+                "name": "asc_order",
+                "value": "",
+                "type": "query",
+                "description": "Whether results are in ascending order."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort results by field. Defaults to `first_name`. When `prefix` is specified and `sort` is not, results are ordered by search relevance score instead."
+              },
+              {
+                "name": "user_role",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user role. `|` represents logical OR."
+              },
+              {
+                "name": "account_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account status. `|` represents logical OR."
+              }
+            ]
+          },
+          "docs": "This endpoint lists local users. When called with a prefix\nparameter, it searches for local users matching the prefix.\n\nBy default, results are sorted by first name, then last name, then\nusername, then email. Use the `sort` parameter to sort by a\ndifferent field. When `prefix` is specified and `sort` is not,\nresults are ordered by relevance to the prefix. When both `prefix`\nand `sort` are specified, the `sort` field takes precedence. The\n`prefix` can also be an exact match for the user's DN (for"
+        },
+        {
+          "info": {
+            "name": "Create a user from caller-supplied details (SAML, password, PAM, proxied, OAuth2 except with Google)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates the given user.\n\n- This endpoint is used only for SAML, OAuth2 (non-Google), password, PAM, and proxied\n  authentication. All other authentication providers should\n  use the [PUT /v1/users](#createPullUser) endpoint.\n- Administrator access is required to create *other* users.\n\n#### Initial User Creation Workflow\n\nThis endpoint requires authentication to create *other* users,\nwhich means that you need an API key for access. How do you\nget an API key if there are no users in "
+        },
+        {
+          "info": {
+            "name": "Create a user using details from a remote authentication provider (LDAP, OAuth2 with Google)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates the given user on the Posit Connect server.\n\n- This endpoint is used only for LDAP and OAuth2 with Google\n  authentication. All other authentication providers should\n  use the [POST /v1/users](#createPushUser) endpoint.\n- Unlike the [POST /v1/users](#createPushUser) endpoint, publisher or administrator\n  access is required to access this endpoint.\n\n#### User Creation Workflow on LDAP and OAuth2 with Google\n\nThis endpoint requires authentication, which means that you need an"
+        },
+        {
+          "info": {
+            "name": "Search for user details from a remote provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/users/remote",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to support operations against users who\ndo not have a Posit Connect account, such as\n[creating LDAP and OAuth2 with Google users](#createPullUser).\nSee [GET /v1/users](#getUsers) for listing users.\n\nThis endpoint searches for users on Posit Connect and on\nyour LDAP or OAuth2 with Google system.\n\nResults are first sorted based on similarity to the `prefix`\nand then by first name, last name, username, and email.\n\n- This endpoint can be used only by LDAP or OAuth2 with Google\n"
+        },
+        {
+          "info": {
+            "name": "Get user details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/users/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information on a specific user.\n\nThe `email` field is not populated for non-admins when\n[`Server.HideEmailAddresses`](../admin/appendix/configuration/index.md#Server.HideEmailAddresses) is enabled. The `external_id` field is only\nvisible to administrators and to users viewing their own record."
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/__api__/v1/users/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates a given user and returns the updated\nuser properties. Note that it returns only the properties that\ncan be modified by this endpoint.\n\nIf the authentication provider allows it:\n\n- a user can change their own user properties.\n- another user's properties can be changed with administrator\n  access.\n- The configuration setting [`Authorization.UserInfoEditableBy`](../admin/appendix/configuration/index.md#Authorization.UserInfoEditableBy)\n  controls whether or not non-admins can "
+        },
+        {
+          "info": {
+            "name": "Lock a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/__api__/v1/users/:guid/lock",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint locks or unlocks a given user account.\n\n- Unlocking a user is prohibited if that additional user would\nviolate the user account limit specified by the Posit Connect product\nlicense.\n- Administrator access is required to access this endpoint.\n- Users are able to lock themselves."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

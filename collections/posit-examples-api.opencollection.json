@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Posit Connect API Reference API Keys Examples API",
+    "version": "1.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Examples",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List examples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/examples"
+          },
+          "docs": "List all examples.\n\n**This endpoint is deprecated.**"
+        },
+        {
+          "info": {
+            "name": "Get example thumbnail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/examples/:name/thumbnail",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download the thumbnail image for the named example.\n\n**This endpoint is deprecated.**"
+        },
+        {
+          "info": {
+            "name": "Download example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/__api__/v1/examples/:name/zip",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download a ZIP archive containing the named example.\n\n**This endpoint is deprecated.**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
