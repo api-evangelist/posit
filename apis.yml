@@ -47,6 +47,17 @@ tags:
 - R
 - Python
 - Publishing
+- Machine-Learning
+- Enterprise
+- Reproducibility
+tags_raw:
+- Company
+- Data Science
+- Analytics
+- Developer Tools
+- R
+- Python
+- Publishing
 - Machine Learning
 - Enterprise
 - Reproducibility
@@ -57,6 +68,8 @@ apis:
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -177,6 +190,8 @@ apis:
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -197,6 +212,8 @@ apis:
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -358,6 +375,8 @@ apis:
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -368,6 +387,8 @@ apis:
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
