@@ -11,6 +11,12 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: negotiated
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-09-20'
+  evidence: Download RStudio
+  free_edition: RStudio IDE
 published: false
 note: Tier feature comparison page with no numeric prices; directs users to contact sales. Named-user
   based pricing mentioned for Posit Team products but no amounts given.
