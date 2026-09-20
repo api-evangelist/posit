@@ -11,8 +11,19 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 9
 edges:
+- tag: OAuth Integrations
+  spec_file: posit-oauth-integrations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /v1/oauth/integrations/credentials exchangeCredentials 'Exchange Connect credentials
+    for OAuth credentials'; 'Verify that an OAuth service account integration is configured correctly.'
+  reason: Configures federated OAuth integrations and performs credential exchange/token issuance for
+    accessing external systems — identity federation and access management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Users
   spec_file: posit-users-api-openapi.yml
   capability_id: BC-620.20
@@ -33,6 +44,29 @@ edges:
     provider (LDAP)
   reason: Full lifecycle of user groups and memberships, including provisioning from remote authentication
     providers (LDAP/SAML/OAuth2) — directory and access administration, i.e. Identity & Access Management.
+- tag: OAuth Sessions
+  spec_file: posit-oauth-sessions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: GET /v1/oauth/sessions listOAuthSessions 'List OAuth sessions'; DELETE /v1/oauth/sessions/{guid}
+    'Delete an OAuth session'
+  reason: Listing and revoking OAuth sessions (stored refresh tokens per user/integration) is session
+    and access revocation administration within identity & access management.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Instrumentation
+  spec_file: posit-instrumentation-api-openapi.yml
+  capability_id: BC-4280.30
+  capability_id_l1: BC-4280
+  capability_name: Product Usage Analytics
+  confidence: 0.72
+  evidence: GET /v1/instrumentation/content/hits 'Get all content hits'; GET /v1/instrumentation/shiny/usage
+    'Get Shiny app usage'
+  reason: Exposes usage telemetry (hits, visits, app usage) for content deployed on the platform — product
+    usage analytics data. Reading it as observability/monitoring is possible but the events are user-visit
+    oriented, so usage analytics fits better.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: API Keys
   spec_file: posit-api-keys-api-openapi.yml
   capability_id: BC-4270.40
@@ -52,3 +86,26 @@ edges:
   evidence: POST /v1/content/{guid}/permissions  addContentPermission  Add or update permission
   reason: CRUD over access permissions granting users/groups rights to a content item — access management.
     Mapped to Identity & Access Management with moderate confidence since it is object-level ACL plumbing.
+- tag: Environments
+  spec_file: posit-environments-api-openapi.yml
+  capability_id: BC-4210.20
+  capability_id_l1: BC-4210
+  capability_name: Environment Management
+  confidence: 0.7
+  evidence: POST /v1/environments createEnvironment 'Create execution environment'; schemas Environment,
+    Installations, VolumeMount
+  reason: CRUD over execution environments (container images/installations) used to run published data-science
+    content — environment provisioning and stewardship. Closest fit is Environment Management, though
+    these are runtime execution environments rather than pre-production ones, hence moderate confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: OAuth Clients
+  spec_file: posit-oauth-clients-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /v1/oauth/clients listOAuthClients 'List registered OAuth clients'; schema OAuthClient,
+    TrustedPublisher
+  reason: Registration and lifecycle of OAuth clients that authenticate against the server — credential/identity
+    administration. Could also be read as developer credential management (BC-4270.40), hence 0.7.
+  recovered_from: sweep-20260829T005356Z-edges.json
