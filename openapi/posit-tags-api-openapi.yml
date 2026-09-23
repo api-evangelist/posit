@@ -1,15 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: support@posit.co
     name: Posit Connect Support
     url: https://support.posit.co/hc/en-us
-  description: "## Overview\n\nThe Posit Connect Server API can be used to perform certain\nuser actions remotely. You will need to install a tool or library\nthat can make HTTP requests. We recommend using one of our SDKs, which\nare designed to make it easier to interact with the API.\n\n- Python: [posit-sdk](https://github.com/posit-dev/posit-sdk-py/)\n- R: [connectapi](https://posit-dev.github.io/connectapi/)\n\nThe SDKs are designed to work with the following values set in environment\nvariables, though you may provide them directly to the SDK if you prefer:\n\n- `CONNECT_SERVER` - The URL of the Posit Connect server.\n- `CONNECT_API_KEY` - Your API key.\n\nPlease note that all API paths are relative to the base API URL\n(e.g., `https://connect.example.com/__api__`).\nUnless otherwise noted, all endpoints which accept a request body\nwill require the body to be in JSON format.\nSimilarly, all response bodies will be returned in JSON format.\n\n### Specifications {#download}\n\nThe Posit Connect Server API OpenAPI specification is available for\ndownload as either JSON or YAML. Both formats contain the same\ninformation, also presented on this page.\n\n* <a href=\"openapi.json\" title=\"OpenAPI (JSON)\" target=\"_blank\">OpenAPI (JSON)</a>\n* <a href=\"openapi.yaml\" title=\"OpenAPI (YAML)\" target=\"_blank\">OpenAPI (YAML)</a>\n\n### Versioning of the API {#versioning-policy}\n\nThe Posit Connect Server API uses a simple, single number versioning scheme as noted\nas the first part of each endpoint path.  This version number will only be incremented\nin the event that non-backward compatible changes are made to an existing endpoint.\nNote that this occurs on a per-endpoint basis; see the section on\n[deprecation](#deprecation) below for more information.\n\nChanges that are considered backward compatible are:\n\n* New fields in responses.\n* New non-required fields in requests.\n* New endpoint behavior which does not violate the current functional intent of the\n  endpoint.\n\nChanges that are considered non-backward compatible are:\n\n* Removal or rename of request or response fields.\n* A change of the type or format of one or more request or response fields.\n* Addition of new required request fields.\n* A substantial deviation from the current functional intent of the endpoint.\n\nThe points relating to functional intent are assumed to be extremely rare as more\noften such situations will result in a completely new endpoint, which makes the\nchange a backward compatible addition.\n\n#### Experimentation\n\nPosit Connect labels experimental endpoints in the API by including `/experimental`\nin the endpoint path immediately after the version indicator.  If an endpoint is noted\nas experimental, it should not be relied upon for any production work.  These are\nendpoints that Posit Connect is making available to our customers to solicit\nfeedback; they are subject to change without notice.  Such changes include anything\nfrom altered request/response shapes, to complete abandonment of the endpoint.\n\nThis public review of an experimental endpoint will last as long as necessary to either\nprove its viability or to determine that it's not really needed.  The time for this\nwill vary based on the intricacies of each endpoint.  When the endpoint is finalized,\nthe next release of Posit Connect will mark the experimental path as deprecated while\nadding the endpoint without the `/experimental` prefix. The path with the experimental\nprefix will be removed six months later.  The documentation for the endpoint will also\nnote, during that time, the original, experimental, path.\n\nAll experimental endpoints are clearly marked as such in this documentation.\n\n#### Deprecation and removal of old versions {#deprecation}\n\nIt is possible that Posit Connect may decide to deprecate an endpoint.  This will\nhappen if either the endpoint serves no useful purpose because its functionality is\nnow handled by a different endpoint or because there is a newer version of the endpoint\nthat should be used.\n\nIf a deprecated endpoint is called, the response to it will include an extra HTTP\nheader called, `X-Deprecated-Endpoint` and will have as a value the path of the\nendpoint that should be used instead.  If the functionality has no direct replacement,\nthe value will be set to `n/a`.\n\nDeprecated versions of an endpoint will be supported for 1 year from the release date\nof Posit Connect in which the endpoint was marked as deprecated.  At that time, the\nendpoint is subject to removal at the discretion of Posit Connect.  The life cycle\nof an endpoint will follow these steps.\n\n1. The `/v1/endpoint` is public and in use by Posit Connect customers.\n1. Posit Connect makes `/v2/experimental/endpoint` available for testing and feedback.\n   Customers should still use `/v1/endpoint` for production work.\n1. Posit Connect moves version 2 of the endpoint out of experimentation so, all within\n   the same release:\n    1. `/v1/endpoint` is marked as deprecated.\n    1. `/v2/experimental/endpoint` is marked as deprecated.\n    1. `/v2/endpoint` is made public.\n1. Six months later, `/v2/experimental/endpoint` is removed from the product.\n1. Twelve months later, `/v1/endpoint` is removed from the product.\n\nNote that it is possible that Posit Connect may produce a new version of an existing\nendpoint without making an experimental version of it first.  The same life cycle,\nwithout those parts, will still be followed.\n\n### Authentication {#authentication}\n\nAPI endpoints require you to identify yourself as a valid Posit Connect\nuser. You do this by specifying an API key when you make a call to the\nserver. The [API Keys](../user/api-keys/) chapter of the Posit Connect\nUser Guide explains how to create an API key.\n\n#### API Keys {#api-keys}\n\nAPI keys are managed by each user in the Posit Connect\ndashboard. If you ever lose an API key or otherwise feel it has\nbeen compromised, use the dashboard to revoke the key and create\nanother one.\n\n**WARNING**: Keep your API key safe.  If your Posit Connect server's URL does not begin\nwith `https`, your API key could be intercepted and used by a malicious actor.\n\nOnce you have an API key, you can authenticate by passing the key with a prefix\nof `\"Key \"` (the space is important) in the Authorization header.\n\nBelow are examples of invoking the \"Get R Information\" endpoint.\n\n##### cURL\n\n```bash\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     https://positconnect.example.com/__api__/v1/server_settings/r\n```\n\n##### R\n\n```r\nlibrary(httr)\napiKey <- \"XXXXXXXXXXX\"\nresult <- GET(\"https://positconnect.example.com/__api__/v1/server_settings/r\",\n  add_headers(Authorization = paste(\"Key\", apiKey)))\n```\n\n##### Python\n\n```python\nimport requests\nr = requests.get(\n  'https://positconnect.example.com/__api__/v1/server_settings/r',\n  headers = { 'Authorization': 'Key XXXXXXXXXXX' }\n)\n```\n\n### API CORS considerations {#api-cors-considerations}\n\nFor information about using Connect's API from web applications in different domains,\nsee the [Cross-Origin Resource Sharing (CORS)](../admin/security/index.md#cors) section in\nthe security documentation.\n\n### Request correlation {#request-correlation}\n\nPosit Connect assigns a correlation ID to every API request via the\n`X-Correlation-ID` HTTP header. Connect includes this identifier in the response\nheaders and in server-side log entries, making it possible to trace a specific\nrequest through the system.\n\nIf you include an `X-Correlation-ID` header in your request, Connect preserves that\nvalue. If you do not include the header, Connect generates a Universally Unique\nIdentifier (UUID) automatically. Either way, the same value is returned in the\nresponse header.\n\nThis header is useful for:\n\n- **Debugging failed requests**: provide the correlation ID to your administrator so\n  they can locate the corresponding server-side log entries.\n- **Correlating client-side and server-side activity**: set a known correlation ID in\n  your client and match it against server logs or OpenTelemetry traces.\n\n**Example**\n\n```bash\n# Let Connect generate a correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: <generated-uuid>\n\n# Provide your own correlation ID\ncurl -H \"Authorization: Key XXXXXXXXXXX\" \\\n     -H \"X-Correlation-ID: my-request-123\" -i \\\n     https://positconnect.example.com/__api__/v1/user\n# Response includes: X-Correlation-ID: my-request-123\n```\n\n### API error codes {#api-error-codes}\n\n{{< include src/api_codes.fragment.html >}}\n"
+  description: '## Overview
+
+
+    The Posit Connect Server API can be used to perform certain
+
+    user actions remotely.'
   license:
     name: Commercial. Copyright 2015-2026 Posit Software, PBC. All Rights Reserved.
     url: https://posit.co/about/eula/
   termsOfService: https://posit.co/about/eula/
-  title: Posit Connect API Reference API Keys Tags API
+  title: Posit Connect API Reference Tags API
   version: 1.0.1
 servers:
 - url: /__api__
@@ -536,22 +541,55 @@ paths:
       - Tags
 components:
   schemas:
-    ScheduleVariant:
+    APIError:
       additionalProperties: false
-      description: Variant information embedded in a schedule.
+      description: The error object returned by the API on failure.
       properties:
-        key:
-          description: The variant key.
-          example: default
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
           type: string
-        name:
-          description: The variant name.
-          example: Default Variant
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    ContentSchedule:
+      allOf:
+      - $ref: '#/components/schemas/Schedule'
+      - properties:
+          variant:
+            allOf:
+            - $ref: '#/components/schemas/ScheduleVariant'
+        type: object
+      description: Schedule information with variant details for a content item.
+    RRuleSet:
+      additionalProperties: false
+      description: RFC 5545 recurrence rule components for a schedule.
+      properties:
+        dtstart:
+          description: 'The DTSTART component specifying when the schedule begins,
+
+            including timezone information.'
+          example: DTSTART;TZID=America/New_York:20240115T090000
           type: string
-        is_default:
-          description: Whether this is the default variant.
-          example: true
-          type: boolean
+        rrules:
+          description: An array of RRULE components defining the recurrence pattern.
+          example:
+          - RRULE:FREQ=DAILY;INTERVAL=2
+          items:
+            type: string
+          type: array
+        until:
+          description: The UNTIL component specifying when the schedule ends, if applicable.
+          example: UNTIL=20240215T090000Z
+          type: string
       type: object
     Schedule:
       description: Base schedule information for a content item.
@@ -567,8 +605,9 @@ components:
         next_run:
           description: The next scheduled run time. Null if no future runs are scheduled.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email:
           description: Whether email notifications are enabled for this schedule.
           example: false
@@ -580,42 +619,79 @@ components:
         start_time:
           description: The start time of the schedule window.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         end_time:
           description: The end time of the schedule window. Null if the schedule runs indefinitely.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         last_run:
           allOf:
           - $ref: '#/components/schemas/ScheduleLastRun'
           description: Information about the last scheduled run.
-          nullable: true
       type: object
-    ContentOwner:
+    ContentTagInput:
       additionalProperties: false
-      description: Basic details about the owner of a content item.
+      description: The fields that must be specified when adding a tag to a content item.
       properties:
-        guid:
-          description: The owner's unique identifier.
-          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
-          format: uuid
+        tag_id:
+          description: The unique identifier for the tag.
+          example: '101'
           type: string
-        username:
-          description: The owner's username.
-          example: jondoe
-          nullable: true
+      type: object
+    TagInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating or updating a tag.
+      properties:
+        name:
+          description: 'The name of the tag. Tags under the same parent must have a unique
+
+            name and cannot be longer than 255 characters.'
+          example: financial-statements
+          type:
+          - string
+          - 'null'
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag will be a top-level tag.'
+          example: '101'
+          type:
+          - string
+          - 'null'
+      type: object
+    Tag:
+      additionalProperties: false
+      description: A tag used to organize content within Connect.
+      properties:
+        id:
+          description: The identifier for the tag.
+          example: '101'
           type: string
-        first_name:
-          description: The owner's first name.
-          example: Jon
-          nullable: true
+        name:
+          description: The name of the tag.
+          example: financial-statements
           type: string
-        last_name:
-          description: The owner's last name.
-          example: Doe
-          nullable: true
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag is a top-level tag.'
+          example: '102'
+          type:
+          - string
+          - 'null'
+        created_time:
+          description: The timestamp (RFC3339) indicating when the tag was created.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+        updated_time:
+          description: The timestamp (RFC3339) indicating when the tag was updated.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
           type: string
       type: object
     Content:
@@ -636,8 +712,9 @@ components:
         title:
           description: The title of this content.
           example: Quarterly Analysis of Team Velocity
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         description:
           description: A rich description of this content.
           example: This report calculates per-team statistics ...
@@ -683,8 +760,9 @@ components:
             that are executed on demand.'
           example: 3600
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         read_timeout:
           description: 'Maximum number of seconds allowed without data received from a
 
@@ -697,8 +775,9 @@ components:
             types that are executed on demand.'
           example: 3600
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         init_timeout:
           description: 'The maximum number of seconds allowed for an interactive application
 
@@ -711,8 +790,9 @@ components:
             Applies only to content types that are executed on demand.'
           example: 60
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         idle_timeout:
           description: 'The maximum number of seconds a worker process for an interactive
 
@@ -723,8 +803,9 @@ components:
             used. Applies only to content types that are executed on demand.'
           example: 5
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         max_processes:
           description: 'Specifies the total number of concurrent processes allowed for a
 
@@ -735,8 +816,9 @@ components:
             content types that are executed on demand.'
           example: 3
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         min_processes:
           description: 'Specifies the minimum number of concurrent processes allowed for a
 
@@ -747,8 +829,9 @@ components:
             content types that are executed on demand.'
           example: 0
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         max_conns_per_process:
           description: 'Specifies the maximum number of client connections allowed to an
 
@@ -761,8 +844,9 @@ components:
             content types that are executed on demand.'
           example: 20
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         load_factor:
           description: 'Controls how aggressively new processes are spawned. When `null`,
 
@@ -771,8 +855,9 @@ components:
             types that are executed on demand.'
           example: 0.5
           format: double
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         memory_request:
           description: 'The minimum amount of RAM this content needs when executing or
 
@@ -785,8 +870,9 @@ components:
             used.'
           example: 1073741824
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         memory_limit:
           description: 'The maximum amount of RAM this content will be allowed to consume
 
@@ -797,8 +883,9 @@ components:
             the default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
           example: 2147483648
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         cpu_request:
           description: 'The minimum amount of compute power this content needs when executing
 
@@ -817,8 +904,9 @@ components:
             used.'
           example: 1
           format: double
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         cpu_limit:
           description: 'The maximum amount of compute power this content will be allowed to
 
@@ -837,8 +925,9 @@ components:
             [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
           example: 1.5
           format: double
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         amd_gpu_limit:
           description: 'The number of AMD GPUs that will be
 
@@ -855,8 +944,9 @@ components:
             [`Scheduler.MaxAMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxAMDGPULimit).'
           example: 1
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         nvidia_gpu_limit:
           description: 'The number of NVIDIA GPUs that will be
 
@@ -873,8 +963,9 @@ components:
             [`Scheduler.MaxNvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxNvidiaGPULimit).'
           example: 1
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         service_account_name:
           description: 'The name of the Kubernetes service account that is used to run a particular
 
@@ -907,8 +998,9 @@ components:
 
             Only administrators can set or change this value.'
           example: rstudio-connect-content
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         default_image_name:
           description: 'The default image that will be used when none is defined by the
 
@@ -949,8 +1041,9 @@ components:
 
             are available for content execution.'
           example: rstudio/content-base:r4.1.3-py3.10.11-jammy
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         default_environment_guid:
           description: 'The default execution environment that will be used when none is defined by
 
@@ -1000,8 +1093,9 @@ components:
             are available for content execution.'
           example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created_time:
           description: The timestamp (RFC3339) indicating when this content was created.
           example: '2006-01-02T15:04:05-07:00'
@@ -1019,8 +1113,9 @@ components:
 
             assigned upon the successful deployment of that bundle.'
           example: '101'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         app_mode:
           description: 'The runtime model for this content. Has a value of `unknown` before
 
@@ -1155,8 +1250,9 @@ components:
             information.'
           example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         cluster_name:
           description: 'The location where this content runs. Content running on the same
 
@@ -1171,8 +1267,9 @@ components:
 
             rights to see this information.'
           example: Local
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         image_name:
           description: 'The name of the container image used to run this content in containerized
 
@@ -1187,8 +1284,9 @@ components:
 
             rights to see this information.'
           example: rstudio/content-base:r4.1.3-py3.10.11-jammy
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         r_version:
           description: 'The of R interpreter associated with this content. A `null` value
 
@@ -1200,8 +1298,9 @@ components:
 
             upon the successful deployment of a bundle.'
           example: 3.5.1
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         py_version:
           description: 'The version of Python associated with this content. A `null` value
 
@@ -1213,8 +1312,9 @@ components:
 
             assigned upon the successful deployment of a bundle.'
           example: 3.8.2
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         quarto_version:
           description: 'The version of Quarto associated with this content. A `null`
 
@@ -1226,8 +1326,9 @@ components:
 
             assigned upon the successful deployment of a bundle.'
           example: 0.2.22
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         node_version:
           description: 'The version of Node.js associated with this content. A `null`
 
@@ -1239,8 +1340,9 @@ components:
 
             assigned upon the successful deployment of a bundle.'
           example: 22.11.0
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         r_environment_management:
           description: 'Indicates whether or not Connect is managing an R environment and
 
@@ -1254,8 +1356,9 @@ components:
 
             upon the successful deployment of a bundle.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         default_r_environment_management:
           description: 'Indicates whether or not Connect should create and manage an R
 
@@ -1275,8 +1378,9 @@ components:
 
             [`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         py_environment_management:
           description: 'Indicates whether or not Connect is managing a Python environment
 
@@ -1290,8 +1394,9 @@ components:
 
             assigned upon the successful deployment of a bundle.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         default_py_environment_management:
           description: 'Indicates whether or not Connect should create and manage a Python
 
@@ -1311,8 +1416,9 @@ components:
 
             [`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         run_as:
           description: 'The UNIX user that executes this content. When `null`, the default
 
@@ -1328,8 +1434,9 @@ components:
 
             executing content.'
           example: rstudio-connect
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         run_as_current_user:
           description: 'Indicates that Connect should run processes for this content item
 
@@ -1374,8 +1481,9 @@ components:
 
             [GET /v1/content/{guid}/jobs/{key}/metrics](#getJobMetrics) endpoint.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         notify_on_share:
           description: 'Controls whether email notifications are sent by default
 
@@ -1388,8 +1496,9 @@ components:
 
             values override the server default.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         otel_enabled:
           description: 'Controls whether content telemetry (metrics, logs, traces) is collected
 
@@ -1444,16 +1553,18 @@ components:
 
             item. Included in responses when `include=bookmarked` is provided.'
           example: true
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         schedules:
           description: 'Schedules associated with this content item. Included in responses when
 
             `include=schedule` is provided.'
           items:
             $ref: '#/components/schemas/ContentSchedule'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         id:
           description: The internal numeric identifier of this content item.
           example: '314'
@@ -1466,15 +1577,15 @@ components:
             no tags.'
           items:
             $ref: '#/components/schemas/Tag'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         owner:
           allOf:
           - $ref: '#/components/schemas/ContentOwner'
           description: 'Basic details about the owner of this content item. Included in
 
             responses when `include=owner` is provided.'
-          nullable: true
         public_content_status:
           description: 'Validation status of public interactive content. When validation is
 
@@ -1488,75 +1599,26 @@ components:
 
             but public content is permitted, it will be "none".'
           example: unrestricted
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
-    Tag:
+    ScheduleVariant:
       additionalProperties: false
-      description: A tag used to organize content within Connect.
+      description: Variant information embedded in a schedule.
       properties:
-        id:
-          description: The identifier for the tag.
-          example: '101'
+        key:
+          description: The variant key.
+          example: default
           type: string
         name:
-          description: The name of the tag.
-          example: financial-statements
+          description: The variant name.
+          example: Default Variant
           type: string
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
-
-            the tag is a top-level tag.'
-          example: '102'
-          nullable: true
-          type: string
-        created_time:
-          description: The timestamp (RFC3339) indicating when the tag was created.
-          example: '2006-01-02T15:04:05Z'
-          format: date-time
-          type: string
-        updated_time:
-          description: The timestamp (RFC3339) indicating when the tag was updated.
-          example: '2006-01-02T15:04:05Z'
-          format: date-time
-          type: string
-      type: object
-    ContentSchedule:
-      allOf:
-      - $ref: '#/components/schemas/Schedule'
-      - properties:
-          variant:
-            allOf:
-            - $ref: '#/components/schemas/ScheduleVariant'
-            nullable: true
-        type: object
-      description: Schedule information with variant details for a content item.
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          nullable: true
-          type: object
-      required:
-      - code
-      - error
-      type: object
-    ContentTagInput:
-      additionalProperties: false
-      description: The fields that must be specified when adding a tag to a content item.
-      properties:
-        tag_id:
-          description: The unique identifier for the tag.
-          example: '101'
-          type: string
+        is_default:
+          description: Whether this is the default variant.
+          example: true
+          type: boolean
       type: object
     ScheduleLastRun:
       additionalProperties: false
@@ -1573,13 +1635,15 @@ components:
         scheduled_time:
           description: The scheduled time of the run.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         queued_time:
           description: The time the run was queued.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         start_time:
           description: The time the run started.
           format: date-time
@@ -1587,61 +1651,51 @@ components:
         end_time:
           description: The time the run ended. Null if still running.
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         run_duration_ms:
           description: The duration of the run in milliseconds. Null if still running.
           example: 5000
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         exit_code:
           description: The exit code of the job. Null if still running.
           example: 0
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       type: object
-    TagInput:
+    ContentOwner:
       additionalProperties: false
-      description: The fields that can be specified when creating or updating a tag.
+      description: Basic details about the owner of a content item.
       properties:
-        name:
-          description: 'The name of the tag. Tags under the same parent must have a unique
-
-            name and cannot be longer than 255 characters.'
-          example: financial-statements
-          nullable: true
+        guid:
+          description: The owner's unique identifier.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
           type: string
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
-
-            the tag will be a top-level tag.'
-          example: '101'
-          nullable: true
-          type: string
-      type: object
-    RRuleSet:
-      additionalProperties: false
-      description: RFC 5545 recurrence rule components for a schedule.
-      properties:
-        dtstart:
-          description: 'The DTSTART component specifying when the schedule begins,
-
-            including timezone information.'
-          example: DTSTART;TZID=America/New_York:20240115T090000
-          type: string
-        rrules:
-          description: An array of RRULE components defining the recurrence pattern.
-          example:
-          - RRULE:FREQ=DAILY;INTERVAL=2
-          items:
-            type: string
-          type: array
-        until:
-          description: The UNTIL component specifying when the schedule ends, if applicable.
-          example: UNTIL=20240215T090000Z
-          type: string
+        username:
+          description: The owner's username.
+          example: jondoe
+          type:
+          - string
+          - 'null'
+        first_name:
+          description: The owner's first name.
+          example: Jon
+          type:
+          - string
+          - 'null'
+        last_name:
+          description: The owner's last name.
+          example: Doe
+          type:
+          - string
+          - 'null'
       type: object
   securitySchemes:
     apiKey:
