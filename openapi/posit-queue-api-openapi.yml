@@ -147,6 +147,20 @@ paths:
       - Queue
 components:
   schemas:
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -166,31 +180,6 @@ components:
       - code
       - error
       type: object
-    OffsetPaging:
-      description: Offset-based pagination metadata.
-      properties:
-        current_page:
-          description: The current page of results
-          example: 1
-          format: int32
-          type: integer
-        total:
-          description: The number of items that match the given filters
-          example: 1
-          format: int32
-          type: integer
-      type: object
-    QueueResponse:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of items in the current page
-            items:
-              $ref: '#/components/schemas/QueueItem'
-            type: array
-        type: object
-      description: An object containing a paginated list of queue items.
     QueueItem:
       additionalProperties: false
       description: An item in the job queue.
@@ -223,6 +212,17 @@ components:
           format: date-time
           type: string
       type: object
+    QueueResponse:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of items in the current page
+            items:
+              $ref: '#/components/schemas/QueueItem'
+            type: array
+        type: object
+      description: An object containing a paginated list of queue items.
   securitySchemes:
     apiKey:
       description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.

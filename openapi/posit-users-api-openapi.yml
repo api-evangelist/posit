@@ -795,24 +795,81 @@ paths:
       - Users
 components:
   schemas:
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
+    User:
+      description: A user object.
       properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
+        email:
+          description: The user's email.
+          example: jon.doe@example.com
           type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
+        username:
+          description: The user's username.
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name.
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name.
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role.
+          enum:
+          - administrator
+          - publisher
+          - viewer
+          example: administrator
+          type: string
+        created_time:
+          description: 'The timestamp (RFC3339) indicating when the user was created in
+
+            the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        updated_time:
+          description: 'The timestamp (RFC3339) indicating when information about this
+
+            user was last updated in the Posit Connect server.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        active_time:
+          description: 'The timestamp (RFC3339) indicating approximately when the user
+
+            was last active. Highly active users only receive periodic updates.'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
           type:
-          - object
+          - string
           - 'null'
-      required:
-      - code
-      - error
+        confirmed:
+          description: 'When `false`, the created user must confirm their account through
+
+            an email. This feature is unique to password authentication.'
+          example: true
+          type: boolean
+        locked:
+          description: Whether or not the user is locked.
+          example: false
+          type: boolean
+        external_id:
+          description: 'The unique identifier for this user from the authentication
+
+            provider, when available.'
+          example: okta-12345-abcde
+          type: string
+        guid:
+          description: 'The user''s GUID, or unique identifier, in UUID
+
+            [RFC4122](https://www.rfc-editor.org/rfc/rfc4122)
+
+            format'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
       type: object
     RemoteSearchResults:
       allOf:
@@ -825,6 +882,16 @@ components:
             type: array
         type: object
       description: The remote user search results with paging information.
+    UserCreatePullInput:
+      additionalProperties: false
+      description: The fields that must be specified when creating a user from a remote authentication provider.
+      properties:
+        temp_ticket:
+          description: 'This value is for actions that require a `temp_ticket`, such
+
+            as adding an LDAP or OAuth2 with Google user to the Connect server.'
+          type: string
+      type: object
     OffsetPaging:
       description: Offset-based pagination metadata.
       properties:
@@ -927,80 +994,6 @@ components:
             as adding an LDAP or OAuth2 with Google user to the Connect server.'
           type: string
       type: object
-    LockUserInput:
-      additionalProperties: false
-      description: The fields that must be specified when locking or unlocking a user.
-      properties:
-        locked:
-          description: Whether or not the user should be locked.
-          example: true
-          type:
-          - boolean
-          - 'null'
-      type: object
-    EditableUser:
-      additionalProperties: false
-      description: The editable user properties.
-      properties:
-        email:
-          description: The user's email
-          example: jon.doe@example.com
-          type: string
-        username:
-          description: The user's username
-          example: jondoe
-          type: string
-        first_name:
-          description: The user's first name
-          example: Jon
-          type: string
-        last_name:
-          description: The user's last name
-          example: Doe
-          type: string
-        user_role:
-          description: The user's role
-          example: administrator
-          type: string
-        updated_time:
-          description: 'The timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format)
-
-            when the
-
-            user was last updated in the Posit Connect server'
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-      type: object
-    UserUpdateInput:
-      additionalProperties: false
-      description: The fields that can be specified when updating a user.
-      properties:
-        email:
-          description: The user's email.
-          example: jon.doe@example.com
-          type: string
-        username:
-          description: The user's username.
-          example: jondoe
-          type: string
-        first_name:
-          description: The user's first name.
-          example: Jon
-          type: string
-        last_name:
-          description: The user's last name.
-          example: Doe
-          type: string
-        user_role:
-          description: The user's role.
-          enum:
-          - administrator
-          - publisher
-          - viewer
-          example: administrator
-          type: string
-      type: object
     UserCreatePushInput:
       additionalProperties: false
       description: The fields that can be specified when creating a user from caller-supplied details.
@@ -1055,19 +1048,62 @@ components:
           example: okta-12345-abcde
           type: string
       type: object
-    Users:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The users list
-            items:
-              $ref: '#/components/schemas/User'
-            type: array
-        type: object
-      description: The users list with paging information.
-    User:
-      description: A user object.
+    EditableUser:
+      additionalProperties: false
+      description: The editable user properties.
+      properties:
+        email:
+          description: The user's email
+          example: jon.doe@example.com
+          type: string
+        username:
+          description: The user's username
+          example: jondoe
+          type: string
+        first_name:
+          description: The user's first name
+          example: Jon
+          type: string
+        last_name:
+          description: The user's last name
+          example: Doe
+          type: string
+        user_role:
+          description: The user's role
+          example: administrator
+          type: string
+        updated_time:
+          description: 'The timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format)
+
+            when the
+
+            user was last updated in the Posit Connect server'
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    UserUpdateInput:
+      additionalProperties: false
+      description: The fields that can be specified when updating a user.
       properties:
         email:
           description: The user's email.
@@ -1093,64 +1129,28 @@ components:
           - viewer
           example: administrator
           type: string
-        created_time:
-          description: 'The timestamp (RFC3339) indicating when the user was created in
-
-            the Posit Connect server.'
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-        updated_time:
-          description: 'The timestamp (RFC3339) indicating when information about this
-
-            user was last updated in the Posit Connect server.'
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-        active_time:
-          description: 'The timestamp (RFC3339) indicating approximately when the user
-
-            was last active. Highly active users only receive periodic updates.'
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        confirmed:
-          description: 'When `false`, the created user must confirm their account through
-
-            an email. This feature is unique to password authentication.'
-          example: true
-          type: boolean
-        locked:
-          description: Whether or not the user is locked.
-          example: false
-          type: boolean
-        external_id:
-          description: 'The unique identifier for this user from the authentication
-
-            provider, when available.'
-          example: okta-12345-abcde
-          type: string
-        guid:
-          description: 'The user''s GUID, or unique identifier, in UUID
-
-            [RFC4122](https://www.rfc-editor.org/rfc/rfc4122)
-
-            format'
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          format: uuid
-          type: string
       type: object
-    UserCreatePullInput:
+    Users:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The users list
+            items:
+              $ref: '#/components/schemas/User'
+            type: array
+        type: object
+      description: The users list with paging information.
+    LockUserInput:
       additionalProperties: false
-      description: The fields that must be specified when creating a user from a remote authentication provider.
+      description: The fields that must be specified when locking or unlocking a user.
       properties:
-        temp_ticket:
-          description: 'This value is for actions that require a `temp_ticket`, such
-
-            as adding an LDAP or OAuth2 with Google user to the Connect server.'
-          type: string
+        locked:
+          description: Whether or not the user should be locked.
+          example: true
+          type:
+          - boolean
+          - 'null'
       type: object
   securitySchemes:
     apiKey:

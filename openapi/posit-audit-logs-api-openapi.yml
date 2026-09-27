@@ -336,49 +336,6 @@ paths:
       - Audit Logs
 components:
   schemas:
-    PagingLinks:
-      description: Navigation links for keyset pagination.
-      properties:
-        first:
-          description: A full URL of the first page of results. Null if the current response is the first page.
-          type:
-          - string
-          - 'null'
-        previous:
-          description: A full URL of the previous page of results. Null if the current response is the first page.
-          type:
-          - string
-          - 'null'
-        next:
-          description: A full URL of the next page of results. Null if the current response is the last page.
-          type:
-          - string
-          - 'null'
-        last:
-          description: A full URL of the last page of results. Null if the current response is the last page.
-          type:
-          - string
-          - 'null'
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
     AuditLogs:
       additionalProperties: false
       description: Audit log results with keyset pagination.
@@ -430,60 +387,6 @@ components:
           example: Created a new user account.
           type: string
       type: object
-    AuditLogSearchResults:
-      additionalProperties: false
-      description: Audit log search results with total count.
-      properties:
-        total:
-          description: The total number of matching audit log entries.
-          example: 100
-          type: integer
-        results:
-          description: The matching audit log entries for this page.
-          items:
-            $ref: '#/components/schemas/AuditLogEntry'
-          type: array
-      type: object
-    AuditActionResult:
-      additionalProperties: false
-      description: An audit action available on your Posit Connect server.
-      properties:
-        action:
-          description: The name of the action.
-          example: create_user
-          type: string
-        description:
-          description: A human-readable description of the action.
-          example: Create a new user.
-          type: string
-      type: object
-    PagingCursors:
-      additionalProperties: false
-      description: Cursor values for keyset pagination.
-      properties:
-        previous:
-          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
-          example: '23948901087'
-          type:
-          - string
-          - 'null'
-        next:
-          description: A cursor ID that can be used with the next query parameter to get the next page of results.
-          example: '23948901087'
-          type:
-          - string
-          - 'null'
-      type: object
-    KeysetPaging:
-      allOf:
-      - $ref: '#/components/schemas/PagingLinks'
-      - properties:
-          cursors:
-            allOf:
-            - $ref: '#/components/schemas/PagingCursors'
-            description: Cursor values for navigating between pages.
-        type: object
-      description: Keyset-based pagination metadata with cursors and navigation links.
     AuditLog:
       additionalProperties: false
       description: An audit log entry.
@@ -517,6 +420,103 @@ components:
           description: A human-readable description of the action.
           example: Added user Full Name (username)
           type: string
+      type: object
+    PagingCursors:
+      additionalProperties: false
+      description: Cursor values for keyset pagination.
+      properties:
+        previous:
+          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
+          example: '23948901087'
+          type:
+          - string
+          - 'null'
+        next:
+          description: A cursor ID that can be used with the next query parameter to get the next page of results.
+          example: '23948901087'
+          type:
+          - string
+          - 'null'
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    AuditActionResult:
+      additionalProperties: false
+      description: An audit action available on your Posit Connect server.
+      properties:
+        action:
+          description: The name of the action.
+          example: create_user
+          type: string
+        description:
+          description: A human-readable description of the action.
+          example: Create a new user.
+          type: string
+      type: object
+    KeysetPaging:
+      allOf:
+      - $ref: '#/components/schemas/PagingLinks'
+      - properties:
+          cursors:
+            allOf:
+            - $ref: '#/components/schemas/PagingCursors'
+            description: Cursor values for navigating between pages.
+        type: object
+      description: Keyset-based pagination metadata with cursors and navigation links.
+    PagingLinks:
+      description: Navigation links for keyset pagination.
+      properties:
+        first:
+          description: A full URL of the first page of results. Null if the current response is the first page.
+          type:
+          - string
+          - 'null'
+        previous:
+          description: A full URL of the previous page of results. Null if the current response is the first page.
+          type:
+          - string
+          - 'null'
+        next:
+          description: A full URL of the next page of results. Null if the current response is the last page.
+          type:
+          - string
+          - 'null'
+        last:
+          description: A full URL of the last page of results. Null if the current response is the last page.
+          type:
+          - string
+          - 'null'
+      type: object
+    AuditLogSearchResults:
+      additionalProperties: false
+      description: Audit log search results with total count.
+      properties:
+        total:
+          description: The total number of matching audit log entries.
+          example: 100
+          type: integer
+        results:
+          description: The matching audit log entries for this page.
+          items:
+            $ref: '#/components/schemas/AuditLogEntry'
+          type: array
       type: object
   securitySchemes:
     apiKey:

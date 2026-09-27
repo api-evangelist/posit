@@ -312,25 +312,6 @@ paths:
       - Content Permissions
 components:
   schemas:
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
     PermissionInput:
       additionalProperties: false
       description: The fields that can be specified when creating or updating a content permission item.
@@ -360,6 +341,25 @@ components:
             (`PUT`). Defaults to `false` when not provided.'
           example: false
           type: boolean
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
       type: object
     Permission:
       additionalProperties: false

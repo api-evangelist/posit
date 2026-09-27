@@ -491,26 +491,111 @@ paths:
       - Instrumentation
 components:
   schemas:
-    PagingLinks:
-      description: Navigation links for keyset pagination.
+    ShinyAppUsageEntry:
+      additionalProperties: false
+      description: A Shiny application usage record.
       properties:
-        first:
-          description: A full URL of the first page of results. Null if the current response is the first page.
+        content_guid:
+          description: The GUID of the Shiny application this usage record pertains to.
+          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
+          format: uuid
+          type: string
+        user_guid:
+          description: The GUID of the user that visited the application. May be null if the user cannot be determined.
+          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
+          format: uuid
           type:
           - string
           - 'null'
+        started:
+          description: The timestamp (RFC3339) when the user opened the application.
+          example: '2018-09-15T18:00:00-05:00'
+          format: date-time
+          type: string
+        ended:
+          description: The timestamp (RFC3339) when the user left the application.
+          example: '2018-09-15T18:01:00-05:00'
+          format: date-time
+          type:
+          - string
+          - 'null'
+        data_version:
+          description: The data version the record was recorded with.
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    ContentVisitLogs:
+      additionalProperties: false
+      description: Content visit results with keyset pagination.
+      properties:
+        results:
+          description: The content visit logs.
+          items:
+            $ref: '#/components/schemas/ContentVisitEntry'
+          type: array
+        paging:
+          allOf:
+          - $ref: '#/components/schemas/KeysetPaging'
+          description: Paging information for navigating result sets.
+      type: object
+    ContentHitEntry:
+      additionalProperties: false
+      description: A content hit activity record.
+      properties:
+        id:
+          description: The ID of the activity record.
+          example: '33'
+          type: string
+        user_guid:
+          description: The GUID of the user that visited the content. May be null when the content does not require a user session.
+          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
+          format: uuid
+          type:
+          - string
+          - 'null'
+        content_guid:
+          description: The GUID of the content this activity pertains to.
+          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
+          format: uuid
+          type: string
+        timestamp:
+          description: The timestamp (RFC3339) when the user visited the content.
+          example: '2018-09-15T18:00:00-05:00'
+          format: date-time
+          type: string
+        data:
+          allOf:
+          - $ref: '#/components/schemas/ContentHitData'
+          description: Additional data about the content hit.
+      type: object
+    ShinyAppUsageLogs:
+      additionalProperties: false
+      description: Shiny application usage results with keyset pagination.
+      properties:
+        results:
+          description: The Shiny application usage logs.
+          items:
+            $ref: '#/components/schemas/ShinyAppUsageEntry'
+          type: array
+        paging:
+          allOf:
+          - $ref: '#/components/schemas/KeysetPaging'
+          description: Paging information for navigating result sets.
+      type: object
+    PagingCursors:
+      additionalProperties: false
+      description: Cursor values for keyset pagination.
+      properties:
         previous:
-          description: A full URL of the previous page of results. Null if the current response is the first page.
+          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
+          example: '23948901087'
           type:
           - string
           - 'null'
         next:
-          description: A full URL of the next page of results. Null if the current response is the last page.
-          type:
-          - string
-          - 'null'
-        last:
-          description: A full URL of the last page of results. Null if the current response is the last page.
+          description: A cursor ID that can be used with the next query parameter to get the next page of results.
+          example: '23948901087'
           type:
           - string
           - 'null'
@@ -572,36 +657,6 @@ components:
           - string
           - 'null'
       type: object
-    ContentHitEntry:
-      additionalProperties: false
-      description: A content hit activity record.
-      properties:
-        id:
-          description: The ID of the activity record.
-          example: '33'
-          type: string
-        user_guid:
-          description: The GUID of the user that visited the content. May be null when the content does not require a user session.
-          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
-          format: uuid
-          type:
-          - string
-          - 'null'
-        content_guid:
-          description: The GUID of the content this activity pertains to.
-          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
-          format: uuid
-          type: string
-        timestamp:
-          description: The timestamp (RFC3339) when the user visited the content.
-          example: '2018-09-15T18:00:00-05:00'
-          format: date-time
-          type: string
-        data:
-          allOf:
-          - $ref: '#/components/schemas/ContentHitData'
-          description: Additional data about the content hit.
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -621,57 +676,6 @@ components:
       - code
       - error
       type: object
-    PagingCursors:
-      additionalProperties: false
-      description: Cursor values for keyset pagination.
-      properties:
-        previous:
-          description: A cursor ID that can be used with the previous query parameter to get the previous page of results.
-          example: '23948901087'
-          type:
-          - string
-          - 'null'
-        next:
-          description: A cursor ID that can be used with the next query parameter to get the next page of results.
-          example: '23948901087'
-          type:
-          - string
-          - 'null'
-      type: object
-    ShinyAppUsageEntry:
-      additionalProperties: false
-      description: A Shiny application usage record.
-      properties:
-        content_guid:
-          description: The GUID of the Shiny application this usage record pertains to.
-          example: bd1d2285-6c80-49af-8a83-a200effe3cb3
-          format: uuid
-          type: string
-        user_guid:
-          description: The GUID of the user that visited the application. May be null if the user cannot be determined.
-          example: 08e3a41d-1f8e-47f2-8855-f05ea3b0d4b2
-          format: uuid
-          type:
-          - string
-          - 'null'
-        started:
-          description: The timestamp (RFC3339) when the user opened the application.
-          example: '2018-09-15T18:00:00-05:00'
-          format: date-time
-          type: string
-        ended:
-          description: The timestamp (RFC3339) when the user left the application.
-          example: '2018-09-15T18:01:00-05:00'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        data_version:
-          description: The data version the record was recorded with.
-          example: 1
-          format: int32
-          type: integer
-      type: object
     KeysetPaging:
       allOf:
       - $ref: '#/components/schemas/PagingLinks'
@@ -682,34 +686,6 @@ components:
             description: Cursor values for navigating between pages.
         type: object
       description: Keyset-based pagination metadata with cursors and navigation links.
-    ContentVisitLogs:
-      additionalProperties: false
-      description: Content visit results with keyset pagination.
-      properties:
-        results:
-          description: The content visit logs.
-          items:
-            $ref: '#/components/schemas/ContentVisitEntry'
-          type: array
-        paging:
-          allOf:
-          - $ref: '#/components/schemas/KeysetPaging'
-          description: Paging information for navigating result sets.
-      type: object
-    ShinyAppUsageLogs:
-      additionalProperties: false
-      description: Shiny application usage results with keyset pagination.
-      properties:
-        results:
-          description: The Shiny application usage logs.
-          items:
-            $ref: '#/components/schemas/ShinyAppUsageEntry'
-          type: array
-        paging:
-          allOf:
-          - $ref: '#/components/schemas/KeysetPaging'
-          description: Paging information for navigating result sets.
-      type: object
     ContentHitData:
       additionalProperties: false
       description: Additional data about a content hit.
@@ -739,6 +715,30 @@ components:
           - 'null'
         sec_fetch_site:
           description: 'The value of the Sec-Fetch-Site HTTP header. Common values: same-origin, same-site, cross-site, none.'
+          type:
+          - string
+          - 'null'
+      type: object
+    PagingLinks:
+      description: Navigation links for keyset pagination.
+      properties:
+        first:
+          description: A full URL of the first page of results. Null if the current response is the first page.
+          type:
+          - string
+          - 'null'
+        previous:
+          description: A full URL of the previous page of results. Null if the current response is the first page.
+          type:
+          - string
+          - 'null'
+        next:
+          description: A full URL of the next page of results. Null if the current response is the last page.
+          type:
+          - string
+          - 'null'
+        last:
+          description: A full URL of the last page of results. Null if the current response is the last page.
           type:
           - string
           - 'null'

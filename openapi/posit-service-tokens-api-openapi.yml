@@ -195,48 +195,6 @@ paths:
       - Service Tokens
 components:
   schemas:
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    ServiceTokenScopes:
-      additionalProperties: false
-      description: An object containing the available scopes for service tokens.
-      properties:
-        scopes:
-          description: The available scopes.
-          items:
-            $ref: '#/components/schemas/ServiceTokenScope'
-          type: array
-      type: object
-    ServiceTokenScope:
-      additionalProperties: false
-      description: A scope you can assign to a service token.
-      properties:
-        name:
-          description: The scope identifier.
-          example: nameservice:read
-          type: string
-        description:
-          description: A human-readable description of what this scope grants.
-          example: Access NSS user and group data
-          type: string
-      type: object
     ServiceTokenCreateInput:
       additionalProperties: false
       description: The input object for creating a service token.
@@ -273,6 +231,19 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    ServiceTokenScope:
+      additionalProperties: false
+      description: A scope you can assign to a service token.
+      properties:
+        name:
+          description: The scope identifier.
+          example: nameservice:read
+          type: string
+        description:
+          description: A human-readable description of what this scope grants.
+          example: Access NSS user and group data
+          type: string
       type: object
     ServiceToken:
       additionalProperties: false
@@ -333,6 +304,35 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    ServiceTokenScopes:
+      additionalProperties: false
+      description: An object containing the available scopes for service tokens.
+      properties:
+        scopes:
+          description: The available scopes.
+          items:
+            $ref: '#/components/schemas/ServiceTokenScope'
+          type: array
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
       type: object
   securitySchemes:
     apiKey:

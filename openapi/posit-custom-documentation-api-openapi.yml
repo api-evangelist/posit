@@ -143,7 +143,7 @@ paths:
       - Custom Documentation
 components:
   schemas:
-    CustomDocumentationResult:
+    CustomDocumentationInput:
       additionalProperties: false
       description: The custom documentation for the Posit Connect server.
       properties:
@@ -174,7 +174,7 @@ components:
       - code
       - error
       type: object
-    CustomDocumentationInput:
+    CustomDocumentationResult:
       additionalProperties: false
       description: The custom documentation for the Posit Connect server.
       properties:

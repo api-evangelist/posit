@@ -61,7 +61,7 @@ tags:
 - R
 - Python
 - Publishing
-- Machine-Learning
+- Machine Learning
 - Enterprise
 - Reproducibility
 tags_raw:
@@ -75,6 +75,7 @@ tags_raw:
 - Machine Learning
 - Enterprise
 - Reproducibility
+- Machine-Learning
 apis:
 - aid: posit:posit-api-keys-api
   name: Posit API Keys API

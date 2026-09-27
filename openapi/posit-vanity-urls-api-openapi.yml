@@ -313,25 +313,6 @@ paths:
       - Vanity URLs
 components:
   schemas:
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
     Vanity:
       additionalProperties: false
       description: The fields that are returned when getting or listing vanity URLs.
@@ -354,6 +335,25 @@ components:
           example: '2006-01-02T15:04:05-07:00'
           format: date-time
           type: string
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
       type: object
     VanityInput:
       additionalProperties: false

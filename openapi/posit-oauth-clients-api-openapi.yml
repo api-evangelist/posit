@@ -169,39 +169,6 @@ paths:
       - OAuth Clients
 components:
   schemas:
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    OffsetPaging:
-      description: Offset-based pagination metadata.
-      properties:
-        current_page:
-          description: The current page of results
-          example: 1
-          format: int32
-          type: integer
-        total:
-          description: The number of items that match the given filters
-          example: 1
-          format: int32
-          type: integer
-      type: object
     OAuthClient:
       additionalProperties: false
       description: OAuthClient represents a registered OAuth client in Posit Connect.
@@ -233,6 +200,20 @@ components:
           - string
           - 'null'
       type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
     OAuthClients:
       allOf:
       - $ref: '#/components/schemas/OffsetPaging'
@@ -243,6 +224,25 @@ components:
             type: array
         type: object
       description: A paginated list of OAuth clients.
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
     TrustedPublisher:
       description: 'A binding that allows a service principal (a machine identity such as a
 

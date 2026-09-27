@@ -541,54 +541,35 @@ paths:
       - Tags
 components:
   schemas:
-    APIError:
+    Tag:
       additionalProperties: false
-      description: The error object returned by the API on failure.
+      description: A tag used to organize content within Connect.
       properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
+        id:
+          description: The identifier for the tag.
+          example: '101'
           type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    ContentSchedule:
-      allOf:
-      - $ref: '#/components/schemas/Schedule'
-      - properties:
-          variant:
-            allOf:
-            - $ref: '#/components/schemas/ScheduleVariant'
-        type: object
-      description: Schedule information with variant details for a content item.
-    RRuleSet:
-      additionalProperties: false
-      description: RFC 5545 recurrence rule components for a schedule.
-      properties:
-        dtstart:
-          description: 'The DTSTART component specifying when the schedule begins,
+        name:
+          description: The name of the tag.
+          example: financial-statements
+          type: string
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
 
-            including timezone information.'
-          example: DTSTART;TZID=America/New_York:20240115T090000
+            the tag is a top-level tag.'
+          example: '102'
+          type:
+          - string
+          - 'null'
+        created_time:
+          description: The timestamp (RFC3339) indicating when the tag was created.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
           type: string
-        rrules:
-          description: An array of RRULE components defining the recurrence pattern.
-          example:
-          - RRULE:FREQ=DAILY;INTERVAL=2
-          items:
-            type: string
-          type: array
-        until:
-          description: The UNTIL component specifying when the schedule ends, if applicable.
-          example: UNTIL=20240215T090000Z
+        updated_time:
+          description: The timestamp (RFC3339) indicating when the tag was updated.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
           type: string
       type: object
     Schedule:
@@ -633,66 +614,54 @@ components:
           - $ref: '#/components/schemas/ScheduleLastRun'
           description: Information about the last scheduled run.
       type: object
-    ContentTagInput:
+    ScheduleLastRun:
       additionalProperties: false
-      description: The fields that must be specified when adding a tag to a content item.
+      description: Information about the last scheduled run.
       properties:
-        tag_id:
-          description: The unique identifier for the tag.
-          example: '101'
+        job_key:
+          description: The unique key of the job.
+          example: abc123xyz
           type: string
-      type: object
-    TagInput:
-      additionalProperties: false
-      description: The fields that can be specified when creating or updating a tag.
-      properties:
-        name:
-          description: 'The name of the tag. Tags under the same parent must have a unique
-
-            name and cannot be longer than 255 characters.'
-          example: financial-statements
+        status:
+          description: The status of the last run.
+          example: success
+          type: string
+        scheduled_time:
+          description: The scheduled time of the run.
+          format: date-time
           type:
           - string
           - 'null'
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
-
-            the tag will be a top-level tag.'
-          example: '101'
+        queued_time:
+          description: The time the run was queued.
+          format: date-time
           type:
           - string
           - 'null'
-      type: object
-    Tag:
-      additionalProperties: false
-      description: A tag used to organize content within Connect.
-      properties:
-        id:
-          description: The identifier for the tag.
-          example: '101'
-          type: string
-        name:
-          description: The name of the tag.
-          example: financial-statements
-          type: string
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
-
-            the tag is a top-level tag.'
-          example: '102'
-          type:
-          - string
-          - 'null'
-        created_time:
-          description: The timestamp (RFC3339) indicating when the tag was created.
-          example: '2006-01-02T15:04:05Z'
+        start_time:
+          description: The time the run started.
           format: date-time
           type: string
-        updated_time:
-          description: The timestamp (RFC3339) indicating when the tag was updated.
-          example: '2006-01-02T15:04:05Z'
+        end_time:
+          description: The time the run ended. Null if still running.
           format: date-time
-          type: string
+          type:
+          - string
+          - 'null'
+        run_duration_ms:
+          description: The duration of the run in milliseconds. Null if still running.
+          example: 5000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        exit_code:
+          description: The exit code of the job. Null if still running.
+          example: 0
+          format: int64
+          type:
+          - integer
+          - 'null'
       type: object
     Content:
       additionalProperties: false
@@ -1603,71 +1572,85 @@ components:
           - string
           - 'null'
       type: object
-    ScheduleVariant:
+    ContentTagInput:
       additionalProperties: false
-      description: Variant information embedded in a schedule.
+      description: The fields that must be specified when adding a tag to a content item.
       properties:
-        key:
-          description: The variant key.
-          example: default
+        tag_id:
+          description: The unique identifier for the tag.
+          example: '101'
           type: string
-        name:
-          description: The variant name.
-          example: Default Variant
-          type: string
-        is_default:
-          description: Whether this is the default variant.
-          example: true
-          type: boolean
       type: object
-    ScheduleLastRun:
+    TagInput:
       additionalProperties: false
-      description: Information about the last scheduled run.
+      description: The fields that can be specified when creating or updating a tag.
       properties:
-        job_key:
-          description: The unique key of the job.
-          example: abc123xyz
-          type: string
-        status:
-          description: The status of the last run.
-          example: success
-          type: string
-        scheduled_time:
-          description: The scheduled time of the run.
-          format: date-time
+        name:
+          description: 'The name of the tag. Tags under the same parent must have a unique
+
+            name and cannot be longer than 255 characters.'
+          example: financial-statements
           type:
           - string
           - 'null'
-        queued_time:
-          description: The time the run was queued.
-          format: date-time
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag will be a top-level tag.'
+          example: '101'
           type:
           - string
           - 'null'
-        start_time:
-          description: The time the run started.
-          format: date-time
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
           type: string
-        end_time:
-          description: The time the run ended. Null if still running.
-          format: date-time
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
           type:
-          - string
+          - object
           - 'null'
-        run_duration_ms:
-          description: The duration of the run in milliseconds. Null if still running.
-          example: 5000
-          format: int64
-          type:
-          - integer
-          - 'null'
-        exit_code:
-          description: The exit code of the job. Null if still running.
-          example: 0
-          format: int64
-          type:
-          - integer
-          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    ContentSchedule:
+      allOf:
+      - $ref: '#/components/schemas/Schedule'
+      - properties:
+          variant:
+            allOf:
+            - $ref: '#/components/schemas/ScheduleVariant'
+        type: object
+      description: Schedule information with variant details for a content item.
+    RRuleSet:
+      additionalProperties: false
+      description: RFC 5545 recurrence rule components for a schedule.
+      properties:
+        dtstart:
+          description: 'The DTSTART component specifying when the schedule begins,
+
+            including timezone information.'
+          example: DTSTART;TZID=America/New_York:20240115T090000
+          type: string
+        rrules:
+          description: An array of RRULE components defining the recurrence pattern.
+          example:
+          - RRULE:FREQ=DAILY;INTERVAL=2
+          items:
+            type: string
+          type: array
+        until:
+          description: The UNTIL component specifying when the schedule ends, if applicable.
+          example: UNTIL=20240215T090000Z
+          type: string
       type: object
     ContentOwner:
       additionalProperties: false
@@ -1696,6 +1679,23 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    ScheduleVariant:
+      additionalProperties: false
+      description: Variant information embedded in a schedule.
+      properties:
+        key:
+          description: The variant key.
+          example: default
+          type: string
+        name:
+          description: The variant name.
+          example: Default Variant
+          type: string
+        is_default:
+          description: Whether this is the default variant.
+          example: true
+          type: boolean
       type: object
   securitySchemes:
     apiKey:

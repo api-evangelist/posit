@@ -1684,20 +1684,11 @@ paths:
       - Content
 components:
   schemas:
-    OffsetPaging:
-      description: Offset-based pagination metadata.
-      properties:
-        current_page:
-          description: The current page of results
-          example: 1
-          format: int32
-          type: integer
-        total:
-          description: The number of items that match the given filters
-          example: 1
-          format: int32
-          type: integer
-      type: object
+    EnvironmentVariableNames:
+      description: List of environment variable names, without values.
+      items:
+        type: string
+      type: array
     UpdateContentInput:
       additionalProperties: false
       description: The content fields that can be specified when updating a content item.
@@ -2044,26 +2035,50 @@ components:
           - string
           - 'null'
       type: object
-    GitLocationInput:
+    Tag:
       additionalProperties: false
-      description: Git location associated with a content item.
+      description: A tag used to organize content within Connect.
       properties:
-        repository:
-          description: URL for the repository.
-          example: https://github.com/rstudio/connect-examples
+        id:
+          description: The identifier for the tag.
+          example: '101'
           type: string
-        branch:
-          description: The tracked Git branch.
-          example: main
+        name:
+          description: The name of the tag.
+          example: financial-statements
           type: string
-        directory:
-          description: Directory containing the content.
-          example: stock-report
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag is a top-level tag.'
+          example: '102'
+          type:
+          - string
+          - 'null'
+        created_time:
+          description: The timestamp (RFC3339) indicating when the tag was created.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
           type: string
-        polling:
-          description: Indicates that the Git repository should be regularly polled.
-          example: false
-          type: boolean
+        updated_time:
+          description: The timestamp (RFC3339) indicating when the tag was updated.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
       type: object
     OAuthIntegrationAssociationInput:
       additionalProperties: false
@@ -2074,366 +2089,6 @@ components:
           example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
           format: uuid
           type: string
-      type: object
-    ContentDeploymentInstructions:
-      additionalProperties: false
-      description: Optionally identifies the target deployment bundle.
-      properties:
-        bundle_id:
-          description: The identifier of the bundle to deploy. If not provided, the most recently uploaded bundle is deployed.
-          type:
-          - string
-          - 'null'
-        activate:
-          description: Whether the deployed bundle should be activated after deployment. Defaults to true.
-          type:
-          - boolean
-          - 'null'
-      type: object
-    VariantResults:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of variants, paginated
-            items:
-              $ref: '#/components/schemas/VariantSearchResult'
-            type: array
-        type: object
-      description: Search results containing variants and pagination metadata.
-    GitLocationOutput:
-      additionalProperties: false
-      description: Git location associated with a content item.
-      properties:
-        repository:
-          description: URL for the repository.
-          example: https://github.com/rstudio/connect-examples
-          type: string
-        branch:
-          description: The tracked Git branch.
-          example: main
-          type: string
-        directory:
-          description: Directory containing the content.
-          example: stock-report
-          type: string
-        polling:
-          description: Indicates that the Git repository is regularly polled.
-          example: false
-          type: boolean
-        last_error:
-          description: The last error encountered when polling the Git repository, if one occurred.
-          example: The requested operation requires authentication.
-          type: string
-        last_known_commit:
-          description: The last known commit in the Git repository.
-          example: a8906feae5c7675b934b7d22eb5fbd12ce51f1ba
-          type: string
-        last_fetched_time:
-          description: The last time the Git repository was fetched.
-          example: '2026-04-14T12:00:00Z'
-          format: date-time
-          type: string
-      type: object
-    Package:
-      additionalProperties: false
-      description: A package dependency record.
-      properties:
-        language:
-          description: Language ecosystem the package belongs to
-          type: string
-        language_version:
-          description: Version of R or Python used by the content
-          example: 3.12.4
-          type: string
-        name:
-          description: Package name
-          example: shiny
-          type: string
-        version:
-          description: Package version
-          example: 1.0.3
-          type: string
-        hash:
-          description: Package description hash for R packages
-          example: e4ac73dd20b2f6420742aac66e5d3e78
-          type:
-          - string
-          - 'null'
-        bundle_id:
-          description: Identifier for the bundle that depends on this package
-          example: '449'
-          type: string
-        app_id:
-          description: This field is deprecated and has been renamed to `content_id`.
-          example: '145'
-          type: string
-        app_guid:
-          description: This field is deprecated and has been renamed to `content_guid`.
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-        content_id:
-          description: Numeric identifier for the content that depends on this package
-          example: '145'
-          type: string
-        content_guid:
-          description: The unique identifier of the content item that depends on this package
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-      type: object
-    ScheduleVariant:
-      additionalProperties: false
-      description: Variant information embedded in a schedule.
-      properties:
-        key:
-          description: The variant key.
-          example: default
-          type: string
-        name:
-          description: The variant name.
-          example: Default Variant
-          type: string
-        is_default:
-          description: Whether this is the default variant.
-          example: true
-          type: boolean
-      type: object
-    ScheduleLastRun:
-      additionalProperties: false
-      description: Information about the last scheduled run.
-      properties:
-        job_key:
-          description: The unique key of the job.
-          example: abc123xyz
-          type: string
-        status:
-          description: The status of the last run.
-          example: success
-          type: string
-        scheduled_time:
-          description: The scheduled time of the run.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        queued_time:
-          description: The time the run was queued.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        start_time:
-          description: The time the run started.
-          format: date-time
-          type: string
-        end_time:
-          description: The time the run ended. Null if still running.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        run_duration_ms:
-          description: The duration of the run in milliseconds. Null if still running.
-          example: 5000
-          format: int64
-          type:
-          - integer
-          - 'null'
-        exit_code:
-          description: The exit code of the job. Null if still running.
-          example: 0
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    RRuleSet:
-      additionalProperties: false
-      description: RFC 5545 recurrence rule components for a schedule.
-      properties:
-        dtstart:
-          description: 'The DTSTART component specifying when the schedule begins,
-
-            including timezone information.'
-          example: DTSTART;TZID=America/New_York:20240115T090000
-          type: string
-        rrules:
-          description: An array of RRULE components defining the recurrence pattern.
-          example:
-          - RRULE:FREQ=DAILY;INTERVAL=2
-          items:
-            type: string
-          type: array
-        until:
-          description: The UNTIL component specifying when the schedule ends, if applicable.
-          example: UNTIL=20240215T090000Z
-          type: string
-      type: object
-    VariantSearchResult:
-      additionalProperties: false
-      description: A single variant in search results.
-      properties:
-        content_guid:
-          description: The GUID of the parent content item
-          example: abc123de-f456-7890-abcd-ef1234567890
-          format: uuid
-          type: string
-        content_name:
-          description: The URL-friendly name of the parent content item
-          example: monthly-sales-report
-          type: string
-        content_title:
-          description: The human-readable title of the parent content item
-          example: Monthly Sales Report
-          type:
-          - string
-          - 'null'
-        variant_key:
-          description: The unique key identifying this variant
-          example: xyz789
-          type: string
-        variant_name:
-          description: The human-readable name of the variant
-          example: West Region
-          type: string
-        is_default:
-          description: Whether this is the default variant for the content
-          example: false
-          type: boolean
-        created_time:
-          description: The time this variant was created
-          example: '2025-06-15T09:00:00Z'
-          format: date-time
-          type: string
-        render_time:
-          description: The time this variant was last rendered
-          example: '2026-01-26T08:00:00Z'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        failures:
-          description: 'The number of failed jobs (non-zero exit code) for this variant.
-
-            When a `failed:>=` filter is used, this count is scoped to failures
-
-            on or after the given timestamp.'
-          example: 0
-          type: integer
-        last_failed:
-          description: 'The time the most recent failed job completed for this variant.
-
-            Null if no failures have occurred. When a `failed:>=` filter is
-
-            used, this reflects only failures within the given time window.'
-          example: '2026-02-01T12:00:00Z'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        skips:
-          description: 'The number of skipped scheduled jobs for this variant. When a
-
-            `skipped:>=` filter is used, this count is scoped to skips on or
-
-            after the given timestamp.'
-          example: 0
-          type: integer
-        last_skipped:
-          description: 'The scheduled time of the most recent skipped job for this
-
-            variant. Null if no skips have occurred. When a `skipped:>=`
-
-            filter is used, this reflects only skips within the given time
-
-            window.'
-          example: '2026-02-01T12:00:00Z'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        schedule:
-          allOf:
-          - $ref: '#/components/schemas/Schedule'
-          description: Schedule information for this variant. Omitted if no schedule exists.
-      type: object
-    ContentRenderTask:
-      additionalProperties: false
-      description: The result of requesting a content render, containing a task identifier.
-      properties:
-        task_id:
-          description: Identifier for the created render task.
-          example: M49MsuXt6XVzlRdL
-          type: string
-      type: object
-    EnvironmentVariables:
-      description: List of environment variables with their values.
-      items:
-        $ref: '#/components/schemas/EnvironmentVariable'
-      type: array
-    ContentResults:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of content items, paginated
-            items:
-              $ref: '#/components/schemas/Content'
-            type: array
-          warnings:
-            description: 'An optional list of warning messages generated during query
-
-              processing. Warnings indicate issues with the search query that
-
-              did not prevent the search from completing, such as invalid
-
-              filter values. When a filter value is invalid, the filter is
-
-              ignored and results are returned unfiltered for that field.
-
-              This field is omitted when there are no warnings.'
-            example:
-            - 'Invalid value for ''published'' filter: ''bogus''. Expected true or false'
-            items:
-              type: string
-            type: array
-        type: object
-      description: Search results containing content items and pagination metadata.
-    ContentBuildInstructions:
-      additionalProperties: false
-      description: Optionally identifies the target build bundle.
-      properties:
-        bundle_id:
-          description: The identifier of the bundle to build. If not provided, the most recently uploaded bundle is built.
-          type:
-          - string
-          - 'null'
-        activate:
-          description: Whether the built bundle should be activated after building. Defaults to true.
-          type:
-          - boolean
-          - 'null'
       type: object
     Content:
       additionalProperties: false
@@ -3344,61 +2999,105 @@ components:
           - string
           - 'null'
       type: object
-    AccessTestResult:
+    VariantResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of variants, paginated
+            items:
+              $ref: '#/components/schemas/VariantSearchResult'
+            type: array
+        type: object
+      description: Search results containing variants and pagination metadata.
+    VariantSearchResult:
       additionalProperties: false
-      description: The results of the public access content verification test.
+      description: A single variant in search results.
       properties:
-        guid:
-          description: The unique identifier of this content item.
-          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+        content_guid:
+          description: The GUID of the parent content item
+          example: abc123de-f456-7890-abcd-ef1234567890
           format: uuid
           type: string
-        url:
-          description: 'The URL that was used to test access to this content. Computed from
-
-            the associated GUID for this content or the optional vanity URL.'
-          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+        content_name:
+          description: The URL-friendly name of the parent content item
+          example: monthly-sales-report
           type: string
-        checked_at:
-          description: The timestamp (RFC3339) indicating when the access test was performed.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-        accessible:
-          description: 'Indicates whether or not the test was able to access the content item
-
-            on the public internet.'
-          example: false
-          type: boolean
-        message:
-          description: 'An optional informational message with extra details about the test
-
-            result. See the
-
-            [Admin Guide](../admin/licensing/index.md#public-access)
-
-            for additional guidance about specific messages.'
-          example: content is not publicly accessible
-          type: string
-      type: object
-    ContentRenderInstructions:
-      additionalProperties: false
-      description: Instructions for rendering a content item.
-      properties:
-        variant_key:
-          description: 'The key of the variant to render. If not specified, the default
-
-            variant is rendered.'
-          example: HidI2Kwq
+        content_title:
+          description: The human-readable title of the parent content item
+          example: Monthly Sales Report
           type:
           - string
           - 'null'
+        variant_key:
+          description: The unique key identifying this variant
+          example: xyz789
+          type: string
+        variant_name:
+          description: The human-readable name of the variant
+          example: West Region
+          type: string
+        is_default:
+          description: Whether this is the default variant for the content
+          example: false
+          type: boolean
+        created_time:
+          description: The time this variant was created
+          example: '2025-06-15T09:00:00Z'
+          format: date-time
+          type: string
+        render_time:
+          description: The time this variant was last rendered
+          example: '2026-01-26T08:00:00Z'
+          format: date-time
+          type:
+          - string
+          - 'null'
+        failures:
+          description: 'The number of failed jobs (non-zero exit code) for this variant.
+
+            When a `failed:>=` filter is used, this count is scoped to failures
+
+            on or after the given timestamp.'
+          example: 0
+          type: integer
+        last_failed:
+          description: 'The time the most recent failed job completed for this variant.
+
+            Null if no failures have occurred. When a `failed:>=` filter is
+
+            used, this reflects only failures within the given time window.'
+          example: '2026-02-01T12:00:00Z'
+          format: date-time
+          type:
+          - string
+          - 'null'
+        skips:
+          description: 'The number of skipped scheduled jobs for this variant. When a
+
+            `skipped:>=` filter is used, this count is scoped to skips on or
+
+            after the given timestamp.'
+          example: 0
+          type: integer
+        last_skipped:
+          description: 'The scheduled time of the most recent skipped job for this
+
+            variant. Null if no skips have occurred. When a `skipped:>=`
+
+            filter is used, this reflects only skips within the given time
+
+            window.'
+          example: '2026-02-01T12:00:00Z'
+          format: date-time
+          type:
+          - string
+          - 'null'
+        schedule:
+          allOf:
+          - $ref: '#/components/schemas/Schedule'
+          description: Schedule information for this variant. Omitted if no schedule exists.
       type: object
-    ContentPackages:
-      description: Lists the packages installed for a content item.
-      items:
-        $ref: '#/components/schemas/Package'
-      type: array
     CreateContentInput:
       additionalProperties: false
       description: The content fields that can be specified when creating a content item.
@@ -3710,111 +3409,6 @@ components:
           - boolean
           - 'null'
       type: object
-    ContentDeploymentTask:
-      additionalProperties: false
-      description: Identifies the task that can be used to track the progress of a deployment operation.
-      properties:
-        task_id:
-          description: Identifier for the created deployment task.
-          example: M49MsuXt6XVzlRdL
-          type: string
-      type: object
-    ContentOwner:
-      additionalProperties: false
-      description: Basic details about the owner of a content item.
-      properties:
-        guid:
-          description: The owner's unique identifier.
-          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
-          format: uuid
-          type: string
-        username:
-          description: The owner's username.
-          example: jondoe
-          type:
-          - string
-          - 'null'
-        first_name:
-          description: The owner's first name.
-          example: Jon
-          type:
-          - string
-          - 'null'
-        last_name:
-          description: The owner's last name.
-          example: Doe
-          type:
-          - string
-          - 'null'
-      type: object
-    ContentSchedule:
-      allOf:
-      - $ref: '#/components/schemas/Schedule'
-      - properties:
-          variant:
-            allOf:
-            - $ref: '#/components/schemas/ScheduleVariant'
-        type: object
-      description: Schedule information with variant details for a content item.
-    Schedule:
-      description: Base schedule information for a content item.
-      properties:
-        type:
-          description: The schedule type.
-          example: rrule
-          type: string
-        schedule:
-          allOf:
-          - $ref: '#/components/schemas/RRuleSet'
-          description: The recurrence rule in RFC5545 format.
-        next_run:
-          description: The next scheduled run time. Null if no future runs are scheduled.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        email:
-          description: Whether email notifications are enabled for this schedule.
-          example: false
-          type: boolean
-        timezone:
-          description: The timezone for this schedule.
-          example: America/New_York
-          type: string
-        start_time:
-          description: The start time of the schedule window.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        end_time:
-          description: The end time of the schedule window. Null if the schedule runs indefinitely.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        last_run:
-          allOf:
-          - $ref: '#/components/schemas/ScheduleLastRun'
-          description: Information about the last scheduled run.
-      type: object
-    EnvironmentVariable:
-      additionalProperties: false
-      description: Defines an environment variable and its value.
-      properties:
-        name:
-          description: Name of the environment variable.
-          example: DEBUG
-          type: string
-        value:
-          description: 'New value of the environment variable.
-
-            A value of `null` will delete the environment variable.'
-          example: '1'
-          type:
-          - string
-          - 'null'
-      type: object
     OAuthIntegrationAssociationOutput:
       additionalProperties: false
       description: Represents an association between a content item and an OAuth integration.
@@ -3870,37 +3464,314 @@ components:
           format: date-time
           type: string
       type: object
-    Tag:
+    AccessTestResult:
       additionalProperties: false
-      description: A tag used to organize content within Connect.
+      description: The results of the public access content verification test.
       properties:
-        id:
-          description: The identifier for the tag.
-          example: '101'
+        guid:
+          description: The unique identifier of this content item.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
           type: string
-        name:
-          description: The name of the tag.
-          example: financial-statements
-          type: string
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
+        url:
+          description: 'The URL that was used to test access to this content. Computed from
 
-            the tag is a top-level tag.'
-          example: '102'
+            the associated GUID for this content or the optional vanity URL.'
+          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+          type: string
+        checked_at:
+          description: The timestamp (RFC3339) indicating when the access test was performed.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        accessible:
+          description: 'Indicates whether or not the test was able to access the content item
+
+            on the public internet.'
+          example: false
+          type: boolean
+        message:
+          description: 'An optional informational message with extra details about the test
+
+            result. See the
+
+            [Admin Guide](../admin/licensing/index.md#public-access)
+
+            for additional guidance about specific messages.'
+          example: content is not publicly accessible
+          type: string
+      type: object
+    ContentPackages:
+      description: Lists the packages installed for a content item.
+      items:
+        $ref: '#/components/schemas/Package'
+      type: array
+    EnvironmentVariables:
+      description: List of environment variables with their values.
+      items:
+        $ref: '#/components/schemas/EnvironmentVariable'
+      type: array
+    ContentRenderInstructions:
+      additionalProperties: false
+      description: Instructions for rendering a content item.
+      properties:
+        variant_key:
+          description: 'The key of the variant to render. If not specified, the default
+
+            variant is rendered.'
+          example: HidI2Kwq
           type:
           - string
           - 'null'
-        created_time:
-          description: The timestamp (RFC3339) indicating when the tag was created.
-          example: '2006-01-02T15:04:05Z'
-          format: date-time
+      type: object
+    ContentRenderTask:
+      additionalProperties: false
+      description: The result of requesting a content render, containing a task identifier.
+      properties:
+        task_id:
+          description: Identifier for the created render task.
+          example: M49MsuXt6XVzlRdL
           type: string
-        updated_time:
-          description: The timestamp (RFC3339) indicating when the tag was updated.
-          example: '2006-01-02T15:04:05Z'
+      type: object
+    GitLocationOutput:
+      additionalProperties: false
+      description: Git location associated with a content item.
+      properties:
+        repository:
+          description: URL for the repository.
+          example: https://github.com/rstudio/connect-examples
+          type: string
+        branch:
+          description: The tracked Git branch.
+          example: main
+          type: string
+        directory:
+          description: Directory containing the content.
+          example: stock-report
+          type: string
+        polling:
+          description: Indicates that the Git repository is regularly polled.
+          example: false
+          type: boolean
+        last_error:
+          description: The last error encountered when polling the Git repository, if one occurred.
+          example: The requested operation requires authentication.
+          type: string
+        last_known_commit:
+          description: The last known commit in the Git repository.
+          example: a8906feae5c7675b934b7d22eb5fbd12ce51f1ba
+          type: string
+        last_fetched_time:
+          description: The last time the Git repository was fetched.
+          example: '2026-04-14T12:00:00Z'
           format: date-time
           type: string
       type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    RRuleSet:
+      additionalProperties: false
+      description: RFC 5545 recurrence rule components for a schedule.
+      properties:
+        dtstart:
+          description: 'The DTSTART component specifying when the schedule begins,
+
+            including timezone information.'
+          example: DTSTART;TZID=America/New_York:20240115T090000
+          type: string
+        rrules:
+          description: An array of RRULE components defining the recurrence pattern.
+          example:
+          - RRULE:FREQ=DAILY;INTERVAL=2
+          items:
+            type: string
+          type: array
+        until:
+          description: The UNTIL component specifying when the schedule ends, if applicable.
+          example: UNTIL=20240215T090000Z
+          type: string
+      type: object
+    ContentOwner:
+      additionalProperties: false
+      description: Basic details about the owner of a content item.
+      properties:
+        guid:
+          description: The owner's unique identifier.
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type: string
+        username:
+          description: The owner's username.
+          example: jondoe
+          type:
+          - string
+          - 'null'
+        first_name:
+          description: The owner's first name.
+          example: Jon
+          type:
+          - string
+          - 'null'
+        last_name:
+          description: The owner's last name.
+          example: Doe
+          type:
+          - string
+          - 'null'
+      type: object
+    ScheduleLastRun:
+      additionalProperties: false
+      description: Information about the last scheduled run.
+      properties:
+        job_key:
+          description: The unique key of the job.
+          example: abc123xyz
+          type: string
+        status:
+          description: The status of the last run.
+          example: success
+          type: string
+        scheduled_time:
+          description: The scheduled time of the run.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        queued_time:
+          description: The time the run was queued.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        start_time:
+          description: The time the run started.
+          format: date-time
+          type: string
+        end_time:
+          description: The time the run ended. Null if still running.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_duration_ms:
+          description: The duration of the run in milliseconds. Null if still running.
+          example: 5000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        exit_code:
+          description: The exit code of the job. Null if still running.
+          example: 0
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    ContentDeploymentInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target deployment bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to deploy. If not provided, the most recently uploaded bundle is deployed.
+          type:
+          - string
+          - 'null'
+        activate:
+          description: Whether the deployed bundle should be activated after deployment. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+      type: object
+    Package:
+      additionalProperties: false
+      description: A package dependency record.
+      properties:
+        language:
+          description: Language ecosystem the package belongs to
+          type: string
+        language_version:
+          description: Version of R or Python used by the content
+          example: 3.12.4
+          type: string
+        name:
+          description: Package name
+          example: shiny
+          type: string
+        version:
+          description: Package version
+          example: 1.0.3
+          type: string
+        hash:
+          description: Package description hash for R packages
+          example: e4ac73dd20b2f6420742aac66e5d3e78
+          type:
+          - string
+          - 'null'
+        bundle_id:
+          description: Identifier for the bundle that depends on this package
+          example: '449'
+          type: string
+        app_id:
+          description: This field is deprecated and has been renamed to `content_id`.
+          example: '145'
+          type: string
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_id:
+          description: Numeric identifier for the content that depends on this package
+          example: '145'
+          type: string
+        content_guid:
+          description: The unique identifier of the content item that depends on this package
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+      type: object
+    ContentBuildInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target build bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to build. If not provided, the most recently uploaded bundle is built.
+          type:
+          - string
+          - 'null'
+        activate:
+          description: Whether the built bundle should be activated after building. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+      type: object
+    ContentSchedule:
+      allOf:
+      - $ref: '#/components/schemas/Schedule'
+      - properties:
+          variant:
+            allOf:
+            - $ref: '#/components/schemas/ScheduleVariant'
+        type: object
+      description: Schedule information with variant details for a content item.
     ContentBuildTask:
       additionalProperties: false
       description: Identifies the task that can be used to track the progress of a build operation.
@@ -3910,11 +3781,140 @@ components:
           example: M49MsuXt6XVzlRdL
           type: string
       type: object
-    EnvironmentVariableNames:
-      description: List of environment variable names, without values.
-      items:
-        type: string
-      type: array
+    EnvironmentVariable:
+      additionalProperties: false
+      description: Defines an environment variable and its value.
+      properties:
+        name:
+          description: Name of the environment variable.
+          example: DEBUG
+          type: string
+        value:
+          description: 'New value of the environment variable.
+
+            A value of `null` will delete the environment variable.'
+          example: '1'
+          type:
+          - string
+          - 'null'
+      type: object
+    ScheduleVariant:
+      additionalProperties: false
+      description: Variant information embedded in a schedule.
+      properties:
+        key:
+          description: The variant key.
+          example: default
+          type: string
+        name:
+          description: The variant name.
+          example: Default Variant
+          type: string
+        is_default:
+          description: Whether this is the default variant.
+          example: true
+          type: boolean
+      type: object
+    ContentResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of content items, paginated
+            items:
+              $ref: '#/components/schemas/Content'
+            type: array
+          warnings:
+            description: 'An optional list of warning messages generated during query
+
+              processing. Warnings indicate issues with the search query that
+
+              did not prevent the search from completing, such as invalid
+
+              filter values. When a filter value is invalid, the filter is
+
+              ignored and results are returned unfiltered for that field.
+
+              This field is omitted when there are no warnings.'
+            example:
+            - 'Invalid value for ''published'' filter: ''bogus''. Expected true or false'
+            items:
+              type: string
+            type: array
+        type: object
+      description: Search results containing content items and pagination metadata.
+    GitLocationInput:
+      additionalProperties: false
+      description: Git location associated with a content item.
+      properties:
+        repository:
+          description: URL for the repository.
+          example: https://github.com/rstudio/connect-examples
+          type: string
+        branch:
+          description: The tracked Git branch.
+          example: main
+          type: string
+        directory:
+          description: Directory containing the content.
+          example: stock-report
+          type: string
+        polling:
+          description: Indicates that the Git repository should be regularly polled.
+          example: false
+          type: boolean
+      type: object
+    Schedule:
+      description: Base schedule information for a content item.
+      properties:
+        type:
+          description: The schedule type.
+          example: rrule
+          type: string
+        schedule:
+          allOf:
+          - $ref: '#/components/schemas/RRuleSet'
+          description: The recurrence rule in RFC5545 format.
+        next_run:
+          description: The next scheduled run time. Null if no future runs are scheduled.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        email:
+          description: Whether email notifications are enabled for this schedule.
+          example: false
+          type: boolean
+        timezone:
+          description: The timezone for this schedule.
+          example: America/New_York
+          type: string
+        start_time:
+          description: The start time of the schedule window.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        end_time:
+          description: The end time of the schedule window. Null if the schedule runs indefinitely.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        last_run:
+          allOf:
+          - $ref: '#/components/schemas/ScheduleLastRun'
+          description: Information about the last scheduled run.
+      type: object
+    ContentDeploymentTask:
+      additionalProperties: false
+      description: Identifies the task that can be used to track the progress of a deployment operation.
+      properties:
+        task_id:
+          description: Identifier for the created deployment task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
   securitySchemes:
     apiKey:
       description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.
