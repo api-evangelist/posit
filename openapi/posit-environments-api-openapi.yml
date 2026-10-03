@@ -306,6 +306,98 @@ paths:
       - Environments
 components:
   schemas:
+    CreateEnvironmentInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating an environment.
+      properties:
+        title:
+          description: A human readable title for this environment.
+          example: Project Alpha (R 4.1.1, Python 3.10)
+          type:
+          - string
+          - 'null'
+        description:
+          description: A human readable description of this environment.
+          example: This is my description of the environment
+          type:
+          - string
+          - 'null'
+        cluster_name:
+          description: 'The cluster identifier for this environment.
+
+
+            The value must be "Kubernetes" when Off Host Execution is enabled.'
+          example: Kubernetes
+          type: string
+        name:
+          description: 'The container image that will be used when executing content with this
+
+            environment.'
+          example: ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804
+          type: string
+        matching:
+          description: 'This field indicates how environments can be considered for selection
+
+            when Posit Connect is choosing a compatible environment to use when
+
+            executing content.
+
+
+            `any` (the default) indicates that the image can be selected by Connect
+
+            automatically,
+
+            _or_ targeted in the bundle''s manifest.
+
+
+            `exact` indicates the image must be explicitly asked for in the bundle''s
+
+            manifest.
+
+
+            `none` indicates that the image should never be selected by Posit Connect.'
+          example: any
+          type:
+          - string
+          - 'null'
+        supervisor:
+          description: 'The path to the script or command that should be used as the
+
+            [program
+
+            supervisor](https://docs.posit.co/helm/rstudio-connect/kubernetes-howto/appendices/content_images.html#per-image-supervisors)
+
+            when executing content with this environment.'
+          example: /usr/local/bin/supervisor.sh
+          type:
+          - string
+          - 'null'
+        python:
+          allOf:
+          - $ref: '#/components/schemas/Installations'
+          description: The available Python installations in this environment.
+        nodejs:
+          allOf:
+          - $ref: '#/components/schemas/Installations'
+          description: The available Node.js installations in this environment.
+        quarto:
+          allOf:
+          - $ref: '#/components/schemas/Installations'
+          description: The available Quarto installations in this environment.
+        r:
+          allOf:
+          - $ref: '#/components/schemas/Installations'
+          description: The available R installations in this environment.
+        tensorflow:
+          allOf:
+          - $ref: '#/components/schemas/Installations'
+          description: The available TensorFlow installations in this environment.
+        volume_mounts:
+          description: The volume mounts for this environment.
+          items:
+            $ref: '#/components/schemas/VolumeMount'
+          type: array
+      type: object
     Environment:
       additionalProperties: false
       description: An execution environment available to Posit Connect when Off Host Execution is enabled.
@@ -429,71 +521,18 @@ components:
             $ref: '#/components/schemas/VolumeMount'
           type: array
       type: object
-    VolumeMount:
+    Installation:
       additionalProperties: false
-      description: A volume mount configuration for an environment.
+      description: An instance of an interpreter within an execution environment.
       properties:
-        source:
-          allOf:
-          - $ref: '#/components/schemas/VolumeSource'
-          description: The source specification for this mount.
-        target:
-          allOf:
-          - $ref: '#/components/schemas/VolumeTarget'
-          description: The target specification for this mount.
-      type: object
-    Installations:
-      additionalProperties: false
-      description: A list of language installations available to an environment.
-      properties:
-        installations:
-          description: The list of language installations.
-          items:
-            $ref: '#/components/schemas/Installation'
-          type: array
-      type: object
-    VolumeSource:
-      additionalProperties: false
-      description: The source specification for a volume mount.
-      properties:
-        volume_type:
-          description: The type of volume.
-          example: nfs
+        version:
+          description: The semantic version of the interpreter.
+          example: 3.6.3
           type: string
-        nfs_host:
-          description: The NFS host. Required when `volume_type` is `nfs`.
-          type:
-          - string
-          - 'null'
-        nfs_export_path:
-          description: The NFS export path. Required when `volume_type` is `nfs`.
-          type:
-          - string
-          - 'null'
-        pvc_name:
-          description: The PersistentVolumeClaim name. Required when `volume_type` is `pvc`.
-          type:
-          - string
-          - 'null'
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
+        path:
+          description: The absolute path to the interpreter's executable.
+          example: /opt/R/3.6.3/bin/R
           type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
       type: object
     VolumeTarget:
       additionalProperties: false
@@ -509,19 +548,6 @@ components:
           type:
           - boolean
           - 'null'
-      type: object
-    Installation:
-      additionalProperties: false
-      description: An instance of an interpreter within an execution environment.
-      properties:
-        version:
-          description: The semantic version of the interpreter.
-          example: 3.6.3
-          type: string
-        path:
-          description: The absolute path to the interpreter's executable.
-          example: /opt/R/3.6.3/bin/R
-          type: string
       type: object
     UpdateEnvironmentInput:
       additionalProperties: false
@@ -602,97 +628,71 @@ components:
             $ref: '#/components/schemas/VolumeMount'
           type: array
       type: object
-    CreateEnvironmentInput:
+    Installations:
       additionalProperties: false
-      description: The fields that can be specified when creating an environment.
+      description: A list of language installations available to an environment.
       properties:
-        title:
-          description: A human readable title for this environment.
-          example: Project Alpha (R 4.1.1, Python 3.10)
-          type:
-          - string
-          - 'null'
-        description:
-          description: A human readable description of this environment.
-          example: This is my description of the environment
-          type:
-          - string
-          - 'null'
-        cluster_name:
-          description: 'The cluster identifier for this environment.
-
-
-            The value must be "Kubernetes" when Off Host Execution is enabled.'
-          example: Kubernetes
-          type: string
-        name:
-          description: 'The container image that will be used when executing content with this
-
-            environment.'
-          example: ghcr.io/rstudio/content-base:r4.1.3-py3.10.4-ubuntu1804
-          type: string
-        matching:
-          description: 'This field indicates how environments can be considered for selection
-
-            when Posit Connect is choosing a compatible environment to use when
-
-            executing content.
-
-
-            `any` (the default) indicates that the image can be selected by Connect
-
-            automatically,
-
-            _or_ targeted in the bundle''s manifest.
-
-
-            `exact` indicates the image must be explicitly asked for in the bundle''s
-
-            manifest.
-
-
-            `none` indicates that the image should never be selected by Posit Connect.'
-          example: any
-          type:
-          - string
-          - 'null'
-        supervisor:
-          description: 'The path to the script or command that should be used as the
-
-            [program
-
-            supervisor](https://docs.posit.co/helm/rstudio-connect/kubernetes-howto/appendices/content_images.html#per-image-supervisors)
-
-            when executing content with this environment.'
-          example: /usr/local/bin/supervisor.sh
-          type:
-          - string
-          - 'null'
-        python:
-          allOf:
-          - $ref: '#/components/schemas/Installations'
-          description: The available Python installations in this environment.
-        nodejs:
-          allOf:
-          - $ref: '#/components/schemas/Installations'
-          description: The available Node.js installations in this environment.
-        quarto:
-          allOf:
-          - $ref: '#/components/schemas/Installations'
-          description: The available Quarto installations in this environment.
-        r:
-          allOf:
-          - $ref: '#/components/schemas/Installations'
-          description: The available R installations in this environment.
-        tensorflow:
-          allOf:
-          - $ref: '#/components/schemas/Installations'
-          description: The available TensorFlow installations in this environment.
-        volume_mounts:
-          description: The volume mounts for this environment.
+        installations:
+          description: The list of language installations.
           items:
-            $ref: '#/components/schemas/VolumeMount'
+            $ref: '#/components/schemas/Installation'
           type: array
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    VolumeSource:
+      additionalProperties: false
+      description: The source specification for a volume mount.
+      properties:
+        volume_type:
+          description: The type of volume.
+          example: nfs
+          type: string
+        nfs_host:
+          description: The NFS host. Required when `volume_type` is `nfs`.
+          type:
+          - string
+          - 'null'
+        nfs_export_path:
+          description: The NFS export path. Required when `volume_type` is `nfs`.
+          type:
+          - string
+          - 'null'
+        pvc_name:
+          description: The PersistentVolumeClaim name. Required when `volume_type` is `pvc`.
+          type:
+          - string
+          - 'null'
+      type: object
+    VolumeMount:
+      additionalProperties: false
+      description: A volume mount configuration for an environment.
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/VolumeSource'
+          description: The source specification for this mount.
+        target:
+          allOf:
+          - $ref: '#/components/schemas/VolumeTarget'
+          description: The target specification for this mount.
       type: object
   securitySchemes:
     apiKey:

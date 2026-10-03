@@ -241,17 +241,6 @@ paths:
       - System Checks
 components:
   schemas:
-    CreateRunInput:
-      additionalProperties: false
-      description: The fields to provide when running system checks.
-      properties:
-        hostname:
-          description: The hostname where this test was run. Optional. Defaults to the host
-          example: connect.example.com
-          type:
-          - string
-          - 'null'
-      type: object
     TestInfo:
       additionalProperties: false
       description: Fields describing a specific test or test group.
@@ -263,25 +252,6 @@ components:
         args:
           description: The arguments that will be passed to this test.
           type: string
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
       type: object
     SystemCheckRun:
       additionalProperties: false
@@ -320,19 +290,24 @@ components:
           format: int32
           type: integer
       type: object
-    SystemCheckRunResults:
+    APIError:
       additionalProperties: false
-      description: Fields containing results of a specific system check run.
+      description: The error object returned by the API on failure.
       properties:
-        run:
-          allOf:
-          - $ref: '#/components/schemas/SystemCheckRun'
-          description: The run that was requested.
-        results:
-          description: The results of the system check run.
-          items:
-            $ref: '#/components/schemas/SystemCheckRunResult'
-          type: array
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
       type: object
     SystemCheckRunResult:
       additionalProperties: false
@@ -356,6 +331,31 @@ components:
         error:
           description: The error that occurred while running this test, or empty string if no error occurred.
           type: string
+      type: object
+    CreateRunInput:
+      additionalProperties: false
+      description: The fields to provide when running system checks.
+      properties:
+        hostname:
+          description: The hostname where this test was run. Optional. Defaults to the host
+          example: connect.example.com
+          type:
+          - string
+          - 'null'
+      type: object
+    SystemCheckRunResults:
+      additionalProperties: false
+      description: Fields containing results of a specific system check run.
+      properties:
+        run:
+          allOf:
+          - $ref: '#/components/schemas/SystemCheckRun'
+          description: The run that was requested.
+        results:
+          description: The results of the system check run.
+          items:
+            $ref: '#/components/schemas/SystemCheckRunResult'
+          type: array
       type: object
   securitySchemes:
     apiKey:

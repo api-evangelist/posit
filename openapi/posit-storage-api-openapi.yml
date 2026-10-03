@@ -157,6 +157,95 @@ paths:
       - Storage
 components:
   schemas:
+    ContentBundleStorageDetail:
+      additionalProperties: false
+      description: Storage information for a single bundle.
+      properties:
+        id:
+          description: The identifier for this bundle.
+          example: '7'
+          type: string
+        created_time:
+          description: The timestamp (RFC3339) of when this bundle was created.
+          example: '2026-01-15T10:30:00Z'
+          format: date-time
+          type: string
+        size_bytes:
+          description: The size of the bundle archive in bytes.
+          example: 104857600
+          format: int64
+          type: integer
+        is_active:
+          description: Whether this is the currently deployed bundle.
+          example: true
+          type: boolean
+      type: object
+    ContentStorageListItemBundles:
+      additionalProperties: false
+      description: Bundle storage metrics for a content item.
+      properties:
+        count:
+          description: The number of bundles for this content item.
+          example: 14
+          type: integer
+        bytes_total:
+          description: Total bytes across all bundles for this content.
+          example: 1073741824
+          format: int64
+          type: integer
+        bytes_active:
+          description: Bytes used by the currently active (deployed) bundle.
+          example: 104857600
+          format: int64
+          type: integer
+        bytes_inactive:
+          description: Bytes used by inactive (historical) bundles.
+          example: 968884224
+          format: int64
+          type: integer
+      type: object
+    ContentStorageList:
+      additionalProperties: false
+      description: Paginated list of content items with storage metrics.
+      properties:
+        results:
+          description: The list of content items for this page.
+          items:
+            $ref: '#/components/schemas/ContentStorageListItem'
+          type: array
+        current_page:
+          description: The current page number.
+          example: 1
+          format: int64
+          type: integer
+        total:
+          description: The total number of content items.
+          example: 542
+          type: integer
+        total_pages:
+          description: The total number of pages.
+          example: 28
+          type: integer
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
     ContentStorageListItem:
       additionalProperties: false
       description: Storage metrics for a single content item.
@@ -197,52 +286,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/ContentStorageListItemBundles'
           description: Bundle storage metrics for this content item.
-      type: object
-    ContentStorageList:
-      additionalProperties: false
-      description: Paginated list of content items with storage metrics.
-      properties:
-        results:
-          description: The list of content items for this page.
-          items:
-            $ref: '#/components/schemas/ContentStorageListItem'
-          type: array
-        current_page:
-          description: The current page number.
-          example: 1
-          format: int64
-          type: integer
-        total:
-          description: The total number of content items.
-          example: 542
-          type: integer
-        total_pages:
-          description: The total number of pages.
-          example: 28
-          type: integer
-      type: object
-    ContentBundleStorageDetail:
-      additionalProperties: false
-      description: Storage information for a single bundle.
-      properties:
-        id:
-          description: The identifier for this bundle.
-          example: '7'
-          type: string
-        created_time:
-          description: The timestamp (RFC3339) of when this bundle was created.
-          example: '2026-01-15T10:30:00Z'
-          format: date-time
-          type: string
-        size_bytes:
-          description: The size of the bundle archive in bytes.
-          example: 104857600
-          format: int64
-          type: integer
-        is_active:
-          description: Whether this is the currently deployed bundle.
-          example: true
-          type: boolean
       type: object
     ContentStorageDetail:
       additionalProperties: false
@@ -294,49 +337,6 @@ components:
           items:
             $ref: '#/components/schemas/ContentBundleStorageDetail'
           type: array
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    ContentStorageListItemBundles:
-      additionalProperties: false
-      description: Bundle storage metrics for a content item.
-      properties:
-        count:
-          description: The number of bundles for this content item.
-          example: 14
-          type: integer
-        bytes_total:
-          description: Total bytes across all bundles for this content.
-          example: 1073741824
-          format: int64
-          type: integer
-        bytes_active:
-          description: Bytes used by the currently active (deployed) bundle.
-          example: 104857600
-          format: int64
-          type: integer
-        bytes_inactive:
-          description: Bytes used by inactive (historical) bundles.
-          example: 968884224
-          format: int64
-          type: integer
       type: object
   securitySchemes:
     apiKey:

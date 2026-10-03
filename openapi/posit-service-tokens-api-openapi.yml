@@ -195,55 +195,15 @@ paths:
       - Service Tokens
 components:
   schemas:
-    ServiceTokenCreateInput:
+    ServiceTokenScopes:
       additionalProperties: false
-      description: The input object for creating a service token.
+      description: An object containing the available scopes for service tokens.
       properties:
-        name:
-          description: 'The name for this service token. Use the name to describe the purpose
-
-            of the token. Names do not need to be unique.'
-          example: NSS Integration
-          type: string
         scopes:
-          description: 'The scopes to grant to this service token. At least one scope is
-
-            required. Supported values: `identity:manage`, `nameservice:read`.
-
-            Use the `/v1/system/service-tokens/scopes` endpoint to get available scopes
-
-            and descriptions.'
-          example:
-          - identity:manage
+          description: The available scopes.
           items:
-            type: string
+            $ref: '#/components/schemas/ServiceTokenScope'
           type: array
-        expires_at:
-          description: 'Optional timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
-
-            format) indicating when the token expires. After this time, the token
-
-            can no longer authenticate and is removed automatically. Must be in
-
-            the future. Omit or set to `null` for a token that never expires.'
-          example: '2026-12-31T00:00:00Z'
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    ServiceTokenScope:
-      additionalProperties: false
-      description: A scope you can assign to a service token.
-      properties:
-        name:
-          description: The scope identifier.
-          example: nameservice:read
-          type: string
-        description:
-          description: A human-readable description of what this scope grants.
-          example: Access NSS user and group data
-          type: string
       type: object
     ServiceToken:
       additionalProperties: false
@@ -305,15 +265,42 @@ components:
           - string
           - 'null'
       type: object
-    ServiceTokenScopes:
+    ServiceTokenCreateInput:
       additionalProperties: false
-      description: An object containing the available scopes for service tokens.
+      description: The input object for creating a service token.
       properties:
+        name:
+          description: 'The name for this service token. Use the name to describe the purpose
+
+            of the token. Names do not need to be unique.'
+          example: NSS Integration
+          type: string
         scopes:
-          description: The available scopes.
+          description: 'The scopes to grant to this service token. At least one scope is
+
+            required. Supported values: `identity:manage`, `nameservice:read`.
+
+            Use the `/v1/system/service-tokens/scopes` endpoint to get available scopes
+
+            and descriptions.'
+          example:
+          - identity:manage
           items:
-            $ref: '#/components/schemas/ServiceTokenScope'
+            type: string
           type: array
+        expires_at:
+          description: 'Optional timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)
+
+            format) indicating when the token expires. After this time, the token
+
+            can no longer authenticate and is removed automatically. Must be in
+
+            the future. Omit or set to `null` for a token that never expires.'
+          example: '2026-12-31T00:00:00Z'
+          format: date-time
+          type:
+          - string
+          - 'null'
       type: object
     APIError:
       additionalProperties: false
@@ -333,6 +320,19 @@ components:
       required:
       - code
       - error
+      type: object
+    ServiceTokenScope:
+      additionalProperties: false
+      description: A scope you can assign to a service token.
+      properties:
+        name:
+          description: The scope identifier.
+          example: nameservice:read
+          type: string
+        description:
+          description: A human-readable description of what this scope grants.
+          example: Access NSS user and group data
+          type: string
       type: object
   securitySchemes:
     apiKey:

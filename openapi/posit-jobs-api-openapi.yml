@@ -597,143 +597,15 @@ paths:
       - Jobs
 components:
   schemas:
-    JobSummaryBucket:
+    LogEntries:
       additionalProperties: false
-      description: A single time bucket in the scheduled job history histogram.
+      description: Log entries for a job.
       properties:
-        timestamp:
-          description: 'The start time of this bucket (RFC3339). Scheduled jobs with start_time in
-
-            the interval
-
-            [timestamp, timestamp+interval) are counted in this bucket.'
-          example: '2026-01-26T00:00:00Z'
-          format: date-time
-          type: string
-        failed:
-          description: Number of scheduled jobs in this bucket that failed.
-          example: 4
-          type: integer
-        succeeded:
-          description: Number of scheduled jobs in this bucket that succeeded.
-          example: 100
-          type: integer
-        skipped:
-          description: 'Number of scheduled jobs in this bucket that were skipped. Note: skipped
-
-            jobs are tracked from Connect version 2026.03.0 onward.'
-          example: 1
-          type: integer
-      type: object
-    JobSummary:
-      additionalProperties: false
-      description: Aggregated job statistics with totals and time-bucketed histogram for scheduled jobs only.
-      properties:
-        totals:
-          allOf:
-          - $ref: '#/components/schemas/JobSummaryTotals'
-          description: Aggregated total counts of scheduled jobs by status.
-        buckets:
-          description: 'Time-series histogram of scheduled job outcomes. Each bucket represents a
-
-            time interval
-
-            with counts of succeeded and failed scheduled jobs. The bucket interval is
-
-            automatically
-
-            determined based on the query time range (5 minutes to 30 days).'
+        entries:
+          description: The list of log entries.
           items:
-            $ref: '#/components/schemas/JobSummaryBucket'
+            $ref: '#/components/schemas/AuditLog'
           type: array
-      type: object
-    JobMetrics:
-      additionalProperties: false
-      description: Resource usage metrics collected for a job.
-      properties:
-        content_guid:
-          description: The unique identifier for the content item.
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          type: string
-        job_key:
-          description: The job's unique key identifier.
-          example: tHawGvHZTosJA2Dx
-          type: string
-        samples:
-          description: 'Array of metric samples collected during job execution.
-
-            May be empty if no metrics were collected.'
-          items:
-            $ref: '#/components/schemas/MetricSample'
-          type: array
-      type: object
-    LogEntry:
-      additionalProperties: false
-      description: A single log entry.
-      properties:
-        source:
-          description: The source of the log entry. `stdout` or `stderr`.
-          example: stdout
-          type: string
-        timestamp:
-          description: The timestamp (RFC3339) indicating when this log entry was recorded.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type:
-          - string
-          - 'null'
-        data:
-          description: The log entry content.
-          example: 'Running on host: connect'
-          type: string
-      type: object
-    LoggedError:
-      additionalProperties: false
-      description: The primary error of a job.
-      properties:
-        code:
-          description: The error code.
-          type: string
-        summary:
-          description: Summary of the error.
-          type: string
-        help_url:
-          description: A help URL with further information about the error.
-          type: string
-      type: object
-    AuditLog:
-      additionalProperties: false
-      description: An audit log entry.
-      properties:
-        id:
-          description: The identifier of the audit action.
-          type: string
-        time:
-          description: Timestamp in RFC3339 format when the action was taken.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-        user_id:
-          description: The user identifier of the actor who performed the audit action.
-          type: string
-        user_guid:
-          description: The user GUID of the actor who performed the audit action.
-          format: uuid
-          type:
-          - string
-          - 'null'
-        user_description:
-          description: A description of the actor.
-          example: Full name (username)
-          type: string
-        action:
-          description: The audit action taken.
-          example: add_user
-          type: string
-        event_description:
-          description: A human-readable description of the action.
-          example: Added user Full Name (username)
-          type: string
       type: object
     JobSummaryTotals:
       additionalProperties: false
@@ -765,6 +637,134 @@ components:
             from Connect version 2026.03.0 onward.'
           example: 2
           type: integer
+      type: object
+    JobMetrics:
+      additionalProperties: false
+      description: Resource usage metrics collected for a job.
+      properties:
+        content_guid:
+          description: The unique identifier for the content item.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          type: string
+        job_key:
+          description: The job's unique key identifier.
+          example: tHawGvHZTosJA2Dx
+          type: string
+        samples:
+          description: 'Array of metric samples collected during job execution.
+
+            May be empty if no metrics were collected.'
+          items:
+            $ref: '#/components/schemas/MetricSample'
+          type: array
+      type: object
+    JobSummary:
+      additionalProperties: false
+      description: Aggregated job statistics with totals and time-bucketed histogram for scheduled jobs only.
+      properties:
+        totals:
+          allOf:
+          - $ref: '#/components/schemas/JobSummaryTotals'
+          description: Aggregated total counts of scheduled jobs by status.
+        buckets:
+          description: 'Time-series histogram of scheduled job outcomes. Each bucket represents a
+
+            time interval
+
+            with counts of succeeded and failed scheduled jobs. The bucket interval is
+
+            automatically
+
+            determined based on the query time range (5 minutes to 30 days).'
+          items:
+            $ref: '#/components/schemas/JobSummaryBucket'
+          type: array
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    MetricSample:
+      additionalProperties: false
+      description: A single resource usage sample for a job process.
+      properties:
+        timestamp:
+          description: The timestamp (RFC3339) when this sample was recorded.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        cpu_fraction:
+          description: CPU usage as a fraction (0.0 to 1.0 per core).
+          example: 0.25
+          format: double
+          type: number
+        memory_bytes:
+          description: Memory usage in bytes.
+          example: 104857600
+          format: int64
+          type: integer
+        connections:
+          description: 'Number of active connections to the process.
+
+            May be null if connection counting is not available.'
+          example: 5
+          format: int64
+          type:
+          - integer
+          - 'null'
+        process_id:
+          description: The process ID being monitored.
+          example: 12345
+          type: integer
+      type: object
+    LoggedError:
+      additionalProperties: false
+      description: The primary error of a job.
+      properties:
+        code:
+          description: The error code.
+          type: string
+        summary:
+          description: Summary of the error.
+          type: string
+        help_url:
+          description: A help URL with further information about the error.
+          type: string
+      type: object
+    LogEntry:
+      additionalProperties: false
+      description: A single log entry.
+      properties:
+        source:
+          description: The source of the log entry. `stdout` or `stderr`.
+          example: stdout
+          type: string
+        timestamp:
+          description: The timestamp (RFC3339) indicating when this log entry was recorded.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type:
+          - string
+          - 'null'
+        data:
+          description: The log entry content.
+          example: 'Running on host: connect'
+          type: string
       type: object
     Job:
       additionalProperties: false
@@ -978,67 +978,67 @@ components:
           example: Order to kill job registered
           type: string
       type: object
-    APIError:
+    AuditLog:
       additionalProperties: false
-      description: The error object returned by the API on failure.
+      description: An audit log entry.
       properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
+        id:
+          description: The identifier of the audit action.
           type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    MetricSample:
-      additionalProperties: false
-      description: A single resource usage sample for a job process.
-      properties:
-        timestamp:
-          description: The timestamp (RFC3339) when this sample was recorded.
+        time:
+          description: Timestamp in RFC3339 format when the action was taken.
           example: '2006-01-02T15:04:05-07:00'
           format: date-time
           type: string
-        cpu_fraction:
-          description: CPU usage as a fraction (0.0 to 1.0 per core).
-          example: 0.25
-          format: double
-          type: number
-        memory_bytes:
-          description: Memory usage in bytes.
-          example: 104857600
-          format: int64
-          type: integer
-        connections:
-          description: 'Number of active connections to the process.
-
-            May be null if connection counting is not available.'
-          example: 5
-          format: int64
+        user_id:
+          description: The user identifier of the actor who performed the audit action.
+          type: string
+        user_guid:
+          description: The user GUID of the actor who performed the audit action.
+          format: uuid
           type:
-          - integer
+          - string
           - 'null'
-        process_id:
-          description: The process ID being monitored.
-          example: 12345
-          type: integer
+        user_description:
+          description: A description of the actor.
+          example: Full name (username)
+          type: string
+        action:
+          description: The audit action taken.
+          example: add_user
+          type: string
+        event_description:
+          description: A human-readable description of the action.
+          example: Added user Full Name (username)
+          type: string
       type: object
-    LogEntries:
+    JobSummaryBucket:
       additionalProperties: false
-      description: Log entries for a job.
+      description: A single time bucket in the scheduled job history histogram.
       properties:
-        entries:
-          description: The list of log entries.
-          items:
-            $ref: '#/components/schemas/AuditLog'
-          type: array
+        timestamp:
+          description: 'The start time of this bucket (RFC3339). Scheduled jobs with start_time in
+
+            the interval
+
+            [timestamp, timestamp+interval) are counted in this bucket.'
+          example: '2026-01-26T00:00:00Z'
+          format: date-time
+          type: string
+        failed:
+          description: Number of scheduled jobs in this bucket that failed.
+          example: 4
+          type: integer
+        succeeded:
+          description: Number of scheduled jobs in this bucket that succeeded.
+          example: 100
+          type: integer
+        skipped:
+          description: 'Number of scheduled jobs in this bucket that were skipped. Note: skipped
+
+            jobs are tracked from Connect version 2026.03.0 onward.'
+          example: 1
+          type: integer
       type: object
   securitySchemes:
     apiKey:

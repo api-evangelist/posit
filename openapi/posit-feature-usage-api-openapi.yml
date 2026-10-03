@@ -69,17 +69,6 @@ paths:
       - Feature Usage
 components:
   schemas:
-    Feature:
-      additionalProperties: false
-      description: Details about a tracked feature.
-      properties:
-        name:
-          description: Name of the feature flag.
-          type: string
-        used:
-          description: Whether or not this feature has been used.
-          type: boolean
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -98,6 +87,17 @@ components:
       required:
       - code
       - error
+      type: object
+    Feature:
+      additionalProperties: false
+      description: Details about a tracked feature.
+      properties:
+        name:
+          description: Name of the feature flag.
+          type: string
+        used:
+          description: Whether or not this feature has been used.
+          type: boolean
       type: object
   securitySchemes:
     apiKey:

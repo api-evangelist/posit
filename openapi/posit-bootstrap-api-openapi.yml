@@ -168,13 +168,6 @@ paths:
       - Bootstrap
 components:
   schemas:
-    BootstrapSuccess:
-      additionalProperties: false
-      properties:
-        api_key:
-          description: The API key for the newly created administrator user.
-          type: string
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -193,6 +186,13 @@ components:
       required:
       - code
       - error
+      type: object
+    BootstrapSuccess:
+      additionalProperties: false
+      properties:
+        api_key:
+          description: The API key for the newly created administrator user.
+          type: string
       type: object
   securitySchemes:
     apiKey:

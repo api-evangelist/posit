@@ -69,6 +69,34 @@ paths:
       - System
 components:
   schemas:
+    ServerStorageSummary:
+      additionalProperties: false
+      description: Aggregate storage metrics for the Connect server.
+      properties:
+        bundles:
+          allOf:
+          - $ref: '#/components/schemas/ServerStorageBundles'
+          description: Bundle storage metrics.
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
     ServerStorageBundles:
       additionalProperties: false
       description: Bundle storage metrics.
@@ -96,34 +124,6 @@ components:
           description: Number of distinct content items with bundles.
           example: 542
           type: integer
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    ServerStorageSummary:
-      additionalProperties: false
-      description: Aggregate storage metrics for the Connect server.
-      properties:
-        bundles:
-          allOf:
-          - $ref: '#/components/schemas/ServerStorageBundles'
-          description: Bundle storage metrics.
       type: object
   securitySchemes:
     apiKey:

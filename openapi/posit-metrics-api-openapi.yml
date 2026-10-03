@@ -64,23 +64,6 @@ paths:
       - Metrics
 components:
   schemas:
-    ActiveUsersWindowCounts:
-      additionalProperties: false
-      description: User counts for a single time window, broken down by role.
-      properties:
-        total:
-          description: Total number of distinct active licensed users in the window.
-          type: integer
-        admin:
-          description: Number of active administrators in the window.
-          type: integer
-        publisher:
-          description: Number of active publishers in the window.
-          type: integer
-        viewer:
-          description: Number of active viewers in the window.
-          type: integer
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -99,6 +82,23 @@ components:
       required:
       - code
       - error
+      type: object
+    ActiveUsersWindowCounts:
+      additionalProperties: false
+      description: User counts for a single time window, broken down by role.
+      properties:
+        total:
+          description: Total number of distinct active licensed users in the window.
+          type: integer
+        admin:
+          description: Number of active administrators in the window.
+          type: integer
+        publisher:
+          description: Number of active publishers in the window.
+          type: integer
+        viewer:
+          description: Number of active viewers in the window.
+          type: integer
       type: object
     ActiveUsersResponse:
       additionalProperties: false

@@ -198,39 +198,6 @@ paths:
       - System Information
 components:
   schemas:
-    RuntimeCaches:
-      additionalProperties: false
-      description: An object containing an array of runtime caches.
-      properties:
-        caches:
-          description: The list of runtime caches.
-          items:
-            $ref: '#/components/schemas/RuntimeCache'
-          type: array
-      type: object
-    DeleteRuntimeCacheInput:
-      additionalProperties: false
-      description: Fields that describe the runtime cache to delete.
-      properties:
-        language:
-          description: The language of the target cache; either "R" or "Python".
-          example: R
-          type: string
-        version:
-          description: The version of the target cache.
-          example: 4.1.2
-          type: string
-        image_name:
-          description: 'The execution environment of the target cache; either "Local" or an
-
-            image name or identifier.'
-          example: Local
-          type: string
-        dry_run:
-          description: When true, check input but do not delete cache.
-          example: true
-          type: boolean
-      type: object
     RuntimeCache:
       additionalProperties: false
       description: A cache of installed packages for a given language, version, and execution environment.
@@ -247,68 +214,6 @@ components:
           description: The name of the cache's execution environment.
           example: Local
           type: string
-      type: object
-    Host:
-      additionalProperties: false
-      description: The fields returned when listing Connect hosts.
-      properties:
-        hostname:
-          description: The hostname or node name configured for the host.
-          example: connect.example.com
-          type: string
-        version:
-          description: The version of Connect running on the host.
-          example: 2021.10.0
-          type: string
-        last_seen:
-          description: The timestamp (RFC3339) of when this host last checked in.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    DeleteRuntimeCacheResponse:
-      additionalProperties: false
-      description: The response from a cache deletion request.
-      properties:
-        language:
-          description: The runtime language of the target cache.
-          example: Python
-          type: string
-        version:
-          description: The language version of the target cache.
-          example: 3.8.12
-          type: string
-        image_name:
-          description: The name of the target cache's execution environment.
-          example: Local
-          type: string
-        task_id:
-          description: 'The identifier for the created deployment task.
-
-            Always `null` for dry-run requests.'
-          example: M49MsuXt6XVzlRdL
-          type:
-          - string
-          - 'null'
       type: object
     ServiceAccounts:
       additionalProperties: false
@@ -339,6 +244,101 @@ components:
           items:
             type: string
           type: array
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    RuntimeCaches:
+      additionalProperties: false
+      description: An object containing an array of runtime caches.
+      properties:
+        caches:
+          description: The list of runtime caches.
+          items:
+            $ref: '#/components/schemas/RuntimeCache'
+          type: array
+      type: object
+    Host:
+      additionalProperties: false
+      description: The fields returned when listing Connect hosts.
+      properties:
+        hostname:
+          description: The hostname or node name configured for the host.
+          example: connect.example.com
+          type: string
+        version:
+          description: The version of Connect running on the host.
+          example: 2021.10.0
+          type: string
+        last_seen:
+          description: The timestamp (RFC3339) of when this host last checked in.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    DeleteRuntimeCacheResponse:
+      additionalProperties: false
+      description: The response from a cache deletion request.
+      properties:
+        language:
+          description: The runtime language of the target cache.
+          example: Python
+          type: string
+        version:
+          description: The language version of the target cache.
+          example: 3.8.12
+          type: string
+        image_name:
+          description: The name of the target cache's execution environment.
+          example: Local
+          type: string
+        task_id:
+          description: 'The identifier for the created deployment task.
+
+            Always `null` for dry-run requests.'
+          example: M49MsuXt6XVzlRdL
+          type:
+          - string
+          - 'null'
+      type: object
+    DeleteRuntimeCacheInput:
+      additionalProperties: false
+      description: Fields that describe the runtime cache to delete.
+      properties:
+        language:
+          description: The language of the target cache; either "R" or "Python".
+          example: R
+          type: string
+        version:
+          description: The version of the target cache.
+          example: 4.1.2
+          type: string
+        image_name:
+          description: 'The execution environment of the target cache; either "Local" or an
+
+            image name or identifier.'
+          example: Local
+          type: string
+        dry_run:
+          description: When true, check input but do not delete cache.
+          example: true
+          type: boolean
       type: object
   securitySchemes:
     apiKey:
