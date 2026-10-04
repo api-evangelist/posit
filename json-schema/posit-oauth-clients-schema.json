@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-clients-schema.json",
+  "title": "OAuthClients",
+  "description": "A paginated list of OAuth clients.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-oauth-clients-api-openapi.yml#/components/schemas/OAuthClients",
+  "allOf": [
+    {
+      "$ref": "#/$defs/OffsetPaging"
+    },
+    {
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/$defs/TrustedPublisher"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "$defs": {
+    "OffsetPaging": {
+      "description": "Offset-based pagination metadata.",
+      "properties": {
+        "current_page": {
+          "description": "The current page of results",
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "description": "The number of items that match the given filters",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TrustedPublisher": {
+      "description": "A binding that allows a service principal (a machine identity such as a\nGitHub Actions workflow) to publish to a single content item. A workload\nthat authenticates as the service principal can upload bundles and deploy\nthis content, but cannot act on any other content.",
+      "properties": {
+        "service_principal_guid": {
+          "description": "The GUID of the service principal bound to this content item.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "description": "The descriptive name of the service principal.",
+          "type": "string"
+        },
+        "role": {
+          "description": "The auth role workloads authenticating as the service principal carry.\nTrusted publishers carry only the viewer role; their ability to publish\ncomes from the per-content grant, not this role.",
+          "type": "string"
+        },
+        "app_role": {
+          "description": "The content access level granted to the service principal on this item.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

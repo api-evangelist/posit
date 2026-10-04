@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-content-hit-entry-schema.json",
+  "title": "ContentHitEntry",
+  "description": "A content hit activity record.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentHitEntry",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The ID of the activity record.",
+      "type": "string"
+    },
+    "user_guid": {
+      "description": "The GUID of the user that visited the content. May be null when the content does not require a user session.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_guid": {
+      "description": "The GUID of the content this activity pertains to.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The timestamp (RFC3339) when the user visited the content.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "data": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ContentHitData"
+        }
+      ],
+      "description": "Additional data about the content hit."
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "ContentHitData": {
+      "additionalProperties": false,
+      "description": "Additional data about a content hit.",
+      "properties": {
+        "path": {
+          "description": "The path consumed for this hit event.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "query": {
+          "description": "The query string for this hit event.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "user_agent": {
+          "description": "The user agent registered for this hit event.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sec_fetch_dest": {
+          "description": "The value of the Sec-Fetch-Dest HTTP header. Common values: document, iframe, empty.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sec_fetch_site": {
+          "description": "The value of the Sec-Fetch-Site HTTP header. Common values: same-origin, same-site, cross-site, none.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

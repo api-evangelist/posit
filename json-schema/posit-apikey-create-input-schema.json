@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-apikey-create-input-schema.json",
+  "title": "APIKeyCreateInput",
+  "description": "An object sent to create an API key.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-api-keys-api-openapi.yml#/components/schemas/APIKeyCreateInput",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "The name for this API key. Use the name to describe the purpose of\nthe key.",
+      "type": "string"
+    },
+    "user_role": {
+      "description": "The role of this API key. Cannot be greater than the role of the\nuser account. Defaults to the user account role when `null`.",
+      "enum": [
+        "administrator",
+        "publisher",
+        "viewer"
+      ],
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "Optional timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)\nformat) indicating when the key expires. After this time, the key\ncan no longer authenticate and is removed automatically. Must be in\nthe future. Omit or set to `null` for a key that never expires.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-rinstallations-schema.json",
+  "title": "RInstallations",
+  "description": "This defines the top-level object that describes the data returned by the server.\nIt contains information about each installation of R that is known.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/RInstallations",
+  "additionalProperties": false,
+  "properties": {
+    "installations": {
+      "description": "The array of information about Posit Connect's R\ninstallations.",
+      "items": {
+        "$ref": "#/$defs/RInstallation"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "RInstallation": {
+      "additionalProperties": false,
+      "description": "This defines the information provided by the server about a single installation of R.",
+      "properties": {
+        "version": {
+          "description": "The version number of this R installation.",
+          "type": "string"
+        },
+        "cluster_name": {
+          "description": "The cluster that contains this R installation.\nA value of `Local` indicates that the R installation is local to the Posit\nConnect server.",
+          "type": "string"
+        },
+        "image_name": {
+          "description": "The image that contains this R installation.\nA value of `Local` indicates that the R installation is local to the Posit\nConnect server.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

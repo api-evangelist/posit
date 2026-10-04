@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-create-environment-input-schema.json",
+  "title": "CreateEnvironmentInput",
+  "description": "The fields that can be specified when creating an environment.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-environments-api-openapi.yml#/components/schemas/CreateEnvironmentInput",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "description": "A human readable title for this environment.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "A human readable description of this environment.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cluster_name": {
+      "description": "The cluster identifier for this environment.\n\nThe value must be \"Kubernetes\" when Off Host Execution is enabled.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The container image that will be used when executing content with this\nenvironment.",
+      "type": "string"
+    },
+    "matching": {
+      "description": "This field indicates how environments can be considered for selection\nwhen Posit Connect is choosing a compatible environment to use when\nexecuting content.\n\n`any` (the default) indicates that the image can be selected by Connect\nautomatically,\n_or_ targeted in the bundle's manifest.\n\n`exact` indicates the image must be explicitly asked for in the bundle's\nmanifest.\n\n`none` indicates that the image should never be selected by Posit Connect.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supervisor": {
+      "description": "The path to the script or command that should be used as the\n[program\nsupervisor](https://docs.posit.co/helm/rstudio-connect/kubernetes-howto/appendices/content_images.html#per-image-supervisors)\nwhen executing content with this environment.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "python": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Installations"
+        }
+      ],
+      "description": "The available Python installations in this environment."
+    },
+    "nodejs": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Installations"
+        }
+      ],
+      "description": "The available Node.js installations in this environment."
+    },
+    "quarto": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Installations"
+        }
+      ],
+      "description": "The available Quarto installations in this environment."
+    },
+    "r": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Installations"
+        }
+      ],
+      "description": "The available R installations in this environment."
+    },
+    "tensorflow": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Installations"
+        }
+      ],
+      "description": "The available TensorFlow installations in this environment."
+    },
+    "volume_mounts": {
+      "description": "The volume mounts for this environment.",
+      "items": {
+        "$ref": "#/$defs/VolumeMount"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "Installation": {
+      "additionalProperties": false,
+      "description": "An instance of an interpreter within an execution environment.",
+      "properties": {
+        "version": {
+          "description": "The semantic version of the interpreter.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The absolute path to the interpreter's executable.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Installations": {
+      "additionalProperties": false,
+      "description": "A list of language installations available to an environment.",
+      "properties": {
+        "installations": {
+          "description": "The list of language installations.",
+          "items": {
+            "$ref": "#/$defs/Installation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "VolumeMount": {
+      "additionalProperties": false,
+      "description": "A volume mount configuration for an environment.",
+      "properties": {
+        "source": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/VolumeSource"
+            }
+          ],
+          "description": "The source specification for this mount."
+        },
+        "target": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/VolumeTarget"
+            }
+          ],
+          "description": "The target specification for this mount."
+        }
+      },
+      "type": "object"
+    },
+    "VolumeSource": {
+      "additionalProperties": false,
+      "description": "The source specification for a volume mount.",
+      "properties": {
+        "volume_type": {
+          "description": "The type of volume.",
+          "type": "string"
+        },
+        "nfs_host": {
+          "description": "The NFS host. Required when `volume_type` is `nfs`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nfs_export_path": {
+          "description": "The NFS export path. Required when `volume_type` is `nfs`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pvc_name": {
+          "description": "The PersistentVolumeClaim name. Required when `volume_type` is `pvc`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "VolumeTarget": {
+      "additionalProperties": false,
+      "description": "The target specification for a volume mount.",
+      "properties": {
+        "path": {
+          "description": "The mount path inside the container.",
+          "type": "string"
+        },
+        "read_only": {
+          "description": "Whether the volume is mounted read-only.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

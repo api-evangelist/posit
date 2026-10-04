@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-job-summary-schema.json",
+  "title": "JobSummary",
+  "description": "Aggregated job statistics with totals and time-bucketed histogram for scheduled jobs only.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/JobSummary",
+  "additionalProperties": false,
+  "properties": {
+    "totals": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/JobSummaryTotals"
+        }
+      ],
+      "description": "Aggregated total counts of scheduled jobs by status."
+    },
+    "buckets": {
+      "description": "Time-series histogram of scheduled job outcomes. Each bucket represents a\ntime interval\nwith counts of succeeded and failed scheduled jobs. The bucket interval is\nautomatically\ndetermined based on the query time range (5 minutes to 30 days).",
+      "items": {
+        "$ref": "#/$defs/JobSummaryBucket"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "JobSummaryBucket": {
+      "additionalProperties": false,
+      "description": "A single time bucket in the scheduled job history histogram.",
+      "properties": {
+        "timestamp": {
+          "description": "The start time of this bucket (RFC3339). Scheduled jobs with start_time in\nthe interval\n[timestamp, timestamp+interval) are counted in this bucket.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "failed": {
+          "description": "Number of scheduled jobs in this bucket that failed.",
+          "type": "integer"
+        },
+        "succeeded": {
+          "description": "Number of scheduled jobs in this bucket that succeeded.",
+          "type": "integer"
+        },
+        "skipped": {
+          "description": "Number of scheduled jobs in this bucket that were skipped. Note: skipped\njobs are tracked from Connect version 2026.03.0 onward.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "JobSummaryTotals": {
+      "additionalProperties": false,
+      "description": "Total counts of scheduled jobs by status.",
+      "properties": {
+        "waiting": {
+          "description": "Number of scheduled jobs queued but not yet started. For time ranges in the\npast, this will be 0.",
+          "type": "integer"
+        },
+        "running": {
+          "description": "Number of currently executing scheduled jobs. For time ranges in the past,\nthis will be 0.",
+          "type": "integer"
+        },
+        "succeeded": {
+          "description": "Number of scheduled jobs that completed successfully (exit code 0).",
+          "type": "integer"
+        },
+        "failed": {
+          "description": "Number of scheduled jobs that failed (non-zero exit code).",
+          "type": "integer"
+        },
+        "skipped": {
+          "description": "Number of scheduled jobs that were skipped. Note: skipped jobs are tracked\nfrom Connect version 2026.03.0 onward.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

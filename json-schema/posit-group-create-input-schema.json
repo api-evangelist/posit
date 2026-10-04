@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-group-create-input-schema.json",
+  "title": "GroupCreateInput",
+  "description": "The fields that can be specified when creating a group.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-groups-api-openapi.yml#/components/schemas/GroupCreateInput",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "The group's desired name",
+      "type": "string"
+    },
+    "unique_id": {
+      "description": "Applies to SAML, OAuth2 and Proxied authentication when\nthe setting `GroupsByUniqueId` is enabled. This field\nmust not be present otherwise.",
+      "type": "string"
+    },
+    "gid": {
+      "description": "The POSIX Group ID (GID) for\n[current user execution](../admin/process-management/index.md#runas-current).\nOnly administrators can set this field, and only when using\nSAML or OAuth2 authentication. Must be a positive integer\nand unique across all groups.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

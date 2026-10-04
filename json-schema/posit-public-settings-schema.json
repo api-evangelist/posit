@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-public-settings-schema.json",
+  "title": "PublicSettings",
+  "description": "Minimal server settings required for rendering the login page and\nrelated unauthenticated pages (e.g., password reset, registration).\nThis is a public endpoint that provides only the information needed\nfor unauthenticated users to authenticate.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/PublicSettings",
+  "additionalProperties": false,
+  "properties": {
+    "authentication": {
+      "description": "Authentication provider configuration.",
+      "type": "object"
+    },
+    "self_registration": {
+      "description": "Whether users can self-register for an account. This is only true\nwhen password authentication is enabled and self-registration is\nconfigured, or when no users exist yet (allowing the first user\nto register).",
+      "type": "boolean"
+    },
+    "system_display_name": {
+      "description": "The display name for the server, used for branding in the UI.",
+      "type": "string"
+    },
+    "public_warning": {
+      "description": "Optional warning message to display on public pages like the\nwelcome and login pages. Can contain HTML.",
+      "type": "string"
+    },
+    "customized_landing": {
+      "description": "Whether a custom landing page is configured to replace the\ndefault welcome page.",
+      "type": "boolean"
+    },
+    "mail_configured": {
+      "description": "Whether email is configured on the server. This determines whether\nfeatures like password reset via email are available.",
+      "type": "boolean"
+    },
+    "prohibited_usernames": {
+      "description": "List of usernames that are not allowed for new user registration.\nThese are reserved system names.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "username_validator": {
+      "description": "The username validation mode. Either \"default\" (strict validation\nwith length and character requirements) or \"permissive\" (minimal\nvalidation, typically used with external authentication providers).",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

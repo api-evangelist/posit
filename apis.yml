@@ -1,28 +1,32 @@
 aid: posit
+
 name: Posit
-description: >-
-  Posit, PBC (formerly RStudio) builds open-source and enterprise software for
-  data science teams working in R and Python. Its professional products —
-  Posit Workbench, Posit Connect, and Posit Package Manager (bundled as Posit
-  Team), plus Posit Cloud and the Positron IDE — help organizations develop,
-  publish, and govern data science work. Posit Connect exposes a full REST
-  Server API (the Connect API) for automating content publishing, deployment
-  bundles, users and groups, permissions, jobs, environments, tags, audit logs,
-  and API keys, authenticated with per-user API keys. Posit also stewards
-  widely used open-source projects including the Tidyverse, Shiny, Quarto, and
-  tidymodels.
+
+description: Posit, PBC (formerly RStudio) builds open-source and enterprise software for data science teams working in R and Python. Its professional
+  products — Posit Workbench, Posit Connect, and Posit Package Manager (bundled as Posit Team), plus Posit Cloud and the Positron IDE — help organizations
+  develop, publish, and govern data science work. Posit Connect exposes a full REST Server API (the Connect API) for automating content publishing,
+  deployment bundles, users and groups, permissions, jobs, environments, tags, audit logs, and API keys, authenticated with per-user API keys.
+  Posit also stewards widely used open-source projects including the Tidyverse, Shiny, Quarto, and tidymodels.
+
 url: https://raw.githubusercontent.com/api-evangelist/posit/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: vc-portfolio
+
 x-backed-by:
 - dcvc
+
 x-tier: stub
+
 x-tier-reason: portfolio-lead
+
 x-enrichment:
   date: '2026-07-20'
   status: enriched
   artifacts_added: 16
   pass: local-v1
+
 deliveryModel:
   model: saas
   open_source: false
@@ -35,6 +39,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -49,10 +54,17 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 specificationVersion: '0.23'
+
 created: '2026-07-17'
+
 modified: '2026-07-20'
+
 image: https://posit.co/wp-content/uploads/2022/10/Posit-Logo-Black-TransparentBackground.png
+
+website: https://posit.co
+
 tags:
 - Company
 - Data Science
@@ -64,6 +76,7 @@ tags:
 - Machine Learning
 - Enterprise
 - Reproducibility
+
 tags_raw:
 - Company
 - Data Science
@@ -76,6 +89,95 @@ tags_raw:
 - Enterprise
 - Reproducibility
 - Machine-Learning
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+
+common:
+- type: Spectral
+  url: rules/posit-rules.yml
+- type: JSONLD
+  url: json-ld/posit-context.jsonld
+- type: Vocabulary
+  url: vocabulary/posit-vocabulary.yml
+- type: Hosts
+  url: hosts/posit-hosts.yml
+- type: Vendors
+  url: vendors/posit-vendors.yml
+- type: PrivacyPolicy
+  url: https://posit.co/about/privacy-policy
+- type: Leadership
+  url: https://posit.co/products/enterprise/team
+- type: Plans
+  url: plans/posit-plans-pricing.yml
+- type: CapabilityMap
+  url: capabilities/posit-capability-edges.yml
+  name: Posit Business Capability Map
+- type: Overlay
+  url: overlays/posit-connect-overlay.yaml
+- type: DomainSecurity
+  url: security/posit-domain-security.yml
+- type: Website
+  url: https://posit.co
+- type: DeveloperPortal
+  url: https://docs.posit.co/
+- type: Documentation
+  url: https://docs.posit.co/connect/
+- type: APIReference
+  url: https://docs.posit.co/connect/api/
+- type: GettingStarted
+  url: https://docs.posit.co/connect/user/
+- type: Blog
+  url: https://posit.co/blog/
+- type: GitHubOrganization
+  url: https://github.com/posit-dev
+- type: Pricing
+  url: https://posit.co/pricing/
+- type: Support
+  url: https://support.posit.co/
+- type: StatusPage
+  url: https://status.posit.co/
+- type: ChangeLog
+  url: https://docs.posit.co/connect/news/
+- type: SDKs
+  url: packages/posit-packages.yml
+- type: CLI
+  url: cli/posit-cli.yml
+- type: AgenticAccess
+  url: agentic-access/posit-agentic-access.yml
+- type: Authentication
+  url: authentication/posit-authentication.yml
+- type: Packages
+  url: packages/posit-packages.yml
+- type: Conventions
+  url: conventions/posit-conventions.yml
+- type: ErrorCatalog
+  url: errors/posit-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/posit-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/posit-lifecycle.yml
+- type: Conformance
+  url: conformance/posit-conformance.yml
+- type: DataModel
+  url: data-model/posit-data-model.yml
+- type: WellKnown
+  url: well-known/posit-well-known.yml
+- type: X-MCPServerCandidate
+  url: mcp/posit-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
+- type: LLMsTxt
+  url: llms/posit-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ChangeLog
+  url: changelog/posit-changelog.yml
+
 apis:
 - aid: posit:posit-api-keys-api
   name: Posit API Keys API
@@ -89,6 +191,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-api-keys-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-apikey-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-apikey-create-input-schema.json
 - aid: posit:posit-audit-logs-api
   name: Posit Audit Logs API
   description: The Audit Logs API from Posit — 3 operation(s) for audit logs.
@@ -99,6 +205,12 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-audit-logs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-audit-log-search-results-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-audit-logs-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-audit-action-result-schema.json
 - aid: posit:posit-bookmarks-api
   name: Posit Bookmarks API
   description: The Bookmarks API from Posit — 1 operation(s) for bookmarks.
@@ -109,6 +221,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-bookmarks-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-bookmark-schema.json
 - aid: posit:posit-bootstrap-api
   name: Posit Bootstrap API
   description: The Bootstrap API from Posit — 2 operation(s) for bootstrap.
@@ -119,6 +233,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-bootstrap-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-bootstrap-success-schema.json
 - aid: posit:posit-bundles-api
   name: Posit Bundles API
   description: The Bundles API from Posit — 5 operation(s) for bundles.
@@ -129,6 +245,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-bundles-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-bundle-schema.json
 - aid: posit:posit-content-api
   name: Posit Content API
   description: The Content API from Posit — 14 operation(s) for content.
@@ -139,6 +257,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-content-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-content-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-update-content-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-create-content-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-integration-association-output-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-access-test-result-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-git-location-output-schema.json
 - aid: posit:posit-content-permissions-api
   name: Posit Content Permissions API
   description: The Content Permissions API from Posit — 2 operation(s) for content permissions.
@@ -149,6 +279,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-content-permissions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-permission-input-schema.json
 - aid: posit:posit-custom-documentation-api
   name: Posit Custom Documentation API
   description: The Custom Documentation API from Posit — 1 operation(s) for custom documentation.
@@ -159,6 +293,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-custom-documentation-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-custom-documentation-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-custom-documentation-result-schema.json
 - aid: posit:posit-environment-permissions-api
   name: Posit Environment Permissions API
   description: The Environment Permissions API from Posit — 2 operation(s) for environment permissions.
@@ -169,6 +307,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-environment-permissions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-environment-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-environment-permission-input-schema.json
 - aid: posit:posit-environments-api
   name: Posit Environments API
   description: The Environments API from Posit — 2 operation(s) for environments.
@@ -181,6 +323,12 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-environments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-environment-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-create-environment-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-update-environment-input-schema.json
 - aid: posit:posit-examples-api
   name: Posit Examples API
   description: The Examples API from Posit — 3 operation(s) for examples.
@@ -203,6 +351,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-feature-usage-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-feature-schema.json
 - aid: posit:posit-groups-api
   name: Posit Groups API
   description: The Groups API from Posit — 6 operation(s) for groups.
@@ -215,6 +365,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-groups-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-group-patch-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-group-ownership-content-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-group-create-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-group-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-group-create-remote-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-group-member-add-input-schema.json
 - aid: posit:posit-instrumentation-api
   name: Posit Instrumentation API
   description: The Instrumentation API from Posit — 3 operation(s) for instrumentation.
@@ -225,6 +387,12 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-instrumentation-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-content-hit-entry-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-shiny-app-usage-logs-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-content-visit-logs-schema.json
 - aid: posit:posit-jobs-api
   name: Posit Jobs API
   description: The Jobs API from Posit — 8 operation(s) for jobs.
@@ -237,6 +405,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-jobs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-job-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-kill-job-order-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-job-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-job-metrics-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-log-entry-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-logged-error-schema.json
 - aid: posit:posit-metrics-api
   name: Posit Metrics API
   description: The Metrics API from Posit — 1 operation(s) for metrics.
@@ -247,6 +427,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-metrics-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-active-users-response-schema.json
 - aid: posit:posit-oauth-clients-api
   name: Posit OAuth Clients API
   description: The OAuth Clients API from Posit — 2 operation(s) for oauth clients.
@@ -257,10 +439,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-oauth-clients-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-oauth-client-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-clients-schema.json
 - aid: posit:posit-oauth-integration-templates-api
   name: Posit OAuth Integration Templates API
-  description: >-
-    The OAuth Integration Templates API from Posit — 2 operation(s) for oauth integration templates.
+  description: The OAuth Integration Templates API from Posit — 2 operation(s) for oauth integration templates.
   humanURL: https://docs.posit.co/connect/api/
   baseURL: https://connect.example.com/__api__
   tags:
@@ -268,6 +453,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-oauth-integration-templates-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-oauth-template-schema.json
 - aid: posit:posit-oauth-integrations-api
   name: Posit OAuth Integrations API
   description: The OAuth Integrations API from Posit — 5 operation(s) for oauth integrations.
@@ -278,6 +465,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-oauth-integrations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-oauth-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-integration-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-integration-association-output-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-integration-update-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-oauth-credentials-schema.json
 - aid: posit:posit-oauth-sessions-api
   name: Posit OAuth Sessions API
   description: The OAuth Sessions API from Posit — 2 operation(s) for oauth sessions.
@@ -288,6 +485,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-oauth-sessions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-oauth-session-schema.json
 - aid: posit:posit-packages-api
   name: Posit Packages API
   description: The Packages API from Posit — 1 operation(s) for packages.
@@ -298,6 +497,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-packages-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-packages-response-schema.json
 - aid: posit:posit-queue-api
   name: Posit Queue API
   description: The Queue API from Posit — 2 operation(s) for queue.
@@ -310,6 +511,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-queue-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-queue-response-schema.json
 - aid: posit:posit-schedules-api
   name: Posit Schedules API
   description: The Schedules API from Posit — 1 operation(s) for schedules.
@@ -322,6 +525,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-schedules-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-schedule-history-response-schema.json
 - aid: posit:posit-server-information-api
   name: Posit Server Information API
   description: The Server Information API from Posit — 7 operation(s) for server information.
@@ -332,6 +537,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-server-information-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-node-js-info-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-python-info-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-tensor-flow-installations-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-quarto-installations-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-rinstallations-schema.json
 - aid: posit:posit-service-tokens-api
   name: Posit Service Tokens API
   description: The Service Tokens API from Posit — 3 operation(s) for service tokens.
@@ -342,6 +559,12 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-service-tokens-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/posit-service-token-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-service-token-create-input-schema.json
+  - type: JSONSchema
+    url: json-schema/posit-service-token-scopes-schema.json
 - aid: posit:posit-storage-api
   name: Posit Storage API
   description: The Storage API from Posit — 2 operation(s) for storage.
@@ -426,75 +649,3 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/posit-vanity-urls-api-openapi.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
-common:
-- type: Plans
-  url: plans/posit-plans-pricing.yml
-- type: CapabilityMap
-  url: capabilities/posit-capability-edges.yml
-  name: Posit Business Capability Map
-- type: Overlay
-  url: overlays/posit-connect-overlay.yaml
-- type: DomainSecurity
-  url: security/posit-domain-security.yml
-- type: Website
-  url: https://posit.co
-- type: DeveloperPortal
-  url: https://docs.posit.co/
-- type: Documentation
-  url: https://docs.posit.co/connect/
-- type: APIReference
-  url: https://docs.posit.co/connect/api/
-- type: GettingStarted
-  url: https://docs.posit.co/connect/user/
-- type: Blog
-  url: https://posit.co/blog/
-- type: GitHubOrganization
-  url: https://github.com/posit-dev
-- type: Pricing
-  url: https://posit.co/pricing/
-- type: TermsOfService
-  url: https://posit.co/about/website-term-of-use/
-- type: Support
-  url: https://support.posit.co/
-- type: StatusPage
-  url: https://status.posit.co/
-- type: ChangeLog
-  url: https://docs.posit.co/connect/news/
-- type: SDKs
-  url: packages/posit-packages.yml
-- type: CLI
-  url: cli/posit-cli.yml
-- type: AgenticAccess
-  url: agentic-access/posit-agentic-access.yml
-- type: Authentication
-  url: authentication/posit-authentication.yml
-- type: Packages
-  url: packages/posit-packages.yml
-- type: Conventions
-  url: conventions/posit-conventions.yml
-- type: ErrorCatalog
-  url: errors/posit-problem-types.yml
-- type: Lifecycle
-  url: lifecycle/posit-lifecycle.yml
-- type: Deprecation
-  url: lifecycle/posit-lifecycle.yml
-- type: Conformance
-  url: conformance/posit-conformance.yml
-- type: DataModel
-  url: data-model/posit-data-model.yml
-- type: WellKnown
-  url: well-known/posit-well-known.yml
-- type: X-MCPServerCandidate
-  url: mcp/posit-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
-- type: LLMsTxt
-  url: llms/posit-llms.txt
-- type: AgentSkill
-  url: skills/_index.yml
-- type: ChangeLog
-  url: changelog/posit-changelog.yml

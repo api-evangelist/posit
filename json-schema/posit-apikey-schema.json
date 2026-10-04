@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-apikey-schema.json",
+  "title": "APIKey",
+  "description": "Object containing API key details.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-api-keys-api-openapi.yml#/components/schemas/APIKey",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The unique identifier for this API key.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name for this API key. The name often describes the purpose of\nthe key.",
+      "type": "string"
+    },
+    "key": {
+      "description": "The secret text for this API key. The full key is only revealed when\nthe key is created. Subsequent reads only reveal the last few\ncharacters.",
+      "type": "string"
+    },
+    "user_role": {
+      "description": "The role of this API key.",
+      "enum": [
+        "administrator",
+        "publisher",
+        "viewer"
+      ],
+      "type": "string"
+    },
+    "created_time": {
+      "description": "Timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)\nformat) indicating when the key was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "active_time": {
+      "description": "Timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)\nformat) indicating approximately when the key was last used.\nHighly active keys only receive periodic updates.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "Timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)\nformat) indicating when the key expires, or `null` if the key never\nexpires.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

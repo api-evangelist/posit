@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-kill-job-order-schema.json",
+  "title": "KillJobOrder",
+  "description": "The result of registering an order to kill a job.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/KillJobOrder",
+  "additionalProperties": false,
+  "properties": {
+    "guid": {
+      "description": "The unique identifier for the registered kill order.",
+      "type": "string"
+    },
+    "app_id": {
+      "description": "This field is deprecated and has been renamed to `content_id`.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "app_guid": {
+      "description": "This field is deprecated and has been renamed to `content_guid`.",
+      "type": "string"
+    },
+    "content_id": {
+      "description": "The identifier for this job's parent content.",
+      "type": "string"
+    },
+    "content_guid": {
+      "description": "The unique identifier for this job's content.",
+      "type": "string"
+    },
+    "job_id": {
+      "description": "The job's id",
+      "format": "int64",
+      "type": "integer"
+    },
+    "job_key": {
+      "description": "The job's unique key identifier.",
+      "type": "string"
+    },
+    "result": {
+      "description": "A short message describing the end result.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

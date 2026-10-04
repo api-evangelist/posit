@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-client-schema.json",
+  "title": "OAuthClient",
+  "description": "OAuthClient represents a registered OAuth client in Posit Connect.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-oauth-clients-api-openapi.yml#/components/schemas/OAuthClient",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The internal numeric identifier of this OAuth client.",
+      "type": "string"
+    },
+    "client_id": {
+      "description": "The OAuth client_id string used during authorization flows.",
+      "type": "string"
+    },
+    "client_name": {
+      "description": "An optional human-readable name for this OAuth client.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "redirect_uris": {
+      "description": "The redirect URIs registered for this OAuth client.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "created_at": {
+      "description": "The timestamp (RFC3339) when this OAuth client was registered.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "last_used_at": {
+      "description": "The timestamp (RFC3339) when this OAuth client was last used, or null if never used.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

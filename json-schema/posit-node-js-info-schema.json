@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-node-js-info-schema.json",
+  "title": "NodeJsInfo",
+  "description": "This defines the top-level object that describes the data returned by the server.\nIt contains information about each installation of Node.js that is known.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/NodeJsInfo",
+  "additionalProperties": false,
+  "properties": {
+    "installations": {
+      "description": "The array of information about Posit Connect's Node.js installations.",
+      "items": {
+        "$ref": "#/$defs/NodeJsInstallation"
+      },
+      "type": "array"
+    },
+    "enabled": {
+      "description": "A `true` value is returned only when Node.js support is enabled in\nConnect and Node.js content is permitted by the product license\n(Advanced tier or Evaluation). It will be `false` in all other cases.",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "NodeJsInstallation": {
+      "additionalProperties": false,
+      "description": "This defines the information provided by the server about a single installation of Node.js.",
+      "properties": {
+        "version": {
+          "description": "The version number of this Node.js installation.",
+          "type": "string"
+        },
+        "cluster_name": {
+          "description": "The cluster that contains this Node.js installation.\nA value of `Local` indicates that the Node.js installation is local to the\nPosit Connect server.",
+          "type": "string"
+        },
+        "image_name": {
+          "description": "The image that contains this Node.js installation.\nA value of `Local` indicates that the Node.js installation is local to the\nPosit Connect server.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

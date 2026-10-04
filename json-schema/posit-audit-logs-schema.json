@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-audit-logs-schema.json",
+  "title": "AuditLogs",
+  "description": "Audit log results with keyset pagination.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLogs",
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "description": "The audit logs",
+      "items": {
+        "$ref": "#/$defs/AuditLog"
+      },
+      "type": "array"
+    },
+    "paging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/KeysetPaging"
+        }
+      ],
+      "description": "Paging object that can be used for navigation."
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "AuditLog": {
+      "additionalProperties": false,
+      "description": "An audit log entry.",
+      "properties": {
+        "id": {
+          "description": "The identifier of the audit action.",
+          "type": "string"
+        },
+        "time": {
+          "description": "Timestamp in RFC3339 format when the action was taken.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "The user identifier of the actor who performed the audit action.",
+          "type": "string"
+        },
+        "user_guid": {
+          "description": "The user GUID of the actor who performed the audit action.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "user_description": {
+          "description": "A description of the actor.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The audit action taken.",
+          "type": "string"
+        },
+        "event_description": {
+          "description": "A human-readable description of the action.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KeysetPaging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PagingLinks"
+        },
+        {
+          "properties": {
+            "cursors": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/PagingCursors"
+                }
+              ],
+              "description": "Cursor values for navigating between pages."
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "Keyset-based pagination metadata with cursors and navigation links."
+    },
+    "PagingCursors": {
+      "additionalProperties": false,
+      "description": "Cursor values for keyset pagination.",
+      "properties": {
+        "previous": {
+          "description": "A cursor ID that can be used with the previous query parameter to get the previous page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A cursor ID that can be used with the next query parameter to get the next page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PagingLinks": {
+      "description": "Navigation links for keyset pagination.",
+      "properties": {
+        "first": {
+          "description": "A full URL of the first page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previous": {
+          "description": "A full URL of the previous page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A full URL of the next page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last": {
+          "description": "A full URL of the last page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

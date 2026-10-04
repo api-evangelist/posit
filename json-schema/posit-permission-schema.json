@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-permission-schema.json",
+  "title": "Permission",
+  "description": "Defines the permission level that a user or group has been granted to a content item.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-content-permissions-api-openapi.yml#/components/schemas/Permission",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The identifier for this permission entry.",
+      "type": "string"
+    },
+    "content_guid": {
+      "description": "The identifier of the content item.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "principal_guid": {
+      "description": "The identifier of the principal (user or group) listed in the ACL.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "principal_type": {
+      "description": "The type of principal.",
+      "type": "string"
+    },
+    "role": {
+      "description": "The level of access that the principal has been\ngiven to this content item.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-job-metrics-schema.json",
+  "title": "JobMetrics",
+  "description": "Resource usage metrics collected for a job.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/JobMetrics",
+  "additionalProperties": false,
+  "properties": {
+    "content_guid": {
+      "description": "The unique identifier for the content item.",
+      "type": "string"
+    },
+    "job_key": {
+      "description": "The job's unique key identifier.",
+      "type": "string"
+    },
+    "samples": {
+      "description": "Array of metric samples collected during job execution.\nMay be empty if no metrics were collected.",
+      "items": {
+        "$ref": "#/$defs/MetricSample"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "MetricSample": {
+      "additionalProperties": false,
+      "description": "A single resource usage sample for a job process.",
+      "properties": {
+        "timestamp": {
+          "description": "The timestamp (RFC3339) when this sample was recorded.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "cpu_fraction": {
+          "description": "CPU usage as a fraction (0.0 to 1.0 per core).",
+          "format": "double",
+          "type": "number"
+        },
+        "memory_bytes": {
+          "description": "Memory usage in bytes.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "connections": {
+          "description": "Number of active connections to the process.\nMay be null if connection counting is not available.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "process_id": {
+          "description": "The process ID being monitored.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

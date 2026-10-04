@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-integration-schema.json",
+  "title": "OAuthIntegration",
+  "description": "OAuthIntegration represents a custom OAuth integration available in Posit Connect.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-oauth-integrations-api-openapi.yml#/components/schemas/OAuthIntegration",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The internal numeric identifier of this OAuth integration.",
+      "type": "string"
+    },
+    "guid": {
+      "description": "The unique identifier of this OAuth integration which is used in REST API\nrequests.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_time": {
+      "description": "The timestamp (RFC3339) indicating when this OAuth integration was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "updated_time": {
+      "description": "The timestamp (RFC3339) indicating when this OAuth integration was last\nupdated.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "name": {
+      "description": "A descriptive name to identify each OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "A brief text to describe each OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "template": {
+      "description": "The template to use to configure this OAuth integration. See List OAuth\ntemplates for more information.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "auth_type": {
+      "description": "The authentication type indicates which OAuth flow is used by this\nintegration. The \"Viewer\" authentication type corresponds to the\nAuthorization Code flow. The \"Service Account\" authentication type\ncorresponds to the Client Credentials flow.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "config": {
+      "additionalProperties": true,
+      "description": "The OAuth integration configuration based on the template. See List OAuth\ntemplates for more\ninformation on available fields for each template. The configuration\ncombines elements from both\noptions and fields from a given template.\n\nFor example, given the following template section:\n\n```\n...\n\"options\": [{\n...\n\"name\": \"auth_mode\",\n\"type\": \"select\",\n\"values\": [\"Confidential\", \"Public\"]\n},\n...\n}],\n\"fields\": [{\n...\n\"name\": \"client_id\",\n\"label\": \"Client ID\"\n},\n...\n}]\n...\n```\n\nA valid OAuthIntegration `config` would be:\n\n```\n{\n...\n\"config\": {\n\"auth_mode\": \"Public\",\n\"client_id\": \"1b9b9733-43f5-4848-a894-f753f2fbaf41\",\n...\n}\n}\n```",
+      "type": "object"
+    },
+    "permissions": {
+      "description": "A list of permission records that define which users or groups have access\nto this OAuth integration.",
+      "items": {
+        "$ref": "#/$defs/OAuthIntegrationPermission"
+      },
+      "type": "array"
+    },
+    "environment_variables": {
+      "description": "The names of the environment variables provisioned by this OAuth integration.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "content_count": {
+      "description": "The number of content items currently using this OAuth integration.\nThis field is only included for administrators.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "OAuthIntegrationPermission": {
+      "additionalProperties": false,
+      "description": "Represents a permission record associated with an OAuth integration that\ndefines which users or groups can access the integration.",
+      "properties": {
+        "id": {
+          "description": "The internal identifier for this permission entry.",
+          "type": "string"
+        },
+        "guid": {
+          "description": "The identifier for this permission entry.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "integration_guid": {
+          "description": "The identifier of the OAuth integration.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_guid": {
+          "description": "The identifier of the user listed in the permission entry.\nThis field will be null if a group is listed.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "group_guid": {
+          "description": "The identifier of the group listed in the permission entry.\nThis field will be null if a user is listed.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

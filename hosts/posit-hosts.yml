@@ -1,0 +1,221 @@
+generated: '2026-10-03'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 19
+  own: 17
+  other_domain: 1
+  platform: 1
+  roles:
+  - api
+  - community
+  - other
+  - partner
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: academy.posit.co
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: api.posit.co
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: api
+  relation: own
+- host: assistant.posit.co
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: conf.posit.co
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: connect.example.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: example.com
+  role: other
+  relation: other-domain
+- host: directory.posit.co
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: docs.posit.co
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - ChangeLog
+  serves:
+  - docs
+  registrable_domain: posit.co
+  role: portal
+  relation: own
+- host: forum.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: community
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: keras.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: opensource.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: pages.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: partners.posit.co
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  types: []
+  serves: []
+  status: 200
+  registrable_domain: posit.co
+  role: partner
+  relation: own
+- host: posit.co
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  - Blog
+  - Pricing
+  - TermsOfService
+  serves: []
+  registrable_domain: posit.co
+  role: website
+  relation: own
+- host: positron.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: shiny.posit.co
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: solutions.posit.co
+  found_by:
+  - probed
+  - site-links
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: posit.co
+  role: other
+  relation: own
+- host: status.posit.co
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: posit.co
+  role: status
+  relation: own
+- host: support.posit.co
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: posit.co
+  role: support
+  relation: own

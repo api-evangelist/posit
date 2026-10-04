@@ -1,0 +1,418 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/posit-api-keys-api-openapi.yml
+- openapi/posit-audit-logs-api-openapi.yml
+- openapi/posit-bookmarks-api-openapi.yml
+- openapi/posit-bootstrap-api-openapi.yml
+- openapi/posit-bundles-api-openapi.yml
+vocabulary:
+  name: Posit Domain Vocabulary
+  description: 'Terms declared by Posit''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-03'
+  terms:
+  - term: APIError
+    definition: The error object returned by the API on failure.
+    tags:
+    - Object
+    source: openapi/posit-api-keys-api-openapi.yml#/components/schemas/APIError
+  - term: APIKeyCreateInput
+    definition: An object sent to create an API key.
+    tags:
+    - Object
+    source: openapi/posit-api-keys-api-openapi.yml#/components/schemas/APIKeyCreateInput
+  - term: APIKey
+    definition: Object containing API key details.
+    tags:
+    - Object
+    source: openapi/posit-api-keys-api-openapi.yml#/components/schemas/APIKey
+  - term: PagingCursors
+    definition: Cursor values for keyset pagination.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/PagingCursors
+  - term: KeysetPaging
+    definition: Keyset-based pagination metadata with cursors and navigation links.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/KeysetPaging
+  - term: AuditLogSearchResults
+    definition: Audit log search results with total count.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLogSearchResults
+  - term: AuditActionResult
+    definition: An audit action available on your Posit Connect server.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditActionResult
+  - term: AuditLogs
+    definition: Audit log results with keyset pagination.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLogs
+  - term: AuditLogEntry
+    definition: An audit log entry.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLogEntry
+  - term: AuditLog
+    definition: An audit log entry.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLog
+  - term: PagingLinks
+    definition: Navigation links for keyset pagination.
+    tags:
+    - Object
+    source: openapi/posit-audit-logs-api-openapi.yml#/components/schemas/PagingLinks
+  - term: Bookmark
+    definition: The fields that are returned when getting a bookmark.
+    tags:
+    - Object
+    source: openapi/posit-bookmarks-api-openapi.yml#/components/schemas/Bookmark
+  - term: BootstrapSuccess
+    definition: 'Object declared by the contract with fields: api_key.'
+    tags:
+    - Object
+    source: openapi/posit-bootstrap-api-openapi.yml#/components/schemas/BootstrapSuccess
+  - term: BundleMetadata
+    definition: Metadata about a bundle including source control information and custom fields.
+    tags:
+    - Object
+    source: openapi/posit-bundles-api-openapi.yml#/components/schemas/BundleMetadata
+  - term: Bundle
+    definition: A deployment bundle associated with a content item.
+    tags:
+    - Object
+    source: openapi/posit-bundles-api-openapi.yml#/components/schemas/Bundle
+  - term: EnvironmentVariables
+    definition: List of environment variables with their values.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/EnvironmentVariables
+  - term: ScheduleVariant
+    definition: Variant information embedded in a schedule.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ScheduleVariant
+  - term: OAuthIntegrationAssociationOutput
+    definition: Represents an association between a content item and an OAuth integration.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/OAuthIntegrationAssociationOutput
+  - term: VariantResults
+    definition: Search results containing variants and pagination metadata.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/VariantResults
+  - term: ContentDeploymentTask
+    definition: Identifies the task that can be used to track the progress of a deployment operation.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentDeploymentTask
+  - term: EnvironmentVariableNames
+    definition: List of environment variable names, without values.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/EnvironmentVariableNames
+  - term: EnvironmentVariable
+    definition: Defines an environment variable and its value.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/EnvironmentVariable
+  - term: ContentResults
+    definition: Search results containing content items and pagination metadata.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentResults
+  - term: Tag
+    definition: A tag used to organize content within Connect.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/Tag
+  - term: Package
+    definition: A package dependency record.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/Package
+  - term: OffsetPaging
+    definition: Offset-based pagination metadata.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/OffsetPaging
+  - term: VariantSearchResult
+    definition: A single variant in search results.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/VariantSearchResult
+  - term: ContentOwner
+    definition: Basic details about the owner of a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentOwner
+  - term: ContentSchedule
+    definition: Schedule information with variant details for a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentSchedule
+  - term: OAuthIntegrationAssociationInput
+    definition: An OAuth integration GUID to associate with a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/OAuthIntegrationAssociationInput
+  - term: ContentRenderTask
+    definition: The result of requesting a content render, containing a task identifier.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentRenderTask
+  - term: ContentPackages
+    definition: Lists the packages installed for a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentPackages
+  - term: GitLocationOutput
+    definition: Git location associated with a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/GitLocationOutput
+  - term: ContentDeploymentInstructions
+    definition: Optionally identifies the target deployment bundle.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentDeploymentInstructions
+  - term: ContentBuildInstructions
+    definition: Optionally identifies the target build bundle.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentBuildInstructions
+  - term: ScheduleLastRun
+    definition: Information about the last scheduled run.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ScheduleLastRun
+  - term: Content
+    definition: The content object models all the "things" you may deploy to Posit Connect. This includes Shiny applications, R Markdown documents,
+      Jupyter notebooks, Plumber APIs, FastAPI and Flask APIs, Python apps, plots, and pins.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/Content
+  - term: ContentRenderInstructions
+    definition: Instructions for rendering a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentRenderInstructions
+  - term: UpdateContentInput
+    definition: The content fields that can be specified when updating a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/UpdateContentInput
+  - term: RRuleSet
+    definition: RFC 5545 recurrence rule components for a schedule.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/RRuleSet
+  - term: CreateContentInput
+    definition: The content fields that can be specified when creating a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/CreateContentInput
+  - term: GitLocationInput
+    definition: Git location associated with a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/GitLocationInput
+  - term: AccessTestResult
+    definition: The results of the public access content verification test.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/AccessTestResult
+  - term: Schedule
+    definition: Base schedule information for a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/Schedule
+  - term: ContentBuildTask
+    definition: Identifies the task that can be used to track the progress of a build operation.
+    tags:
+    - Object
+    source: openapi/posit-content-api-openapi.yml#/components/schemas/ContentBuildTask
+  - term: PermissionInput
+    definition: The fields that can be specified when creating or updating a content permission item.
+    tags:
+    - Object
+    source: openapi/posit-content-permissions-api-openapi.yml#/components/schemas/PermissionInput
+  - term: Permission
+    definition: Defines the permission level that a user or group has been granted to a content item.
+    tags:
+    - Object
+    source: openapi/posit-content-permissions-api-openapi.yml#/components/schemas/Permission
+  - term: CustomDocumentationResult
+    definition: The custom documentation for the Posit Connect server.
+    tags:
+    - Object
+    source: openapi/posit-custom-documentation-api-openapi.yml#/components/schemas/CustomDocumentationResult
+  - term: CustomDocumentationInput
+    definition: The custom documentation for the Posit Connect server.
+    tags:
+    - Object
+    source: openapi/posit-custom-documentation-api-openapi.yml#/components/schemas/CustomDocumentationInput
+  - term: EnvironmentPermission
+    definition: Provides details about the relationship between the execution environment and the user or group that has access to it.
+    tags:
+    - Object
+    source: openapi/posit-environment-permissions-api-openapi.yml#/components/schemas/EnvironmentPermission
+  - term: EnvironmentPermissionInput
+    definition: The fields that can be specified when adding permissions to an execution environment. Note that only one of user_guid or group_guid
+      can be specified in a single request.
+    tags:
+    - Object
+    source: openapi/posit-environment-permissions-api-openapi.yml#/components/schemas/EnvironmentPermissionInput
+  - term: CreateEnvironmentInput
+    definition: The fields that can be specified when creating an environment.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/CreateEnvironmentInput
+  - term: Environment
+    definition: An execution environment available to Posit Connect when Off Host Execution is enabled.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/Environment
+  - term: Installation
+    definition: An instance of an interpreter within an execution environment.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/Installation
+  - term: VolumeTarget
+    definition: The target specification for a volume mount.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/VolumeTarget
+  - term: UpdateEnvironmentInput
+    definition: The fields that can be specified when updating an environment.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/UpdateEnvironmentInput
+  - term: Installations
+    definition: A list of language installations available to an environment.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/Installations
+  - term: VolumeSource
+    definition: The source specification for a volume mount.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/VolumeSource
+  - term: VolumeMount
+    definition: A volume mount configuration for an environment.
+    tags:
+    - Object
+    source: openapi/posit-environments-api-openapi.yml#/components/schemas/VolumeMount
+  - term: Feature
+    definition: Details about a tracked feature.
+    tags:
+    - Object
+    source: openapi/posit-feature-usage-api-openapi.yml#/components/schemas/Feature
+  - term: GroupRemoteSearch
+    definition: The remote group search results with paging information.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupRemoteSearch
+  - term: GroupUpdateInput
+    definition: The fields that can be specified when updating a group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupUpdateInput
+  - term: Group
+    definition: A group object.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/Group
+  - term: TrustedPublisher
+    definition: A binding that allows a service principal (a machine identity such as a GitHub Actions workflow) to publish to a single content
+      item. A workload that authenticates as the service principal can upload bundles and deploy this content, but cannot act on any other content.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/TrustedPublisher
+  - term: GroupCreateInput
+    definition: The fields that can be specified when creating a group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupCreateInput
+  - term: GroupCreateRemoteInput
+    definition: The fields that must be specified when creating a remote group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupCreateRemoteInput
+  - term: GroupPatchInput
+    definition: The fields that can be specified when partially updating a group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupPatchInput
+  - term: GroupOwnershipContent
+    definition: Content item with access control details for a group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupOwnershipContent
+  - term: GroupMemberAddInput
+    definition: The fields that must be specified when adding a member to a group.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupMemberAddInput
+  - term: GroupWithTicket
+    definition: A group object with a temporary ticket for remote group creation.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupWithTicket
+  - term: GroupMember
+    definition: A group member (user).
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupMember
+  - term: GroupOwnershipPermission
+    definition: A principal with access to a content item.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupOwnershipPermission
+  - term: User
+    definition: A user object.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/User
+  - term: GroupMembers
+    definition: The group members list with paging information.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/GroupMembers
+  - term: Groups
+    definition: The groups list with paging information.
+    tags:
+    - Object
+    source: openapi/posit-groups-api-openapi.yml#/components/schemas/Groups
+  - term: ContentVisitLogs
+    definition: Content visit results with keyset pagination.
+    tags:
+    - Object
+    source: openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentVisitLogs
+  - term: ContentHitEntry
+    definition: A content hit activity record.
+    tags:
+    - Object
+    source: openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentHitEntry
+  - term: ContentHitData
+    definition: Additional data about a content hit.
+    tags:
+    - Object
+    source: openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentHitData
+  - term: ContentVisitEntry
+    definition: A content visit record.
+    tags:
+    - Object
+    source: openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentVisitEntry
+  - term: ShinyAppUsageLogs
+    definition: Shiny application usage results with keyset pagination.
+    tags:
+    - Object
+    source: openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ShinyAppUsageLogs

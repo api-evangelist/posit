@@ -1684,264 +1684,351 @@ paths:
       - Content
 components:
   schemas:
-    EnvironmentVariables:
-      description: List of environment variables with their values.
-      items:
-        $ref: '#/components/schemas/EnvironmentVariable'
-      type: array
-    ScheduleVariant:
+    UpdateContentInput:
       additionalProperties: false
-      description: Variant information embedded in a schedule.
+      description: The content fields that can be specified when updating a content item.
       properties:
-        key:
-          description: The variant key.
-          example: default
-          type: string
         name:
-          description: The variant name.
-          example: Default Variant
+          description: 'A simple identifier. Allows alpha-numeric
+
+            characters, periods (`"."`), hyphens (`"-"`), and underscores (`"_"`).'
+          example: quarterly-analysis
           type: string
-        is_default:
-          description: Whether this is the default variant.
+        title:
+          description: The title of this content.
+          example: Quarterly Analysis of Team Velocity
+          type:
+          - string
+          - 'null'
+        description:
+          description: A rich description of this content.
+          example: This report calculates per-team statistics ...
+          type: string
+        owner_guid:
+          description: 'The unique identifier of the user who owns this content item.
+
+            Can only be changed by an administrator.'
+          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
+          format: uuid
+          type:
+          - string
+          - 'null'
+        access_type:
+          description: 'Access type describes how this content manages its viewers. The
+
+            value `all` is the most permissive; any visitor to Posit Connect
+
+            will be able to view this content. The value `logged_in` indicates
+
+            that all Posit Connect accounts may view the content. The `acl`
+
+            value lets specifically enumerated users and groups view the
+
+            content. Users configured as collaborators may always view content.
+
+
+            Access types may be restricted by the Connect configuration or the
+
+            product license.'
+          enum:
+          - all
+          - logged_in
+          - acl
+          example: acl
+          type: string
+        locked:
+          description: Whether or not the content is locked.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        locked_message:
+          description: 'A custom message that is displayed by the content item when locked.
+
+            It is possible to format this message using Markdown.'
+          example: '# This piece of content is locked'
+          type:
+          - string
+          - 'null'
+        connection_timeout:
+          description: 'Maximum number of seconds allowed without data sent or received
+
+            across a client connection. A value of `0` means connections will
+
+            never time-out (not recommended). When `null`, the default
+
+            [`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types
+
+            that are executed on demand.'
+          example: 3600
+          format: int32
+          type:
+          - integer
+          - 'null'
+        read_timeout:
+          description: 'Maximum number of seconds allowed without data received from a
+
+            client connection. A value of `0` means a lack of client (browser)
+
+            interaction never causes the connection to close. When `null`, the
+
+            default [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 3600
+          format: int32
+          type:
+          - integer
+          - 'null'
+        init_timeout:
+          description: 'The maximum number of seconds allowed for an interactive application
+
+            to start. Posit Connect must be able to connect to a newly
+
+            launched application before this threshold has
+
+            elapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.
+
+            Applies only to content types that are executed on demand.'
+          example: 60
+          format: int32
+          type:
+          - integer
+          - 'null'
+        idle_timeout:
+          description: 'The maximum number of seconds a worker process for an interactive
+
+            application to remain alive after it goes idle (no active
+
+            connections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is
+
+            used. Applies only to content types that are executed on demand.'
+          example: 5
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_processes:
+          description: 'Specifies the total number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 3
+          format: int32
+          type:
+          - integer
+          - 'null'
+        min_processes:
+          description: 'Specifies the minimum number of concurrent processes allowed for a
+
+            single interactive application per Posit Connect node. When `null`,
+
+            the default `Scheduler.MinProcesses` is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 0
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_conns_per_process:
+          description: 'Specifies the maximum number of client connections allowed to an
+
+            individual process. Incoming connections which will exceed this
+
+            limit are routed to a new process or rejected. When `null`, the
+
+            default [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to
+
+            content types that are executed on demand.'
+          example: 20
+          format: int32
+          type:
+          - integer
+          - 'null'
+        load_factor:
+          description: 'Controls how aggressively new processes are spawned. When `null`,
+
+            the default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content
+
+            types that are executed on demand.'
+          example: 0.5
+          format: double
+          type:
+          - number
+          - 'null'
+        default_r_environment_management:
+          description: 'Indicates whether or not Connect should create and manage an R
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
           example: true
-          type: boolean
-      type: object
-    OAuthIntegrationAssociationOutput:
-      additionalProperties: false
-      description: Represents an association between a content item and an OAuth integration.
-      properties:
-        app_guid:
-          description: This field is deprecated and has been renamed to `content_guid`.
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-        content_guid:
-          description: The unique identifier of the content item.
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-        oauth_integration_guid:
-          description: The unique identifier of an existing OAuth integration.
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-        oauth_integration_name:
-          description: A descriptive name that identifies the OAuth integration.
-          example: Databricks Integration
+          type:
+          - boolean
+          - 'null'
+        default_py_environment_management:
+          description: 'Indicates whether or not Connect should create and manage a Python
+
+            environment (installing required packages) for this content. When
+
+            `null`, Connect makes this determination based on the server
+
+            configuration.'
+          example: true
+          type:
+          - boolean
+          - 'null'
+        run_as:
+          description: 'The UNIX user that executes this content. When `null`, the default
+
+            [`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content
+
+            types - not `static`.'
+          example: rstudio-connect
           type:
           - string
           - 'null'
-        oauth_integration_description:
-          description: A brief text that describes the OAuth integration.
-          example: Integration with external system
+        run_as_current_user:
+          description: 'Indicates that Connect should run processes for this content item
+
+            under the Unix account of the user who visits it. Content accessed
+
+            anonymously will continue to run as the specified `run_as` user.'
+          example: false
           type:
-          - string
+          - boolean
           - 'null'
-        oauth_integration_template:
-          description: The template used to configure this OAuth integration.
-          example: custom
+        memory_request:
+          description: 'The minimum amount of RAM this content needs when executing or
+
+            rendering, expressed in bytes. When `null`, the default
+
+            [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is used.'
+          example: 1073741824
+          format: int64
           type:
-          - string
+          - integer
           - 'null'
-        oauth_integration_auth_type:
-          description: 'Indicates which OAuth flow is used by this integration. The
+        memory_limit:
+          description: 'The maximum amount of RAM this content will be allowed to consume
 
-            "Viewer" authentication type corresponds to the Authorization Code
+            when executing or rendering, expressed in bytes. When `null`, the
 
-            flow. The "Service Account" authentication type corresponds to the
-
-            Client Credentials flow.'
-          example: Viewer
+            default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
+          example: 2147483648
+          format: int64
           type:
-          - string
+          - integer
           - 'null'
-        created_time:
-          description: The timestamp (RFC3339) indicating when this association was created.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-      type: object
-    VariantResults:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of variants, paginated
-            items:
-              $ref: '#/components/schemas/VariantSearchResult'
-            type: array
-        type: object
-      description: Search results containing variants and pagination metadata.
-    ContentDeploymentTask:
-      additionalProperties: false
-      description: Identifies the task that can be used to track the progress of a deployment operation.
-      properties:
-        task_id:
-          description: Identifier for the created deployment task.
-          example: M49MsuXt6XVzlRdL
-          type: string
-      type: object
-    EnvironmentVariableNames:
-      description: List of environment variable names, without values.
-      items:
-        type: string
-      type: array
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    EnvironmentVariable:
-      additionalProperties: false
-      description: Defines an environment variable and its value.
-      properties:
-        name:
-          description: Name of the environment variable.
-          example: DEBUG
-          type: string
-        value:
-          description: 'New value of the environment variable.
+        cpu_request:
+          description: 'The minimum amount of compute power this content needs when executing
 
-            A value of `null` will delete the environment variable.'
-          example: '1'
-          type:
-          - string
-          - 'null'
-      type: object
-    ContentResults:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of content items, paginated
-            items:
-              $ref: '#/components/schemas/Content'
-            type: array
-          warnings:
-            description: 'An optional list of warning messages generated during query
+            or rendering, expressed in CPU Units, where 1.0 unit is equivalent to
 
-              processing. Warnings indicate issues with the search query that
+            1 physical or virtual core. Fractional values are allowed. When `null`,
 
-              did not prevent the search from completing, such as invalid
-
-              filter values. When a filter value is invalid, the filter is
-
-              ignored and results are returned unfiltered for that field.
-
-              This field is omitted when there are no warnings.'
-            example:
-            - 'Invalid value for ''published'' filter: ''bogus''. Expected true or false'
-            items:
-              type: string
-            type: array
-        type: object
-      description: Search results containing content items and pagination metadata.
-    Tag:
-      additionalProperties: false
-      description: A tag used to organize content within Connect.
-      properties:
-        id:
-          description: The identifier for the tag.
-          example: '101'
-          type: string
-        name:
-          description: The name of the tag.
-          example: financial-statements
-          type: string
-        parent_id:
-          description: 'The identifier for the parent tag. If there is no parent_id,
-
-            the tag is a top-level tag.'
-          example: '102'
-          type:
-          - string
-          - 'null'
-        created_time:
-          description: The timestamp (RFC3339) indicating when the tag was created.
-          example: '2006-01-02T15:04:05Z'
-          format: date-time
-          type: string
-        updated_time:
-          description: The timestamp (RFC3339) indicating when the tag was updated.
-          example: '2006-01-02T15:04:05Z'
-          format: date-time
-          type: string
-      type: object
-    Package:
-      additionalProperties: false
-      description: A package dependency record.
-      properties:
-        language:
-          description: Language ecosystem the package belongs to
-          type: string
-        language_version:
-          description: Version of R or Python used by the content
-          example: 3.12.4
-          type: string
-        name:
-          description: Package name
-          example: shiny
-          type: string
-        version:
-          description: Package version
-          example: 1.0.3
-          type: string
-        hash:
-          description: Package description hash for R packages
-          example: e4ac73dd20b2f6420742aac66e5d3e78
-          type:
-          - string
-          - 'null'
-        bundle_id:
-          description: Identifier for the bundle that depends on this package
-          example: '449'
-          type: string
-        app_id:
-          description: This field is deprecated and has been renamed to `content_id`.
-          example: '145'
-          type: string
-        app_guid:
-          description: This field is deprecated and has been renamed to `content_guid`.
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-        content_id:
-          description: Numeric identifier for the content that depends on this package
-          example: '145'
-          type: string
-        content_guid:
-          description: The unique identifier of the content item that depends on this package
-          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
-          format: uuid
-          type: string
-      type: object
-    OffsetPaging:
-      description: Offset-based pagination metadata.
-      properties:
-        current_page:
-          description: The current page of results
+            the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is used.'
           example: 1
-          format: int32
-          type: integer
-        total:
-          description: The number of items that match the given filters
+          format: double
+          type:
+          - number
+          - 'null'
+        cpu_limit:
+          description: 'The maximum amount of compute power this content will be allowed to
+
+            consume when executing or rendering, expressed in CPU Units. When
+
+            `null`, the default [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
+          example: 1.5
+          format: double
+          type:
+          - number
+          - 'null'
+        amd_gpu_limit:
+          description: 'The number of AMD GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used.'
           example: 1
-          format: int32
-          type: integer
+          format: int64
+          type:
+          - integer
+          - 'null'
+        nvidia_gpu_limit:
+          description: 'The number of NVIDIA GPUs allocated to run this content. When `null`,
+
+            the default [`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used.'
+          example: 1
+          format: int64
+          type:
+          - integer
+          - 'null'
+        service_account_name:
+          description: The name of the Kubernetes service account used to run this content.
+          example: rstudio-connect-content
+          type:
+          - string
+          - 'null'
+        default_image_name:
+          description: 'The default container image used when none is defined by the bundle''s
+
+            manifest.'
+          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
+          type:
+          - string
+          - 'null'
+        default_environment_guid:
+          description: 'The default execution environment used when none is defined by the
+
+            bundle''s manifest.'
+          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
+          format: uuid
+          type:
+          - string
+          - 'null'
+        metrics_collection_enabled:
+          description: 'Controls whether per-job resource metrics are collected for this
+
+            content item. When `null`, inherits the server-wide default.'
+          example: true
+          type:
+          - boolean
+          - 'null'
+        notify_on_share:
+          description: 'Controls whether email notifications are sent by default when
+
+            users or groups are added as collaborators or viewers.
+
+            When `null`, inherits the server-wide default from
+
+            [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare).'
+          example: true
+          type:
+          - boolean
+          - 'null'
+        otel_enabled:
+          description: Controls whether content telemetry is collected for this content item.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        content_category:
+          description: 'The `content_category` field refines the type of content specified by
+
+            `app_mode`. For example, the MCP content category indicates content that
+
+            serves as an MCP server. Allowed values are `""` (empty string to clear)
+
+            or `"mcp"`.'
+          example: mcp
+          type:
+          - string
+          - 'null'
       type: object
     VariantSearchResult:
       additionalProperties: false
@@ -2031,6 +2118,23 @@ components:
           - $ref: '#/components/schemas/Schedule'
           description: Schedule information for this variant. Omitted if no schedule exists.
       type: object
+    ScheduleVariant:
+      additionalProperties: false
+      description: Variant information embedded in a schedule.
+      properties:
+        key:
+          description: The variant key.
+          example: default
+          type: string
+        name:
+          description: The variant name.
+          example: Default Variant
+          type: string
+        is_default:
+          description: Whether this is the default variant.
+          example: true
+          type: boolean
+      type: object
     ContentOwner:
       additionalProperties: false
       description: Basic details about the owner of a content item.
@@ -2059,6 +2163,233 @@ components:
           - string
           - 'null'
       type: object
+    OAuthIntegrationAssociationOutput:
+      additionalProperties: false
+      description: Represents an association between a content item and an OAuth integration.
+      properties:
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_guid:
+          description: The unique identifier of the content item.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_guid:
+          description: The unique identifier of an existing OAuth integration.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        oauth_integration_name:
+          description: A descriptive name that identifies the OAuth integration.
+          example: Databricks Integration
+          type:
+          - string
+          - 'null'
+        oauth_integration_description:
+          description: A brief text that describes the OAuth integration.
+          example: Integration with external system
+          type:
+          - string
+          - 'null'
+        oauth_integration_template:
+          description: The template used to configure this OAuth integration.
+          example: custom
+          type:
+          - string
+          - 'null'
+        oauth_integration_auth_type:
+          description: 'Indicates which OAuth flow is used by this integration. The
+
+            "Viewer" authentication type corresponds to the Authorization Code
+
+            flow. The "Service Account" authentication type corresponds to the
+
+            Client Credentials flow.'
+          example: Viewer
+          type:
+          - string
+          - 'null'
+        created_time:
+          description: The timestamp (RFC3339) indicating when this association was created.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+      type: object
+    Package:
+      additionalProperties: false
+      description: A package dependency record.
+      properties:
+        language:
+          description: Language ecosystem the package belongs to
+          type: string
+        language_version:
+          description: Version of R or Python used by the content
+          example: 3.12.4
+          type: string
+        name:
+          description: Package name
+          example: shiny
+          type: string
+        version:
+          description: Package version
+          example: 1.0.3
+          type: string
+        hash:
+          description: Package description hash for R packages
+          example: e4ac73dd20b2f6420742aac66e5d3e78
+          type:
+          - string
+          - 'null'
+        bundle_id:
+          description: Identifier for the bundle that depends on this package
+          example: '449'
+          type: string
+        app_id:
+          description: This field is deprecated and has been renamed to `content_id`.
+          example: '145'
+          type: string
+        app_guid:
+          description: This field is deprecated and has been renamed to `content_guid`.
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+        content_id:
+          description: Numeric identifier for the content that depends on this package
+          example: '145'
+          type: string
+        content_guid:
+          description: The unique identifier of the content item that depends on this package
+          example: f4b3d7f6-7e1d-4f3b-8b9e-3f0f3f3f3f3f
+          format: uuid
+          type: string
+      type: object
+    RRuleSet:
+      additionalProperties: false
+      description: RFC 5545 recurrence rule components for a schedule.
+      properties:
+        dtstart:
+          description: 'The DTSTART component specifying when the schedule begins,
+
+            including timezone information.'
+          example: DTSTART;TZID=America/New_York:20240115T090000
+          type: string
+        rrules:
+          description: An array of RRULE components defining the recurrence pattern.
+          example:
+          - RRULE:FREQ=DAILY;INTERVAL=2
+          items:
+            type: string
+          type: array
+        until:
+          description: The UNTIL component specifying when the schedule ends, if applicable.
+          example: UNTIL=20240215T090000Z
+          type: string
+      type: object
+    ContentResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of content items, paginated
+            items:
+              $ref: '#/components/schemas/Content'
+            type: array
+          warnings:
+            description: 'An optional list of warning messages generated during query
+
+              processing. Warnings indicate issues with the search query that
+
+              did not prevent the search from completing, such as invalid
+
+              filter values. When a filter value is invalid, the filter is
+
+              ignored and results are returned unfiltered for that field.
+
+              This field is omitted when there are no warnings.'
+            example:
+            - 'Invalid value for ''published'' filter: ''bogus''. Expected true or false'
+            items:
+              type: string
+            type: array
+        type: object
+      description: Search results containing content items and pagination metadata.
+    ContentPackages:
+      description: Lists the packages installed for a content item.
+      items:
+        $ref: '#/components/schemas/Package'
+      type: array
+    ContentBuildTask:
+      additionalProperties: false
+      description: Identifies the task that can be used to track the progress of a build operation.
+      properties:
+        task_id:
+          description: Identifier for the created build task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    ContentDeploymentInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target deployment bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to deploy. If not provided, the most recently uploaded bundle is deployed.
+          type:
+          - string
+          - 'null'
+        activate:
+          description: Whether the deployed bundle should be activated after deployment. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+      type: object
+    Tag:
+      additionalProperties: false
+      description: A tag used to organize content within Connect.
+      properties:
+        id:
+          description: The identifier for the tag.
+          example: '101'
+          type: string
+        name:
+          description: The name of the tag.
+          example: financial-statements
+          type: string
+        parent_id:
+          description: 'The identifier for the parent tag. If there is no parent_id,
+
+            the tag is a top-level tag.'
+          example: '102'
+          type:
+          - string
+          - 'null'
+        created_time:
+          description: The timestamp (RFC3339) indicating when the tag was created.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+        updated_time:
+          description: The timestamp (RFC3339) indicating when the tag was updated.
+          example: '2006-01-02T15:04:05Z'
+          format: date-time
+          type: string
+      type: object
     ContentSchedule:
       allOf:
       - $ref: '#/components/schemas/Schedule'
@@ -2068,6 +2399,86 @@ components:
             - $ref: '#/components/schemas/ScheduleVariant'
         type: object
       description: Schedule information with variant details for a content item.
+    ContentBuildInstructions:
+      additionalProperties: false
+      description: Optionally identifies the target build bundle.
+      properties:
+        bundle_id:
+          description: The identifier of the bundle to build. If not provided, the most recently uploaded bundle is built.
+          type:
+          - string
+          - 'null'
+        activate:
+          description: Whether the built bundle should be activated after building. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+      type: object
+    EnvironmentVariables:
+      description: List of environment variables with their values.
+      items:
+        $ref: '#/components/schemas/EnvironmentVariable'
+      type: array
+    ContentDeploymentTask:
+      additionalProperties: false
+      description: Identifies the task that can be used to track the progress of a deployment operation.
+      properties:
+        task_id:
+          description: Identifier for the created deployment task.
+          example: M49MsuXt6XVzlRdL
+          type: string
+      type: object
+    ContentRenderInstructions:
+      additionalProperties: false
+      description: Instructions for rendering a content item.
+      properties:
+        variant_key:
+          description: 'The key of the variant to render. If not specified, the default
+
+            variant is rendered.'
+          example: HidI2Kwq
+          type:
+          - string
+          - 'null'
+      type: object
+    EnvironmentVariable:
+      additionalProperties: false
+      description: Defines an environment variable and its value.
+      properties:
+        name:
+          description: Name of the environment variable.
+          example: DEBUG
+          type: string
+        value:
+          description: 'New value of the environment variable.
+
+            A value of `null` will delete the environment variable.'
+          example: '1'
+          type:
+          - string
+          - 'null'
+      type: object
+    GitLocationInput:
+      additionalProperties: false
+      description: Git location associated with a content item.
+      properties:
+        repository:
+          description: URL for the repository.
+          example: https://github.com/rstudio/connect-examples
+          type: string
+        branch:
+          description: The tracked Git branch.
+          example: main
+          type: string
+        directory:
+          description: Directory containing the content.
+          example: stock-report
+          type: string
+        polling:
+          description: Indicates that the Git repository should be regularly polled.
+          example: false
+          type: boolean
+      type: object
     OAuthIntegrationAssociationInput:
       additionalProperties: false
       description: An OAuth integration GUID to associate with a content item.
@@ -2078,20 +2489,17 @@ components:
           format: uuid
           type: string
       type: object
-    ContentRenderTask:
-      additionalProperties: false
-      description: The result of requesting a content render, containing a task identifier.
-      properties:
-        task_id:
-          description: Identifier for the created render task.
-          example: M49MsuXt6XVzlRdL
-          type: string
-      type: object
-    ContentPackages:
-      description: Lists the packages installed for a content item.
-      items:
-        $ref: '#/components/schemas/Package'
-      type: array
+    VariantResults:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of variants, paginated
+            items:
+              $ref: '#/components/schemas/VariantSearchResult'
+            type: array
+        type: object
+      description: Search results containing variants and pagination metadata.
     GitLocationOutput:
       additionalProperties: false
       description: Git location associated with a content item.
@@ -2126,84 +2534,38 @@ components:
           format: date-time
           type: string
       type: object
-    ContentDeploymentInstructions:
+    APIError:
       additionalProperties: false
-      description: Optionally identifies the target deployment bundle.
+      description: The error object returned by the API on failure.
       properties:
-        bundle_id:
-          description: The identifier of the bundle to deploy. If not provided, the most recently uploaded bundle is deployed.
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
           type:
-          - string
+          - object
           - 'null'
-        activate:
-          description: Whether the deployed bundle should be activated after deployment. Defaults to true.
-          type:
-          - boolean
-          - 'null'
+      required:
+      - code
+      - error
       type: object
-    ContentBuildInstructions:
+    EnvironmentVariableNames:
+      description: List of environment variable names, without values.
+      items:
+        type: string
+      type: array
+    ContentRenderTask:
       additionalProperties: false
-      description: Optionally identifies the target build bundle.
+      description: The result of requesting a content render, containing a task identifier.
       properties:
-        bundle_id:
-          description: The identifier of the bundle to build. If not provided, the most recently uploaded bundle is built.
-          type:
-          - string
-          - 'null'
-        activate:
-          description: Whether the built bundle should be activated after building. Defaults to true.
-          type:
-          - boolean
-          - 'null'
-      type: object
-    ScheduleLastRun:
-      additionalProperties: false
-      description: Information about the last scheduled run.
-      properties:
-        job_key:
-          description: The unique key of the job.
-          example: abc123xyz
+        task_id:
+          description: Identifier for the created render task.
+          example: M49MsuXt6XVzlRdL
           type: string
-        status:
-          description: The status of the last run.
-          example: success
-          type: string
-        scheduled_time:
-          description: The scheduled time of the run.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        queued_time:
-          description: The time the run was queued.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        start_time:
-          description: The time the run started.
-          format: date-time
-          type: string
-        end_time:
-          description: The time the run ended. Null if still running.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        run_duration_ms:
-          description: The duration of the run in milliseconds. Null if still running.
-          example: 5000
-          format: int64
-          type:
-          - integer
-          - 'null'
-        exit_code:
-          description: The exit code of the job. Null if still running.
-          example: 0
-          format: int64
-          type:
-          - integer
-          - 'null'
       type: object
     Content:
       additionalProperties: false
@@ -3114,386 +3476,84 @@ components:
           - string
           - 'null'
       type: object
-    ContentRenderInstructions:
+    AccessTestResult:
       additionalProperties: false
-      description: Instructions for rendering a content item.
+      description: The results of the public access content verification test.
       properties:
-        variant_key:
-          description: 'The key of the variant to render. If not specified, the default
-
-            variant is rendered.'
-          example: HidI2Kwq
-          type:
-          - string
-          - 'null'
-      type: object
-    UpdateContentInput:
-      additionalProperties: false
-      description: The content fields that can be specified when updating a content item.
-      properties:
-        name:
-          description: 'A simple identifier. Allows alpha-numeric
-
-            characters, periods (`"."`), hyphens (`"-"`), and underscores (`"_"`).'
-          example: quarterly-analysis
-          type: string
-        title:
-          description: The title of this content.
-          example: Quarterly Analysis of Team Velocity
-          type:
-          - string
-          - 'null'
-        description:
-          description: A rich description of this content.
-          example: This report calculates per-team statistics ...
-          type: string
-        owner_guid:
-          description: 'The unique identifier of the user who owns this content item.
-
-            Can only be changed by an administrator.'
+        guid:
+          description: The unique identifier of this content item.
           example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
           format: uuid
-          type:
-          - string
-          - 'null'
-        access_type:
-          description: 'Access type describes how this content manages its viewers. The
-
-            value `all` is the most permissive; any visitor to Posit Connect
-
-            will be able to view this content. The value `logged_in` indicates
-
-            that all Posit Connect accounts may view the content. The `acl`
-
-            value lets specifically enumerated users and groups view the
-
-            content. Users configured as collaborators may always view content.
-
-
-            Access types may be restricted by the Connect configuration or the
-
-            product license.'
-          enum:
-          - all
-          - logged_in
-          - acl
-          example: acl
           type: string
-        locked:
-          description: Whether or not the content is locked.
+        url:
+          description: 'The URL that was used to test access to this content. Computed from
+
+            the associated GUID for this content or the optional vanity URL.'
+          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
+          type: string
+        checked_at:
+          description: The timestamp (RFC3339) indicating when the access test was performed.
+          example: '2006-01-02T15:04:05-07:00'
+          format: date-time
+          type: string
+        accessible:
+          description: 'Indicates whether or not the test was able to access the content item
+
+            on the public internet.'
           example: false
-          type:
-          - boolean
-          - 'null'
-        locked_message:
-          description: 'A custom message that is displayed by the content item when locked.
+          type: boolean
+        message:
+          description: 'An optional informational message with extra details about the test
 
-            It is possible to format this message using Markdown.'
-          example: '# This piece of content is locked'
-          type:
-          - string
-          - 'null'
-        connection_timeout:
-          description: 'Maximum number of seconds allowed without data sent or received
+            result. See the
 
-            across a client connection. A value of `0` means connections will
+            [Admin Guide](../admin/licensing/index.md#public-access)
 
-            never time-out (not recommended). When `null`, the default
-
-            [`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types
-
-            that are executed on demand.'
-          example: 3600
-          format: int32
-          type:
-          - integer
-          - 'null'
-        read_timeout:
-          description: 'Maximum number of seconds allowed without data received from a
-
-            client connection. A value of `0` means a lack of client (browser)
-
-            interaction never causes the connection to close. When `null`, the
-
-            default [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content
-
-            types that are executed on demand.'
-          example: 3600
-          format: int32
-          type:
-          - integer
-          - 'null'
-        init_timeout:
-          description: 'The maximum number of seconds allowed for an interactive application
-
-            to start. Posit Connect must be able to connect to a newly
-
-            launched application before this threshold has
-
-            elapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.
-
-            Applies only to content types that are executed on demand.'
-          example: 60
-          format: int32
-          type:
-          - integer
-          - 'null'
-        idle_timeout:
-          description: 'The maximum number of seconds a worker process for an interactive
-
-            application to remain alive after it goes idle (no active
-
-            connections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is
-
-            used. Applies only to content types that are executed on demand.'
-          example: 5
-          format: int32
-          type:
-          - integer
-          - 'null'
-        max_processes:
-          description: 'Specifies the total number of concurrent processes allowed for a
-
-            single interactive application per Posit Connect node. When `null`,
-
-            the default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to
-
-            content types that are executed on demand.'
-          example: 3
-          format: int32
-          type:
-          - integer
-          - 'null'
-        min_processes:
-          description: 'Specifies the minimum number of concurrent processes allowed for a
-
-            single interactive application per Posit Connect node. When `null`,
-
-            the default `Scheduler.MinProcesses` is used. Applies only to
-
-            content types that are executed on demand.'
-          example: 0
-          format: int32
-          type:
-          - integer
-          - 'null'
-        max_conns_per_process:
-          description: 'Specifies the maximum number of client connections allowed to an
-
-            individual process. Incoming connections which will exceed this
-
-            limit are routed to a new process or rejected. When `null`, the
-
-            default [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to
-
-            content types that are executed on demand.'
-          example: 20
-          format: int32
-          type:
-          - integer
-          - 'null'
-        load_factor:
-          description: 'Controls how aggressively new processes are spawned. When `null`,
-
-            the default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content
-
-            types that are executed on demand.'
-          example: 0.5
-          format: double
-          type:
-          - number
-          - 'null'
-        default_r_environment_management:
-          description: 'Indicates whether or not Connect should create and manage an R
-
-            environment (installing required packages) for this content. When
-
-            `null`, Connect makes this determination based on the server
-
-            configuration.'
-          example: true
-          type:
-          - boolean
-          - 'null'
-        default_py_environment_management:
-          description: 'Indicates whether or not Connect should create and manage a Python
-
-            environment (installing required packages) for this content. When
-
-            `null`, Connect makes this determination based on the server
-
-            configuration.'
-          example: true
-          type:
-          - boolean
-          - 'null'
-        run_as:
-          description: 'The UNIX user that executes this content. When `null`, the default
-
-            [`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content
-
-            types - not `static`.'
-          example: rstudio-connect
-          type:
-          - string
-          - 'null'
-        run_as_current_user:
-          description: 'Indicates that Connect should run processes for this content item
-
-            under the Unix account of the user who visits it. Content accessed
-
-            anonymously will continue to run as the specified `run_as` user.'
-          example: false
-          type:
-          - boolean
-          - 'null'
-        memory_request:
-          description: 'The minimum amount of RAM this content needs when executing or
-
-            rendering, expressed in bytes. When `null`, the default
-
-            [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is used.'
-          example: 1073741824
-          format: int64
-          type:
-          - integer
-          - 'null'
-        memory_limit:
-          description: 'The maximum amount of RAM this content will be allowed to consume
-
-            when executing or rendering, expressed in bytes. When `null`, the
-
-            default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.'
-          example: 2147483648
-          format: int64
-          type:
-          - integer
-          - 'null'
-        cpu_request:
-          description: 'The minimum amount of compute power this content needs when executing
-
-            or rendering, expressed in CPU Units, where 1.0 unit is equivalent to
-
-            1 physical or virtual core. Fractional values are allowed. When `null`,
-
-            the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is used.'
-          example: 1
-          format: double
-          type:
-          - number
-          - 'null'
-        cpu_limit:
-          description: 'The maximum amount of compute power this content will be allowed to
-
-            consume when executing or rendering, expressed in CPU Units. When
-
-            `null`, the default [`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.'
-          example: 1.5
-          format: double
-          type:
-          - number
-          - 'null'
-        amd_gpu_limit:
-          description: 'The number of AMD GPUs allocated to run this content. When `null`,
-
-            the default [`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used.'
-          example: 1
-          format: int64
-          type:
-          - integer
-          - 'null'
-        nvidia_gpu_limit:
-          description: 'The number of NVIDIA GPUs allocated to run this content. When `null`,
-
-            the default [`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used.'
-          example: 1
-          format: int64
-          type:
-          - integer
-          - 'null'
-        service_account_name:
-          description: The name of the Kubernetes service account used to run this content.
-          example: rstudio-connect-content
-          type:
-          - string
-          - 'null'
-        default_image_name:
-          description: 'The default container image used when none is defined by the bundle''s
-
-            manifest.'
-          example: rstudio/content-base:r4.1.3-py3.10.11-jammy
-          type:
-          - string
-          - 'null'
-        default_environment_guid:
-          description: 'The default execution environment used when none is defined by the
-
-            bundle''s manifest.'
-          example: 36538b83-ea6d-4839-ae8e-53c52ac5f0bf
-          format: uuid
-          type:
-          - string
-          - 'null'
-        metrics_collection_enabled:
-          description: 'Controls whether per-job resource metrics are collected for this
-
-            content item. When `null`, inherits the server-wide default.'
-          example: true
-          type:
-          - boolean
-          - 'null'
-        notify_on_share:
-          description: 'Controls whether email notifications are sent by default when
-
-            users or groups are added as collaborators or viewers.
-
-            When `null`, inherits the server-wide default from
-
-            [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare).'
-          example: true
-          type:
-          - boolean
-          - 'null'
-        otel_enabled:
-          description: Controls whether content telemetry is collected for this content item.
-          example: false
-          type:
-          - boolean
-          - 'null'
-        content_category:
-          description: 'The `content_category` field refines the type of content specified by
-
-            `app_mode`. For example, the MCP content category indicates content that
-
-            serves as an MCP server. Allowed values are `""` (empty string to clear)
-
-            or `"mcp"`.'
-          example: mcp
-          type:
-          - string
-          - 'null'
+            for additional guidance about specific messages.'
+          example: content is not publicly accessible
+          type: string
       type: object
-    RRuleSet:
-      additionalProperties: false
-      description: RFC 5545 recurrence rule components for a schedule.
+    Schedule:
+      description: Base schedule information for a content item.
       properties:
-        dtstart:
-          description: 'The DTSTART component specifying when the schedule begins,
-
-            including timezone information.'
-          example: DTSTART;TZID=America/New_York:20240115T090000
+        type:
+          description: The schedule type.
+          example: rrule
           type: string
-        rrules:
-          description: An array of RRULE components defining the recurrence pattern.
-          example:
-          - RRULE:FREQ=DAILY;INTERVAL=2
-          items:
-            type: string
-          type: array
-        until:
-          description: The UNTIL component specifying when the schedule ends, if applicable.
-          example: UNTIL=20240215T090000Z
+        schedule:
+          allOf:
+          - $ref: '#/components/schemas/RRuleSet'
+          description: The recurrence rule in RFC5545 format.
+        next_run:
+          description: The next scheduled run time. Null if no future runs are scheduled.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        email:
+          description: Whether email notifications are enabled for this schedule.
+          example: false
+          type: boolean
+        timezone:
+          description: The timezone for this schedule.
+          example: America/New_York
           type: string
+        start_time:
+          description: The start time of the schedule window.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        end_time:
+          description: The end time of the schedule window. Null if the schedule runs indefinitely.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        last_run:
+          allOf:
+          - $ref: '#/components/schemas/ScheduleLastRun'
+          description: Information about the last scheduled run.
       type: object
     CreateContentInput:
       additionalProperties: false
@@ -3806,114 +3866,54 @@ components:
           - boolean
           - 'null'
       type: object
-    GitLocationInput:
+    ScheduleLastRun:
       additionalProperties: false
-      description: Git location associated with a content item.
+      description: Information about the last scheduled run.
       properties:
-        repository:
-          description: URL for the repository.
-          example: https://github.com/rstudio/connect-examples
+        job_key:
+          description: The unique key of the job.
+          example: abc123xyz
           type: string
-        branch:
-          description: The tracked Git branch.
-          example: main
+        status:
+          description: The status of the last run.
+          example: success
           type: string
-        directory:
-          description: Directory containing the content.
-          example: stock-report
-          type: string
-        polling:
-          description: Indicates that the Git repository should be regularly polled.
-          example: false
-          type: boolean
-      type: object
-    AccessTestResult:
-      additionalProperties: false
-      description: The results of the public access content verification test.
-      properties:
-        guid:
-          description: The unique identifier of this content item.
-          example: 25438b83-ea6d-4839-ae8e-53c52ac5f9ce
-          format: uuid
-          type: string
-        url:
-          description: 'The URL that was used to test access to this content. Computed from
-
-            the associated GUID for this content or the optional vanity URL.'
-          example: https://posit-connect.company.com/content/9d8e7f3e-92e8-4a08-b0ff-196319cc56ae
-          type: string
-        checked_at:
-          description: The timestamp (RFC3339) indicating when the access test was performed.
-          example: '2006-01-02T15:04:05-07:00'
-          format: date-time
-          type: string
-        accessible:
-          description: 'Indicates whether or not the test was able to access the content item
-
-            on the public internet.'
-          example: false
-          type: boolean
-        message:
-          description: 'An optional informational message with extra details about the test
-
-            result. See the
-
-            [Admin Guide](../admin/licensing/index.md#public-access)
-
-            for additional guidance about specific messages.'
-          example: content is not publicly accessible
-          type: string
-      type: object
-    Schedule:
-      description: Base schedule information for a content item.
-      properties:
-        type:
-          description: The schedule type.
-          example: rrule
-          type: string
-        schedule:
-          allOf:
-          - $ref: '#/components/schemas/RRuleSet'
-          description: The recurrence rule in RFC5545 format.
-        next_run:
-          description: The next scheduled run time. Null if no future runs are scheduled.
+        scheduled_time:
+          description: The scheduled time of the run.
           format: date-time
           type:
           - string
           - 'null'
-        email:
-          description: Whether email notifications are enabled for this schedule.
-          example: false
-          type: boolean
-        timezone:
-          description: The timezone for this schedule.
-          example: America/New_York
-          type: string
+        queued_time:
+          description: The time the run was queued.
+          format: date-time
+          type:
+          - string
+          - 'null'
         start_time:
-          description: The start time of the schedule window.
+          description: The time the run started.
           format: date-time
-          type:
-          - string
-          - 'null'
-        end_time:
-          description: The end time of the schedule window. Null if the schedule runs indefinitely.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        last_run:
-          allOf:
-          - $ref: '#/components/schemas/ScheduleLastRun'
-          description: Information about the last scheduled run.
-      type: object
-    ContentBuildTask:
-      additionalProperties: false
-      description: Identifies the task that can be used to track the progress of a build operation.
-      properties:
-        task_id:
-          description: Identifier for the created build task.
-          example: M49MsuXt6XVzlRdL
           type: string
+        end_time:
+          description: The time the run ended. Null if still running.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_duration_ms:
+          description: The duration of the run in milliseconds. Null if still running.
+          example: 5000
+          format: int64
+          type:
+          - integer
+          - 'null'
+        exit_code:
+          description: The exit code of the job. Null if still running.
+          example: 0
+          format: int64
+          type:
+          - integer
+          - 'null'
       type: object
   securitySchemes:
     apiKey:

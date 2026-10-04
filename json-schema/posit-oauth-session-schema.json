@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-session-schema.json",
+  "title": "OAuthSession",
+  "description": "OAuthSession represents an OAuth session for a given user associated to an OAuth integration.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-oauth-sessions-api-openapi.yml#/components/schemas/OAuthSession",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The internal numeric identifier of this OAuth session.",
+      "type": "string"
+    },
+    "guid": {
+      "description": "The unique identifier of this OAuth session which is used in REST API\nrequests.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "user_guid": {
+      "description": "The unique identifier of the user that is associated with this OAuth\nsession.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "oauth_integration_guid": {
+      "description": "The unique identifier of the OAuth integration that is associated with this\nOAuth session.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "has_refresh_token": {
+      "description": "Indicates whether this OAuth session has a refresh token.",
+      "type": "boolean"
+    },
+    "created_time": {
+      "description": "The timestamp (RFC3339) indicating when this OAuth session was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "updated_time": {
+      "description": "The timestamp (RFC3339) indicating when this OAuth session was last updated.",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

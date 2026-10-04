@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-environment-permission-input-schema.json",
+  "title": "EnvironmentPermissionInput",
+  "description": "The fields that can be specified when adding permissions to an execution environment.\nNote that only one of user_guid or group_guid can be specified in a single request.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-environment-permissions-api-openapi.yml#/components/schemas/EnvironmentPermissionInput",
+  "additionalProperties": false,
+  "properties": {
+    "user_guid": {
+      "description": "The identifier of the user. Do not specify this field if you are adding a group.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "group_guid": {
+      "description": "The identifier of the group. Do not specify this field if you are adding a user.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

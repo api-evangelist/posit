@@ -1,59 +1,153 @@
-# Posit
+# Posit Docs
 
-> [Posit](https://posit.co) (formerly RStudio) provides open-source and enterprise-ready professional software for data science teams using R and Python.
+> Documentation for Posit products and services
 
-## Core Products
-- [Posit Team](https://posit.co/products/enterprise/team/): A bundle of Workbench, Connect, and Package Manager for end-to-end data science.
-- [Posit Workbench](https://posit.co/products/enterprise/workbench/): Centralized development environment supporting RStudio IDE, VS Code, Jupyter, and Positron.
-- [Posit Connect](https://posit.co/products/enterprise/connect/): A publishing platform for Shiny apps, Quarto docs, APIs (Plumber/FastAPI), and more.
-- [Posit Package Manager](https://posit.co/products/enterprise/package-manager/): Repository management for secure, reproducible R and Python packages.
-- [Posit Cloud](https://posit.cloud/): A cloud-based version of Posit’s IDEs for easy sharing and teaching.
-- [Positron](https://positron.posit.co/): A next-generation, extensible data science IDE built by Posit.
+## Pages
 
-## Open Source
-- [Tidyverse](https://www.tidyverse.org/): A collection of R packages designed for data science.
-- [Quarto](https://quarto.org/): An open-source scientific and technical publishing system.
-- [Shiny](https://shiny.posit.co/): A framework for building interactive web applications with R and Python.
-- [tidymodels](https://www.tidymodels.org/): A framework for modeling and machine learning using tidyverse principles.
+- [Install R](https://docs.posit.co/resources/install-r.llms.md)
+- [Azure reference architectures](https://docs.posit.co/reference-architectures/azure.llms.md)
+- [Upgrade Linux OS and Posit Team — Rollout to production](https://docs.posit.co/how-to-guides/upgrade-os-and-product/rollout.llms.md)
+- [Upgrade and/or Migrate Posit Team — Phase 1, Install upgraded products](https://docs.posit.co/how-to-guides/upgrade-os-and-product/phase1-upgrade.llms.md)
+- [Upgrade Linux OS and Posit Team — Alternative Path, Upgrade OS In-Place](https://docs.posit.co/how-to-guides/upgrade-os-and-product/not-rec-upgrade-os-in-place.llms.md)
+- [Shiny Server Pro to Posit Connect Migration Process](https://docs.posit.co/how-to-guides/guides/migrate-shiny-server-pro-to-connect.llms.md)
+- [Managed credentials](https://docs.posit.co/concepts/managed-credentials.llms.md)
+- [RStudio IDE / Workbench - supported versions](https://docs.posit.co/supported-versions/rstudio.llms.md)
+- [Supported versions](https://docs.posit.co/supported-versions/index.llms.md)
+- [Archived versions (unsupported)](https://docs.posit.co/supported-versions/archived.llms.md)
+- [Open source resources](https://docs.posit.co/resources/open-source.llms.md)
+- [Install Quarto](https://docs.posit.co/resources/install-quarto.llms.md)
+- [Install Python](https://docs.posit.co/resources/install-python-posit.llms.md)
+- [Install Node.js](https://docs.posit.co/resources/install-nodejs.llms.md)
+- [Posit Team](https://docs.posit.co/posit-team/index.llms.md)
+- [index](https://docs.posit.co/other/index.llms.md)
+- [Licensing FAQ](https://docs.posit.co/licensing/licensing-faq.llms.md)
+- [Posit how-to guides](https://docs.posit.co/how-to-guides/index.llms.md)
+- [Product guide index](https://docs.posit.co/guides.llms.md)
+- [Networking](https://docs.posit.co/getting-started/networking.llms.md)
+- [Install Posit professional products](https://docs.posit.co/getting-started/index.llms.md)
+- [Configuration of Posit professional products](https://docs.posit.co/getting-started/configuration.llms.md)
+- [Posit enterprise products](https://docs.posit.co/enterprise/index.llms.md)
+- [docs.posit.co site changes announcement](https://docs.posit.co/blog/posts/2024.01.5-product-pages.llms.md)
+- [Posit Package Manager documentation consolidation](https://docs.posit.co/blog/posts/2023.05.5-ppm_docs.llms.md)
+- [Blog posts](https://docs.posit.co/blog/index.llms.md)
+- [Posit Connect documentation consolidation](https://docs.posit.co/blog/posts/2023.06.0-pct_docs.llms.md)
+- [Cloud products](https://docs.posit.co/cloud-products/index.llms.md)
+- [Posit floating license servers](https://docs.posit.co/floating-license-servers.llms.md)
+- [Database](https://docs.posit.co/getting-started/database.llms.md)
+- [Install planner](https://docs.posit.co/getting-started/install-planner.llms.md)
+- [Storage](https://docs.posit.co/getting-started/storage.llms.md)
+- [How to install SSL certificates on a Linux server](https://docs.posit.co/how-to-guides/guides/install-ssl-certificates.llms.md)
+- [index](https://docs.posit.co/index.llms.md)
+- [Licensing](https://docs.posit.co/licensing/licensing.llms.md)
+- [Platform support](https://docs.posit.co/platform-support.llms.md)
+- [Reference architectures](https://docs.posit.co/reference-architectures.llms.md)
+- [Install Python in an offline environment](https://docs.posit.co/resources/install-python-offline.llms.md)
+- [Install Python](https://docs.posit.co/resources/install-python-uv.llms.md)
+- [Install R from source](https://docs.posit.co/resources/install-r-source.llms.md)
+- [Posit Support](https://docs.posit.co/support.llms.md)
+- [Posit Connect - supported versions](https://docs.posit.co/supported-versions/connect.llms.md)
+- [Posit Package Manager - supported versions](https://docs.posit.co/supported-versions/package-manager.llms.md)
+- [Posit concepts](https://docs.posit.co/concepts/index.llms.md)
+- [Sizing recommendations](https://docs.posit.co/getting-started/sizing.llms.md)
+- [Upgrade and/or Migrate Posit Team — Overview](https://docs.posit.co/how-to-guides/upgrade-os-and-product/index.llms.md)
+- [Upgrade and/or Migrate Posit Team — Testing of Phase 1 upgraded installations](https://docs.posit.co/how-to-guides/upgrade-os-and-product/phase1-test.llms.md)
+- [Upgrade and/or Migrate Posit Team — Phase 2, Migrate content and data](https://docs.posit.co/how-to-guides/upgrade-os-and-product/phase2-migrate.llms.md)
+- [AWS reference architectures](https://docs.posit.co/reference-architectures/aws.llms.md)
+- [Generic architectures for Posit Team](https://docs.posit.co/reference-architectures/posit-team.llms.md)
 
-## Legal, Policies & Compliance
-- [Product Accessibility Statement](https://posit.co/about/accessibility/)
-- [Software License Descriptions](https://posit.co/about/software-license-descriptions/)
-- [TAM Terms of Service](https://posit.co/about/tam-tos/)
-- [Premium Plus Support Terms](https://posit.co/about/premium-plus-support-terms/)
-- [Acceptable Use Policy](https://posit.co/about/acceptable-use-policy/)
-- [Website Terms of Use](https://posit.co/about/website-term-of-use/)
-- [Trademark Guidelines](https://posit.co/about/trademark-guidelines/)
-- [ECCN Policy](https://posit.co/about/eccn-policy/)
-- [Product Security](https://posit.co/about/security/)
-- [Posit AI Service Terms](https://posit.co/about/posit-ai-service-terms/)
-- [Benefit Corporation Annual Report](https://posit.co/about/pbc-report/)
+## Additional product documentation
 
-## Documentation
-- [Posit Documentation Hub](https://docs.posit.co/): Central index for all professional product manuals.
-- [Connect API Reference](https://docs.posit.co/connect/api/): Machine-readable API specs for automation.
-- [Solutions Guide](https://solutions.posit.co/): Best practices for deploying Posit products in the enterprise.\
+### Posit Workbench
 
-`Full details available at: [llms-full.txt](https://posit.co/llms-full.txt)`
-## Custom page context
-- [AI-Powered R & Python Data Science You Can Actually Trust | Snowflake + Posit Demo](https://posit.co/llms-ai-powered-r-python-data-science-you-can-actually-trust-snowflake-posit-demo.txt)
-- [Champions: Business case](https://posit.co/llms-champions-business-case.txt)
-- [Don't bring a spreadsheet to a data fight](https://posit.co/llms-dont-bring-spreadsheet-data-fight.txt)
-- [How Posit Team governs AI for public sector and government](https://posit.co/llms-how-posit-team-governs-ai-public-sector-and-government.txt)
-- [Introducing the Posit Connect Cloud Advanced Plan](https://posit.co/llms-introducing-the-posit-connect-cloud-advanced-plan.txt)
-- [Is your R and Python data science work reaching the people who need it?](https://posit.co/llms-scaling-data-science-organization.txt)
-- [Modern data science infrastructure for federal health agencies.](https://posit.co/llms-federal-health-data-science.txt)
-- [Posit Assistant: AI That Sees Your Data, Code, and Visualizations for Reproducible Analysis](https://posit.co/llms-posit-assistant-ai-sees-your-data-code-and-visualizations-reproducible-analysis.txt)
-- [Posit Named "One to Watch" in Snowflake's 2026 Modern Marketing Data Stack Report  ](https://posit.co/llms-posit-named-one-watch-snowflakes-2026-modern-marketing-data-stack-report.txt)
-- [Posit Package Manager 2026.05.0: VS Code Extension Governance and Smarter Package Search](https://posit.co/llms-posit-package-manager-2026050-vs-code-extension-governance-and-smarter-package-search.txt)
-- [Posit Package Manager Is Now GA in the Posit Team Native App](https://posit.co/llms-posit-package-manager-now-ga-posit-team-native-app.txt)
-- [Posit wins two Snowflake Partner Awards and launches Posit Assistant at Snowflake Summit 2026](https://posit.co/llms-posit-wins-two-snowflake-partner-awards-and-launches-posit-assistant-snowflake-summit-2026.txt)
-- [Public Sector Shiny Showcase: Government Agencies Worldwide Building Data Science with R, Python, and Shiny](https://posit.co/llms-public-sector-shiny-showcase-government-agencies-worldwide-building-data-science-r-python.txt)
-- [Scaling Code-First, AI-Powered Data Science on Snowflake: The Posit Playbook for Financial Services and Insurance](https://posit.co/llms-enterprise-guide-posit-snowflake-fsi.txt)
-- [Score a Disease Surveillance Model Inside Snowflake, Without Moving](https://posit.co/llms-score-a-disease-surveillance-model-inside-snowflake-without-moving-your-data.txt)
-- [Secure sharing on Connect Cloud: SOC 2 Type I and new OAuth integrations](https://posit.co/llms-secure-sharing-connect-cloud-soc-2-type-i-and-new-oauth-integrations.txt)
-- [Snowflake Native Apps vs. Connected Apps for financial services](https://posit.co/llms-snowflake-native-apps-vs-connected-apps-financial-services.txt)
-- [Solutions: Data Scientists](https://posit.co/llms-data-scientists.txt)
-- [The Missing Layer in your SCE: Why AI in Pharma Needs Skills, Not Just Prompts](https://posit.co/llms-the-missing-layer-in-your-sce-why-ai-in-pharma-needs-skills-not-just-prompts.txt)
-- [What makes Posit different from proprietary analytics vendors](https://posit.co/llms-what-makes-posit-different-proprietary-analytics-vendors.txt)
-- [When the regulator asks what actually ran, can your platform answer?](https://posit.co/llms-audit-ready-model-governance.txt)
+- [Posit Workbench Documentation](https://docs.posit.co/ide/server-pro/)
+- [Job Launcher Guide](https://docs.posit.co/ide/server-pro/admin/job_launcher/job_launcher.html)
+- [Posit Workbench Snowflake Native Application Guide](https://docs.posit.co/partnerships/snowflake/)
+
+### RStudio IDE
+
+- [RStudio IDE User Guide](https://docs.posit.co/ide/user/)
+
+### RStudio Desktop Pro
+
+- [RStudio Desktop Administration Guide](https://docs.posit.co/ide/desktop-pro/)
+
+### Posit Connect
+
+- [Posit Connect Documentation](https://docs.posit.co/connect/)
+
+### Posit Package Manager
+
+- [Posit Package Manager Documentation](https://docs.posit.co/rspm/)
+
+### Posit Professional Drivers
+
+- [Database using R](https://solutions.posit.co/connections/db/)
+
+### Posit Chronicle
+
+- [Posit Chronicle Documentation](https://docs.posit.co/chronicle/)
+
+### Shiny Server Pro
+
+- [Shiny Server Pro Admin Guide](https://docs.posit.co/shiny-server/)
+
+### shinyapps.io
+
+- [shinyapps.io User Guide](https://docs.posit.co/shinyapps.io/)
+
+### Posit Cloud
+
+- [Posit Cloud Documentation](https://docs.posit.co/cloud/)
+
+### Posit Connect Cloud
+
+- [Posit Connect Cloud Documentation](https://docs.posit.co/connect-cloud/)
+
+### Posit Workbench Reference Architecture resources
+
+- [Selecting the Right Architecture for Posit Workbench](https://docs.posit.co/ide/server-pro/reference-architectures/)
+- [Generic Architectures for Posit Workbench](https://docs.posit.co/ide/server-pro/reference-architectures/generic-architectures.html)
+- [AWS Single Server Architecture](https://docs.posit.co/ide/server-pro/reference-architectures/aws-single-server.html)
+- [AWS Kubernetes](https://docs.posit.co/ide/server-pro/reference-architectures/aws-eks.html)
+- [AWS ParallelCluster Architecture](https://docs.posit.co/ide/server-pro/reference-architectures/aws-parallelcluster.html)
+
+### Posit Connect Reference Architecture resources
+
+- [Selecting the Right Architecture for Posit Connect](https://docs.posit.co/connect/admin/reference-architectures/overview/)
+- [Generic Architectures](https://docs.posit.co/connect/admin/reference-architectures/generic-architectures/)
+- [AWS Single Server](https://docs.posit.co/connect/admin/reference-architectures/aws/single-server/)
+- [AWS Single Server Robust](https://docs.posit.co/connect/admin/reference-architectures/aws/single-server-robust/)
+- [AWS Load Balanced](https://docs.posit.co/connect/admin/reference-architectures/aws/load-balanced/)
+- [AWS Kubernetes](https://docs.posit.co/connect/admin/reference-architectures/aws/k8s/)
+- [Azure Single Server](https://docs.posit.co/connect/admin/reference-architectures/azure/single-server/)
+- [Azure Single Server Robust](https://docs.posit.co/connect/admin/reference-architectures/azure/single-server-robust/)
+- [Azure Load Balanced](https://docs.posit.co/connect/admin/reference-architectures/azure/load-balanced/)
+- [Azure Kubernetes](https://docs.posit.co/connect/admin/reference-architectures/azure/k8s/)
+
+### Posit Package Manager Reference Architecture resources
+
+- [Selecting the Right Architecture for Posit Package Manager](https://docs.posit.co/rspm/admin/reference-architectures/overview/)
+- [Generic Architectures](https://docs.posit.co/rspm/admin/reference-architectures/generic-architectures/)
+- [AWS Single Server](https://docs.posit.co/rspm/admin/reference-architectures/aws/reference-architecture-aws-single-server/)
+- [AWS Load Balanced](https://docs.posit.co/rspm/admin/reference-architectures/aws/reference-architecture-aws-lb/)
+- [AWS Kubernetes](https://docs.posit.co/rspm/admin/reference-architectures/aws/reference-architecture-aws-k8s/)
+- [Azure Single Server](https://docs.posit.co/rspm/admin/reference-architectures/azure/reference-architecture-azure-single-server/)
+- [Azure Load Balanced](https://docs.posit.co/rspm/admin/reference-architectures/azure/reference-architecture-azure-lb/)
+- [Azure Kubernetes](https://docs.posit.co/rspm/admin/reference-architectures/azure/reference-architecture-azure-k8s/)
+
+### Partnerships
+
+- [Snowflake](https://docs.posit.co/partnerships/snowflake/)
+- [Databricks](https://docs.posit.co/partnerships/databricks/)
+- [Amazon SageMaker](https://docs.posit.co/partnerships/aws-sagemaker/)
+
+### Helm
+
+- [Posit Workbench Helm Chart](https://docs.posit.co/helm/charts/rstudio-workbench/README.html)
+- [Posit Connect Helm Chart](https://docs.posit.co/helm/charts/rstudio-connect/README.html)
+- [Posit Package Manager Helm Chart](https://docs.posit.co/helm/charts/rstudio-pm/README.html)
+- [Posit Chronicle Helm Chart](https://docs.posit.co/helm/charts/posit-chronicle/README.html)
+
+### Troubleshooting
+
+- [Troubleshooting](https://docs.posit.co/troubleshooting)

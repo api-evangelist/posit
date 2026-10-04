@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-queue-response-schema.json",
+  "title": "QueueResponse",
+  "description": "An object containing a paginated list of queue items.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-queue-api-openapi.yml#/components/schemas/QueueResponse",
+  "allOf": [
+    {
+      "$ref": "#/$defs/OffsetPaging"
+    },
+    {
+      "properties": {
+        "results": {
+          "description": "The list of items in the current page",
+          "items": {
+            "$ref": "#/$defs/QueueItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "$defs": {
+    "OffsetPaging": {
+      "description": "Offset-based pagination metadata.",
+      "properties": {
+        "current_page": {
+          "description": "The current page of results",
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "description": "The number of items that match the given filters",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "QueueItem": {
+      "additionalProperties": false,
+      "description": "An item in the job queue.",
+      "properties": {
+        "id": {
+          "description": "The ID of the queue object",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of queue",
+          "type": "string"
+        },
+        "job_type": {
+          "description": "The type of job in the queue",
+          "type": "string"
+        },
+        "created_time": {
+          "description": "The time that the item was placed in the queue",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated_time": {
+          "description": "The time that the enqueued item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "started_time": {
+          "description": "The time that work started on the queued item",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

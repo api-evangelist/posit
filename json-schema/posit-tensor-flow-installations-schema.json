@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-tensor-flow-installations-schema.json",
+  "title": "TensorFlowInstallations",
+  "description": "This defines the top-level object that describes the data returned by the server.\nIt contains information about each installation of TensorFlow that is known.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/TensorFlowInstallations",
+  "additionalProperties": false,
+  "properties": {
+    "installations": {
+      "description": "The array of information about Posit Connect's TensorFlow\ninstallations.",
+      "items": {
+        "$ref": "#/$defs/TensorFlowInstallation"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "TensorFlowInstallation": {
+      "additionalProperties": false,
+      "description": "This defines the information provided by the server about a single installation of TensorFlow.",
+      "properties": {
+        "version": {
+          "description": "The version number of this TensorFlow installation.",
+          "type": "string"
+        },
+        "cluster_name": {
+          "description": "The cluster that contains this TensorFlow installation.\nA value of `Local` indicates that the TensorFlow installation is local to\nthe Posit Connect server.",
+          "type": "string"
+        },
+        "image_name": {
+          "description": "The image that contains this TensorFlow installation.\nA value of `Local` indicates that the TensorFlow installation is local to\nthe Posit Connect server.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

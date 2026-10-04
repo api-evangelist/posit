@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-access-test-result-schema.json",
+  "title": "AccessTestResult",
+  "description": "The results of the public access content verification test.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-content-api-openapi.yml#/components/schemas/AccessTestResult",
+  "additionalProperties": false,
+  "properties": {
+    "guid": {
+      "description": "The unique identifier of this content item.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "url": {
+      "description": "The URL that was used to test access to this content. Computed from\nthe associated GUID for this content or the optional vanity URL.",
+      "type": "string"
+    },
+    "checked_at": {
+      "description": "The timestamp (RFC3339) indicating when the access test was performed.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "accessible": {
+      "description": "Indicates whether or not the test was able to access the content item\non the public internet.",
+      "type": "boolean"
+    },
+    "message": {
+      "description": "An optional informational message with extra details about the test\nresult. See the\n[Admin Guide](../admin/licensing/index.md#public-access)\nfor additional guidance about specific messages.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

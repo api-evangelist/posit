@@ -143,18 +143,6 @@ paths:
       - Custom Documentation
 components:
   schemas:
-    CustomDocumentationResult:
-      additionalProperties: false
-      description: The custom documentation for the Posit Connect server.
-      properties:
-        content:
-          description: The custom documentation content, formatted using Markdown.
-          type: string
-        created_time:
-          description: The time when the custom documentation was created.
-          format: date-time
-          type: string
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -175,6 +163,18 @@ components:
       - error
       type: object
     CustomDocumentationInput:
+      additionalProperties: false
+      description: The custom documentation for the Posit Connect server.
+      properties:
+        content:
+          description: The custom documentation content, formatted using Markdown.
+          type: string
+        created_time:
+          description: The time when the custom documentation was created.
+          format: date-time
+          type: string
+      type: object
+    CustomDocumentationResult:
       additionalProperties: false
       description: The custom documentation for the Posit Connect server.
       properties:

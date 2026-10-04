@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-content-visit-logs-schema.json",
+  "title": "ContentVisitLogs",
+  "description": "Content visit results with keyset pagination.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ContentVisitLogs",
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "description": "The content visit logs.",
+      "items": {
+        "$ref": "#/$defs/ContentVisitEntry"
+      },
+      "type": "array"
+    },
+    "paging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/KeysetPaging"
+        }
+      ],
+      "description": "Paging information for navigating result sets."
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "ContentVisitEntry": {
+      "additionalProperties": false,
+      "description": "A content visit record.",
+      "properties": {
+        "content_guid": {
+          "description": "The GUID of the content this visit pertains to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_guid": {
+          "description": "The GUID of the user that visited the content. May be null when the content does not require a user session.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variant_key": {
+          "description": "The key of the variant the user visited. Null for static content.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "time": {
+          "description": "The timestamp (RFC3339) when the user visited the content.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "rendering_id": {
+          "description": "The ID of the rendering the user visited. Null for static content.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bundle_id": {
+          "description": "The ID of the particular bundle used.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "path": {
+          "description": "The path requested by the user.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "data_version": {
+          "description": "The data version the record was recorded with.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "user_agent": {
+          "description": "The user agent that made the request.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "KeysetPaging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PagingLinks"
+        },
+        {
+          "properties": {
+            "cursors": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/PagingCursors"
+                }
+              ],
+              "description": "Cursor values for navigating between pages."
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "Keyset-based pagination metadata with cursors and navigation links."
+    },
+    "PagingCursors": {
+      "additionalProperties": false,
+      "description": "Cursor values for keyset pagination.",
+      "properties": {
+        "previous": {
+          "description": "A cursor ID that can be used with the previous query parameter to get the previous page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A cursor ID that can be used with the next query parameter to get the next page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PagingLinks": {
+      "description": "Navigation links for keyset pagination.",
+      "properties": {
+        "first": {
+          "description": "A full URL of the first page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previous": {
+          "description": "A full URL of the previous page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A full URL of the next page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last": {
+          "description": "A full URL of the last page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

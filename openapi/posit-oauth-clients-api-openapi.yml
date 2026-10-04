@@ -214,6 +214,16 @@ components:
           example: editor
           type: string
       type: object
+    OAuthClients:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            items:
+              $ref: '#/components/schemas/TrustedPublisher'
+            type: array
+        type: object
+      description: A paginated list of OAuth clients.
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -233,16 +243,6 @@ components:
       - code
       - error
       type: object
-    OAuthClients:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            items:
-              $ref: '#/components/schemas/TrustedPublisher'
-            type: array
-        type: object
-      description: A paginated list of OAuth clients.
     OAuthClient:
       additionalProperties: false
       description: OAuthClient represents a registered OAuth client in Posit Connect.

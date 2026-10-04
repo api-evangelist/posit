@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-bundle-schema.json",
+  "title": "Bundle",
+  "description": "A deployment bundle associated with a content item.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-bundles-api-openapi.yml#/components/schemas/Bundle",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The identifier for this bundle.",
+      "type": "string"
+    },
+    "content_guid": {
+      "description": "The identifier of the owning content.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "created_by": {
+      "description": "The GUID of the user who created the bundle.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_time": {
+      "description": "The timestamp (RFC3339) of when this bundle was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "environment_guid": {
+      "description": "The guid of the execution environment used to run this content. Content\nrunning locally\non the same server as Connect will have a `null` value.\n\nA `null` value is returned when the client does not have sufficient rights\nto see this\ninformation.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cluster_name": {
+      "description": "The location where this content runs. Content running on the same\nserver as Connect will have either a `null` value or the string\n\"Local\". Gives the name of the cluster when run external to the\nConnect host.\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "image_name": {
+      "description": "The name of the container image used to run this content in containerized\nenvironments such as Kubernetes. Content running locally\non the same server as Connect will have either a `null` value or the string\n\"Local\".\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "r_version": {
+      "description": "The version of R used when last restoring this bundle. A `null`\nvalue represents that R is not used by this bundle or that the\nbundle has not been prepared for execution.\n\nR version is not disclosed to users with a \"viewer\" role; they\nreceive a `null` value.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "r_environment_management": {
+      "description": "Indicates whether or not Connect is managing an R environment and\nhas installed the required packages for this content. The `null`\nvalue represents that R is not used by this bundle or that it has\nnot yet been determined if an R environment is required.\n\nR environment management is not disclosed to users with a \"viewer\"\nrole; they receive a `null` value.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "py_version": {
+      "description": "The version of Python used when last restoring this bundle. A `null`\nvalue represents that Python is not used by this bundle or that the\nbundle has not been prepared for execution.\n\nPython version is not disclosed to users with a \"viewer\" role; they\nreceive a `null` value.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "py_environment_management": {
+      "description": "Indicates whether or not Connect is managing a Python environment\nand has installed the required packages for this content. The `null`\nvalue represents that Python is not used by this bundle or that it\nhas not yet been determined if a Python environment is required.\n\nPython environment management is not disclosed to users with a\n\"viewer\" role; they receive a `null` value.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "quarto_version": {
+      "description": "The version of Quarto used when last restoring this bundle. A `null`\nvalue represents that Quarto is not used by this bundle or that the\nbundle has not been successfully prepared for execution.\n\nQuarto version is not disclosed to users with a \"viewer\" role; they\nreceive a `null` value.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "description": "Indicates if this bundle is active for the owning content.",
+      "type": "boolean"
+    },
+    "size": {
+      "description": "On-disk size in bytes of the tar.gz file associated with this bundle.\nZero when there is no on-disk file.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "metadata": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/BundleMetadata"
+        }
+      ],
+      "description": "Metadata object associated with this bundle.\nMay be generated by Connect, if using git-backed publishing,\nor supplied by the publisher at upload time."
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "BundleMetadata": {
+      "additionalProperties": false,
+      "description": "Metadata about a bundle including source control information and custom fields.",
+      "properties": {
+        "source": {
+          "description": "Source for this bundle.\n`git` for bundles fetched from a git repository.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_repo": {
+          "description": "Repository URL for this bundle.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_branch": {
+          "description": "Repository branch or ref name for this bundle.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_commit": {
+          "description": "Commit ID (hash) for this bundle.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "archive_md5": {
+          "description": "MD5 hash of the archive file for this bundle. `null` for bundles\nuploaded before this field was added.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "archive_sha1": {
+          "description": "SHA1 hash of the archive file for this bundle. `null` for bundles\nuploaded before this field was added.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

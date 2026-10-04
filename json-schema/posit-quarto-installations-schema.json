@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-quarto-installations-schema.json",
+  "title": "QuartoInstallations",
+  "description": "This defines the top-level object that describes the data returned by the server.\nIt contains information about each installation of Quarto that is known.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/QuartoInstallations",
+  "additionalProperties": false,
+  "properties": {
+    "installations": {
+      "description": "The array of information about Posit Connect's Quarto\ninstallations.",
+      "items": {
+        "$ref": "#/$defs/QuartoInstallation"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "QuartoInstallation": {
+      "additionalProperties": false,
+      "description": "This defines the information provided by the server about a single installation of Quarto.",
+      "properties": {
+        "version": {
+          "description": "The version number of this Quarto installation.",
+          "type": "string"
+        },
+        "cluster_name": {
+          "description": "The cluster that contains this Quarto installation.\nA value of `Local` indicates that the Quarto installation is local to the\nPosit Connect server.",
+          "type": "string"
+        },
+        "image_name": {
+          "description": "The image that contains this Quarto installation.\nA value of `Local` indicates that the Quarto installation is local to the\nPosit Connect server.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-custom-documentation-result-schema.json",
+  "title": "CustomDocumentationResult",
+  "description": "The custom documentation for the Posit Connect server.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-custom-documentation-api-openapi.yml#/components/schemas/CustomDocumentationResult",
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "description": "The custom documentation content, formatted using Markdown.",
+      "type": "string"
+    },
+    "created_time": {
+      "description": "The time when the custom documentation was created.",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

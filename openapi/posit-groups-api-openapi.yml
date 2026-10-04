@@ -965,37 +965,10 @@ paths:
       - Groups
 components:
   schemas:
-    GroupRemoteSearch:
+    GroupMember:
       allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The groups list
-            items:
-              $ref: '#/components/schemas/GroupWithTicket'
-            type: array
-        type: object
-      description: The remote group search results with paging information.
-    GroupUpdateInput:
-      additionalProperties: false
-      description: The fields that can be specified when updating a group.
-      type: object
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/TrustedPublisher'
-      - properties:
-          guid:
-            description: The unique identifier
-            example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-            format: uuid
-            type: string
-          member_count:
-            description: The number of members in the group.
-            example: 3
-            format: int64
-            type: integer
-        type: object
-      description: A group object.
+      - $ref: '#/components/schemas/User'
+      description: A group member (user).
     OffsetPaging:
       description: Offset-based pagination metadata.
       properties:
@@ -1041,138 +1014,6 @@ components:
           example: editor
           type: string
       type: object
-    GroupCreateInput:
-      additionalProperties: false
-      description: The fields that can be specified when creating a group.
-      properties:
-        name:
-          description: The group's desired name
-          example: marketing
-          type: string
-        unique_id:
-          description: 'Applies to SAML, OAuth2 and Proxied authentication when
-
-            the setting `GroupsByUniqueId` is enabled. This field
-
-            must not be present otherwise.'
-          type: string
-        gid:
-          description: 'The POSIX Group ID (GID) for
-
-            [current user execution](../admin/process-management/index.md#runas-current).
-
-            Only administrators can set this field, and only when using
-
-            SAML or OAuth2 authentication. Must be a positive integer
-
-            and unique across all groups.'
-          example: 1001
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
-    GroupCreateRemoteInput:
-      additionalProperties: false
-      description: The fields that must be specified when creating a remote group.
-      properties:
-        temp_ticket:
-          description: 'The temporary ticket used for creating a group on the
-
-            Posit Connect server. It is obtained from the
-
-            [GET /v1/groups/remote](#searchRemoteGroups) endpoint.'
-          type: string
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    GroupPatchInput:
-      additionalProperties: false
-      description: The fields that can be specified when partially updating a group.
-      properties:
-        name:
-          description: 'The group''s new name. Cannot be empty or `null`, and must be
-
-            at most 4096 characters. Names must be unique, except for
-
-            SAML, OAuth2, and Proxied authentication when `GroupsByUniqueId`
-
-            is enabled.'
-          example: engineering
-          type:
-          - string
-          - 'null'
-        owner_guid:
-          description: 'The new owner''s unique identifier. Must reference an existing
-
-            user who is not a viewer. Can be set to `null` to remove the
-
-            owner for SAML, OAuth2, and Proxied authentication when
-
-            `GroupsAutoProvision` is enabled.'
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          format: uuid
-          type:
-          - string
-          - 'null'
-        gid:
-          description: 'The POSIX Group ID (GID) for
-
-            [current user execution](../admin/process-management/index.md#runas-current).
-
-            Must be a positive integer and unique across all groups. Set
-
-            to `null` to remove the GID.'
-          example: 1001
-          format: int32
-          type:
-          - integer
-          - 'null'
-      type: object
-    GroupOwnershipContent:
-      additionalProperties: false
-      description: Content item with access control details for a group.
-      properties:
-        content_guid:
-          description: The unique identifier of the content item.
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          format: uuid
-          type: string
-        content_name:
-          description: The name of the content item.
-          type: string
-        content_title:
-          description: The title of the content item.
-          type: string
-        access_type:
-          description: The access type of the content item.
-          example: acl
-          type: string
-        permissions:
-          description: 'List of principals (users and groups) with access to the content.
-
-            The owner is listed as `author` and is always present.'
-          items:
-            $ref: '#/components/schemas/GroupOwnershipPermission'
-          type: array
-      type: object
     GroupMemberAddInput:
       additionalProperties: false
       description: The fields that must be specified when adding a member to a group.
@@ -1183,58 +1024,17 @@ components:
           format: uuid
           type: string
       type: object
-    GroupWithTicket:
-      additionalProperties: false
-      description: A group object with a temporary ticket for remote group creation.
-      properties:
-        name:
-          description: The group name
-          example: accounting
-          type: string
-        guid:
-          description: 'The group''s unique identifier in
-
-            [RFC4122](https://tools.ietf.org/html/rfc4122) format. When
-
-            a group does not exist in the Posit Connect server, this
-
-            property will be `null`.'
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          format: uuid
-          type:
-          - string
-          - 'null'
-        temp_ticket:
-          description: 'This value is for actions that require a `temp_ticket`, such
-
-            as adding an LDAP group to the Connect server.'
-          type: string
-      type: object
-    GroupMember:
+    Groups:
       allOf:
-      - $ref: '#/components/schemas/User'
-      description: A group member (user).
-    GroupOwnershipPermission:
-      additionalProperties: false
-      description: A principal with access to a content item.
-      properties:
-        principal_guid:
-          description: The identifier of the principal (user or group) with access to the content.
-          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
-          format: uuid
-          type: string
-        principal_name:
-          description: The name of the principal (user or group) with access to the content.
-          type: string
-        principal_role:
-          description: The role of the principal (user or group) with access to the content.
-          example: author
-          type: string
-        principal_type:
-          description: The type of the principal (user or group) with access to the content.
-          example: user
-          type: string
-      type: object
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The groups list
+            items:
+              $ref: '#/components/schemas/Group'
+            type: array
+        type: object
+      description: The groups list with paging information.
     User:
       description: A user object.
       properties:
@@ -1311,6 +1111,202 @@ components:
           format: uuid
           type: string
       type: object
+    GroupWithTicket:
+      additionalProperties: false
+      description: A group object with a temporary ticket for remote group creation.
+      properties:
+        name:
+          description: The group name
+          example: accounting
+          type: string
+        guid:
+          description: 'The group''s unique identifier in
+
+            [RFC4122](https://tools.ietf.org/html/rfc4122) format. When
+
+            a group does not exist in the Posit Connect server, this
+
+            property will be `null`.'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type:
+          - string
+          - 'null'
+        temp_ticket:
+          description: 'This value is for actions that require a `temp_ticket`, such
+
+            as adding an LDAP group to the Connect server.'
+          type: string
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    GroupCreateInput:
+      additionalProperties: false
+      description: The fields that can be specified when creating a group.
+      properties:
+        name:
+          description: The group's desired name
+          example: marketing
+          type: string
+        unique_id:
+          description: 'Applies to SAML, OAuth2 and Proxied authentication when
+
+            the setting `GroupsByUniqueId` is enabled. This field
+
+            must not be present otherwise.'
+          type: string
+        gid:
+          description: 'The POSIX Group ID (GID) for
+
+            [current user execution](../admin/process-management/index.md#runas-current).
+
+            Only administrators can set this field, and only when using
+
+            SAML or OAuth2 authentication. Must be a positive integer
+
+            and unique across all groups.'
+          example: 1001
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    GroupOwnershipContent:
+      additionalProperties: false
+      description: Content item with access control details for a group.
+      properties:
+        content_guid:
+          description: The unique identifier of the content item.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+        content_name:
+          description: The name of the content item.
+          type: string
+        content_title:
+          description: The title of the content item.
+          type: string
+        access_type:
+          description: The access type of the content item.
+          example: acl
+          type: string
+        permissions:
+          description: 'List of principals (users and groups) with access to the content.
+
+            The owner is listed as `author` and is always present.'
+          items:
+            $ref: '#/components/schemas/GroupOwnershipPermission'
+          type: array
+      type: object
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/TrustedPublisher'
+      - properties:
+          guid:
+            description: The unique identifier
+            example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+            format: uuid
+            type: string
+          member_count:
+            description: The number of members in the group.
+            example: 3
+            format: int64
+            type: integer
+        type: object
+      description: A group object.
+    GroupPatchInput:
+      additionalProperties: false
+      description: The fields that can be specified when partially updating a group.
+      properties:
+        name:
+          description: 'The group''s new name. Cannot be empty or `null`, and must be
+
+            at most 4096 characters. Names must be unique, except for
+
+            SAML, OAuth2, and Proxied authentication when `GroupsByUniqueId`
+
+            is enabled.'
+          example: engineering
+          type:
+          - string
+          - 'null'
+        owner_guid:
+          description: 'The new owner''s unique identifier. Must reference an existing
+
+            user who is not a viewer. Can be set to `null` to remove the
+
+            owner for SAML, OAuth2, and Proxied authentication when
+
+            `GroupsAutoProvision` is enabled.'
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type:
+          - string
+          - 'null'
+        gid:
+          description: 'The POSIX Group ID (GID) for
+
+            [current user execution](../admin/process-management/index.md#runas-current).
+
+            Must be a positive integer and unique across all groups. Set
+
+            to `null` to remove the GID.'
+          example: 1001
+          format: int32
+          type:
+          - integer
+          - 'null'
+      type: object
+    GroupCreateRemoteInput:
+      additionalProperties: false
+      description: The fields that must be specified when creating a remote group.
+      properties:
+        temp_ticket:
+          description: 'The temporary ticket used for creating a group on the
+
+            Posit Connect server. It is obtained from the
+
+            [GET /v1/groups/remote](#searchRemoteGroups) endpoint.'
+          type: string
+      type: object
+    GroupOwnershipPermission:
+      additionalProperties: false
+      description: A principal with access to a content item.
+      properties:
+        principal_guid:
+          description: The identifier of the principal (user or group) with access to the content.
+          example: 6f300623-1e0c-48e6-a473-ddf630c0c0c3
+          format: uuid
+          type: string
+        principal_name:
+          description: The name of the principal (user or group) with access to the content.
+          type: string
+        principal_role:
+          description: The role of the principal (user or group) with access to the content.
+          example: author
+          type: string
+        principal_type:
+          description: The type of the principal (user or group) with access to the content.
+          example: user
+          type: string
+      type: object
     GroupMembers:
       allOf:
       - $ref: '#/components/schemas/OffsetPaging'
@@ -1322,17 +1318,21 @@ components:
             type: array
         type: object
       description: The group members list with paging information.
-    Groups:
+    GroupUpdateInput:
+      additionalProperties: false
+      description: The fields that can be specified when updating a group.
+      type: object
+    GroupRemoteSearch:
       allOf:
       - $ref: '#/components/schemas/OffsetPaging'
       - properties:
           results:
             description: The groups list
             items:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupWithTicket'
             type: array
         type: object
-      description: The groups list with paging information.
+      description: The remote group search results with paging information.
   securitySchemes:
     apiKey:
       description: 'Prefix your API key with `Key `, e.g. `Key ABC123`.

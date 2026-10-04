@@ -1,0 +1,1269 @@
+{
+  "@context": {
+    "@vocab": "https://posit.co/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "posit": "https://posit.co/schema#",
+    "APIError": "posit:APIError",
+    "code": {
+      "@id": "posit:code",
+      "@type": "xsd:integer"
+    },
+    "error": {
+      "@id": "posit:error",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "posit:payload"
+    },
+    "APIKeyCreateInput": "posit:APIKeyCreateInput",
+    "name": {
+      "@id": "posit:name",
+      "@type": "xsd:string"
+    },
+    "user_role": {
+      "@id": "posit:user_role",
+      "@type": "xsd:string"
+    },
+    "expires_at": {
+      "@id": "posit:expires_at",
+      "@type": "xsd:dateTime"
+    },
+    "APIKey": "posit:APIKey",
+    "id": {
+      "@id": "posit:id",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "posit:key",
+      "@type": "xsd:string"
+    },
+    "created_time": {
+      "@id": "posit:created_time",
+      "@type": "xsd:dateTime"
+    },
+    "active_time": {
+      "@id": "posit:active_time",
+      "@type": "xsd:dateTime"
+    },
+    "PagingCursors": "posit:PagingCursors",
+    "previous": {
+      "@id": "posit:previous",
+      "@type": "xsd:string"
+    },
+    "next": {
+      "@id": "posit:next",
+      "@type": "xsd:string"
+    },
+    "AuditLogSearchResults": "posit:AuditLogSearchResults",
+    "total": {
+      "@id": "posit:total",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "posit:results",
+      "@container": "@list"
+    },
+    "AuditActionResult": "posit:AuditActionResult",
+    "action": {
+      "@id": "posit:action",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "posit:description",
+      "@type": "xsd:string"
+    },
+    "AuditLogs": "posit:AuditLogs",
+    "paging": {
+      "@id": "posit:paging"
+    },
+    "AuditLogEntry": "posit:AuditLogEntry",
+    "time": {
+      "@id": "posit:time",
+      "@type": "xsd:dateTime"
+    },
+    "user_id": {
+      "@id": "posit:user_id",
+      "@type": "xsd:string"
+    },
+    "user_guid": {
+      "@id": "posit:user_guid",
+      "@type": "xsd:string"
+    },
+    "user_description": {
+      "@id": "posit:user_description",
+      "@type": "xsd:string"
+    },
+    "event_description": {
+      "@id": "posit:event_description",
+      "@type": "xsd:string"
+    },
+    "AuditLog": "posit:AuditLog",
+    "PagingLinks": "posit:PagingLinks",
+    "first": {
+      "@id": "posit:first",
+      "@type": "xsd:string"
+    },
+    "last": {
+      "@id": "posit:last",
+      "@type": "xsd:string"
+    },
+    "Bookmark": "posit:Bookmark",
+    "BootstrapSuccess": "posit:BootstrapSuccess",
+    "api_key": {
+      "@id": "posit:api_key",
+      "@type": "xsd:string"
+    },
+    "BundleMetadata": "posit:BundleMetadata",
+    "source": {
+      "@id": "posit:source",
+      "@type": "xsd:string"
+    },
+    "source_repo": {
+      "@id": "posit:source_repo",
+      "@type": "xsd:string"
+    },
+    "source_branch": {
+      "@id": "posit:source_branch",
+      "@type": "xsd:string"
+    },
+    "source_commit": {
+      "@id": "posit:source_commit",
+      "@type": "xsd:string"
+    },
+    "archive_md5": {
+      "@id": "posit:archive_md5",
+      "@type": "xsd:string"
+    },
+    "archive_sha1": {
+      "@id": "posit:archive_sha1",
+      "@type": "xsd:string"
+    },
+    "Bundle": "posit:Bundle",
+    "content_guid": {
+      "@id": "posit:content_guid",
+      "@type": "xsd:string"
+    },
+    "created_by": {
+      "@id": "posit:created_by",
+      "@type": "xsd:string"
+    },
+    "environment_guid": {
+      "@id": "posit:environment_guid",
+      "@type": "xsd:string"
+    },
+    "cluster_name": {
+      "@id": "posit:cluster_name",
+      "@type": "xsd:string"
+    },
+    "image_name": {
+      "@id": "posit:image_name",
+      "@type": "xsd:string"
+    },
+    "r_version": {
+      "@id": "posit:r_version",
+      "@type": "xsd:string"
+    },
+    "r_environment_management": {
+      "@id": "posit:r_environment_management",
+      "@type": "xsd:boolean"
+    },
+    "py_version": {
+      "@id": "posit:py_version",
+      "@type": "xsd:string"
+    },
+    "py_environment_management": {
+      "@id": "posit:py_environment_management",
+      "@type": "xsd:boolean"
+    },
+    "quarto_version": {
+      "@id": "posit:quarto_version",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "posit:active",
+      "@type": "xsd:boolean"
+    },
+    "size": {
+      "@id": "posit:size",
+      "@type": "xsd:integer"
+    },
+    "metadata": {
+      "@id": "posit:metadata"
+    },
+    "ScheduleVariant": "posit:ScheduleVariant",
+    "is_default": {
+      "@id": "posit:is_default",
+      "@type": "xsd:boolean"
+    },
+    "OAuthIntegrationAssociationOutput": "posit:OAuthIntegrationAssociationOutput",
+    "app_guid": {
+      "@id": "posit:app_guid",
+      "@type": "xsd:string"
+    },
+    "oauth_integration_guid": {
+      "@id": "posit:oauth_integration_guid",
+      "@type": "xsd:string"
+    },
+    "oauth_integration_name": {
+      "@id": "posit:oauth_integration_name",
+      "@type": "xsd:string"
+    },
+    "oauth_integration_description": {
+      "@id": "posit:oauth_integration_description",
+      "@type": "xsd:string"
+    },
+    "oauth_integration_template": {
+      "@id": "posit:oauth_integration_template",
+      "@type": "xsd:string"
+    },
+    "oauth_integration_auth_type": {
+      "@id": "posit:oauth_integration_auth_type",
+      "@type": "xsd:string"
+    },
+    "ContentDeploymentTask": "posit:ContentDeploymentTask",
+    "task_id": {
+      "@id": "posit:task_id",
+      "@type": "xsd:string"
+    },
+    "EnvironmentVariable": "posit:EnvironmentVariable",
+    "value": {
+      "@id": "posit:value",
+      "@type": "xsd:string"
+    },
+    "Tag": "posit:Tag",
+    "parent_id": {
+      "@id": "posit:parent_id",
+      "@type": "xsd:string"
+    },
+    "updated_time": {
+      "@id": "posit:updated_time",
+      "@type": "xsd:dateTime"
+    },
+    "Package": "posit:Package",
+    "language": {
+      "@id": "posit:language",
+      "@type": "xsd:string"
+    },
+    "language_version": {
+      "@id": "posit:language_version",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "posit:version",
+      "@type": "xsd:string"
+    },
+    "hash": {
+      "@id": "posit:hash",
+      "@type": "xsd:string"
+    },
+    "bundle_id": {
+      "@id": "posit:bundle_id",
+      "@type": "xsd:string"
+    },
+    "app_id": {
+      "@id": "posit:app_id",
+      "@type": "xsd:string"
+    },
+    "content_id": {
+      "@id": "posit:content_id",
+      "@type": "xsd:string"
+    },
+    "OffsetPaging": "posit:OffsetPaging",
+    "current_page": {
+      "@id": "posit:current_page",
+      "@type": "xsd:integer"
+    },
+    "VariantSearchResult": "posit:VariantSearchResult",
+    "content_name": {
+      "@id": "posit:content_name",
+      "@type": "xsd:string"
+    },
+    "content_title": {
+      "@id": "posit:content_title",
+      "@type": "xsd:string"
+    },
+    "variant_key": {
+      "@id": "posit:variant_key",
+      "@type": "xsd:string"
+    },
+    "variant_name": {
+      "@id": "posit:variant_name",
+      "@type": "xsd:string"
+    },
+    "render_time": {
+      "@id": "posit:render_time",
+      "@type": "xsd:dateTime"
+    },
+    "failures": {
+      "@id": "posit:failures",
+      "@type": "xsd:integer"
+    },
+    "last_failed": {
+      "@id": "posit:last_failed",
+      "@type": "xsd:dateTime"
+    },
+    "skips": {
+      "@id": "posit:skips",
+      "@type": "xsd:integer"
+    },
+    "last_skipped": {
+      "@id": "posit:last_skipped",
+      "@type": "xsd:dateTime"
+    },
+    "schedule": {
+      "@id": "posit:schedule"
+    },
+    "ContentOwner": "posit:ContentOwner",
+    "guid": {
+      "@id": "posit:guid",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "posit:username",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "posit:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "posit:last_name",
+      "@type": "xsd:string"
+    },
+    "OAuthIntegrationAssociationInput": "posit:OAuthIntegrationAssociationInput",
+    "ContentRenderTask": "posit:ContentRenderTask",
+    "GitLocationOutput": "posit:GitLocationOutput",
+    "repository": {
+      "@id": "posit:repository",
+      "@type": "xsd:string"
+    },
+    "branch": {
+      "@id": "posit:branch",
+      "@type": "xsd:string"
+    },
+    "directory": {
+      "@id": "posit:directory",
+      "@type": "xsd:string"
+    },
+    "polling": {
+      "@id": "posit:polling",
+      "@type": "xsd:boolean"
+    },
+    "last_error": {
+      "@id": "posit:last_error",
+      "@type": "xsd:string"
+    },
+    "last_known_commit": {
+      "@id": "posit:last_known_commit",
+      "@type": "xsd:string"
+    },
+    "last_fetched_time": {
+      "@id": "posit:last_fetched_time",
+      "@type": "xsd:dateTime"
+    },
+    "ContentDeploymentInstructions": "posit:ContentDeploymentInstructions",
+    "activate": {
+      "@id": "posit:activate",
+      "@type": "xsd:boolean"
+    },
+    "ContentBuildInstructions": "posit:ContentBuildInstructions",
+    "ScheduleLastRun": "posit:ScheduleLastRun",
+    "job_key": {
+      "@id": "posit:job_key",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "posit:status",
+      "@type": "xsd:string"
+    },
+    "scheduled_time": {
+      "@id": "posit:scheduled_time",
+      "@type": "xsd:dateTime"
+    },
+    "queued_time": {
+      "@id": "posit:queued_time",
+      "@type": "xsd:dateTime"
+    },
+    "start_time": {
+      "@id": "posit:start_time",
+      "@type": "xsd:dateTime"
+    },
+    "end_time": {
+      "@id": "posit:end_time",
+      "@type": "xsd:dateTime"
+    },
+    "run_duration_ms": {
+      "@id": "posit:run_duration_ms",
+      "@type": "xsd:integer"
+    },
+    "exit_code": {
+      "@id": "posit:exit_code",
+      "@type": "xsd:integer"
+    },
+    "Content": "posit:Content",
+    "title": {
+      "@id": "posit:title",
+      "@type": "xsd:string"
+    },
+    "access_type": {
+      "@id": "posit:access_type",
+      "@type": "xsd:string"
+    },
+    "locked": {
+      "@id": "posit:locked",
+      "@type": "xsd:boolean"
+    },
+    "locked_message": {
+      "@id": "posit:locked_message",
+      "@type": "xsd:string"
+    },
+    "connection_timeout": {
+      "@id": "posit:connection_timeout",
+      "@type": "xsd:integer"
+    },
+    "read_timeout": {
+      "@id": "posit:read_timeout",
+      "@type": "xsd:integer"
+    },
+    "init_timeout": {
+      "@id": "posit:init_timeout",
+      "@type": "xsd:integer"
+    },
+    "idle_timeout": {
+      "@id": "posit:idle_timeout",
+      "@type": "xsd:integer"
+    },
+    "max_processes": {
+      "@id": "posit:max_processes",
+      "@type": "xsd:integer"
+    },
+    "min_processes": {
+      "@id": "posit:min_processes",
+      "@type": "xsd:integer"
+    },
+    "max_conns_per_process": {
+      "@id": "posit:max_conns_per_process",
+      "@type": "xsd:integer"
+    },
+    "load_factor": {
+      "@id": "posit:load_factor",
+      "@type": "xsd:decimal"
+    },
+    "memory_request": {
+      "@id": "posit:memory_request",
+      "@type": "xsd:integer"
+    },
+    "memory_limit": {
+      "@id": "posit:memory_limit",
+      "@type": "xsd:integer"
+    },
+    "cpu_request": {
+      "@id": "posit:cpu_request",
+      "@type": "xsd:decimal"
+    },
+    "cpu_limit": {
+      "@id": "posit:cpu_limit",
+      "@type": "xsd:decimal"
+    },
+    "amd_gpu_limit": {
+      "@id": "posit:amd_gpu_limit",
+      "@type": "xsd:integer"
+    },
+    "nvidia_gpu_limit": {
+      "@id": "posit:nvidia_gpu_limit",
+      "@type": "xsd:integer"
+    },
+    "service_account_name": {
+      "@id": "posit:service_account_name",
+      "@type": "xsd:string"
+    },
+    "default_image_name": {
+      "@id": "posit:default_image_name",
+      "@type": "xsd:string"
+    },
+    "default_environment_guid": {
+      "@id": "posit:default_environment_guid",
+      "@type": "xsd:string"
+    },
+    "last_deployed_time": {
+      "@id": "posit:last_deployed_time",
+      "@type": "xsd:dateTime"
+    },
+    "app_mode": {
+      "@id": "posit:app_mode",
+      "@type": "xsd:string"
+    },
+    "content_category": {
+      "@id": "posit:content_category",
+      "@type": "xsd:string"
+    },
+    "parameterized": {
+      "@id": "posit:parameterized",
+      "@type": "xsd:boolean"
+    },
+    "node_version": {
+      "@id": "posit:node_version",
+      "@type": "xsd:string"
+    },
+    "default_r_environment_management": {
+      "@id": "posit:default_r_environment_management",
+      "@type": "xsd:boolean"
+    },
+    "default_py_environment_management": {
+      "@id": "posit:default_py_environment_management",
+      "@type": "xsd:boolean"
+    },
+    "run_as": {
+      "@id": "posit:run_as",
+      "@type": "xsd:string"
+    },
+    "run_as_current_user": {
+      "@id": "posit:run_as_current_user",
+      "@type": "xsd:boolean"
+    },
+    "metrics_collection_enabled": {
+      "@id": "posit:metrics_collection_enabled",
+      "@type": "xsd:boolean"
+    },
+    "notify_on_share": {
+      "@id": "posit:notify_on_share",
+      "@type": "xsd:boolean"
+    },
+    "otel_enabled": {
+      "@id": "posit:otel_enabled",
+      "@type": "xsd:boolean"
+    },
+    "owner_guid": {
+      "@id": "posit:owner_guid",
+      "@type": "xsd:string"
+    },
+    "content_url": {
+      "@id": "posit:content_url",
+      "@type": "xsd:string"
+    },
+    "dashboard_url": {
+      "@id": "posit:dashboard_url",
+      "@type": "xsd:string"
+    },
+    "vanity_url": {
+      "@id": "posit:vanity_url",
+      "@type": "xsd:string"
+    },
+    "app_role": {
+      "@id": "posit:app_role",
+      "@type": "xsd:string"
+    },
+    "bookmarked": {
+      "@id": "posit:bookmarked",
+      "@type": "xsd:boolean"
+    },
+    "schedules": {
+      "@id": "posit:schedules",
+      "@container": "@list"
+    },
+    "tags": {
+      "@id": "posit:tags",
+      "@container": "@list"
+    },
+    "owner": {
+      "@id": "posit:owner"
+    },
+    "public_content_status": {
+      "@id": "posit:public_content_status",
+      "@type": "xsd:string"
+    },
+    "ContentRenderInstructions": "posit:ContentRenderInstructions",
+    "UpdateContentInput": "posit:UpdateContentInput",
+    "RRuleSet": "posit:RRuleSet",
+    "dtstart": {
+      "@id": "posit:dtstart",
+      "@type": "xsd:string"
+    },
+    "rrules": {
+      "@id": "posit:rrules",
+      "@container": "@list"
+    },
+    "until": {
+      "@id": "posit:until",
+      "@type": "xsd:string"
+    },
+    "CreateContentInput": "posit:CreateContentInput",
+    "GitLocationInput": "posit:GitLocationInput",
+    "AccessTestResult": "posit:AccessTestResult",
+    "url": {
+      "@id": "posit:url",
+      "@type": "xsd:string"
+    },
+    "checked_at": {
+      "@id": "posit:checked_at",
+      "@type": "xsd:dateTime"
+    },
+    "accessible": {
+      "@id": "posit:accessible",
+      "@type": "xsd:boolean"
+    },
+    "message": {
+      "@id": "posit:message",
+      "@type": "xsd:string"
+    },
+    "Schedule": "posit:Schedule",
+    "type": {
+      "@id": "posit:type",
+      "@type": "xsd:string"
+    },
+    "next_run": {
+      "@id": "posit:next_run",
+      "@type": "xsd:dateTime"
+    },
+    "email": {
+      "@id": "posit:email",
+      "@type": "xsd:boolean"
+    },
+    "timezone": {
+      "@id": "posit:timezone",
+      "@type": "xsd:string"
+    },
+    "last_run": {
+      "@id": "posit:last_run"
+    },
+    "ContentBuildTask": "posit:ContentBuildTask",
+    "PermissionInput": "posit:PermissionInput",
+    "principal_guid": {
+      "@id": "posit:principal_guid",
+      "@type": "xsd:string"
+    },
+    "principal_type": {
+      "@id": "posit:principal_type",
+      "@type": "xsd:string"
+    },
+    "role": {
+      "@id": "posit:role",
+      "@type": "xsd:string"
+    },
+    "send_email": {
+      "@id": "posit:send_email",
+      "@type": "xsd:boolean"
+    },
+    "Permission": "posit:Permission",
+    "CustomDocumentationResult": "posit:CustomDocumentationResult",
+    "content": {
+      "@id": "posit:content",
+      "@type": "xsd:string"
+    },
+    "CustomDocumentationInput": "posit:CustomDocumentationInput",
+    "EnvironmentPermission": "posit:EnvironmentPermission",
+    "group_guid": {
+      "@id": "posit:group_guid",
+      "@type": "xsd:string"
+    },
+    "EnvironmentPermissionInput": "posit:EnvironmentPermissionInput",
+    "CreateEnvironmentInput": "posit:CreateEnvironmentInput",
+    "matching": {
+      "@id": "posit:matching",
+      "@type": "xsd:string"
+    },
+    "supervisor": {
+      "@id": "posit:supervisor",
+      "@type": "xsd:string"
+    },
+    "python": {
+      "@id": "posit:python"
+    },
+    "nodejs": {
+      "@id": "posit:nodejs"
+    },
+    "quarto": {
+      "@id": "posit:quarto"
+    },
+    "r": {
+      "@id": "posit:r"
+    },
+    "tensorflow": {
+      "@id": "posit:tensorflow"
+    },
+    "volume_mounts": {
+      "@id": "posit:volume_mounts",
+      "@container": "@list"
+    },
+    "Environment": "posit:Environment",
+    "environment_type": {
+      "@id": "posit:environment_type",
+      "@type": "xsd:string"
+    },
+    "managed_by": {
+      "@id": "posit:managed_by",
+      "@type": "xsd:string"
+    },
+    "Installation": "posit:Installation",
+    "path": {
+      "@id": "posit:path",
+      "@type": "xsd:string"
+    },
+    "VolumeTarget": "posit:VolumeTarget",
+    "read_only": {
+      "@id": "posit:read_only",
+      "@type": "xsd:boolean"
+    },
+    "UpdateEnvironmentInput": "posit:UpdateEnvironmentInput",
+    "Installations": "posit:Installations",
+    "installations": {
+      "@id": "posit:installations",
+      "@container": "@list"
+    },
+    "VolumeSource": "posit:VolumeSource",
+    "volume_type": {
+      "@id": "posit:volume_type",
+      "@type": "xsd:string"
+    },
+    "nfs_host": {
+      "@id": "posit:nfs_host",
+      "@type": "xsd:string"
+    },
+    "nfs_export_path": {
+      "@id": "posit:nfs_export_path",
+      "@type": "xsd:string"
+    },
+    "pvc_name": {
+      "@id": "posit:pvc_name",
+      "@type": "xsd:string"
+    },
+    "VolumeMount": "posit:VolumeMount",
+    "target": {
+      "@id": "posit:target"
+    },
+    "Feature": "posit:Feature",
+    "used": {
+      "@id": "posit:used",
+      "@type": "xsd:boolean"
+    },
+    "TrustedPublisher": "posit:TrustedPublisher",
+    "service_principal_guid": {
+      "@id": "posit:service_principal_guid",
+      "@type": "xsd:string"
+    },
+    "GroupCreateInput": "posit:GroupCreateInput",
+    "unique_id": {
+      "@id": "posit:unique_id",
+      "@type": "xsd:string"
+    },
+    "gid": {
+      "@id": "posit:gid",
+      "@type": "xsd:integer"
+    },
+    "GroupCreateRemoteInput": "posit:GroupCreateRemoteInput",
+    "temp_ticket": {
+      "@id": "posit:temp_ticket",
+      "@type": "xsd:string"
+    },
+    "GroupPatchInput": "posit:GroupPatchInput",
+    "GroupOwnershipContent": "posit:GroupOwnershipContent",
+    "permissions": {
+      "@id": "posit:permissions",
+      "@container": "@list"
+    },
+    "GroupMemberAddInput": "posit:GroupMemberAddInput",
+    "GroupWithTicket": "posit:GroupWithTicket",
+    "GroupOwnershipPermission": "posit:GroupOwnershipPermission",
+    "principal_name": {
+      "@id": "posit:principal_name",
+      "@type": "xsd:string"
+    },
+    "principal_role": {
+      "@id": "posit:principal_role",
+      "@type": "xsd:string"
+    },
+    "User": "posit:User",
+    "confirmed": {
+      "@id": "posit:confirmed",
+      "@type": "xsd:boolean"
+    },
+    "external_id": {
+      "@id": "posit:external_id",
+      "@type": "xsd:string"
+    },
+    "ContentVisitLogs": "posit:ContentVisitLogs",
+    "ContentHitEntry": "posit:ContentHitEntry",
+    "timestamp": {
+      "@id": "posit:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "data": {
+      "@id": "posit:data"
+    },
+    "ContentHitData": "posit:ContentHitData",
+    "query": {
+      "@id": "posit:query",
+      "@type": "xsd:string"
+    },
+    "user_agent": {
+      "@id": "posit:user_agent",
+      "@type": "xsd:string"
+    },
+    "sec_fetch_dest": {
+      "@id": "posit:sec_fetch_dest",
+      "@type": "xsd:string"
+    },
+    "sec_fetch_site": {
+      "@id": "posit:sec_fetch_site",
+      "@type": "xsd:string"
+    },
+    "ContentVisitEntry": "posit:ContentVisitEntry",
+    "rendering_id": {
+      "@id": "posit:rendering_id",
+      "@type": "xsd:string"
+    },
+    "data_version": {
+      "@id": "posit:data_version",
+      "@type": "xsd:integer"
+    },
+    "ShinyAppUsageLogs": "posit:ShinyAppUsageLogs",
+    "ShinyAppUsageEntry": "posit:ShinyAppUsageEntry",
+    "started": {
+      "@id": "posit:started",
+      "@type": "xsd:dateTime"
+    },
+    "ended": {
+      "@id": "posit:ended",
+      "@type": "xsd:dateTime"
+    },
+    "LogEntries": "posit:LogEntries",
+    "entries": {
+      "@id": "posit:entries",
+      "@container": "@list"
+    },
+    "JobSummaryTotals": "posit:JobSummaryTotals",
+    "waiting": {
+      "@id": "posit:waiting",
+      "@type": "xsd:integer"
+    },
+    "running": {
+      "@id": "posit:running",
+      "@type": "xsd:integer"
+    },
+    "succeeded": {
+      "@id": "posit:succeeded",
+      "@type": "xsd:integer"
+    },
+    "failed": {
+      "@id": "posit:failed",
+      "@type": "xsd:integer"
+    },
+    "skipped": {
+      "@id": "posit:skipped",
+      "@type": "xsd:integer"
+    },
+    "JobMetrics": "posit:JobMetrics",
+    "samples": {
+      "@id": "posit:samples",
+      "@container": "@list"
+    },
+    "JobSummary": "posit:JobSummary",
+    "totals": {
+      "@id": "posit:totals"
+    },
+    "buckets": {
+      "@id": "posit:buckets",
+      "@container": "@list"
+    },
+    "MetricSample": "posit:MetricSample",
+    "cpu_fraction": {
+      "@id": "posit:cpu_fraction",
+      "@type": "xsd:decimal"
+    },
+    "memory_bytes": {
+      "@id": "posit:memory_bytes",
+      "@type": "xsd:integer"
+    },
+    "connections": {
+      "@id": "posit:connections",
+      "@type": "xsd:integer"
+    },
+    "process_id": {
+      "@id": "posit:process_id",
+      "@type": "xsd:integer"
+    },
+    "LoggedError": "posit:LoggedError",
+    "summary": {
+      "@id": "posit:summary",
+      "@type": "xsd:string"
+    },
+    "help_url": {
+      "@id": "posit:help_url",
+      "@type": "xsd:string"
+    },
+    "LogEntry": "posit:LogEntry",
+    "Job": "posit:Job",
+    "ppid": {
+      "@id": "posit:ppid",
+      "@type": "xsd:string"
+    },
+    "pid": {
+      "@id": "posit:pid",
+      "@type": "xsd:string"
+    },
+    "remote_id": {
+      "@id": "posit:remote_id",
+      "@type": "xsd:string"
+    },
+    "variant_id": {
+      "@id": "posit:variant_id",
+      "@type": "xsd:string"
+    },
+    "last_heartbeat_time": {
+      "@id": "posit:last_heartbeat_time",
+      "@type": "xsd:dateTime"
+    },
+    "queue_name": {
+      "@id": "posit:queue_name",
+      "@type": "xsd:string"
+    },
+    "tag": {
+      "@id": "posit:tag",
+      "@type": "xsd:string"
+    },
+    "hostname": {
+      "@id": "posit:hostname",
+      "@type": "xsd:string"
+    },
+    "cluster": {
+      "@id": "posit:cluster",
+      "@type": "xsd:string"
+    },
+    "image": {
+      "@id": "posit:image",
+      "@type": "xsd:string"
+    },
+    "skip_reason": {
+      "@id": "posit:skip_reason",
+      "@type": "xsd:string"
+    },
+    "KillJobOrder": "posit:KillJobOrder",
+    "job_id": {
+      "@id": "posit:job_id",
+      "@type": "xsd:integer"
+    },
+    "result": {
+      "@id": "posit:result",
+      "@type": "xsd:string"
+    },
+    "JobSummaryBucket": "posit:JobSummaryBucket",
+    "ActiveUsersWindowCounts": "posit:ActiveUsersWindowCounts",
+    "admin": {
+      "@id": "posit:admin",
+      "@type": "xsd:integer"
+    },
+    "publisher": {
+      "@id": "posit:publisher",
+      "@type": "xsd:integer"
+    },
+    "viewer": {
+      "@id": "posit:viewer",
+      "@type": "xsd:integer"
+    },
+    "ActiveUsersResponse": "posit:ActiveUsersResponse",
+    "windows": {
+      "@id": "posit:windows"
+    },
+    "OAuthClient": "posit:OAuthClient",
+    "client_id": {
+      "@id": "posit:client_id",
+      "@type": "xsd:string"
+    },
+    "client_name": {
+      "@id": "posit:client_name",
+      "@type": "xsd:string"
+    },
+    "redirect_uris": {
+      "@id": "posit:redirect_uris",
+      "@container": "@list"
+    },
+    "created_at": {
+      "@id": "posit:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "last_used_at": {
+      "@id": "posit:last_used_at",
+      "@type": "xsd:dateTime"
+    },
+    "OAuthTemplateSection": "posit:OAuthTemplateSection",
+    "order": {
+      "@id": "posit:order",
+      "@type": "xsd:integer"
+    },
+    "ServicePrincipalTemplateOption": "posit:ServicePrincipalTemplateOption",
+    "label": {
+      "@id": "posit:label",
+      "@type": "xsd:string"
+    },
+    "visibility_expression": {
+      "@id": "posit:visibility_expression"
+    },
+    "values": {
+      "@id": "posit:values",
+      "@container": "@list"
+    },
+    "default": {
+      "@id": "posit:default"
+    },
+    "OAuthTemplate": "posit:OAuthTemplate",
+    "sections": {
+      "@id": "posit:sections",
+      "@container": "@list"
+    },
+    "options": {
+      "@id": "posit:options",
+      "@container": "@list"
+    },
+    "fields": {
+      "@id": "posit:fields",
+      "@container": "@list"
+    },
+    "environment_variables": {
+      "@id": "posit:environment_variables",
+      "@container": "@list"
+    },
+    "ServicePrincipalTemplateVisibilityExpression": "posit:ServicePrincipalTemplateVisibilityExpression",
+    "operator": {
+      "@id": "posit:operator",
+      "@type": "xsd:string"
+    },
+    "operands": {
+      "@id": "posit:operands",
+      "@container": "@list"
+    },
+    "ServicePrincipalTemplateField": "posit:ServicePrincipalTemplateField",
+    "validation": {
+      "@id": "posit:validation",
+      "@type": "xsd:string"
+    },
+    "validation_description": {
+      "@id": "posit:validation_description",
+      "@type": "xsd:string"
+    },
+    "secret": {
+      "@id": "posit:secret",
+      "@type": "xsd:boolean"
+    },
+    "multiline": {
+      "@id": "posit:multiline",
+      "@type": "xsd:boolean"
+    },
+    "OAuthIntegrationPermission": "posit:OAuthIntegrationPermission",
+    "integration_guid": {
+      "@id": "posit:integration_guid",
+      "@type": "xsd:string"
+    },
+    "OAuthIntegrationInput": "posit:OAuthIntegrationInput",
+    "template": {
+      "@id": "posit:template",
+      "@type": "xsd:string"
+    },
+    "config": {
+      "@id": "posit:config"
+    },
+    "OAuthIntegrationUpdate": "posit:OAuthIntegrationUpdate",
+    "OAuthCredentials": "posit:OAuthCredentials",
+    "access_token": {
+      "@id": "posit:access_token",
+      "@type": "xsd:string"
+    },
+    "issued_token_type": {
+      "@id": "posit:issued_token_type",
+      "@type": "xsd:string"
+    },
+    "token_type": {
+      "@id": "posit:token_type",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "posit:expires_in",
+      "@type": "xsd:integer"
+    },
+    "OAuthIntegration": "posit:OAuthIntegration",
+    "auth_type": {
+      "@id": "posit:auth_type",
+      "@type": "xsd:string"
+    },
+    "content_count": {
+      "@id": "posit:content_count",
+      "@type": "xsd:integer"
+    },
+    "OAuthIntegrationPermissionInput": "posit:OAuthIntegrationPermissionInput",
+    "OAuthSession": "posit:OAuthSession",
+    "has_refresh_token": {
+      "@id": "posit:has_refresh_token",
+      "@type": "xsd:boolean"
+    },
+    "QueueItem": "posit:QueueItem",
+    "job_type": {
+      "@id": "posit:job_type",
+      "@type": "xsd:string"
+    },
+    "started_time": {
+      "@id": "posit:started_time",
+      "@type": "xsd:dateTime"
+    },
+    "VariantScheduleHistory": "posit:VariantScheduleHistory",
+    "current_schedule": {
+      "@id": "posit:current_schedule"
+    },
+    "history": {
+      "@id": "posit:history",
+      "@container": "@list"
+    },
+    "total_count": {
+      "@id": "posit:total_count",
+      "@type": "xsd:integer"
+    },
+    "ScheduleHistoryEntry": "posit:ScheduleHistoryEntry",
+    "change_type": {
+      "@id": "posit:change_type",
+      "@type": "xsd:string"
+    },
+    "change_time": {
+      "@id": "posit:change_time",
+      "@type": "xsd:dateTime"
+    },
+    "user": {
+      "@id": "posit:user"
+    },
+    "new_schedule": {
+      "@id": "posit:new_schedule"
+    },
+    "CurrentSchedule": "posit:CurrentSchedule",
+    "HistorySchedule": "posit:HistorySchedule",
+    "ScheduleHistoryResponse": "posit:ScheduleHistoryResponse",
+    "PyInstallation": "posit:PyInstallation",
+    "QuartoInstallation": "posit:QuartoInstallation",
+    "TimeZoneEntry": "posit:TimeZoneEntry",
+    "offset": {
+      "@id": "posit:offset",
+      "@type": "xsd:string"
+    },
+    "NodeJsInstallation": "posit:NodeJsInstallation",
+    "RInstallations": "posit:RInstallations",
+    "PythonInfo": "posit:PythonInfo",
+    "api_enabled": {
+      "@id": "posit:api_enabled",
+      "@type": "xsd:boolean"
+    },
+    "TensorFlowInstallations": "posit:TensorFlowInstallations",
+    "RInstallation": "posit:RInstallation",
+    "QuartoInstallations": "posit:QuartoInstallations",
+    "NodeJsInfo": "posit:NodeJsInfo",
+    "enabled": {
+      "@id": "posit:enabled",
+      "@type": "xsd:boolean"
+    },
+    "TensorFlowInstallation": "posit:TensorFlowInstallation",
+    "PublicSettings": "posit:PublicSettings",
+    "authentication": {
+      "@id": "posit:authentication"
+    },
+    "self_registration": {
+      "@id": "posit:self_registration",
+      "@type": "xsd:boolean"
+    },
+    "system_display_name": {
+      "@id": "posit:system_display_name",
+      "@type": "xsd:string"
+    },
+    "public_warning": {
+      "@id": "posit:public_warning",
+      "@type": "xsd:string"
+    },
+    "customized_landing": {
+      "@id": "posit:customized_landing",
+      "@type": "xsd:boolean"
+    },
+    "mail_configured": {
+      "@id": "posit:mail_configured",
+      "@type": "xsd:boolean"
+    },
+    "prohibited_usernames": {
+      "@id": "posit:prohibited_usernames",
+      "@container": "@list"
+    },
+    "username_validator": {
+      "@id": "posit:username_validator",
+      "@type": "xsd:string"
+    },
+    "ServiceTokenScopes": "posit:ServiceTokenScopes",
+    "scopes": {
+      "@id": "posit:scopes",
+      "@container": "@list"
+    },
+    "ServiceToken": "posit:ServiceToken",
+    "ServiceTokenCreateInput": "posit:ServiceTokenCreateInput",
+    "ServiceTokenScope": "posit:ServiceTokenScope",
+    "ContentBundleStorageDetail": "posit:ContentBundleStorageDetail",
+    "size_bytes": {
+      "@id": "posit:size_bytes",
+      "@type": "xsd:integer"
+    },
+    "is_active": {
+      "@id": "posit:is_active",
+      "@type": "xsd:boolean"
+    },
+    "ContentStorageListItemBundles": "posit:ContentStorageListItemBundles",
+    "count": {
+      "@id": "posit:count",
+      "@type": "xsd:integer"
+    },
+    "bytes_total": {
+      "@id": "posit:bytes_total",
+      "@type": "xsd:integer"
+    },
+    "bytes_active": {
+      "@id": "posit:bytes_active",
+      "@type": "xsd:integer"
+    },
+    "bytes_inactive": {
+      "@id": "posit:bytes_inactive",
+      "@type": "xsd:integer"
+    },
+    "ContentStorageList": "posit:ContentStorageList",
+    "total_pages": {
+      "@id": "posit:total_pages",
+      "@type": "xsd:integer"
+    },
+    "ContentStorageListItem": "posit:ContentStorageListItem",
+    "owner_username": {
+      "@id": "posit:owner_username",
+      "@type": "xsd:string"
+    },
+    "bundles": {
+      "@id": "posit:bundles"
+    },
+    "ContentStorageDetail": "posit:ContentStorageDetail",
+    "bundle_count": {
+      "@id": "posit:bundle_count",
+      "@type": "xsd:integer"
+    },
+    "bundle_bytes_total": {
+      "@id": "posit:bundle_bytes_total",
+      "@type": "xsd:integer"
+    },
+    "bundle_bytes_active": {
+      "@id": "posit:bundle_bytes_active",
+      "@type": "xsd:integer"
+    },
+    "bundle_bytes_inactive": {
+      "@id": "posit:bundle_bytes_inactive",
+      "@type": "xsd:integer"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Posit API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Posit's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-03) from openapi/posit-api-keys-api-openapi.yml, openapi/posit-audit-logs-api-openapi.yml, openapi/posit-bookmarks-api-openapi.yml.",
+  "dcterms:created": "2026-10-03",
+  "dcterms:source": [
+    "openapi/posit-api-keys-api-openapi.yml",
+    "openapi/posit-audit-logs-api-openapi.yml",
+    "openapi/posit-bookmarks-api-openapi.yml",
+    "openapi/posit-bootstrap-api-openapi.yml",
+    "openapi/posit-bundles-api-openapi.yml"
+  ]
+}

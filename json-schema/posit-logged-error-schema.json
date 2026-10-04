@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-logged-error-schema.json",
+  "title": "LoggedError",
+  "description": "The primary error of a job.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/LoggedError",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "description": "The error code.",
+      "type": "string"
+    },
+    "summary": {
+      "description": "Summary of the error.",
+      "type": "string"
+    },
+    "help_url": {
+      "description": "A help URL with further information about the error.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

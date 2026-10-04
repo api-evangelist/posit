@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-packages-response-schema.json",
+  "title": "PackagesResponse",
+  "description": "An object containing a paginated list of packages.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-packages-api-openapi.yml#/components/schemas/PackagesResponse",
+  "allOf": [
+    {
+      "$ref": "#/$defs/OffsetPaging"
+    },
+    {
+      "properties": {
+        "results": {
+          "description": "The list of packages",
+          "items": {
+            "$ref": "#/$defs/Package"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  ],
+  "$defs": {
+    "OffsetPaging": {
+      "description": "Offset-based pagination metadata.",
+      "properties": {
+        "current_page": {
+          "description": "The current page of results",
+          "format": "int32",
+          "type": "integer"
+        },
+        "total": {
+          "description": "The number of items that match the given filters",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "description": "A package dependency record.",
+      "properties": {
+        "language": {
+          "description": "Language ecosystem the package belongs to",
+          "type": "string"
+        },
+        "language_version": {
+          "description": "Version of R or Python used by the content",
+          "type": "string"
+        },
+        "name": {
+          "description": "Package name",
+          "type": "string"
+        },
+        "version": {
+          "description": "Package version",
+          "type": "string"
+        },
+        "hash": {
+          "description": "Package description hash for R packages",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bundle_id": {
+          "description": "Identifier for the bundle that depends on this package",
+          "type": "string"
+        },
+        "app_id": {
+          "description": "This field is deprecated and has been renamed to `content_id`.",
+          "type": "string"
+        },
+        "app_guid": {
+          "description": "This field is deprecated and has been renamed to `content_guid`.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "content_id": {
+          "description": "Numeric identifier for the content that depends on this package",
+          "type": "string"
+        },
+        "content_guid": {
+          "description": "The unique identifier of the content item that depends on this package",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

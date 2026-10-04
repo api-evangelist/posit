@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-python-info-schema.json",
+  "title": "PythonInfo",
+  "description": "This defines the top-level object that describes the data returned by the server.\nIt contains information about each installation of Python that is known.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-server-information-api-openapi.yml#/components/schemas/PythonInfo",
+  "additionalProperties": false,
+  "properties": {
+    "installations": {
+      "description": "The array of information about Posit Connect's Python\ninstallations.",
+      "items": {
+        "$ref": "#/$defs/PyInstallation"
+      },
+      "type": "array"
+    },
+    "api_enabled": {
+      "description": "A `true` value is returned only when Python support is enabled in\nConnect and API hosting is permitted by the product license. It will\nbe `false` in all other cases.",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "PyInstallation": {
+      "additionalProperties": false,
+      "description": "This defines the information provided by the server about a single installation of Python.",
+      "properties": {
+        "version": {
+          "description": "The version number of this Python installation.",
+          "type": "string"
+        },
+        "cluster_name": {
+          "description": "The cluster that contains this Python installation.\nA value of `Local` indicates that the Python installation is local to the\nPosit Connect server.",
+          "type": "string"
+        },
+        "image_name": {
+          "description": "The image that contains this Python installation.\nA value of `Local` indicates that the Python installation is local to the\nPosit Connect server.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

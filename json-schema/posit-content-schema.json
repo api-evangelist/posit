@@ -1,0 +1,629 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-content-schema.json",
+  "title": "Content",
+  "description": "The content object models all the \"things\" you may deploy to Posit Connect. This includes Shiny applications, R Markdown documents, Jupyter notebooks, Plumber APIs, FastAPI and Flask APIs, Python apps, plots, and pins.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-content-api-openapi.yml#/components/schemas/Content",
+  "additionalProperties": false,
+  "properties": {
+    "guid": {
+      "description": "The unique identifier of this content item.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "name": {
+      "description": "A simple identifier. Allows alpha-numeric\ncharacters, periods (`\".\"`), hyphens (`\"-\"`), and underscores (`\"_\"`).",
+      "type": "string"
+    },
+    "title": {
+      "description": "The title of this content.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "A rich description of this content.",
+      "type": "string"
+    },
+    "access_type": {
+      "description": "Access type describes how this content manages its viewers. The\nvalue `all` is the most permissive; any visitor to Posit Connect\nwill be able to view this content. The value `logged_in` indicates\nthat all Posit Connect accounts may view the content. The `acl`\nvalue lets specifically enumerated users and groups view the\ncontent. Users configured as collaborators may always view content.\n\nAccess types may be restricted by the Connect configuration or the\nproduct license.",
+      "type": "string"
+    },
+    "locked": {
+      "description": "Whether or not the content is locked.",
+      "type": "boolean"
+    },
+    "locked_message": {
+      "description": "A custom message that is displayed by the content item when locked.\nIt is possible to format this message using Markdown.",
+      "type": "string"
+    },
+    "connection_timeout": {
+      "description": "Maximum number of seconds allowed without data sent or received\nacross a client connection. A value of `0` means connections will\nnever time-out (not recommended). When `null`, the default\n[`Scheduler.ConnectionTimeout`](../admin/appendix/configuration/index.md#Scheduler.ConnectionTimeout) is used. Applies only to content types\nthat are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "read_timeout": {
+      "description": "Maximum number of seconds allowed without data received from a\nclient connection. A value of `0` means a lack of client (browser)\ninteraction never causes the connection to close. When `null`, the\ndefault [`Scheduler.ReadTimeout`](../admin/appendix/configuration/index.md#Scheduler.ReadTimeout) is used. Applies only to content\ntypes that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "init_timeout": {
+      "description": "The maximum number of seconds allowed for an interactive application\nto start. Posit Connect must be able to connect to a newly\nlaunched application before this threshold has\nelapsed. When `null`, the default [`Scheduler.InitTimeout`](../admin/appendix/configuration/index.md#Scheduler.InitTimeout) is used.\nApplies only to content types that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "idle_timeout": {
+      "description": "The maximum number of seconds a worker process for an interactive\napplication to remain alive after it goes idle (no active\nconnections). When `null`, the default [`Scheduler.IdleTimeout`](../admin/appendix/configuration/index.md#Scheduler.IdleTimeout) is\nused. Applies only to content types that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "max_processes": {
+      "description": "Specifies the total number of concurrent processes allowed for a\nsingle interactive application per Posit Connect node. When `null`,\nthe default [`Scheduler.MaxProcesses`](../admin/appendix/configuration/index.md#Scheduler.MaxProcesses) is used. Applies only to\ncontent types that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "min_processes": {
+      "description": "Specifies the minimum number of concurrent processes allowed for a\nsingle interactive application per Posit Connect node. When `null`,\nthe default `Scheduler.MinProcesses` is used. Applies only to\ncontent types that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "max_conns_per_process": {
+      "description": "Specifies the maximum number of client connections allowed to an\nindividual process. Incoming connections which will exceed this\nlimit are routed to a new process or rejected. When `null`, the\ndefault [`Scheduler.MaxConnsPerProcess`](../admin/appendix/configuration/index.md#Scheduler.MaxConnsPerProcess) is used. Applies only to\ncontent types that are executed on demand.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "load_factor": {
+      "description": "Controls how aggressively new processes are spawned. When `null`,\nthe default [`Scheduler.LoadFactor`](../admin/appendix/configuration/index.md#Scheduler.LoadFactor) is used. Applies only to content\ntypes that are executed on demand.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "memory_request": {
+      "description": "The minimum amount of RAM this content needs when executing or\nrendering, expressed in bytes. This is used when running in an\noff-host execution configuration to determine where the content\nshould be run. When `null`, the default [`Scheduler.MemoryRequest`](../admin/appendix/configuration/index.md#Scheduler.MemoryRequest) is\nused.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "memory_limit": {
+      "description": "The maximum amount of RAM this content will be allowed to consume\nwhen executing or rendering, expressed in bytes. If the process tries\nto use more memory than allowed, it will be terminated. When `null`,\nthe default [`Scheduler.MemoryLimit`](../admin/appendix/configuration/index.md#Scheduler.MemoryLimit) is used.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "cpu_request": {
+      "description": "The minimum amount of compute power this content needs when executing\nor rendering, expressed in [\"CPU\nUnits\"](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu),\nwhere 1.0 unit is equivalent to 1 physical or virtual core.\nFractional values are allowed. This is used when running in an\noff-host execution configuration to determine where the content\nshould be run. When `null`, the default [`Scheduler.CPURequest`](../admin/appendix/configuration/index.md#Scheduler.CPURequest) is\nused.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "cpu_limit": {
+      "description": "The maximum amount of compute power this content will be allowed to\nconsume when executing or rendering, expressed in [\"CPU\nUnits\"](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu),\nwhere 1.0 unit is equivalent to 1 physical or virtual core.\nFractional values are allowed. This is used when running in an\noff-host execution configuration. If the process tries to use more\nCPU than allowed, it will be throttled. When `null`, the default\n[`Scheduler.CPULimit`](../admin/appendix/configuration/index.md#Scheduler.CPULimit) is used.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "amd_gpu_limit": {
+      "description": "The number of AMD GPUs that will be\n[allocated by\nKubernetes](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)\nto run this content. This is used when running in an\noff-host execution configuration. When `null`, the default\n[`Scheduler.AMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.AMDGPULimit) is used. This setting can not exceed\n[`Scheduler.MaxAMDGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxAMDGPULimit).",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "nvidia_gpu_limit": {
+      "description": "The number of NVIDIA GPUs that will be\n[allocated by\nKubernetes](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)\nto run this content. This is used when running in an\noff-host execution configuration. When `null`, the default\n[`Scheduler.NvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.NvidiaGPULimit) is used. This setting can not exceed\n[`Scheduler.MaxNvidiaGPULimit`](../admin/appendix/configuration/index.md#Scheduler.MaxNvidiaGPULimit).",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "service_account_name": {
+      "description": "The name of the Kubernetes service account that is used to run a particular\npiece of content.\nIt must adhere to valid Kubernetes service account naming rules.\n\nConnect must be configured to run with [`Launcher.Enabled = true`](../admin/appendix/configuration/index.md#Launcher.Enabled),\n[`Launcher.Kubernetes = true`](../admin/appendix/configuration/index.md#Launcher.Kubernetes) and\n[`Launcher.KubernetesContentServiceAccountSelection = true`](../admin/appendix/configuration/index.md#Launcher.KubernetesContentServiceAccountSelection)\nfor this value to be applied. It will have precedence over the\n[`Launcher.KubernetesDefaultServiceAccount`](../admin/appendix/configuration/index.md#Launcher.KubernetesDefaultServiceAccount) that may be set in the\nconfiguration for Connect.\n\nIf this value is defined and Connect is configured with\n[`Launcher.KubernetesContentServiceAccountSelection = false`](../admin/appendix/configuration/index.md#Launcher.KubernetesContentServiceAccountSelection) an error will be\nreturned.\n\nOnly administrators and publishers can view this value.\nOnly administrators can set or change this value.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_image_name": {
+      "description": "The default image that will be used when none is defined by the\nbundle's manifest. A specific image may be selected by setting the\n`environment.image` field in the manifest. If no image is selected\nby the manifest file, then the `default_image_name` is used.\nIf a target image is not defined by the manifest, and no\n`default_image_name` is configured, then Connect will select an\nimage from the list of configured execution environments.\n\nIf either `environment.identifier` or `environment.image` is specified in\nthe bundle's\nmanifest.json then the settings in the manifest are used and the\ncontent-level default\nsettings will be ignored. This allows historical bundle activation to behave\nconsistently\neven when the content-level default values may have changed.\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.\n\nUse the `/v1/environments` API endpoints to determine which environments\nare available for content execution.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_environment_guid": {
+      "description": "The default execution environment that will be used when none is defined by\nthe\nbundle's manifest. A specific execution environment may be selected by\nsetting the\n`environment.identifier` field in the manifest. If no execution environment\nis selected\nby the manifest file, then `default_environment_guid` is used to select the\nexecution environment. If a target execution environment is not defined by\nthe manifest,\nand no `default_environment_guid` is configured, then Connect will select an\nexecution environment from the list of configured execution environments.\n\nIf either `environment.identifier` or `environment.image` is specified in\nthe bundle's\nmanifest.json then the settings in the manifest are used and the\ncontent-level default\nsettings will be ignored. This allows historical bundle activation to behave\nconsistently\neven when the content-level default values may have changed.\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.\n\nUse the `/v1/environments` API endpoints to determine which environments\nare available for content execution.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_time": {
+      "description": "The timestamp (RFC3339) indicating when this content was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "last_deployed_time": {
+      "description": "The timestamp (RFC3339) indicating when this content last had a\nsuccessful bundle deployment performed.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "bundle_id": {
+      "description": "The identifier for the active deployment bundle. Automatically\nassigned upon the successful deployment of that bundle.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "app_mode": {
+      "description": "The runtime model for this content. Has a value of `unknown` before\ndata is deployed to this item. Automatically assigned upon the first\nsuccessful bundle deployment.\n\nValid values are:\n\n* `api` - R code defining a [Plumber API](https://www.rplumber.io/).\n* `jupyter-static` - A [Jupyter\nNotebook](https://jupyter-notebook.readthedocs.io/en/stable/).\n* `jupyter-voila` A [Voila](https://voila.readthedocs.io/en/stable/)\ninteractive dashboard.\n* `python-api` - Python code defining a WSGI API (such as\n[Flask](https://palletsprojects.com/p/flask/))\n* `python-bokeh` - Python code defining a [Bokeh\napplication](https://bokeh.org/).\n* `python-panel` - Python code defining a [Panel\napplication](https://panel.holoviz.org/).\n* `python-dash` - Python code defining a [Dash\napplication](https://dash.plotly.com/).\n* `python-fastapi` - Python code defining an ASGI API (such as\n[FastAPI](https://fastapi.tiangolo.com/))\n* `python-gradio` - Python code defining a [Gradio](https://www.gradio.app/)\napplication.\n* `python-shiny` - Python code defining a [Shiny\napplication](https://shiny.posit.co/py/).\n* `python-streamlit` - Python code defining a [Streamlit\napplication](https://streamlit.io/).\n* `quarto-shiny` - A [Quarto](https://quarto.org/) document with a Shiny\nruntime.\n* `quarto-static` - A [Quarto](https://quarto.org/) document or site.\n* `rmd-shiny` - An [R Markdown](https://rmarkdown.rstudio.com/) document\nwith a Shiny runtime.\n* `rmd-static` - An [R Markdown](https://rmarkdown.rstudio.com/) document or\nsite.\n* `shiny` - R code defining a [Shiny application](https://shiny.posit.co/).\n* `static` - Content deployed without source; often HTML and plots.\n* `tensorflow-saved-model` - A TensorFlow Model API.\n* `unknown` - No known runtime model.",
+      "type": "string"
+    },
+    "content_category": {
+      "description": "Describes the specialization of the content runtime model.\nAutomatically assigned upon the first successful bundle deployment.\n\nThe `content_category` field refines the type of content specified by\n`app_mode`. It is empty by default. The rsconnect R package may assign\na value when analyzing your content and building its manifest and\nbundle. Plots (images created in the RStudio IDE and presented in the\n\"Plots\" pane) have an `app_mode` of `static` and receive a\n`content_category` of `plot` to distinguish them from other HTML\ndocuments. Pinned static data sets have an `app_mode` of `static` and a\n`content_category` of `pin`. Multi-document R Markdown sites have an\n`app_mode` of `rmd-static` and a `content_category` of `site`.\nAPI content types (such as FastAPI, Flask, or Plumber) that serve as\nMCP servers have a `content_category` of `mcp`. The `mcp` category is\nauto-detected on first deploy but can also be set or cleared via\n[PATCH /v1/content/{guid}](#updateContent).",
+      "type": "string"
+    },
+    "parameterized": {
+      "description": "True when R Markdown rendered content allows parameter\nconfiguration. Automatically assigned upon the first successful\nbundle deployment. Applies only to content with an `app_mode` of\n`rmd-static`.",
+      "type": "boolean"
+    },
+    "environment_guid": {
+      "description": "The guid of the execution environment used to run this content. Content\nrunning locally\non the same server as Connect will have either a `null` value.\n\nA `null` value is returned when the client does not have sufficient rights\nto see this\ninformation.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cluster_name": {
+      "description": "The location where this content runs. Content running on the same\nserver as Connect will have either a `null` value or the string\n\"Local\". Gives the name of the cluster when run external to the\nConnect host.\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "image_name": {
+      "description": "The name of the container image used to run this content in containerized\nenvironments such as Kubernetes. Content running locally\non the same server as Connect will have either a `null` value or the string\n\"Local\".\n\nA `null` value is returned when the client does not have sufficient\nrights to see this information.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "r_version": {
+      "description": "The of R interpreter associated with this content. A `null` value\nrepresents that R is not used by this content, that the content has\nnot been prepared for execution, or that the client does not have\nsufficient rights to see this information. Automatically assigned\nupon the successful deployment of a bundle.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "py_version": {
+      "description": "The version of Python associated with this content. A `null` value\nrepresents that Python is not used by this content, that the content\nhas not been prepared for execution, or that the client does not\nhave sufficient rights to see this information. Automatically\nassigned upon the successful deployment of a bundle.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quarto_version": {
+      "description": "The version of Quarto associated with this content. A `null`\nrepresents that Quarto is not used by this content, that the content\nhas not been prepared for execution, or that the client does not\nhave sufficient rights to see this information. Automatically\nassigned upon the successful deployment of a bundle.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "node_version": {
+      "description": "The version of Node.js associated with this content. A `null`\nrepresents that Node.js is not used by this content, that the content\nhas not been prepared for execution, or that the client does not\nhave sufficient rights to see this information. Automatically\nassigned upon the successful deployment of a bundle.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "r_environment_management": {
+      "description": "Indicates whether or not Connect is managing an R environment and\nhas installed the required packages for this content. A `null` value\nrepresents that R is not used by this content, that the content has\nnot been prepared for execution, or that the client does not have\nsufficient rights to see this information. Automatically assigned\nupon the successful deployment of a bundle.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "default_r_environment_management": {
+      "description": "Indicates whether or not Connect should create and manage an R\nenvironment (installing required packages) for this content. When\n`null`, Connect makes this determination based on the server\nconfiguration.\n\nA `null` value is also returned when the client does not have\nsufficient rights to see this information.\n\nThis value is ignored if the server setting\n[`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "py_environment_management": {
+      "description": "Indicates whether or not Connect is managing a Python environment\nand has installed the required packages for this content. A `null`\nvalue represents that Python is not used by this content, that the\ncontent has not been prepared for execution, or that the client does\nnot have sufficient rights to see this information. Automatically\nassigned upon the successful deployment of a bundle.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "default_py_environment_management": {
+      "description": "Indicates whether or not Connect should create and manage a Python\nenvironment (installing required packages) for this content. When\n`null`, Connect makes this determination based on the server\nconfiguration.\n\nA `null` value is also returned when the client does not have\nsufficient rights to see this information.\n\nThis value is ignored if the server setting\n[`Applications.DefaultEnvironmentManagementSelection`](../admin/appendix/configuration/index.md#Applications.DefaultEnvironmentManagementSelection) is disabled.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "run_as": {
+      "description": "The UNIX user that executes this content. When `null`, the default\n[`Applications.RunAs`](../admin/appendix/configuration/index.md#Applications.RunAs) is used. Applies only to executable content\ntypes - not `static`.\n\nOnly administrators can change this value.\n\nIf [`Applications.RunAsEnabled = false`](../admin/appendix/configuration/index.md#Applications.RunAsEnabled), this value will be ignored when\nexecuting content.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "run_as_current_user": {
+      "description": "Indicates that Connect should run processes for this content item\nunder the Unix account of the user who visits it. Content accessed\nanonymously will continue to run as the specified `run_as` user.\n\nConnect must be configured with the server setting\n[`Applications.RunAsCurrentUser = true`](../admin/appendix/configuration/index.md#Applications.RunAsCurrentUser). Current user execution is\nsupported with the PAM, OAuth2, SAML, and LDAP authentication\nproviders; PAM additionally requires [`PAM.ForwardPassword = true`](../admin/appendix/configuration/index.md#PAM.ForwardPassword).\n\nThis setting applies to application content types (Shiny, Dash,\nStreamlit, Bokeh, and Panel) and API content types (Plumber, Flask,\nFastAPI, and Node.js).\n\nOnly administrators can change this value.",
+      "type": "boolean"
+    },
+    "metrics_collection_enabled": {
+      "description": "Controls whether per-job resource metrics (CPU, memory, connections)\nare collected for this content item.\n\nWhen `null`, the content item inherits the server-wide default from\n[`Applications.MetricsCollectionEnabled`](../admin/appendix/configuration/index.md#Applications.MetricsCollectionEnabled). Explicit `true` or `false`\nvalues override the server default.\n\nMetrics can be retrieved via the\n[GET /v1/content/{guid}/jobs/{key}/metrics](#getJobMetrics) endpoint.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "notify_on_share": {
+      "description": "Controls whether email notifications are sent by default\nwhen users or groups are added as collaborators or viewers.\n\nWhen `null`, the content item inherits the server-wide default\nfrom [`Applications.NotifyOnShare`](../admin/appendix/configuration/index.md#Applications.NotifyOnShare). Explicit `true` or `false`\nvalues override the server default.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "otel_enabled": {
+      "description": "Controls whether content telemetry (metrics, logs, traces) is collected\nfor this content item. Both this field and the server setting\n`OpenTelemetry.AllowContentInstrumentation` must be true for signals to flow.\nOnly visible to collaborators and owners.",
+      "type": "boolean"
+    },
+    "owner_guid": {
+      "description": "The unique identifier of the user who created this content item.\nAutomatically assigned when the content is created.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "content_url": {
+      "description": "The URL associated with this content. Computed from the associated\nGUID for this content.",
+      "type": "string"
+    },
+    "dashboard_url": {
+      "description": "The URL within the Connect dashboard where this content can be configured.\nComputed from the GUID for this content.",
+      "type": "string"
+    },
+    "vanity_url": {
+      "description": "The vanity URL associated with this content item. Included in responses\nwhen the vanity URL is set and `include=vanity_url` is provided.",
+      "type": "string"
+    },
+    "app_role": {
+      "description": "The relationship of the accessing user to this content. A value of\n`owner` is returned for the content owner. `editor` indicates a\ncollaborator. The `viewer` value is given to users who are permitted\nto view the content. A `none` role is returned for administrators\nwho cannot view the content but are permitted to view its\nconfiguration. Computed at the time of the request.",
+      "type": "string"
+    },
+    "bookmarked": {
+      "description": "Indicates whether the requesting user has bookmarked this content\nitem. Included in responses when `include=bookmarked` is provided.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "schedules": {
+      "description": "Schedules associated with this content item. Included in responses when\n`include=schedule` is provided.",
+      "items": {
+        "$ref": "#/$defs/ContentSchedule"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "id": {
+      "description": "The internal numeric identifier of this content item.",
+      "type": "string"
+    },
+    "tags": {
+      "description": "Tags associated with this content item. Included in responses when\n`include=tags` is provided. Returns an empty array when content has\nno tags.",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "owner": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ContentOwner"
+        }
+      ],
+      "description": "Basic details about the owner of this content item. Included in\nresponses when `include=owner` is provided."
+    },
+    "public_content_status": {
+      "description": "Validation status of public interactive content. When validation is\nrequired by licensing, this will be one of \"ok\", \"warning\", or\n\"restricted\". If licensing does not require validation, it will be\n\"unrestricted\"; if licensing does not allow public interactive\ncontent, it will be \"unlicensed\". If the app has not been made public,\nbut public content is permitted, it will be \"none\".",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "ContentOwner": {
+      "additionalProperties": false,
+      "description": "Basic details about the owner of a content item.",
+      "properties": {
+        "guid": {
+          "description": "The owner's unique identifier.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "username": {
+          "description": "The owner's username.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_name": {
+          "description": "The owner's first name.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_name": {
+          "description": "The owner's last name.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ContentSchedule": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Schedule"
+        },
+        {
+          "properties": {
+            "variant": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ScheduleVariant"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "Schedule information with variant details for a content item."
+    },
+    "RRuleSet": {
+      "additionalProperties": false,
+      "description": "RFC 5545 recurrence rule components for a schedule.",
+      "properties": {
+        "dtstart": {
+          "description": "The DTSTART component specifying when the schedule begins,\nincluding timezone information.",
+          "type": "string"
+        },
+        "rrules": {
+          "description": "An array of RRULE components defining the recurrence pattern.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "until": {
+          "description": "The UNTIL component specifying when the schedule ends, if applicable.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Schedule": {
+      "description": "Base schedule information for a content item.",
+      "properties": {
+        "type": {
+          "description": "The schedule type.",
+          "type": "string"
+        },
+        "schedule": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RRuleSet"
+            }
+          ],
+          "description": "The recurrence rule in RFC5545 format."
+        },
+        "next_run": {
+          "description": "The next scheduled run time. Null if no future runs are scheduled.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "description": "Whether email notifications are enabled for this schedule.",
+          "type": "boolean"
+        },
+        "timezone": {
+          "description": "The timezone for this schedule.",
+          "type": "string"
+        },
+        "start_time": {
+          "description": "The start time of the schedule window.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "end_time": {
+          "description": "The end time of the schedule window. Null if the schedule runs indefinitely.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_run": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ScheduleLastRun"
+            }
+          ],
+          "description": "Information about the last scheduled run."
+        }
+      },
+      "type": "object"
+    },
+    "ScheduleLastRun": {
+      "additionalProperties": false,
+      "description": "Information about the last scheduled run.",
+      "properties": {
+        "job_key": {
+          "description": "The unique key of the job.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the last run.",
+          "type": "string"
+        },
+        "scheduled_time": {
+          "description": "The scheduled time of the run.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "queued_time": {
+          "description": "The time the run was queued.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start_time": {
+          "description": "The time the run started.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "end_time": {
+          "description": "The time the run ended. Null if still running.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "run_duration_ms": {
+          "description": "The duration of the run in milliseconds. Null if still running.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "exit_code": {
+          "description": "The exit code of the job. Null if still running.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ScheduleVariant": {
+      "additionalProperties": false,
+      "description": "Variant information embedded in a schedule.",
+      "properties": {
+        "key": {
+          "description": "The variant key.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The variant name.",
+          "type": "string"
+        },
+        "is_default": {
+          "description": "Whether this is the default variant.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "description": "A tag used to organize content within Connect.",
+      "properties": {
+        "id": {
+          "description": "The identifier for the tag.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the tag.",
+          "type": "string"
+        },
+        "parent_id": {
+          "description": "The identifier for the parent tag. If there is no parent_id,\nthe tag is a top-level tag.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_time": {
+          "description": "The timestamp (RFC3339) indicating when the tag was created.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated_time": {
+          "description": "The timestamp (RFC3339) indicating when the tag was updated.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

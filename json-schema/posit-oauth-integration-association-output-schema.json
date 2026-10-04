@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-integration-association-output-schema.json",
+  "title": "OAuthIntegrationAssociationOutput",
+  "description": "Represents an association between a content item and an OAuth integration.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-content-api-openapi.yml#/components/schemas/OAuthIntegrationAssociationOutput",
+  "additionalProperties": false,
+  "properties": {
+    "app_guid": {
+      "description": "This field is deprecated and has been renamed to `content_guid`.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "content_guid": {
+      "description": "The unique identifier of the content item.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "oauth_integration_guid": {
+      "description": "The unique identifier of an existing OAuth integration.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "oauth_integration_name": {
+      "description": "A descriptive name that identifies the OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "oauth_integration_description": {
+      "description": "A brief text that describes the OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "oauth_integration_template": {
+      "description": "The template used to configure this OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "oauth_integration_auth_type": {
+      "description": "Indicates which OAuth flow is used by this integration. The\n\"Viewer\" authentication type corresponds to the Authorization Code\nflow. The \"Service Account\" authentication type corresponds to the\nClient Credentials flow.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_time": {
+      "description": "The timestamp (RFC3339) indicating when this association was created.",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

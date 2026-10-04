@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-job-schema.json",
+  "title": "Job",
+  "description": "A job record representing a content execution.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/Job",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "The job identifier.",
+      "type": "string"
+    },
+    "ppid": {
+      "description": "The job's parent process identifier.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pid": {
+      "description": "The job's process identifier.",
+      "type": "string"
+    },
+    "key": {
+      "description": "The job's unique key identifier.",
+      "type": "string"
+    },
+    "remote_id": {
+      "description": "The job's identifier for off-host execution configurations.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "app_id": {
+      "description": "This field is deprecated and has been renamed to `content_id`.",
+      "type": "string"
+    },
+    "content_id": {
+      "description": "The identifier for this job's parent content.",
+      "type": "string"
+    },
+    "content_guid": {
+      "description": "The unique identifier for this job's content.",
+      "type": "string"
+    },
+    "variant_id": {
+      "description": "The identifier of the variant owning this job.",
+      "type": "string"
+    },
+    "variant_key": {
+      "description": "The key of the variant owning this job. May be empty\nif the variant is no longer available.",
+      "type": "string"
+    },
+    "bundle_id": {
+      "description": "The identifier of a content bundle linked to this job.",
+      "type": "string"
+    },
+    "start_time": {
+      "description": "The timestamp (RFC3339) indicating when this job started.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "end_time": {
+      "description": "The timestamp (RFC3339) indicating when this job finished.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_heartbeat_time": {
+      "description": "The timestamp (RFC3339) indicating the last time\nthis job was observed to be running.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "queued_time": {
+      "description": "The timestamp (RFC3339) indicating when this job was added to the queue\nto be processed. Only scheduled reports will present a value for this field.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "queue_name": {
+      "description": "The name of the queue which processes the job. Only scheduled reports\nwill present a value for this field.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tag": {
+      "description": "A tag to identify the nature of the job. It can be one of `unknown`,\n`build_report`, `build_site`, `build_jupyter`, `packrat_restore`,\n`python_restore`, `configure_report`, `run_app`, `run_api`,\n`run_tensorflow`, `run_python_api`, `run_dash_app`,\n`run_streamlit`, `run_bokeh_app`, `run_panel_app`, `run_fastapi_app`,\n`run_gradio_app`,\n`run_pyshiny_app`, `render_shiny`, `run_voila_app`, `testing`,\n`git`, `val_py_ext_pkg`, `val_r_ext_pkg`, `val_r_install`.",
+      "type": "string"
+    },
+    "exit_code": {
+      "description": "The job's exit code. Present only when job is finished.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "error": {
+      "description": "The error message if the job failed due to an unexpected server error.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "description": "The current status of the job. It can be one of Active: `0`, Finished: `1`,\nFinalized: `2`, Skipped: `3`.",
+      "type": "integer"
+    },
+    "hostname": {
+      "description": "The name of the node which processes the job.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cluster": {
+      "description": "The location where this content runs. Content running on the same\nserver as Connect will have either a `null` value or the string\n`Local`. Gives the name of the cluster when run external to the\nConnect host.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "image": {
+      "description": "The location where this content runs. Content running on the\nsame server as Connect will have either a `null` value or the string\n`Local`. References the name of the target image when content runs\nin a clustered environment such as Kubernetes.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "run_as": {
+      "description": "The UNIX user that executed this job.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "skip_reason": {
+      "description": "The reason why this job was skipped. Only present for jobs with a\nskipped status (e.g., when a duplicate job was already queued).",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

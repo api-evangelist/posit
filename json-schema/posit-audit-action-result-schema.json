@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-audit-action-result-schema.json",
+  "title": "AuditActionResult",
+  "description": "An audit action available on your Posit Connect server.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditActionResult",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "description": "The name of the action.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A human-readable description of the action.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

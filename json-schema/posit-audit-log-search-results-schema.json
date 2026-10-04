@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-audit-log-search-results-schema.json",
+  "title": "AuditLogSearchResults",
+  "description": "Audit log search results with total count.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-audit-logs-api-openapi.yml#/components/schemas/AuditLogSearchResults",
+  "additionalProperties": false,
+  "properties": {
+    "total": {
+      "description": "The total number of matching audit log entries.",
+      "type": "integer"
+    },
+    "results": {
+      "description": "The matching audit log entries for this page.",
+      "items": {
+        "$ref": "#/$defs/AuditLogEntry"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "AuditLogEntry": {
+      "additionalProperties": false,
+      "description": "An audit log entry.",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of the audit log entry.",
+          "type": "string"
+        },
+        "time": {
+          "description": "The timestamp (RFC3339) of the audit action.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "The unique identifier of the user who performed the action.",
+          "type": "string"
+        },
+        "user_guid": {
+          "description": "The GUID of the user who performed the action.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "user_description": {
+          "description": "A description of the user who performed the action.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The name of the audit action.",
+          "type": "string"
+        },
+        "event_description": {
+          "description": "A human-readable description of the event.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

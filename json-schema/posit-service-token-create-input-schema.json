@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-service-token-create-input-schema.json",
+  "title": "ServiceTokenCreateInput",
+  "description": "The input object for creating a service token.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-service-tokens-api-openapi.yml#/components/schemas/ServiceTokenCreateInput",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "The name for this service token. Use the name to describe the purpose\nof the token. Names do not need to be unique.",
+      "type": "string"
+    },
+    "scopes": {
+      "description": "The scopes to grant to this service token. At least one scope is\nrequired. Supported values: `identity:manage`, `nameservice:read`.\nUse the `/v1/system/service-tokens/scopes` endpoint to get available scopes\nand descriptions.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "expires_at": {
+      "description": "Optional timestamp (in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)\nformat) indicating when the token expires. After this time, the token\ncan no longer authenticate and is removed automatically. Must be in\nthe future. Omit or set to `null` for a token that never expires.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

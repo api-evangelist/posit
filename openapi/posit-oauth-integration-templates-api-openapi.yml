@@ -125,60 +125,6 @@ paths:
       - OAuth Integration Templates
 components:
   schemas:
-    OAuthTemplateSection:
-      additionalProperties: false
-      description: OAuthTemplateSection defines a section within an OAuth template used to group options and fields when building the UI.
-      properties:
-        id:
-          description: The primary identifier of the template section.
-          format: int32
-          type: integer
-        order:
-          description: 'The order of this section relative to other sections within the OAuth
-
-            template.'
-          format: int32
-          type: integer
-        name:
-          description: The name of this section.
-          type: string
-        description:
-          description: The description of this section.
-          type: string
-      type: object
-    ServicePrincipalTemplateOption:
-      additionalProperties: false
-      description: A configuration option (boolean or drop-down input) for a service principal template.
-      properties:
-        name:
-          description: The primary identifier of the option, used as a config map key.
-          type: string
-        description:
-          description: A description of the option.
-          type: string
-        order:
-          description: The order of this option relative to other options and fields.
-          format: int32
-          type: integer
-        label:
-          description: The label to use for this option.
-          type: string
-        visibility_expression:
-          allOf:
-          - $ref: '#/components/schemas/ServicePrincipalTemplateVisibilityExpression'
-          description: A Boolean expression tree that indicates if this option is visible.
-        type:
-          description: The type of this option, either "bool" or "select".
-          type: string
-        values:
-          description: The possible values when type is "select".
-          items:
-            type: string
-          type: array
-        default:
-          description: The default value of this option.
-          type: object
-      type: object
     OAuthTemplate:
       additionalProperties: false
       description: 'OAuthTemplate holds the set of available fields that can be configured when creating
@@ -249,25 +195,6 @@ components:
             $ref: '#/components/schemas/ServicePrincipalTemplateVisibilityExpression'
           type: array
       type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
     ServicePrincipalTemplateField:
       additionalProperties: false
       description: A configuration field (text input) for a service principal template.
@@ -304,6 +231,79 @@ components:
         multiline:
           description: Indicates whether the field accepts multiline text input.
           type: boolean
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    ServicePrincipalTemplateOption:
+      additionalProperties: false
+      description: A configuration option (boolean or drop-down input) for a service principal template.
+      properties:
+        name:
+          description: The primary identifier of the option, used as a config map key.
+          type: string
+        description:
+          description: A description of the option.
+          type: string
+        order:
+          description: The order of this option relative to other options and fields.
+          format: int32
+          type: integer
+        label:
+          description: The label to use for this option.
+          type: string
+        visibility_expression:
+          allOf:
+          - $ref: '#/components/schemas/ServicePrincipalTemplateVisibilityExpression'
+          description: A Boolean expression tree that indicates if this option is visible.
+        type:
+          description: The type of this option, either "bool" or "select".
+          type: string
+        values:
+          description: The possible values when type is "select".
+          items:
+            type: string
+          type: array
+        default:
+          description: The default value of this option.
+          type: object
+      type: object
+    OAuthTemplateSection:
+      additionalProperties: false
+      description: OAuthTemplateSection defines a section within an OAuth template used to group options and fields when building the UI.
+      properties:
+        id:
+          description: The primary identifier of the template section.
+          format: int32
+          type: integer
+        order:
+          description: 'The order of this section relative to other sections within the OAuth
+
+            template.'
+          format: int32
+          type: integer
+        name:
+          description: The name of this section.
+          type: string
+        description:
+          description: The description of this section.
+          type: string
       type: object
   securitySchemes:
     apiKey:

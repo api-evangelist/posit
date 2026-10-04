@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-group-patch-input-schema.json",
+  "title": "GroupPatchInput",
+  "description": "The fields that can be specified when partially updating a group.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-groups-api-openapi.yml#/components/schemas/GroupPatchInput",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "The group's new name. Cannot be empty or `null`, and must be\nat most 4096 characters. Names must be unique, except for\nSAML, OAuth2, and Proxied authentication when `GroupsByUniqueId`\nis enabled.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "owner_guid": {
+      "description": "The new owner's unique identifier. Must reference an existing\nuser who is not a viewer. Can be set to `null` to remove the\nowner for SAML, OAuth2, and Proxied authentication when\n`GroupsAutoProvision` is enabled.",
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gid": {
+      "description": "The POSIX Group ID (GID) for\n[current user execution](../admin/process-management/index.md#runas-current).\nMust be a positive integer and unique across all groups. Set\nto `null` to remove the GID.",
+      "format": "int32",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

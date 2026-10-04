@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-oauth-integration-update-schema.json",
+  "title": "OAuthIntegrationUpdate",
+  "description": "The fields that can be specified when updating an OAuth integration.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-oauth-integrations-api-openapi.yml#/components/schemas/OAuthIntegrationUpdate",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "A descriptive name to identify each OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "description": "A brief text to describe each OAuth integration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "config": {
+      "additionalProperties": true,
+      "description": "The OAuth integration configuration based on the template.\nSee List OAuth templates for more information on available fields for each\ntemplate.\nThe configuration combines elements from both options and fields from a\ngiven template.\n\nFor example, given the following OAuthTemplateOptions:\n\n```\n...\n\"options\": [{\n...\n\"name\": \"auth_mode\",\n\"type\": \"select\",\n\"values\": [\"Confidential\", \"Public\"]\n},\n...\n}],\n\"fields\": [{\n...\n\"name\": \"client_id\",\n\"label\": \"Client ID\"\n},\n...\n}]\n...\n```\n\nA valid OAuthIntegration `config` would be:\n\n```\n{\n...\n\"config\": {\n\"auth_mode\": \"Public\",\n\"client_id\": \"1b9b9733-43f5-4848-a894-f753f2fbaf41\",\n...\n}\n}\n```",
+      "type": "object"
+    },
+    "permissions": {
+      "description": "An optional list of permissions to grant access to this OAuth integration.\nEach permission record specifies a user or group that can access the\nintegration.\nWhen provided, this replaces the existing permissions for the integration.",
+      "items": {
+        "$ref": "#/$defs/OAuthIntegrationPermissionInput"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "OAuthIntegrationPermissionInput": {
+      "additionalProperties": false,
+      "description": "The fields that can be specified when adding permissions to an OAuth integration.\nNote that only one of user_guid or group_guid can be specified in a single request.",
+      "properties": {
+        "user_guid": {
+          "description": "The identifier of the user. Do not specify this field if you\nare adding a group.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "group_guid": {
+          "description": "The identifier of the group. Do not specify this field if you\nare adding a user.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Posit Connect Server API
   version: 1.0.0
-extends: openapi/posit-connect-openapi-original.json
+extends: ../openapi/_original/posit-connect-openapi-original.json
 actions:
 - target: $.info
   update:

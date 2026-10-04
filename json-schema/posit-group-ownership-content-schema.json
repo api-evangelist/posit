@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-group-ownership-content-schema.json",
+  "title": "GroupOwnershipContent",
+  "description": "Content item with access control details for a group.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-groups-api-openapi.yml#/components/schemas/GroupOwnershipContent",
+  "additionalProperties": false,
+  "properties": {
+    "content_guid": {
+      "description": "The unique identifier of the content item.",
+      "format": "uuid",
+      "type": "string"
+    },
+    "content_name": {
+      "description": "The name of the content item.",
+      "type": "string"
+    },
+    "content_title": {
+      "description": "The title of the content item.",
+      "type": "string"
+    },
+    "access_type": {
+      "description": "The access type of the content item.",
+      "type": "string"
+    },
+    "permissions": {
+      "description": "List of principals (users and groups) with access to the content.\nThe owner is listed as `author` and is always present.",
+      "items": {
+        "$ref": "#/$defs/GroupOwnershipPermission"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "GroupOwnershipPermission": {
+      "additionalProperties": false,
+      "description": "A principal with access to a content item.",
+      "properties": {
+        "principal_guid": {
+          "description": "The identifier of the principal (user or group) with access to the content.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "principal_name": {
+          "description": "The name of the principal (user or group) with access to the content.",
+          "type": "string"
+        },
+        "principal_role": {
+          "description": "The role of the principal (user or group) with access to the content.",
+          "type": "string"
+        },
+        "principal_type": {
+          "description": "The type of the principal (user or group) with access to the content.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

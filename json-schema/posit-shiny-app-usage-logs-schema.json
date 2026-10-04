@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-shiny-app-usage-logs-schema.json",
+  "title": "ShinyAppUsageLogs",
+  "description": "Shiny application usage results with keyset pagination.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-instrumentation-api-openapi.yml#/components/schemas/ShinyAppUsageLogs",
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "description": "The Shiny application usage logs.",
+      "items": {
+        "$ref": "#/$defs/ShinyAppUsageEntry"
+      },
+      "type": "array"
+    },
+    "paging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/KeysetPaging"
+        }
+      ],
+      "description": "Paging information for navigating result sets."
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "KeysetPaging": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PagingLinks"
+        },
+        {
+          "properties": {
+            "cursors": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/PagingCursors"
+                }
+              ],
+              "description": "Cursor values for navigating between pages."
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "Keyset-based pagination metadata with cursors and navigation links."
+    },
+    "PagingCursors": {
+      "additionalProperties": false,
+      "description": "Cursor values for keyset pagination.",
+      "properties": {
+        "previous": {
+          "description": "A cursor ID that can be used with the previous query parameter to get the previous page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A cursor ID that can be used with the next query parameter to get the next page of results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PagingLinks": {
+      "description": "Navigation links for keyset pagination.",
+      "properties": {
+        "first": {
+          "description": "A full URL of the first page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previous": {
+          "description": "A full URL of the previous page of results. Null if the current response is the first page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "description": "A full URL of the next page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last": {
+          "description": "A full URL of the last page of results. Null if the current response is the last page.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ShinyAppUsageEntry": {
+      "additionalProperties": false,
+      "description": "A Shiny application usage record.",
+      "properties": {
+        "content_guid": {
+          "description": "The GUID of the Shiny application this usage record pertains to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_guid": {
+          "description": "The GUID of the user that visited the application. May be null if the user cannot be determined.",
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "started": {
+          "description": "The timestamp (RFC3339) when the user opened the application.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "ended": {
+          "description": "The timestamp (RFC3339) when the user left the application.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "data_version": {
+          "description": "The data version the record was recorded with.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

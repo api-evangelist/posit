@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-log-entry-schema.json",
+  "title": "LogEntry",
+  "description": "A single log entry.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-jobs-api-openapi.yml#/components/schemas/LogEntry",
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "description": "The source of the log entry. `stdout` or `stderr`.",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "The timestamp (RFC3339) indicating when this log entry was recorded.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "description": "The log entry content.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

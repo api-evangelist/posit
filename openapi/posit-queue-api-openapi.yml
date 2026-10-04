@@ -147,50 +147,6 @@ paths:
       - Queue
 components:
   schemas:
-    QueueResponse:
-      allOf:
-      - $ref: '#/components/schemas/OffsetPaging'
-      - properties:
-          results:
-            description: The list of items in the current page
-            items:
-              $ref: '#/components/schemas/QueueItem'
-            type: array
-        type: object
-      description: An object containing a paginated list of queue items.
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    OffsetPaging:
-      description: Offset-based pagination metadata.
-      properties:
-        current_page:
-          description: The current page of results
-          example: 1
-          format: int32
-          type: integer
-        total:
-          description: The number of items that match the given filters
-          example: 1
-          format: int32
-          type: integer
-      type: object
     QueueItem:
       additionalProperties: false
       description: An item in the job queue.
@@ -222,6 +178,50 @@ components:
           example: '2006-01-02T15:04:05-07:00'
           format: date-time
           type: string
+      type: object
+    OffsetPaging:
+      description: Offset-based pagination metadata.
+      properties:
+        current_page:
+          description: The current page of results
+          example: 1
+          format: int32
+          type: integer
+        total:
+          description: The number of items that match the given filters
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    QueueResponse:
+      allOf:
+      - $ref: '#/components/schemas/OffsetPaging'
+      - properties:
+          results:
+            description: The list of items in the current page
+            items:
+              $ref: '#/components/schemas/QueueItem'
+            type: array
+        type: object
+      description: An object containing a paginated list of queue items.
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
       type: object
   securitySchemes:
     apiKey:

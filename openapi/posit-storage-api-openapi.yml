@@ -157,6 +157,89 @@ paths:
       - Storage
 components:
   schemas:
+    ContentStorageListItem:
+      additionalProperties: false
+      description: Storage metrics for a single content item.
+      properties:
+        content_guid:
+          description: The unique identifier of the content item.
+          example: abc12345-6789-0abc-def0-123456789abc
+          format: uuid
+          type: string
+        content_name:
+          description: The URL-safe name of the content item.
+          example: my-dashboard
+          type: string
+        content_title:
+          description: The human-friendly title of the content item, or null if not set.
+          example: My Dashboard
+          type:
+          - string
+          - 'null'
+        owner_guid:
+          description: The unique identifier of the content owner, or null if the owner has been deleted.
+          example: def12345-6789-0abc-def0-123456789abc
+          format: uuid
+          type:
+          - string
+          - 'null'
+        owner_username:
+          description: The username of the content owner, or null if the owner has been deleted.
+          example: jsmith
+          type:
+          - string
+          - 'null'
+        app_mode:
+          description: The type of content (e.g., shiny, rmd, python-api).
+          example: shiny
+          type: string
+        bundles:
+          allOf:
+          - $ref: '#/components/schemas/ContentStorageListItemBundles'
+          description: Bundle storage metrics for this content item.
+      type: object
+    APIError:
+      additionalProperties: false
+      description: The error object returned by the API on failure.
+      properties:
+        code:
+          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
+          type: integer
+        error:
+          description: A description of the problem that was encountered.
+          type: string
+        payload:
+          description: Additional error details, if any. The structure varies by error type.
+          type:
+          - object
+          - 'null'
+      required:
+      - code
+      - error
+      type: object
+    ContentStorageList:
+      additionalProperties: false
+      description: Paginated list of content items with storage metrics.
+      properties:
+        results:
+          description: The list of content items for this page.
+          items:
+            $ref: '#/components/schemas/ContentStorageListItem'
+          type: array
+        current_page:
+          description: The current page number.
+          example: 1
+          format: int64
+          type: integer
+        total:
+          description: The total number of content items.
+          example: 542
+          type: integer
+        total_pages:
+          description: The total number of pages.
+          example: 28
+          type: integer
+      type: object
     ContentBundleStorageDetail:
       additionalProperties: false
       description: Storage information for a single bundle.
@@ -203,89 +286,6 @@ components:
           example: 968884224
           format: int64
           type: integer
-      type: object
-    ContentStorageList:
-      additionalProperties: false
-      description: Paginated list of content items with storage metrics.
-      properties:
-        results:
-          description: The list of content items for this page.
-          items:
-            $ref: '#/components/schemas/ContentStorageListItem'
-          type: array
-        current_page:
-          description: The current page number.
-          example: 1
-          format: int64
-          type: integer
-        total:
-          description: The total number of content items.
-          example: 542
-          type: integer
-        total_pages:
-          description: The total number of pages.
-          example: 28
-          type: integer
-      type: object
-    APIError:
-      additionalProperties: false
-      description: The error object returned by the API on failure.
-      properties:
-        code:
-          description: The specific code for the type of error returned. See the [API error codes reference](#api-error-codes) for the full set of values.
-          type: integer
-        error:
-          description: A description of the problem that was encountered.
-          type: string
-        payload:
-          description: Additional error details, if any. The structure varies by error type.
-          type:
-          - object
-          - 'null'
-      required:
-      - code
-      - error
-      type: object
-    ContentStorageListItem:
-      additionalProperties: false
-      description: Storage metrics for a single content item.
-      properties:
-        content_guid:
-          description: The unique identifier of the content item.
-          example: abc12345-6789-0abc-def0-123456789abc
-          format: uuid
-          type: string
-        content_name:
-          description: The URL-safe name of the content item.
-          example: my-dashboard
-          type: string
-        content_title:
-          description: The human-friendly title of the content item, or null if not set.
-          example: My Dashboard
-          type:
-          - string
-          - 'null'
-        owner_guid:
-          description: The unique identifier of the content owner, or null if the owner has been deleted.
-          example: def12345-6789-0abc-def0-123456789abc
-          format: uuid
-          type:
-          - string
-          - 'null'
-        owner_username:
-          description: The username of the content owner, or null if the owner has been deleted.
-          example: jsmith
-          type:
-          - string
-          - 'null'
-        app_mode:
-          description: The type of content (e.g., shiny, rmd, python-api).
-          example: shiny
-          type: string
-        bundles:
-          allOf:
-          - $ref: '#/components/schemas/ContentStorageListItemBundles'
-          description: Bundle storage metrics for this content item.
       type: object
     ContentStorageDetail:
       additionalProperties: false

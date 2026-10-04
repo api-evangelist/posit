@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-active-users-response-schema.json",
+  "title": "ActiveUsersResponse",
+  "description": "Active user counts indexed by time window.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-metrics-api-openapi.yml#/components/schemas/ActiveUsersResponse",
+  "additionalProperties": false,
+  "properties": {
+    "windows": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ActiveUsersWindowCounts"
+      },
+      "description": "A map from time-window label to the user counts for that\nwindow. The keys are `1d`, `7d`, `30d`, and `365d`, and each\nvalue is an ActiveUsersWindowCounts object.",
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "ActiveUsersWindowCounts": {
+      "additionalProperties": false,
+      "description": "User counts for a single time window, broken down by role.",
+      "properties": {
+        "total": {
+          "description": "Total number of distinct active licensed users in the window.",
+          "type": "integer"
+        },
+        "admin": {
+          "description": "Number of active administrators in the window.",
+          "type": "integer"
+        },
+        "publisher": {
+          "description": "Number of active publishers in the window.",
+          "type": "integer"
+        },
+        "viewer": {
+          "description": "Number of active viewers in the window.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -69,15 +69,6 @@ paths:
       - System
 components:
   schemas:
-    ServerStorageSummary:
-      additionalProperties: false
-      description: Aggregate storage metrics for the Connect server.
-      properties:
-        bundles:
-          allOf:
-          - $ref: '#/components/schemas/ServerStorageBundles'
-          description: Bundle storage metrics.
-      type: object
     APIError:
       additionalProperties: false
       description: The error object returned by the API on failure.
@@ -96,6 +87,15 @@ components:
       required:
       - code
       - error
+      type: object
+    ServerStorageSummary:
+      additionalProperties: false
+      description: Aggregate storage metrics for the Connect server.
+      properties:
+        bundles:
+          allOf:
+          - $ref: '#/components/schemas/ServerStorageBundles'
+          description: Bundle storage metrics.
       type: object
     ServerStorageBundles:
       additionalProperties: false

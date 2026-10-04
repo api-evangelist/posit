@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/posit/main/json-schema/posit-permission-input-schema.json",
+  "title": "PermissionInput",
+  "description": "The fields that can be specified when creating or updating a content permission item.",
+  "x-generated": "2026-10-03",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/posit-content-permissions-api-openapi.yml#/components/schemas/PermissionInput",
+  "additionalProperties": false,
+  "properties": {
+    "principal_guid": {
+      "description": "The identifier of the principal (user or group).",
+      "format": "uuid",
+      "type": "string"
+    },
+    "principal_type": {
+      "description": "The type of principal.",
+      "type": "string"
+    },
+    "role": {
+      "description": "The level of access that the principal has been\ngiven to this content item.",
+      "type": "string"
+    },
+    "send_email": {
+      "description": "Whether to send an email notification to the\nprincipal being added. Only applies when creating\na new permission (`POST`); ignored on update\n(`PUT`). Defaults to `false` when not provided.",
+      "type": "boolean"
+    }
+  },
+  "type": "object"
+}
