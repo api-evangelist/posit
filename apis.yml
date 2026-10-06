@@ -59,7 +59,7 @@ specificationVersion: '0.23'
 
 created: '2026-07-17'
 
-modified: '2026-07-20'
+modified: '2026-10-06'
 
 image: https://posit.co/wp-content/uploads/2022/10/Posit-Logo-Black-TransparentBackground.png
 
@@ -97,6 +97,10 @@ maintainers:
   email: info@apis.io
 
 common:
+- url: https://opensource.posit.co/blog/
+  type: Blog
+- url: https://opensource.posit.co/blog/index.xml
+  type: BlogRSS
 - type: Spectral
   url: rules/posit-rules.yml
 - type: JSONLD
