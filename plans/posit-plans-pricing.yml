@@ -35,3 +35,30 @@ plans:
   price_text: Talk to sales
   period: none
   included_quota: Support as many developers and viewers as you need; Unlimited package repositories
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Basic
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Enhanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Advanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
