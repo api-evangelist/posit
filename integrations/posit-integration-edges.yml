@@ -1,0 +1,29 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://marketplace.visualstudio.com/vscode
+marketplace_apps: []
+edges:
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/Posit
+  listing_count: 4
+  apps:
+  - Shiny
+  - Shiny (deprecated)
+  - Air - R Language Support
+  - ShinyUiEditor
+  publisher_name: Posit
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+source:
+- https://marketplace.visualstudio.com/vscode
