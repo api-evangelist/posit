@@ -2,7 +2,12 @@ generated: '2026-10-14'
 method: searched
 checked:
 - https://api.nuget.org/v3
+- https://cdn.winget.microsoft.com/cache
 - https://crates.io/api/v1
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
 - https://github.com/kubeflow/website
 - https://github.com/lfai/landscape
 - https://github.com/mlcommons
@@ -35,6 +40,66 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/rsconnect-python/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: rsconnect-python
+      version: 1.32.0
+      released: '2026-10-16'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/rsconnect-python/
+      repo_leg: domain:posit.co
+      publisher_leg: email:posit.co
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official CLI (PyPI)
+  evidence: https://pypi.org/project/rsconnect-python/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public package index)
+    spec_file: null
+    packages:
+    - name: rsconnect-python
+      version: 1.32.0
+      released: '2026-10-16'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/rsconnect-python/
+      cli: 'PyPI name/summary: The Posit Connect command-line interface.'
+      repo_leg: domain:posit.co
+      publisher_leg: email:posit.co
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  detected_by: sweep-official-clis.py
+  first_seen: '2026-10-20'
 - partner_name: LF AI & Data (Landscape)
   partner: lf-ai-data
   partner_match: register
@@ -66,35 +131,5 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-mlops.py
   first_seen: '2026-10-15'
-- partner_name: PyPI
-  partner: pypi
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: official SDK (Python)
-  evidence: https://pypi.org/project/rsconnect-python/
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: PyPI (public registry JSON)
-    spec_file: null
-    language: Python
-    packages:
-    - name: rsconnect-python
-      version: 1.32.0
-      released: '2026-10-16'
-      released_field: upload_time
-      lapsed: false
-      page: https://pypi.org/project/rsconnect-python/
-      repo_leg: domain:posit.co
-      publisher_leg: email:posit.co
-      matched_by: domain
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
 source:
 - https://marketplace.visualstudio.com/vscode
