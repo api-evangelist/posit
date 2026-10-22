@@ -185,3 +185,33 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: posit-cran
+  label: CRAN
+  partner_name: CRAN
+  category: official SDK (R)
+  type: register
+  channel: package-registry
+  evidence: https://cran.r-project.org/package=connectapi
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: CRAN (packages.rds, the public package metadata table)
+    spec_file: null
+    language: R
+    packages:
+    - name: connectapi
+      version: 0.12.1
+      title: Utilities for Interacting with the 'Posit Connect' Server API
+      released: '2026-04-29'
+      released_field: Published
+      lapsed: false
+      page: https://cran.r-project.org/package=connectapi
+      repo_leg: github-org:posit-dev
+      publisher_leg: email:posit.co
+      matched_by: domain
+    current: true
+    signal_note: 'an official R package on CRAN: distribution, not an integration; lapsed = no release in 24 months'
+    detected_by: sweep-cran-r-packages.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
