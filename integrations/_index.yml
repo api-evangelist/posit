@@ -172,19 +172,6 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
-- slug: posit-eclipse-foundation-open-vsx
-  label: Eclipse Foundation (open-vsx)
-  partner: eclipse
-  partner_name: Eclipse Foundation (open-vsx)
-  category: IDE / developer extension marketplace listing
-  type: marketplace
-  marketplace: open-vsx
-  channel: partner-built
-  evidence: https://open-vsx.org/namespace/posit
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: posit-cran
   label: CRAN
   partner_name: CRAN
@@ -213,5 +200,31 @@
     signal_note: 'an official R package on CRAN: distribution, not an integration; lapsed = no release in 24 months'
     detected_by: sweep-cran-r-packages.py
     detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: posit-eclipse-foundation-open-vsx
+  label: Eclipse Foundation (open-vsx)
+  partner: eclipse
+  partner_name: Eclipse Foundation (open-vsx)
+  category: IDE / developer extension marketplace listing
+  type: marketplace
+  marketplace: open-vsx
+  channel: partner-built
+  evidence: https://open-vsx.org/namespace/posit
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: posit-artifact-hub-artifact-hub
+  label: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_name: Artifact Hub (artifact-hub)
+  category: Artifact Hub listing (Helm chart)
+  type: marketplace
+  marketplace: artifact-hub
+  channel: partner-built
+  evidence: https://artifacthub.io/packages/search?repo=rstudio
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

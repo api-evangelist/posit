@@ -25,6 +25,7 @@ checked:
 - https://www.skills.sh/sitemap.xml
 - eclipse/integrations/eclipse-integration-edges.yml
 - https://cran.r-project.org/web/packages/packages.rds
+- artifact-hub/integrations/artifact-hub-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Visual Studio Code Marketplace
@@ -279,31 +280,6 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
-- partner_name: Eclipse Foundation (open-vsx)
-  partner: eclipse
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: open-vsx
-  evidence: https://open-vsx.org/namespace/posit
-  mirror_of: eclipse/integrations/eclipse-integration-edges.yml
-  apps:
-  - Shiny
-  - Posit Publisher
-  - Air - R Language Support
-  - Posit Assistant
-  - Databot
-  - Shiny (deprecated)
-  - ShinyUiEditor
-  listing_count: 1
-  detected: '2026-10-20'
-  detected_by: mirror-platform-listings.py
-  category: IDE / developer extension marketplace listing
-  badges:
-  - Verified namespace
 - partner_name: CRAN
   partner: null
   partner_match: null
@@ -334,5 +310,54 @@ edges:
     detected: '2026-10-22'
   detected_by: sweep-cran-r-packages.py
   first_seen: '2026-10-22'
+- partner_name: Eclipse Foundation (open-vsx)
+  partner: eclipse
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: open-vsx
+  evidence: https://open-vsx.org/namespace/posit
+  mirror_of: eclipse/integrations/eclipse-integration-edges.yml
+  apps:
+  - Shiny
+  - Posit Publisher
+  - Air - R Language Support
+  - Posit Assistant
+  - Databot
+  - Shiny (deprecated)
+  - ShinyUiEditor
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: IDE / developer extension marketplace listing
+  badges:
+  - Verified namespace
+- partner_name: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: artifact-hub
+  evidence: https://artifacthub.io/packages/search?repo=rstudio
+  mirror_of: artifact-hub/integrations/artifact-hub-integration-edges.yml
+  apps:
+  - rstudio-connect
+  - rstudio-workbench
+  - rstudio-library
+  - rstudio-pm
+  - prepull-daemonset
+  - rstudio-library-test
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Artifact Hub listing (Helm chart)
+  badges:
+  - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
 source:
 - https://marketplace.visualstudio.com/vscode
