@@ -5,7 +5,7 @@
       "source": "https://opensource.posit.co/blog/",
       "feed_url": "https://opensource.posit.co/blog/index.xml",
       "title": "",
-      "saved": 4,
+      "saved": 0,
       "method": "discovered"
     },
     {
@@ -19,8 +19,15 @@
       "source": "https://posit.co/blog/",
       "feed_url": "https://posit.co/blog/rss/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "https://posit.co/blog/rss/",
+      "feed_url": "https://posit.co/blog/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://docs.posit.co/connect/user/",
@@ -30,6 +37,6 @@
       "method": "none"
     }
   ],
-  "post_count": 5,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 39,
+  "fetched": "2026-10-17T14:53:57Z"
 }
