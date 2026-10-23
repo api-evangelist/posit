@@ -26,6 +26,7 @@ checked:
 - eclipse/integrations/eclipse-integration-edges.yml
 - https://cran.r-project.org/web/packages/packages.rds
 - artifact-hub/integrations/artifact-hub-integration-edges.yml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Visual Studio Code Marketplace
@@ -359,5 +360,27 @@ edges:
   category: Artifact Hub listing (Helm chart)
   badges:
   - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/posit
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - posit/shiny-for-r-template
+  - posit/quarto-template
+  - posit/shiny-for-python-template
+  - posit/gptneox-chat
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub spaces
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 source:
 - https://marketplace.visualstudio.com/vscode
