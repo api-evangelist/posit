@@ -231,127 +231,199 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
+  hosts/posit-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
     method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+    evidence: carries an API Evangelist house phrase
+  integrations/posit-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
+  json-ld/posit-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-access-test-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-active-users-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-apikey-create-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-apikey-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-audit-action-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-audit-log-search-results-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-audit-logs-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-bookmark-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-bootstrap-success-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-bundle-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-content-hit-entry-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-content-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-content-visit-logs-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-create-content-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-create-environment-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-custom-documentation-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-custom-documentation-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-environment-permission-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-environment-permission-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-environment-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-feature-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-git-location-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-create-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-create-remote-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-member-add-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-ownership-content-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-patch-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-group-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-job-metrics-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-job-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-job-summary-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-kill-job-order-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-log-entry-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-logged-error-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-node-js-info-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-client-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-clients-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-credentials-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-integration-association-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-integration-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-integration-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-integration-update-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-session-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-oauth-template-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-packages-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-permission-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-permission-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-public-settings-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-python-info-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-quarto-installations-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-queue-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-rinstallations-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-schedule-history-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-service-token-create-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-service-token-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-service-token-scopes-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-shiny-app-usage-logs-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-tensor-flow-installations-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-update-content-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/posit-update-environment-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -435,9 +507,27 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/posit-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/posit-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/posit-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -446,8 +536,8 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/posit-connect-openapi-original.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: the same operations as https://docs.posit.co/connect/api/openapi.json (sha256 9c6acbbb4f06,
+      fetched 2026-10-04)
   openapi/posit-api-keys-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -548,13 +638,16 @@ artifacts:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   overlays/posit-connect-overlay.yaml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/posit-packages.yml:
     method: searched
     evidence: declared in the artifact
   plans/posit-plans-pricing.yml:
     method: searched
+    evidence: declared in the artifact
+  rules/posit-rules.yml:
+    method: generated
     evidence: declared in the artifact
   security/posit-domain-security.yml:
     method: unknown
@@ -568,6 +661,12 @@ artifacts:
   skills/posit-manage-access.md:
     method: unknown
     evidence: no authorship recorded
+  vendors/posit-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/posit-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/posit-well-known.yml:
     method: searched
     evidence: declared in the artifact
